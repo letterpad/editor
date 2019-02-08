@@ -1,5 +1,5 @@
-const BlockquoteKeyboardShortcut = () => {
-  return;
+const BlockquoteKeyboardShortcut = (event, editor, next) => {
+    // next();
 };
 
 export default BlockquoteKeyboardShortcut;

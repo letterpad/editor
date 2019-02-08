@@ -123,7 +123,7 @@ const plugins = [
     //     onlyIn: node => node.type === "code_block",
     //     getSyntax: node => node.data.get("syntax")
     // }),
-    // CodeblockPlugin(),
+    CodeblockPlugin(),
     HeadingsPlugin(),
     BoldPlugin(),
     ItalicPlugin(),
@@ -132,7 +132,7 @@ const plugins = [
     ListPlugin(),
     // // ImagePlugin(),
     LinkPlugin(),
-    // // LinebreakPlugin(),
+    LinebreakPlugin(),
     // // MarkdownPlugin(),
     BlockquotePlugin(),
     AutoScrollPlugin()
@@ -259,6 +259,8 @@ class Editor extends Component {
                         <HeadingsButton type="heading-three" />
                         <HeadingsButton type="heading-four" />
                         <HeadingsButton type="heading-five" />
+                        <CodeblockButton />
+                        <LinebreakButton />
                     </StyledToolBar>
                 </SlateEditor>
             </React.Fragment>
