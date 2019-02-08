@@ -4,19 +4,21 @@ import classnames from "classnames";
 
 import { unorderedListStrategy, isUnorderedList } from "./ListUtils";
 /* eslint-disable react/prop-types */
-const UnorderedListButton = ({ value, onChange, className, style, type }) => (
-  <span
-    style={style}
-    type={type}
-    onMouseDown={() => onChange(unorderedListStrategy(value.change()))}
-    className={classnames(
-      "button slate-list-plugin--button",
-      { active: isUnorderedList(value) },
-      className,
-    )}
-  >
-    <span className="material-icons">format_list_bulleted</span>
-  </span>
-);
-
+const UnorderedListButton = ({ editor, className, style, type }) => {
+    if (!editor.current) return <span />;
+    return (
+        <span
+            style={style}
+            type={type}
+            onMouseDown={() => unorderedListStrategy(editor.current)}
+            className={classnames(
+                "button slate-list-plugin--button",
+                { active: isUnorderedList(editor.current.value) },
+                className
+            )}
+        >
+            <span className="material-icons">format_list_bulleted</span>
+        </span>
+    );
+};
 export default UnorderedListButton;

@@ -124,18 +124,18 @@ const plugins = [
     //     getSyntax: node => node.data.get("syntax")
     // }),
     // CodeblockPlugin(),
-    // HeadingsPlugin(),
+    HeadingsPlugin(),
     BoldPlugin(),
     ItalicPlugin(),
     UnderlinePlugin(),
-    // HighlightPlugin(),
-    // ListPlugin(),
-    // ImagePlugin(),
+    HighlightPlugin(),
+    ListPlugin(),
+    // // ImagePlugin(),
     LinkPlugin(),
-    // LinebreakPlugin(),
-    // MarkdownPlugin(),
-    BlockquotePlugin()
-    // AutoScrollPlugin()
+    // // LinebreakPlugin(),
+    // // MarkdownPlugin(),
+    BlockquotePlugin(),
+    AutoScrollPlugin()
 ];
 
 class Editor extends Component {
@@ -193,38 +193,6 @@ class Editor extends Component {
      */
 
     updateMenu = () => {
-        // const { value } = this.state;
-
-        // // disable formatting options for code blocks
-        // let parentNode = value.anchorBlock;
-        // const menu = this.menuRef.current;
-        // if (parentNode) {
-        //     do {
-        //         if (parentNode.type === "code_block") {
-        //             return menu.removeAttribute("style");
-        //         }
-        //     } while ((parentNode = value.document.getParent(parentNode.key)));
-        // }
-        // if (!menu) return;
-
-        // if (value.isBlurred || value.isEmpty()) {
-        //     menu.removeAttribute("style");
-        //     return;
-        // }
-
-        // const selection = window.getSelection();
-        // const range = selection.getRangeAt(0);
-        // const rect = range.getBoundingClientRect();
-        // menu.style.opacity = 1;
-        // menu.style.top = `${rect.top +
-        //     window.pageYOffset -
-        //     menu.offsetHeight}px`;
-
-        // menu.style.left = `${rect.left +
-        //     window.pageXOffset -
-        //     menu.offsetWidth / 2 +
-        //     rect.width / 2}px`;
-
         const menu = this.menuRef.current;
         if (!menu) return;
 
@@ -258,13 +226,12 @@ class Editor extends Component {
         this.setState({ value: value });
     };
 
-    onPaste = (event, change) => {
+    onPaste = (event, editor, next) => {
         scrollToCursor();
         const transfer = getEventTransfer(event);
-        if (transfer.type != "html") return;
+        if (transfer.type != "html") return next();
         const { document } = html.deserialize(transfer.html);
-        change.insertFragment(document);
-        return true;
+        editor.insertFragment(document);
     };
 
     render() {
@@ -278,14 +245,21 @@ class Editor extends Component {
                     editorRef={this.editorRef}
                 >
                     <StyledMenu menuRef={this.menuRef}>
+                        <HeadingsButton type="heading-one" />
+                        <HeadingsButton type="heading-two" />
                         <BoldButton />
                         <ItalicButton />
                         <UnderlineButton />
                         <LinkButton />
                         <BlockquoteButton />
+                        <ListButtonBar />
                     </StyledMenu>
                     <StyledContent />
-                    <StyledToolBar value={this.state.value} />
+                    <StyledToolBar value={this.state.value}>
+                        <HeadingsButton type="heading-three" />
+                        <HeadingsButton type="heading-four" />
+                        <HeadingsButton type="heading-five" />
+                    </StyledToolBar>
                 </SlateEditor>
             </React.Fragment>
         );

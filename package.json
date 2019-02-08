@@ -26,5 +26,10 @@
         "style-loader": "^0.23.1",
         "webpack": "^4.29.0",
         "webpack-cli": "^3.2.1"
+    },
+    "devServer": {
+        "inline": true,
+        "port": 8080,
+        "hot": true
     }
 }
