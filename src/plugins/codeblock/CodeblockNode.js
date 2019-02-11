@@ -29,9 +29,6 @@ class CodeblockNode extends Component {
         editor.setNodeByKey(node.key, {
             data: { language: event.target.value }
         });
-        // editor.change(c =>
-        //   c.setNodeByKey(node.key, { data: { language: event.target.value } }),
-        // );
     };
 
     render() {

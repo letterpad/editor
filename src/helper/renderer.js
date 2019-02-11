@@ -19,8 +19,8 @@ import { ItalicMark } from "../plugins/italic";
 import { UnderlineMark } from "../plugins/underline";
 import { HighlightMark } from "../plugins/highlight";
 
-export const nodeRenderer = (type, props, next) => {
-    switch (type) {
+export const nodeRenderer = (props, editor, next) => {
+    switch (props.node.type) {
         case "code_block":
             return <CodeblockNode {...props} />;
         case "line-break":
@@ -49,8 +49,8 @@ export const nodeRenderer = (type, props, next) => {
     }
 };
 
-export const markRenderer = (type, props, next) => {
-    switch (type) {
+export const markRenderer = (props, editor, next) => {
+    switch (props.mark.type) {
         case "bold":
             return <BoldMark {...props} />;
         case "highlight":
@@ -63,7 +63,7 @@ export const markRenderer = (type, props, next) => {
             return (
                 <span
                     {...props.attributes}
-                    className={"prism-token token " + type}
+                    className={"prism-token token " + props.mark.type}
                     style={{ opacity: "0.33" }}
                 >
                     {props.children}
@@ -73,7 +73,7 @@ export const markRenderer = (type, props, next) => {
             return (
                 <span
                     {...props.attributes}
-                    className={"prism-token token " + type}
+                    className={"prism-token token " + props.mark.type}
                     style={{ fontWeight: "bold" }}
                 >
                     {props.children}
@@ -83,7 +83,7 @@ export const markRenderer = (type, props, next) => {
             return (
                 <span
                     {...props.attributes}
-                    className={"prism-token token " + type}
+                    className={"prism-token token " + props.mark.type}
                     style={{ fontWeight: "bold" }}
                 >
                     {props.children}
@@ -93,7 +93,7 @@ export const markRenderer = (type, props, next) => {
             return (
                 <span
                     {...props.attributes}
-                    className={"prism-token token " + type}
+                    className={"prism-token token " + props.mark.type}
                     style={{ opacity: "0.75" }}
                 >
                     {props.children}

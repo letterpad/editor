@@ -12,6 +12,7 @@
         "react": "^16.7.0",
         "react-dom": "^16.7.0",
         "slate": "^0.44.10",
+        "slate-edit-code": "^0.15.5",
         "slate-html-serializer": "^0.7.34",
         "slate-prism": "^0.5.0",
         "slate-react": "^0.21.16",

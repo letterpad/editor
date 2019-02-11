@@ -6,18 +6,18 @@ import classnames from "classnames";
 import { insertLinkStrategy, hasLinks } from "./LinkUtils";
 
 const LinkButton = ({ editor, className, style, type }) => {
-    if (!editor.current) return <span />;
+    if (!editor) return <span />;
     return (
         <span
             style={style}
             type={type}
             onMouseDown={e => {
                 e.preventDefault();
-                return insertLinkStrategy(editor.current);
+                return insertLinkStrategy(editor);
             }}
             className={classnames(
                 "button",
-                { active: hasLinks(editor.current.value) },
+                { active: hasLinks(editor.value) },
                 className
             )}
         >

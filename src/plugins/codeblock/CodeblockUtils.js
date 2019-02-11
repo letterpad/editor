@@ -34,11 +34,6 @@ export const applyCodeblock = editor => {
                     path: [2],
                     offset: codeBlock.text.length
                 }
-
-                // anchorKey: startNode.key,
-                // anchorOffset: 0,
-                // focusKey: lastNode.key,
-                // focusOffset: codeBlock.text.length
             })
         );
 
@@ -54,7 +49,6 @@ export const applyCodeblock = editor => {
 };
 
 export const decorateNode = (node, editor, next) => {
-    // return decorations;
     const others = next() || [];
     const block = node.nodes.get(0);
     const { type } = block;

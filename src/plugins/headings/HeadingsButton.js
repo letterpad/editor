@@ -5,20 +5,20 @@ import { hasBlock } from "../../helper/strategy";
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 const HeadingsButton = ({ editor, style, type }) => {
-    if (!editor.current) return <span />;
+    if (!editor) return <span />;
     return (
         <span
             style={style}
             className={classnames("button", {
-                active: hasBlock(editor.current.value, type)
+                active: hasBlock(editor.value, type)
             })}
             type={type}
             onMouseDown={e => {
                 e.preventDefault();
                 // check if this is already active
-                const isActive = hasBlock(editor.current.value, type);
+                const isActive = hasBlock(editor.value, type);
                 return applyHeadings(
-                    editor.current,
+                    editor,
                     isActive ? "paragraph" : type
                 );
             }}

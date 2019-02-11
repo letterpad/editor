@@ -9,7 +9,7 @@ const codeblockButton = ({ editor, style, type, node }) => (
         className="button"
         type={type}
         onMouseDown={e => {
-            return applyCodeblock(editor.current);
+            return applyCodeblock(editor);
         }}
     >
         <span className="material-icons">code</span>

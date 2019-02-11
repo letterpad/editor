@@ -3,7 +3,7 @@ import { applyLinebreak } from "./LinebreakUtils";
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 const LinebreakButton = ({ editor, style, type }) => {
-    if (!editor.current) return <span />;
+    if (!editor) return <span />;
     return (
         <span
             style={style}
@@ -11,7 +11,7 @@ const LinebreakButton = ({ editor, style, type }) => {
             type={type}
             onMouseDown={e => {
                 e.preventDefault();
-                return applyLinebreak(editor.current, "line-break");
+                return applyLinebreak(editor, "line-break");
             }}
         >
             <span className="material-icons">more_horiz</span>

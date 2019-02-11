@@ -4,15 +4,15 @@ import { MARK_TAGS } from "../../helper/constants";
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 const ItalicButton = ({ style, type, editor }) => {
-    if (!editor.current) return <span />;
-    const active = isMarkActive(editor.current.value, MARK_TAGS.em);
+    if (!editor) return <span />;
+    const active = isMarkActive(editor.value, MARK_TAGS.em);
     return (
         <span
             style={style}
             className={"button " + (active ? "active" : "")}
             onMouseDown={e => {
                 e.preventDefault();
-                return applyMarkStrategy(editor.current, MARK_TAGS.em);
+                return applyMarkStrategy(editor, MARK_TAGS.em);
             }}
         >
             <span className="material-icons">format_italic</span>
