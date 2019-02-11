@@ -67,24 +67,21 @@ export default [
     },
     {
         deserialize: (el, next) => {
-            if (!el.tagName) return;
-
+            // if (!el.tagName) return;
             const type = INLINE_TAGS[el.tagName.toLowerCase()];
 
-            if (!type) {
-                return;
+            if (type) {
+                return {
+                    object: "inline",
+                    type,
+                    isVoid: el.tagName.toLowerCase() === "img",
+                    nodes: next(el.childNodes),
+                    data: {
+                        href: el.getAttribute("href"),
+                        src: el.getAttribute("src")
+                    }
+                };
             }
-
-            return {
-                object: "inline",
-                type,
-                isVoid: el.tagName.toLowerCase() === "img",
-                nodes: next(el.childNodes),
-                data: {
-                    href: el.getAttribute("href"),
-                    src: el.getAttribute("src")
-                }
-            };
         },
         serialize: (obj, children) => {
             if (obj.object != "inline") {
@@ -96,6 +93,24 @@ export default [
                     return <LinkNode {...props} />;
                 case "image":
                     return <ImageNode {...props} />;
+            }
+        }
+    },
+    {
+        // Special case for code blocks, which need to grab the nested childNodes.
+        deserialize(el, next) {
+            if (el.tagName.toLowerCase() == "pre") {
+                const code = el.childNodes[0];
+                const childNodes =
+                    code && code.tagName.toLowerCase() == "code"
+                        ? code.childNodes
+                        : el.childNodes;
+
+                return {
+                    object: "block",
+                    type: "code",
+                    nodes: next(childNodes)
+                };
             }
         }
     }

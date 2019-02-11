@@ -7,7 +7,7 @@ import Html from "slate-html-serializer";
 
 import ToolBar from "./slatejs/ToolBar";
 import rules from "./helper/rules";
-
+import initialValue from "./value.json";
 import { SlateContent, SlateEditor, TextMenu } from "./slatejs";
 import { BoldPlugin, BoldButton } from "./plugins/bold";
 import { ItalicPlugin, ItalicButton } from "./plugins/italic";
@@ -145,26 +145,7 @@ class Editor extends Component {
     };
 
     state = {
-        value: Value.fromJSON({
-            document: {
-                nodes: [
-                    {
-                        object: "block",
-                        type: "paragraph",
-                        nodes: [
-                            {
-                                object: "text",
-                                leaves: [
-                                    {
-                                        text: "A line of text in a paragraph."
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        })
+        value: Value.fromJSON(initialValue)
     };
 
     menuRef = React.createRef();
@@ -223,7 +204,7 @@ class Editor extends Component {
     };
 
     onEditorChange = value => {
-        this.setState({ value: value });
+        this.setState({ value });
     };
 
     onPaste = (event, editor, next) => {

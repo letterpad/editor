@@ -19,7 +19,7 @@ import { ItalicMark } from "../plugins/italic";
 import { UnderlineMark } from "../plugins/underline";
 import { HighlightMark } from "../plugins/highlight";
 
-export const nodeRenderer = (type, props) => {
+export const nodeRenderer = (type, props, next) => {
     switch (type) {
         case "code_block":
             return <CodeblockNode {...props} />;
@@ -44,12 +44,12 @@ export const nodeRenderer = (type, props) => {
             return <OrderedListNode {...props} />;
         case "unordered-list":
             return <UnorderedListNode {...props} />;
-        case "paragraph":
-            return <p {...props.attributes}>{props.children}</p>;
+        default:
+            return next();
     }
 };
 
-export const markRenderer = (type, props) => {
+export const markRenderer = (type, props, next) => {
     switch (type) {
         case "bold":
             return <BoldMark {...props} />;
@@ -59,5 +59,47 @@ export const markRenderer = (type, props) => {
             return <ItalicMark {...props} />;
         case "underline":
             return <UnderlineMark {...props} />;
+        case "comment":
+            return (
+                <span
+                    {...props.attributes}
+                    className={"prism-token token " + type}
+                    style={{ opacity: "0.33" }}
+                >
+                    {props.children}
+                </span>
+            );
+        case "keyword":
+            return (
+                <span
+                    {...props.attributes}
+                    className={"prism-token token " + type}
+                    style={{ fontWeight: "bold" }}
+                >
+                    {props.children}
+                </span>
+            );
+        case "tag":
+            return (
+                <span
+                    {...props.attributes}
+                    className={"prism-token token " + type}
+                    style={{ fontWeight: "bold" }}
+                >
+                    {props.children}
+                </span>
+            );
+        case "punctuation":
+            return (
+                <span
+                    {...props.attributes}
+                    className={"prism-token token " + type}
+                    style={{ opacity: "0.75" }}
+                >
+                    {props.children}
+                </span>
+            );
+        default:
+            return next();
     }
 };

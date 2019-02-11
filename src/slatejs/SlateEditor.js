@@ -7,8 +7,12 @@ import { cloneElement } from "../helper/clone";
 
 class SlateEditor extends Component {
     state = {
-        value: this.props.value
+        value: null
     };
+
+    componentDidMount() {
+        this.setState({ value: this.props.value });
+    }
 
     onChange = ({ value }) => {
         this.setState({ value });
@@ -17,11 +21,12 @@ class SlateEditor extends Component {
     };
 
     changeState = state => {
-        this.setState(state);
-        this.props.onChange(state);
+        // this.setState(state);
+        // this.props.onChange(state);
     };
 
     render() {
+        if (!this.state.value) return <span />;
         const {
             children,
             style,
@@ -34,7 +39,6 @@ class SlateEditor extends Component {
         const childProps = {
             plugins,
             value: this.state.value,
-            outerState: this.state,
             onChange: this.onChange,
             onPaste: onPaste,
             editor: editorRef,

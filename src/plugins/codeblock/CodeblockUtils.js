@@ -2,10 +2,6 @@ import Prism from "prismjs";
 import { Block, Range } from "slate";
 import { isMod } from "../../helper/keyboard-event";
 
-export const hasBlock = (value, type) => {
-    return value.blocks.some(node => node.type == type);
-};
-
 export const getCodeBlockParent = value => {
     let parentNode = value.anchorBlock;
     do {
@@ -57,122 +53,113 @@ export const applyCodeblock = editor => {
     return editor.wrapBlock("code_block");
 };
 
-export const decorateNode = node => {
-    if (node.type != "code_block") return;
-    let language = "javascript";
-    if (node.data.get("language")) {
-        language = node.data.get("language");
-    }
-    const grammar = Prism.languages[language];
+export const decorateNode = (node, editor, next) => {
+    // return decorations;
+    const others = next() || [];
+    const block = node.nodes.get(0);
+    const { type } = block;
+    if (type != "code_block") return others;
+
+    const language = block.data.get("language") || "javascript";
     const texts = node.getTexts().toArray();
-
-    // Tokenize the whole block text
-    const blockText = texts.map(t => t.text).join("\n");
-    const tokens = Prism.tokenize(blockText, grammar);
-
-    // The list of decorations to return
+    const string = texts.map(t => t.text).join("\n");
+    const grammar = Prism.languages[language];
+    const tokens = Prism.tokenize(string, grammar);
     const decorations = [];
-    let textStart = 0;
-    let textEnd = 0;
+    let startText = texts.shift();
+    let endText = startText;
+    let startOffset = 0;
+    let endOffset = 0;
+    let start = 0;
 
-    texts.forEach(text => {
-        textEnd = textStart + text.text.length;
+    for (const token of tokens) {
+        startText = endText;
+        startOffset = endOffset;
 
-        let offset = 0;
+        const content = getContent(token);
+        const newlines = content.split("\n").length - 1;
+        const length = content.length - newlines;
+        const end = start + length;
 
-        const processToken = (token, accu) => {
-            accu = accu || "";
+        let available = startText.text.length - startOffset;
+        let remaining = length;
 
-            if (typeof token === "string") {
-                if (accu) {
-                    const decoration = createDecoration({
-                        text,
-                        textStart,
-                        textEnd,
-                        start: offset,
-                        end: offset + token.length,
-                        className: `prism-token token ${accu}`
-                    });
-                    if (decoration) {
-                        decorations.push(decoration);
-                    }
-                }
-                offset += token.length;
-            } else {
-                accu = `${accu} ${token.type} ${token.alias || ""}`;
+        endOffset = startOffset + remaining;
 
-                if (typeof token.content === "string") {
-                    const decoration = createDecoration({
-                        text,
-                        textStart,
-                        textEnd,
-                        start: offset,
-                        end: offset + token.content.length,
-                        className: `prism-token token ${accu}`
-                    });
-                    if (decoration) {
-                        decorations.push(decoration);
-                    }
-
-                    offset += token.content.length;
-                } else {
-                    // When using token.content instead of token.matchedStr, token can be deep
-                    for (let i = 0; i < token.content.length; i += 1) {
-                        processToken(token.content[i], accu);
-                    }
-                }
-            }
-        };
-
-        tokens.forEach(processToken);
-        textStart = textEnd + 1; // account for added `\n`
-    });
-
-    return decorations;
-};
-/**
- * Return a decoration range for the given text.
- */
-const createDecoration = ({
-    text,
-    textStart,
-    textEnd,
-    start,
-    end,
-    className
-}) => {
-    if (start >= textEnd || end <= textStart) {
-        // Ignore, the token is not in the text
-        return null;
-    }
-
-    // Shrink to this text boundaries
-    start = Math.max(start, textStart);
-    end = Math.min(end, textEnd);
-
-    // Now shift offsets to be relative to this text
-    start -= textStart;
-    end -= textStart;
-
-    return {
-        anchor: {
-            key: text.key,
-            path: [1],
-            offset: start
-        },
-        focus: {
-            key: text.key,
-            path: [2],
-            offset: text.text.length
+        while (available < remaining && texts.length > 0) {
+            endText = texts.shift();
+            remaining = length - available;
+            available = endText.text.length;
+            endOffset = remaining;
         }
 
-        // anchorKey: text.key,
-        // anchorOffset: start,
-        // focusKey: text.key,
-        // focusOffset: end,
-        // marks: [{ type: "prism-token", data: { className } }]
-    };
+        if (typeof token != "string") {
+            const dec = {
+                anchor: {
+                    key: startText.key,
+                    offset: startOffset
+                },
+                focus: {
+                    key: endText.key,
+                    offset: endOffset
+                },
+                mark: {
+                    type: token.type
+                }
+            };
+
+            decorations.push(dec);
+        }
+
+        start = end;
+    }
+
+    return [...others, ...decorations];
 };
+
+// /**
+//  * Return a decoration range for the given text.
+//  */
+// const createDecoration = ({
+//     text,
+//     textStart,
+//     textEnd,
+//     start,
+//     end,
+//     className
+// }) => {
+//     if (start >= textEnd || end <= textStart) {
+//         // Ignore, the token is not in the text
+//         return null;
+//     }
+
+//     // Shrink to this text boundaries
+//     start = Math.max(start, textStart);
+//     end = Math.min(end, textEnd);
+
+//     // Now shift offsets to be relative to this text
+//     start -= textStart;
+//     end -= textStart;
+
+//     return {
+//         anchor: {
+//             key: text.key,
+//             path: [1],
+//             offset: start
+//         },
+//         focus: {
+//             key: text.key,
+//             path: [2],
+//             offset: text.text.length
+//         }
+
+//         // anchorKey: text.key,
+//         // anchorOffset: start,
+//         // focusKey: text.key,
+//         // focusOffset: end,
+//         // marks: [{ type: "prism-token", data: { className } }]
+//     };
+// };
 
 export const insertNewLineBeforeCodeBlock = change => {
     const anchor = change.value.anchorBlock;
@@ -282,7 +269,7 @@ export const handleCommandAInCodeBlock = (event, change) => {
         Range.create({
             anchor: startNode,
             focus: lastNode,
-            mark: { type: "code-block" }
+            mark: { type: "code_block" }
             // anchorKey: startNode.key,
             // anchorOffset: 0,
             // focusKey: lastNode.key,
@@ -296,3 +283,20 @@ export const handleCommandAInCodeBlock = (event, change) => {
     event.preventDefault();
     return true;
 };
+
+/**
+ * A helper function to return the content of a Prism `token`.
+ *
+ * @param {Object} token
+ * @return {String}
+ */
+
+function getContent(token) {
+    if (typeof token == "string") {
+        return token;
+    } else if (typeof token.content == "string") {
+        return token.content;
+    } else {
+        return token.content.map(getContent).join("");
+    }
+}

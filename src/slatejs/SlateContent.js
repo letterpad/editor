@@ -8,12 +8,12 @@ import { decorateNode } from "../plugins/codeblock/CodeblockUtils";
 import { nodeRenderer, markRenderer } from "../helper/renderer";
 
 /* eslint-disable default-case */
-export const renderNode = props => {
-    return nodeRenderer(props.node.type, props);
+export const renderNode = (props, editor, next) => {
+    return nodeRenderer(props.node.type, props, next);
 };
 
-export const renderMark = props => {
-    return markRenderer(props.mark.type, props);
+export const renderMark = (props, editor, next) => {
+    return markRenderer(props.mark.type, props, next);
 };
 
 /**
@@ -24,11 +24,11 @@ export const renderMark = props => {
 const schema = {
     document: {
         last: { types: ["paragraph"] },
-        normalize: (change, reason, { node }) => {
-            switch (reason) {
+        normalize: (editor, { code, child, node }) => {
+            switch (code) {
                 case LAST_CHILD_TYPE_INVALID: {
                     const paragraph = Block.create("paragraph");
-                    return change.insertNodeByKey(
+                    return editor.insertNodeByKey(
                         node.key,
                         node.nodes.size,
                         paragraph
@@ -46,7 +46,6 @@ export default ({
     wrapperStyle,
     style,
     value,
-    outerState,
     plugins,
     onChange,
     children,
@@ -54,8 +53,6 @@ export default ({
     editor,
     ...rest
 }) => {
-    const { readOnly } = outerState;
-
     return (
         <div
             className={classnames("editor--content", className)}
@@ -64,11 +61,9 @@ export default ({
             <Editor
                 schema={schema}
                 plugins={plugins}
-                value={value}
+                defaultValue={value}
                 onChange={onChange}
                 onPaste={onPaste}
-                readOnly={readOnly}
-                outerState={outerState}
                 style={style}
                 ref={editor}
                 renderNode={renderNode}
