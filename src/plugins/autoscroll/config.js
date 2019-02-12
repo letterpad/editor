@@ -7,5 +7,6 @@ export default {
     menuButtons: [],
     toolbarButtons: [],
     render: () => {},
-    main: AutoScrollPlugin
+    main: AutoScrollPlugin,
+    identifier: []
 };

@@ -4,9 +4,11 @@ import LinkNode from "./LinkNode";
 import { LinkPlugin } from ".";
 
 export default {
-    type: "node",
+    type: "inline",
+    tag: "node",
     menuButtons: [<LinkButton />],
     toolbarButtons: [],
     render: LinkNode,
+    identifier: [["a", "link"]],
     main: LinkPlugin
 };

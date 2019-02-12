@@ -2,7 +2,7 @@ import React from "react";
 import Prism from "prismjs";
 import { BLOCK_TAGS, MARK_TAGS, INLINE_TAGS } from "./constants";
 import { LinkNode } from "../plugins/link";
-import { nodeRenderer, markRenderer } from "./renderer";
+import { renderNode, renderMark } from "./renderer";
 import { ImageNode } from "../plugins/image";
 
 export default [
@@ -42,7 +42,7 @@ export default [
                         />
                     );
                 }
-                return nodeRenderer(obj.type, props);
+                return renderNode(obj.type, props);
             }
         }
     },
@@ -61,7 +61,7 @@ export default [
         serialize(obj, children) {
             if (obj.object == "mark") {
                 const props = { children };
-                return markRenderer(obj.type, props);
+                return renderMark(obj.type, props);
             }
         }
     },

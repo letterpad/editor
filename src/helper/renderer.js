@@ -1,105 +1,55 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-// Nodes
-import { ImageNode } from "../plugins/image";
-import { LinkNode } from "../plugins/link";
-import { BlockquoteNode } from "../plugins/blockquote";
-import { LinebreakNode } from "../plugins/linebreak";
-import { HeadingsNode } from "../plugins/headings";
-import { CodeblockNode } from "../plugins/codeblock";
-import {
-    ListItemNode,
-    OrderedListNode,
-    UnorderedListNode
-} from "../plugins/list";
+import { pluginConfigs } from "../plugins";
 
-// Marks
-import { BoldMark } from "../plugins/bold";
-import { ItalicMark } from "../plugins/italic";
-import { UnderlineMark } from "../plugins/underline";
-import { HighlightMark } from "../plugins/highlight";
+const pluginsMap = { node: {}, mark: {} };
 
-export const nodeRenderer = (props, editor, next) => {
-    switch (props.node.type) {
-        case "code_block":
-            return <CodeblockNode {...props} />;
-        case "line-break":
-            return <LinebreakNode {...props} />;
-        case "image":
-            return <ImageNode {...props} />;
-        case "block-quote":
-            return <BlockquoteNode {...props} />;
-        case "heading-one":
-        case "heading-two":
-        case "heading-three":
-        case "heading-four":
-        case "heading-five":
-        case "heading-six":
-            return <HeadingsNode {...props} />;
-        case "link":
-            return <LinkNode {...props} />;
-        case "list-item":
-            return <ListItemNode {...props} />;
-        case "ordered-list":
-            return <OrderedListNode {...props} />;
-        case "unordered-list":
-            return <UnorderedListNode {...props} />;
-        default:
-            return next();
+/*|------------------------------------------------------------------------------
+ * create a map of plugins so that its easy to identify based on node/mark
+ * {
+ *   mark: {
+ *     bold: {
+ *       is: "b",
+ *       plugin: { ...config }
+        }
+ *   },
+ *   node: {
+ *      blockquote: {
+ *        is: "block-quote",
+ *        plugin: { ...config }
+ *      }
+ *   }
+ * }
+ *|------------------------------------------------------------------------------*/
+pluginConfigs.forEach(config => {
+    if (!Array.isArray(config)) {
+        config = [config];
     }
+    config.forEach(plugin => {
+        let { identifier, tag } = plugin;
+        identifier.forEach(set => {
+            pluginsMap[tag][set[1]] = {
+                plugin,
+                is: set[0]
+            };
+        });
+    });
+});
+
+// Search from the pluginsMap and give back the node to render
+export const renderNode = (props, editor, next) => {
+    if (pluginsMap.node[props.node.type]) {
+        const RenderNode = pluginsMap.node[props.node.type].plugin.render;
+        return <RenderNode {...props} next={next} />;
+    }
+    return next();
 };
 
-export const markRenderer = (props, editor, next) => {
-    switch (props.mark.type) {
-        case "bold":
-            return <BoldMark {...props} />;
-        case "highlight":
-            return <HighlightMark {...props} />;
-        case "italic":
-            return <ItalicMark {...props} />;
-        case "underline":
-            return <UnderlineMark {...props} />;
-        case "comment":
-            return (
-                <span
-                    {...props.attributes}
-                    className={"prism-token token " + props.mark.type}
-                    style={{ opacity: "0.33" }}
-                >
-                    {props.children}
-                </span>
-            );
-        case "keyword":
-            return (
-                <span
-                    {...props.attributes}
-                    className={"prism-token token " + props.mark.type}
-                    style={{ fontWeight: "bold" }}
-                >
-                    {props.children}
-                </span>
-            );
-        case "tag":
-            return (
-                <span
-                    {...props.attributes}
-                    className={"prism-token token " + props.mark.type}
-                    style={{ fontWeight: "bold" }}
-                >
-                    {props.children}
-                </span>
-            );
-        case "punctuation":
-            return (
-                <span
-                    {...props.attributes}
-                    className={"prism-token token " + props.mark.type}
-                    style={{ opacity: "0.75" }}
-                >
-                    {props.children}
-                </span>
-            );
-        default:
-            return next();
+// Search from the pluginsMap and give back the mark to render
+export const renderMark = (props, editor, next) => {
+    if (pluginsMap.mark[props.mark.type]) {
+        const RenderMark = pluginsMap.mark[props.mark.type].plugin.render;
+        return <RenderMark {...props} next={next} />;
     }
+    return next();
 };

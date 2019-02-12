@@ -4,8 +4,10 @@ import UnderlineMark from "./UnderlineMark";
 
 export default {
     type: "mark",
+    tag: "mark",
     menuButtons: [<UnderlineButton />],
     toolbarButtons: [],
     render: UnderlineMark,
+    identifier: [["u", "underline"]],
     main: UnderlinePlugin
 };

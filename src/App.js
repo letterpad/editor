@@ -11,7 +11,7 @@ import schema from "./helper/schema";
 import rules from "./helper/rules";
 import initialValue from "./value.json";
 import scrollToCursor from "./helper/scrollToCursor";
-import { nodeRenderer, markRenderer } from "./helper/renderer";
+import { renderNode, renderMark } from "./helper/renderer";
 
 import { pluginConfigs } from "./plugins";
 import { ImageButton, ImagePlugin } from "./plugins/image";
@@ -36,16 +36,23 @@ const plugins = [
     // // MarkdownPlugin(),
 ];
 
-pluginConfigs.forEach(plugin => {
-    const _menuButtons = plugin.menuButtons;
-    if (Array.isArray(_menuButtons)) {
-        _menuButtons.forEach(b => menuButtons.push(b));
+pluginConfigs.forEach(config => {
+    if (!Array.isArray(config)) {
+        config = [config];
     }
-    const _toolbarButtons = plugin.toolbarButtons;
-    if (Array.isArray(_toolbarButtons)) {
-        _toolbarButtons.forEach(b => toolbarButtons.push(b));
-    }
-    plugins.push(plugin.main());
+    config.forEach(plugin => {
+        const _menuButtons = plugin.menuButtons;
+        if (Array.isArray(_menuButtons)) {
+            _menuButtons.forEach(b => menuButtons.push(b));
+        }
+        const _toolbarButtons = plugin.toolbarButtons;
+        if (Array.isArray(_toolbarButtons)) {
+            _toolbarButtons.forEach(b => toolbarButtons.push(b));
+        }
+        if (plugin.main) {
+            plugins.push(plugin.main());
+        }
+    });
 });
 
 class App extends Component {
@@ -166,8 +173,8 @@ class App extends Component {
                     onChange={this.onChange}
                     onPaste={this.onPaste}
                     ref={this.editorRef}
-                    renderNode={nodeRenderer}
-                    renderMark={markRenderer}
+                    renderNode={renderNode}
+                    renderMark={renderMark}
                     renderEditor={this.renderEditor}
                     decorateNode={decorateNode}
                     placeholder="Compose a story.."

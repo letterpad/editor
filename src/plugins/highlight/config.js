@@ -5,8 +5,10 @@ import { HighlightPlugin } from ".";
 
 export default {
     type: "mark",
+    tag: "mark",
     menuButtons: [<HighlightButton type="heading-one" />],
     toolbarButtons: [],
     render: HighlightMark,
+    identifier: [["code", "highlight"]],
     main: HighlightPlugin
 };

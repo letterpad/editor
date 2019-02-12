@@ -5,14 +5,14 @@ import { MARK_TAGS } from "../../helper/constants";
 /* eslint-disable no-unused-vars */
 const UnderlineButton = ({ style, type, editor }) => {
     if (!editor) return <span />;
-    const active = isMarkActive(editor.value, MARK_TAGS.u);
+    const active = isMarkActive(editor.value, "underline");
     return (
         <span
             style={style}
             className={"button " + (active ? "active" : "")}
             onMouseDown={e => {
                 e.preventDefault();
-                return applyMarkStrategy(editor, MARK_TAGS.u);
+                return applyMarkStrategy(editor, "underline");
             }}
         >
             <span className="material-icons">format_underline</span>
