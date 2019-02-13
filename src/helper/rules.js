@@ -1,6 +1,6 @@
 import React from "react";
 import Prism from "prismjs";
-import { BLOCK_TAGS, MARK_TAGS, INLINE_TAGS } from "./constants";
+import { getAllTags } from "./constants";
 import { LinkNode } from "../plugins/link";
 import { renderNode, renderMark } from "./renderer";
 import { ImageNode } from "../plugins/image";
@@ -8,7 +8,7 @@ import { ImageNode } from "../plugins/image";
 export default [
     {
         deserialize(el, next) {
-            const type = BLOCK_TAGS[el.tagName.toLowerCase()];
+            const type = getAllTags().BLOCK_TAGS[el.tagName.toLowerCase()];
             if (type) {
                 return {
                     object: "block",
@@ -49,7 +49,7 @@ export default [
     // Add a new rule that handles marks...
     {
         deserialize(el, next) {
-            const type = MARK_TAGS[el.tagName.toLowerCase()];
+            const type = getAllTags().MARK_TAGS[el.tagName.toLowerCase()];
             if (type) {
                 return {
                     object: "mark",
@@ -68,7 +68,7 @@ export default [
     {
         deserialize: (el, next) => {
             // if (!el.tagName) return;
-            const type = INLINE_TAGS[el.tagName.toLowerCase()];
+            const type = getAllTags().INLINE_TAGS[el.tagName.toLowerCase()];
 
             if (type) {
                 return {

@@ -1,40 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { pluginConfigs } from "../plugins";
-
-const pluginsMap = { node: {}, mark: {} };
-
-/*|------------------------------------------------------------------------------
- * create a map of plugins so that its easy to identify based on node/mark
- * {
- *   mark: {
- *     bold: {
- *       is: "b",
- *       plugin: { ...config }
-        }
- *   },
- *   node: {
- *      blockquote: {
- *        is: "block-quote",
- *        plugin: { ...config }
- *      }
- *   }
- * }
- *|------------------------------------------------------------------------------*/
-pluginConfigs.forEach(config => {
-    if (!Array.isArray(config)) {
-        config = [config];
-    }
-    config.forEach(plugin => {
-        let { identifier, tag } = plugin;
-        identifier.forEach(set => {
-            pluginsMap[tag][set[1]] = {
-                plugin,
-                is: set[0]
-            };
-        });
-    });
-});
+import { pluginsMap } from "../plugins";
 
 // Search from the pluginsMap and give back the node to render
 export const renderNode = (props, editor, next) => {
