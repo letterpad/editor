@@ -9,6 +9,6 @@ export default {
     menuButtons: [<BlockquoteButton />],
     toolbarButtons: [],
     render: BlockquoteNode,
-    identifier: [["blockquote", "block-quote"]],
+    identifier: ["blockquote"],
     main: BlockquotePlugin
 };

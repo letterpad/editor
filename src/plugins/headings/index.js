@@ -4,13 +4,7 @@ import * as HeadingsUtils from "./HeadingsUtils";
 import HeadingsButton from "./HeadingsButton";
 import { hasBlock } from "../../helper/strategy";
 
-const types = [
-    "heading-one",
-    "heading-two",
-    "heading-three",
-    "heading-four",
-    "heading-five"
-];
+const types = ["h1", "h1", "h3", "h4", "h5"];
 
 /* eslint-disable no-unused-vars */
 const HeadingsPlugin = options => ({

@@ -14,7 +14,7 @@ export default [
         render: props => {
             return <CodeblockNode {...props} />;
         },
-        identifier: [["pre", "code_block"]],
+        identifier: ["pre"],
         main: CodeblockPlugin
     },
     {
@@ -70,12 +70,6 @@ export default [
             }
             return null;
         },
-        identifier: [
-            ["span", "comment"],
-            ["span", "keyword"],
-            ["span", "puntuation"],
-            ["span", "tag"],
-            ["span", "constant"]
-        ]
+        identifier: ["comment", "keyword", "puntuation", "tag", "constant"]
     }
 ];

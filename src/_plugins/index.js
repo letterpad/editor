@@ -59,10 +59,10 @@ pluginConfigs.forEach(config => {
         * }
         *|------------------------------------------------------------------------------*/
         let { identifier, tag } = plugin;
-        identifier.forEach(id => {
-            pluginsMap[tag][id] = {
+        identifier.forEach(set => {
+            pluginsMap[tag][set[1]] = {
                 plugin,
-                is: id
+                is: set[0]
             };
         });
     });

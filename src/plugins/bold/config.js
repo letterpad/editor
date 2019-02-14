@@ -8,6 +8,6 @@ export default {
     menuButtons: [<BoldButton />],
     toolbarButtons: [],
     render: BoldMark,
-    identifier: [["strong", "bold"]],
+    identifier: ["strong"],
     main: BoldPlugin
 };

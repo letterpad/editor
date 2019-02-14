@@ -9,6 +9,6 @@ export default {
     menuButtons: [<LinkButton />],
     toolbarButtons: [],
     render: LinkNode,
-    identifier: [["a", "link"]],
+    identifier: ["a"],
     main: LinkPlugin
 };

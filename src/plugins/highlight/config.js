@@ -9,6 +9,6 @@ export default {
     menuButtons: [<HighlightButton type="heading-one" />],
     toolbarButtons: [],
     render: HighlightMark,
-    identifier: [["code", "highlight"]],
+    identifier: ["code"],
     main: HighlightPlugin
 };

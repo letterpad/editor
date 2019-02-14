@@ -4,7 +4,7 @@ import { applyBlockquote } from "./BlockquoteUtils";
 import { hasBlock } from "../../helper/strategy";
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-const BlockquoteButton = ({ editor, onChange, changeState, style }) => {
+const BlockquoteButton = ({ editor, style }) => {
     if (!editor) return <span />;
     const type = "block-quote";
     return (
@@ -18,10 +18,7 @@ const BlockquoteButton = ({ editor, onChange, changeState, style }) => {
                 // e.preventDefault();
                 // check if this is already active
                 const isActive = hasBlock(editor.value, type);
-                return applyBlockquote(
-                    editor,
-                    isActive ? "paragraph" : type
-                );
+                return applyBlockquote(editor, isActive ? "paragraph" : type);
             }}
         >
             <span className="material-icons">format_quote</span>

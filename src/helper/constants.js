@@ -23,16 +23,16 @@ pluginConfigs.filter(config => {
             if (!identifier) {
                 return false;
             }
-            identifier.forEach(set => {
-                if (set[0] === "span") return;
+            identifier.forEach(id => {
+                // if (set[0] === "span") return;
                 if (type === "block") {
-                    BLOCK_TAGS[set[0]] = set[1];
+                    BLOCK_TAGS[id] = id;
                 }
                 if (type === "mark") {
-                    MARK_TAGS[set[0]] = set[1];
+                    MARK_TAGS[id] = id;
                 }
                 if (type === "inline") {
-                    INLINE_TAGS[set[0]] = set[1];
+                    INLINE_TAGS[id] = id;
                 }
             });
         });

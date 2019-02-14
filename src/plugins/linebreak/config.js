@@ -8,6 +8,6 @@ export default {
     menuButtons: [],
     toolbarButtons: [<LinebreakButton />],
     render: LinebreakNode,
-    identifier: [["hr", "line-break"]],
+    identifier: ["hr"],
     main: LinebreakPlugin
 };

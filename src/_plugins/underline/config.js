@@ -8,6 +8,6 @@ export default {
     menuButtons: [<UnderlineButton />],
     toolbarButtons: [],
     render: UnderlineMark,
-    identifier: ["u"],
+    identifier: [["u", "underline"]],
     main: UnderlinePlugin
 };

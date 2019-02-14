@@ -11,7 +11,7 @@ const LinebreakButton = ({ editor, style, type }) => {
             type={type}
             onMouseDown={e => {
                 e.preventDefault();
-                return applyLinebreak(editor, "line-break");
+                return applyLinebreak(editor, "hr");
             }}
         >
             <span className="material-icons">more_horiz</span>

@@ -4,7 +4,7 @@ import {
     getNodeOfType,
     getBlockParent
 } from "../../helper/strategy";
-const itemType = "list-item";
+const itemType = "li";
 
 export const onTab = (event, change) => {
     event.preventDefault();
@@ -25,10 +25,10 @@ export const onBackspace = (event, editor, next) => {
             return decreaseListDepthStrategy(editor);
         } else {
             editor.setBlocks("paragraph");
-            if (getBlockParent(value, "unordered-list")) {
-                return editor.unwrapBlock("unordered-list");
-            } else if (getBlockParent(value, "ordered-list")) {
-                return editor.unwrapBlock("ordered-list");
+            if (getBlockParent(value, "ul")) {
+                return editor.unwrapBlock("ul");
+            } else if (getBlockParent(value, "ol")) {
+                return editor.unwrapBlock("ol");
             }
         }
     }
@@ -48,53 +48,54 @@ export const onEnter = (event, editor, next) => {
     if (startText.text === "") {
         return deepRemoveList(editor);
     } else {
-        return editor.splitBlock().setBlocks(itemType);
+        editor.splitBlock().setBlocks(itemType);
     }
+    return next();
 };
 
 // helper functions
 
 export const isUnorderedList = value => {
-    return hasParentOfType(value, "unordered-list");
+    return hasParentOfType(value, "ul");
 };
 
 export const isOrderedList = value => {
-    return hasParentOfType(value, "ordered-list");
+    return hasParentOfType(value, "ol");
 };
 
 export const getUnorderedListNode = value => {
-    return getNodeOfType(value, "unordered-list");
+    return getNodeOfType(value, "ul");
 };
 
 export const getOrderedListNode = value => {
-    return getNodeOfType(value, "ordered-list");
+    return getNodeOfType(value, "ol");
 };
 
 export const removeUnorderedList = editor => {
     editor
         .setBlocks("paragraph")
-        .unwrapBlock("unordered-list")
+        .unwrapBlock("ul")
         .focus();
 };
 
 export const switchToOrderedList = editor => {
     return editor
-        .unwrapBlock("unordered-list")
-        .wrapBlock("ordered-list")
+        .unwrapBlock("ul")
+        .wrapBlock("ol")
         .focus();
 };
 
 export const removeOrderedList = editor => {
     return editor
         .setBlocks("paragraph")
-        .unwrapBlock("ordered-list")
+        .unwrapBlock("ol")
         .focus();
 };
 
 export const switchToUnorderedList = editor => {
     return editor
-        .wrapBlock("unordered-list")
-        .unwrapBlock("ordered-list")
+        .wrapBlock("ul")
+        .unwrapBlock("ol")
         .focus();
 };
 
@@ -110,19 +111,19 @@ export const onlyRemove = (editor, type) => {
 };
 
 export const onlyRemoveUnorderedList = editor => {
-    return onlyRemove(editor, "unordered-list");
+    return onlyRemove(editor, "ul");
 };
 
 export const onlyRemoveOrderedList = editor => {
-    return onlyRemove(editor, "ordered-list");
+    return onlyRemove(editor, "ol");
 };
 
 export const applyUnorderedList = editor => {
-    return applyList(editor, "unordered-list");
+    return applyList(editor, "ul");
 };
 
 export const applyOrderedList = editor => {
-    return applyList(editor, "ordered-list");
+    return applyList(editor, "ol");
 };
 
 const deepRemoveList = editor => {
@@ -135,7 +136,7 @@ const deepRemoveList = editor => {
         .fill(".")
         .forEach(() => {
             const parent = document.getParent(node.key);
-            if (parent.type === "unordered-list") removeUnorderedList(editor);
+            if (parent.type === "ul") removeUnorderedList(editor);
             else removeOrderedList(editor);
         });
     return editor;
@@ -143,7 +144,7 @@ const deepRemoveList = editor => {
 
 export const unorderedListStrategy = editor => {
     const { value } = editor;
-    if (!hasBlock(value, itemType)) return applyList(editor, "unordered-list");
+    if (!hasBlock(value, itemType)) return applyList(editor, "ul");
 
     if (isUnorderedList(value)) return deepRemoveList(editor);
     if (isOrderedList(value)) return switchToUnorderedList(editor);
@@ -153,7 +154,7 @@ export const unorderedListStrategy = editor => {
 export const orderedListStrategy = editor => {
     const { value } = editor;
     // If it is not a list yet, transform it!
-    if (!hasBlock(value, itemType)) return applyList(editor, "ordered-list");
+    if (!hasBlock(value, itemType)) return applyList(editor, "ol");
 
     // If it is already a list, handle it!
     if (isOrderedList(value)) return deepRemoveList(editor);

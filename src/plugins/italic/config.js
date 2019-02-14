@@ -8,6 +8,6 @@ export default {
     menuButtons: [<ItalicButton />],
     toolbarButtons: [],
     render: ItalicMark,
-    identifier: [["em", "italic"]],
+    identifier: ["em"],
     main: ItalicPlugin
 };

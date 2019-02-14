@@ -1,56 +1,60 @@
 import {
-  insertNewLineBeforeCodeBlock,
-  deleteNewLineBeforeCodeBlock,
-  isPrintableKeycode,
-  preserveIndentationForCodeBlock,
-  unindentClosingBlocks,
-  handleCommandAInCodeBlock,
-  getCodeBlockParent,
+    insertNewLineBeforeCodeBlock,
+    deleteNewLineBeforeCodeBlock,
+    isPrintableKeycode,
+    preserveIndentationForCodeBlock,
+    unindentClosingBlocks,
+    handleCommandAInCodeBlock,
+    getCodeBlockParent
 } from "./CodeblockUtils";
 import { isMod } from "../../helper/keyboard-event";
 
 /* eslint-disable react/prop-types */
-const codeblockKeyboardShortcut = (event, change) => {
-  const { value } = change;
+const codeblockKeyboardShortcut = (event, editor, next) => {
+    const { value } = editor;
 
-  if (value.isExpanded && !isMod(event) && isPrintableKeycode(event.which)) {
-    change.delete();
-    return true;
-  }
+    if (
+        value.selection.isExpanded &&
+        !isMod(event) &&
+        isPrintableKeycode(event.which)
+    ) {
+        editor.delete();
+        return next();
+    }
 
-  if (!getCodeBlockParent(value)) return;
+    if (!getCodeBlockParent(value)) return next();
 
-  switch (event.key) {
-    case "Enter":
-      if (value.startOffset === 0) {
-        const done = insertNewLineBeforeCodeBlock(change);
-        if (done) return true;
-      }
-      return preserveIndentationForCodeBlock(change);
+    switch (event.key) {
+        case "Enter":
+            if (value.startOffset === 0) {
+                const done = insertNewLineBeforeCodeBlock(editor);
+                if (done) return next();
+            }
+            return preserveIndentationForCodeBlock(editor);
 
-    case "Backspace":
-      if (value.startOffset === 0) {
-        return deleteNewLineBeforeCodeBlock(change);
-      }
-      break;
+        case "Backspace":
+            if (value.startOffset === 0) {
+                return deleteNewLineBeforeCodeBlock(editor);
+            }
+            break;
 
-    case "Tab":
-      event.preventDefault();
-      // insert 2 spaces
-      change.insertText("  ");
-      return true;
+        case "Tab":
+            event.preventDefault();
+            // insert 2 spaces
+            editor.insertText("  ");
+            return next();
 
-    case "a":
-      return handleCommandAInCodeBlock(event, change);
+        case "a":
+            return handleCommandAInCodeBlock(event, editor);
 
-    case "}":
-    case ")":
-    case "]":
-      return unindentClosingBlocks(change);
+        case "}":
+        case ")":
+        case "]":
+            return unindentClosingBlocks(editor);
 
-    default:
-    // console.log(event.key);
-  }
+        default:
+            return next();
+    }
 };
 
 export default codeblockKeyboardShortcut;

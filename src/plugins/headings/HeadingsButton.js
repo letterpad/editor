@@ -17,10 +17,7 @@ const HeadingsButton = ({ editor, style, type }) => {
                 e.preventDefault();
                 // check if this is already active
                 const isActive = hasBlock(editor.value, type);
-                return applyHeadings(
-                    editor,
-                    isActive ? "paragraph" : type
-                );
+                return applyHeadings(editor, isActive ? "paragraph" : type);
             }}
         >
             <span className="material-icons">{getType(type)}</span>
@@ -30,17 +27,17 @@ const HeadingsButton = ({ editor, style, type }) => {
 
 const getType = type => {
     switch (type) {
-        case "heading-one":
+        case "h1":
             return "looks_one";
-        case "heading-two":
+        case "h2":
             return "looks_two";
-        case "heading-three":
+        case "h3":
             return "looks_3";
-        case "heading-four":
+        case "h4":
             return "looks_4";
-        case "heading-five":
+        case "h5":
             return "looks_5";
-        case "heading-six":
+        case "h6":
             return "looks_6";
 
         default:

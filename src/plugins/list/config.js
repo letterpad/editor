@@ -10,18 +10,14 @@ export default {
     menuButtons: [<ListButtonBar />],
     toolbarButtons: [],
     render: props => {
-        if (props.node.type === "unordered-list") {
+        if (props.node.type === "ul") {
             return <UnorderedListNode {...props} />;
-        } else if (props.node.type === "ordered-list") {
+        } else if (props.node.type === "ol") {
             return <OrderedListNode {...props} />;
-        } else if (props.node.type === "list-item") {
+        } else if (props.node.type === "li") {
             return <ListItemNode {...props} />;
         }
     },
-    identifier: [
-        ["li", "list-item"],
-        ["ol", "ordered-list"],
-        ["ul", "unordered-list"]
-    ],
+    identifier: ["li", "ol", "ul"],
     main: ListPlugin
 };
