@@ -37,8 +37,6 @@ export const applyCodeblock = editor => {
             })
         );
 
-        editor.moveToRangeOf(codeBlock);
-
         return editor
             .removeMark("highlight")
             .unwrapBlockByKey(codeBlock.key, "code_block")

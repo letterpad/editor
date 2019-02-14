@@ -59,7 +59,7 @@ export default [
             }
         },
         serialize(obj, children) {
-            if (obj.object == "mark") {
+            if (obj.object === "mark") {
                 const props = { children };
                 return renderMark(obj.type, props);
             }
