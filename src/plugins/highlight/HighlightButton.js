@@ -1,22 +1,20 @@
 import React from "react";
 import { isMarkActive, applyMarkStrategy } from "../../helper/strategy";
+import Button from "../../components/Button";
 
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-const highlightButton = ({ editor, style, type }) => {
+const highlightButton = ({ editor }) => {
     if (!editor) return <span />;
     const active = isMarkActive(editor.value, "code");
+
     return (
-        <span
-            style={style}
-            className={"button " + (active ? "active" : "")}
+        <Button
+            isActive={active}
+            icon="border_color"
             onMouseDown={e => {
                 e.preventDefault();
                 return applyMarkStrategy(editor, "code");
             }}
-        >
-            <span className="material-icons">border_color</span>
-        </span>
+        />
     );
 };
 export default highlightButton;

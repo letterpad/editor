@@ -1,24 +1,18 @@
 import React from "react";
-
-import classnames from "classnames";
-
 import { unorderedListStrategy, isUnorderedList } from "./ListUtils";
-/* eslint-disable react/prop-types */
-const UnorderedListButton = ({ editor, className, style, type }) => {
+import Button from "../../components/Button";
+
+const UnorderedListButton = ({ editor }) => {
     if (!editor) return <span />;
     return (
-        <span
-            style={style}
-            type={type}
-            onMouseDown={() => unorderedListStrategy(editor)}
-            className={classnames(
-                "button slate-list-plugin--button",
-                { active: isUnorderedList(editor.value) },
-                className
-            )}
-        >
-            <span className="material-icons">format_list_bulleted</span>
-        </span>
+        <Button
+            isActive={isUnorderedList(editor.value)}
+            icon={"format_list_bulleted"}
+            onMouseDown={e => {
+                e.preventDefault();
+                return unorderedListStrategy(editor, "unordered-list");
+            }}
+        />
     );
 };
 export default UnorderedListButton;

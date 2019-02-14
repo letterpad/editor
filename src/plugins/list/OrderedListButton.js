@@ -1,25 +1,19 @@
 import React from "react";
-import classnames from "classnames";
-
 import { orderedListStrategy, isOrderedList } from "./ListUtils";
-/* eslint-disable react/prop-types */
-const OrderedListButton = ({ editor, className, style, type }) => {
+import Button from "../../components/Button";
+
+const OrderedListButton = ({ editor }) => {
     if (!editor) return <span />;
+
     return (
-        <span
-            style={style}
-            type={type}
-            onMouseDown={() =>
-                orderedListStrategy(editor, "ordered-list")
-            }
-            className={classnames(
-                "button slate-list-plugin--button",
-                { active: isOrderedList(editor.value) },
-                className
-            )}
-        >
-            <span className="material-icons">format_list_numbered</span>
-        </span>
+        <Button
+            isActive={isOrderedList(editor.value)}
+            icon={"format_list_numbered"}
+            onMouseDown={e => {
+                e.preventDefault();
+                return orderedListStrategy(editor, "ordered-list");
+            }}
+        />
     );
 };
 export default OrderedListButton;

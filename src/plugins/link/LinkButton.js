@@ -1,28 +1,19 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React from "react";
-import classnames from "classnames";
-
 import { insertLinkStrategy, hasLinks } from "./LinkUtils";
+import Button from "../../components/Button";
 
-const LinkButton = ({ editor, className, style, type }) => {
+const LinkButton = ({ editor }) => {
     if (!editor) return <span />;
+
     return (
-        <span
-            style={style}
-            type={type}
+        <Button
+            isActive={hasLinks(editor.value)}
+            icon="insert_link"
             onMouseDown={e => {
                 e.preventDefault();
-                return insertLinkStrategy(editor);
+                return insertLinkStrategy(editor, "code");
             }}
-            className={classnames(
-                "button",
-                { active: hasLinks(editor.value) },
-                className
-            )}
-        >
-            <span className="material-icons">insert_link</span>
-        </span>
+        />
     );
 };
 

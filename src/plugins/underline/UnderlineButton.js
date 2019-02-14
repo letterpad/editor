@@ -1,22 +1,19 @@
 import React from "react";
 import { applyMarkStrategy, isMarkActive } from "../../helper/strategy";
-import { MARK_TAGS } from "../../helper/constants";
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-const UnderlineButton = ({ style, type, editor }) => {
+import Button from "../../components/Button";
+
+const UnderlineButton = ({ editor }) => {
     if (!editor) return <span />;
-    const active = isMarkActive(editor.value, "u");
+
     return (
-        <span
-            style={style}
-            className={"button " + (active ? "active" : "")}
+        <Button
+            isActive={isMarkActive(editor.value, "u")}
+            icon="format_underline"
             onMouseDown={e => {
                 e.preventDefault();
                 return applyMarkStrategy(editor, "u");
             }}
-        >
-            <span className="material-icons">format_underline</span>
-        </span>
+        />
     );
 };
 export default UnderlineButton;

@@ -1,21 +1,18 @@
 import React from "react";
 import { applyMarkStrategy, isMarkActive } from "../../helper/strategy";
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-const BoldButton = ({ style, type, editor }) => {
+import Button from "../../components/Button";
+
+const BoldButton = ({ editor }) => {
     if (!editor) return <span />;
-    const active = isMarkActive(editor.value, "strong");
     return (
-        <span
-            style={style}
-            className={"button " + (active ? "active" : "")}
+        <Button
+            isActive={isMarkActive(editor.value, "strong")}
+            icon="format_bold"
             onMouseDown={e => {
                 e.preventDefault();
                 return applyMarkStrategy(editor, "strong");
             }}
-        >
-            <span className="material-icons">format_bold</span>
-        </span>
+        />
     );
 };
 export default BoldButton;

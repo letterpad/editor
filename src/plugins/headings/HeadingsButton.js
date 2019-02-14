@@ -2,26 +2,21 @@ import React from "react";
 import classnames from "classnames";
 import { applyHeadings } from "./HeadingsUtils";
 import { hasBlock } from "../../helper/strategy";
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-const HeadingsButton = ({ editor, style, type }) => {
+import Button from "../../components/Button";
+
+const HeadingsButton = ({ editor, type }) => {
     if (!editor) return <span />;
+
     return (
-        <span
-            style={style}
-            className={classnames("button", {
-                active: hasBlock(editor.value, type)
-            })}
-            type={type}
+        <Button
+            isActive={hasBlock(editor.value, type)}
+            icon={getType(type)}
             onMouseDown={e => {
                 e.preventDefault();
-                // check if this is already active
                 const isActive = hasBlock(editor.value, type);
                 return applyHeadings(editor, isActive ? "paragraph" : type);
             }}
-        >
-            <span className="material-icons">{getType(type)}</span>
-        </span>
+        />
     );
 };
 

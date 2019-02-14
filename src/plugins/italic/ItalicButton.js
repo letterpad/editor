@@ -1,22 +1,18 @@
 import React from "react";
 import { applyMarkStrategy, isMarkActive } from "../../helper/strategy";
-import { MARK_TAGS } from "../../helper/constants";
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-const ItalicButton = ({ style, type, editor }) => {
+import Button from "../../components/Button";
+
+const ItalicButton = ({ editor }) => {
     if (!editor) return <span />;
-    const active = isMarkActive(editor.value, "em");
     return (
-        <span
-            style={style}
-            className={"button " + (active ? "active" : "")}
+        <Button
+            isActive={isMarkActive(editor.value, "em")}
+            icon="format_italic"
             onMouseDown={e => {
                 e.preventDefault();
                 return applyMarkStrategy(editor, "em");
             }}
-        >
-            <span className="material-icons">format_italic</span>
-        </span>
+        />
     );
 };
 export default ItalicButton;
