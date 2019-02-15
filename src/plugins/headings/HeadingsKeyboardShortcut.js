@@ -9,23 +9,23 @@ const HeadingsKeyboardShortcut = (event, editor, next) => {
 
     if (event.key === "1") {
         event.preventDefault();
-        type = "heading-one";
+        type = "h1";
     }
     if (event.key === "2") {
         event.preventDefault();
-        type = "heading-two";
+        type = "h2";
     }
     if (event.key === "3") {
         event.preventDefault();
-        type = "heading-three";
+        type = "h3";
     }
     if (event.key === "4") {
         event.preventDefault();
-        type = "heading-four";
+        type = "h4";
     }
     if (event.key === "5") {
         event.preventDefault();
-        type = "heading-five";
+        type = "h5";
     }
     if (type === "") {
         return next();

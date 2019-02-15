@@ -15,7 +15,7 @@ import matchLink from "./match/link";
  * @param {Change} change
  */
 
-export const onSpace = (event, change) => {
+export const onSpace = (event, change, next) => {
     const { value } = change;
     if (value.isExpanded) return;
 
@@ -116,7 +116,7 @@ export const onSpace = (event, change) => {
         change.setBlocks(type);
     }
     change.extendToStartOf(currentTextNode).delete();
-    return true;
+    return next();
 };
 
 /**

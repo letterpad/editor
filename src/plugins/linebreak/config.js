@@ -9,5 +9,12 @@ export default {
     toolbarButtons: [<LinebreakButton />],
     render: LinebreakNode,
     identifier: ["hr"],
-    main: LinebreakPlugin
+    main: LinebreakPlugin,
+    markdown: {
+        trigger: "space",
+        before: /^(-{3})$/,
+        change: (editor, event, matches) => {
+            editor.setBlocks({ type: "hr", isVoid: true });
+        }
+    }
 };

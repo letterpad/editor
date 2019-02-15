@@ -9,5 +9,20 @@ export default {
     toolbarButtons: [],
     render: ItalicMark,
     identifier: ["em"],
-    main: ItalicPlugin
+    main: ItalicPlugin,
+    markdown: {
+        trigger: "_",
+        before: /(\_\_)(.*?)(\_)/,
+        change: (editor, event, matched) => {
+            const text = matched.before[0].replace(/\_/g, "");
+
+            editor
+                .insertText(text)
+                .moveFocusBackward(text.length)
+                .addMark("em")
+                .moveFocusForward(text.length)
+                .removeMark("em")
+                .insertText(" ");
+        }
+    }
 };

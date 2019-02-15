@@ -1,3 +1,5 @@
+import AutoReplace from "slate-auto-replace";
+
 // import { ImageButton, ImagePlugin } from "./image";
 // import { MarkdownPlugin } from "./markdown";
 
@@ -23,7 +25,7 @@ export const plugins = [
     // // ImagePlugin(),
     // // MarkdownPlugin(),
 ];
-
+window.plugins = plugins;
 pluginConfigs.forEach(config => {
     if (!Array.isArray(config)) {
         config = [config];
@@ -39,6 +41,9 @@ pluginConfigs.forEach(config => {
         }
         if (plugin.main) {
             plugins.push(plugin.main());
+        }
+        if (plugin.markdown) {
+            plugins.push(AutoReplace(plugin.markdown));
         }
 
         /*|------------------------------------------------------------------------------

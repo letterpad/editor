@@ -84,12 +84,14 @@ export default [
             }
         },
         serialize: (obj, children) => {
-            if (obj.object != "inline") {
+            if (obj.object !== "inline") {
                 return;
             }
+            const type = getAllTags().INLINE_TAGS[el.tagName.toLowerCase()];
             const props = { children, node: obj };
+
             switch (obj.type) {
-                case "link":
+                case "a":
                     return <LinkNode {...props} />;
                 case "image":
                     return <ImageNode {...props} />;

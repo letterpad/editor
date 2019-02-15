@@ -10,5 +10,10 @@ export default {
     toolbarButtons: [],
     render: BlockquoteNode,
     identifier: ["blockquote"],
-    main: BlockquotePlugin
+    main: BlockquotePlugin,
+    markdown: {
+        trigger: "space",
+        before: /^(>)$/,
+        change: change => change.setBlocks("blockquote")
+    }
 };

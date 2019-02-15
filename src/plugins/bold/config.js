@@ -9,5 +9,20 @@ export default {
     toolbarButtons: [],
     render: BoldMark,
     identifier: ["strong"],
-    main: BoldPlugin
+    main: BoldPlugin,
+    markdown: {
+        trigger: "*",
+        before: /(\*\*)(.*?)(\*)/,
+        change: (editor, event, matched) => {
+            const text = matched.before[0].replace(/\*/g, "");
+
+            editor
+                .insertText(text)
+                .moveFocusBackward(text.length)
+                .addMark("strong")
+                .moveFocusForward(text.length)
+                .removeMark("strong")
+                .insertText(" ");
+        }
+    }
 };

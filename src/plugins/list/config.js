@@ -19,5 +19,10 @@ export default {
         }
     },
     identifier: ["li", "ol", "ul"],
-    main: ListPlugin
+    main: ListPlugin,
+    markdown: {
+        trigger: "space",
+        before: /^(-)$/,
+        change: change => change.setBlocks("li").wrapBlock("ul")
+    }
 };

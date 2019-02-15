@@ -34,18 +34,18 @@ export const httpPreffixStrategy = href =>
     href.search("https?://") >= 0 ? href : `http://${href}`;
 
 export const hasLinks = value =>
-    value.inlines.some(inline => inline.type === "link");
+    value.inlines.some(inline => inline.type === "a");
 
 export const getLink = value =>
-    value.inlines.filter(inline => inline.type === "link").first();
+    value.inlines.filter(inline => inline.type === "a").first();
 
 export const hasMultiBlocks = value => value.blocks.size > 1;
 
-export const unlink = change => change.unwrapInline("link").focus();
+export const unlink = change => change.unwrapInline("a").focus();
 
 const wrapLink = (editor, href) => {
     editor.wrapInline({
-        type: "link",
+        type: "a",
         data: { href }
     });
 
@@ -53,5 +53,5 @@ const wrapLink = (editor, href) => {
 };
 
 const unwrapLink = editor => {
-    editor.unwrapInline("link");
+    editor.unwrapInline("a");
 };

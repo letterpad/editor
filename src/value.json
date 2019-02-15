@@ -9,7 +9,24 @@
                         "object": "text",
                         "leaves": [
                             {
-                                "text": "A line of text in a paragraph."
+                                "text": "A line of text in a paragraph. "
+                            }
+                        ]
+                    },
+                    {
+                        "object": "inline",
+                        "type": "a",
+                        "data": {
+                            "href": "https://en.wikipedia.org/wiki/Hypertext"
+                        },
+                        "nodes": [
+                            {
+                                "object": "text",
+                                "leaves": [
+                                    {
+                                        "text": "hyperlinks"
+                                    }
+                                ]
                             }
                         ]
                     }
