@@ -1,11 +1,11 @@
 import React from "react";
-import { applyBlockquote } from "./BlockquoteUtils";
+import { applyAudio } from "./AudioUtils";
 import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
 
-const BlockquoteButton = ({ editor }) => {
+const AudioButton = ({ editor }) => {
     if (!editor) return <span />;
-    const type = "blockquote";
+    const type = "audio";
 
     return (
         <Button
@@ -13,9 +13,9 @@ const BlockquoteButton = ({ editor }) => {
             icon="format_quote"
             onMouseDown={e => {
                 const isActive = hasBlock(editor.value, type);
-                return applyBlockquote(editor, isActive ? "paragraph" : type);
+                return applyAudio(editor, isActive ? "paragraph" : type);
             }}
         />
     );
 };
-export default BlockquoteButton;
+export default AudioButton;

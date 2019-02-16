@@ -57,7 +57,7 @@ pluginConfigs.forEach(config => {
         *   },
         *   node: {
         *      blockquote: {
-        *        is: "block-quote",
+        *        is: "blockquote",
         *        plugin: { ...config }
         *      }
         *   }

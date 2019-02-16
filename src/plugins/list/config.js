@@ -22,7 +22,13 @@ export default {
     main: ListPlugin,
     markdown: {
         trigger: "space",
-        before: /^(-)$/,
-        change: change => change.setBlocks("li").wrapBlock("ul")
+        before: /^(\*|-)$/,
+        change: (change, event, matches) => {
+            if (matches.before[0] === "*") {
+                return change.setBlocks("li").wrapBlock("ol");
+            } else {
+                return change.setBlocks("li").wrapBlock("ul");
+            }
+        }
     }
 };

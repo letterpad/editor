@@ -45,12 +45,9 @@ export const onEnter = (event, editor, next) => {
 
     event.preventDefault();
 
-    if (startText.text === "") {
-        return deepRemoveList(editor);
-    } else {
-        editor.splitBlock().setBlocks(itemType);
-    }
-    return next();
+    const emptyText = startText.text === "";
+
+    return emptyText ? deepRemoveList(editor) : editor.splitBlock();
 };
 
 // helper functions

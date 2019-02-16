@@ -27,23 +27,6 @@ const HeadingsPlugin = options => ({
                 }
             }
         }
-        // else if (event.key === " ") {
-        //     const { value } = editor;
-        //     const { selection } = value;
-        //     if (selection.isExpanded) return next();
-
-        //     const { startBlock } = value;
-        //     const { start } = selection;
-        //     const chars = startBlock.text
-        //         .slice(0, start.offset)
-        //         .replace(/\s*/g, "");
-        //     const type = markdownChars[chars];
-        //     if (!type) return next();
-
-        //     event.preventDefault();
-        //     editor.setBlocks(type);
-        //     return editor.moveFocusToStartOfNode(startBlock).delete();
-        // }
 
         return HeadingsKeyboardShortcut(event, editor, next);
     }

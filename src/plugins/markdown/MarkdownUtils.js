@@ -135,7 +135,7 @@ const getType = chars => {
         case "1.":
             return "ol";
         case ">":
-            return "block-quote";
+            return "blockquote";
         case "#":
             return "heading-one";
         case "##":
