@@ -93,7 +93,7 @@ export default [
             switch (obj.type) {
                 case "a":
                     return <LinkNode {...props} />;
-                case "image":
+                case "img":
                     return <ImageNode {...props} />;
             }
         }

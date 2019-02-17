@@ -62,6 +62,7 @@ class App extends Component {
     };
 
     onChange = ({ value }) => {
+        console.log("value :", value);
         this.setState({ value });
     };
 

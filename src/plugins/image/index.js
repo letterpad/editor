@@ -5,15 +5,16 @@ import ImageButton from "./ImageButton";
 
 /* eslint-disable no-unused-vars */
 const ImagePlugin = options => ({
-  onKeyDown(...args) {
-    return ImageKeyboardShortcut(...args);
-  },
+    // onKeyDown(event, editor, next) {
+    //     return next();
+    //     return ImageKeyboardShortcut(event, editor, next);
+    // }
 });
 
 export {
-  ImagePlugin,
-  ImageNode,
-  ImageKeyboardShortcut,
-  ImageUtils,
-  ImageButton,
+    ImagePlugin,
+    ImageNode,
+    ImageKeyboardShortcut,
+    ImageUtils,
+    ImageButton
 };

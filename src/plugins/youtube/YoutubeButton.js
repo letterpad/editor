@@ -1,22 +1,22 @@
 import React from "react";
-import { applyAudio } from "./AudioUtils";
+import { applyYoutube } from "./YoutubeUtils";
 import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
 
-const AudioButton = ({ editor }) => {
+const YoutubeButton = ({ editor }) => {
     if (!editor) return <span />;
-    const type = "audio";
+    const type = "iframe";
 
     return (
         <Button
             isActive={hasBlock(editor.value, type)}
             icon="queue_music"
             onMouseDown={e => {
-                const src = window.prompt("Enter the URL of the audio:");
+                const src = window.prompt("Enter the URL of the Youtube:");
                 const isActive = hasBlock(editor.value, type);
-                return applyAudio(editor, isActive ? "paragraph" : type, src);
+                return applyYoutube(editor, isActive ? "paragraph" : type, src);
             }}
         />
     );
 };
-export default AudioButton;
+export default YoutubeButton;

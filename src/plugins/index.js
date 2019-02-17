@@ -14,7 +14,7 @@ export const pluginConfigs = (ctx => {
 
 export const menuButtons = [];
 export const toolbarButtons = [];
-export const pluginsMap = { node: {}, mark: {} };
+export const pluginsMap = { node: {}, mark: {}, inline: {} };
 
 // Apply plugins
 export const plugins = [

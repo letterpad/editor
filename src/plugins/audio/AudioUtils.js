@@ -1,1 +1,2 @@
-export const applyAudio = (editor, type) => editor.setBlocks(type);
+export const applyAudio = (editor, type, src) =>
+    editor.setBlocks({ type, data: { src } });

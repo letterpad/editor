@@ -15,5 +15,10 @@ export default {
                 }
             }
         }
+    },
+    blocks: {
+        img: {
+            isVoid: true
+        }
     }
 };

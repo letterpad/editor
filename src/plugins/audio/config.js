@@ -7,8 +7,8 @@ export default [
     {
         type: "block",
         tag: "node",
-        menuButtons: [<AudioButton />],
-        toolbarButtons: [],
+        menuButtons: [],
+        toolbarButtons: [<AudioButton />],
         render: AudioNode,
         identifier: ["audio"],
         main: AudioPlugin,
@@ -19,7 +19,8 @@ export default [
                 const src = matches.before[0].replace("[audio=", "");
                 return change
                     .setBlocks({ type: "audio", data: { src: src } })
-                    .focus();
+                    .moveToEndOfBlock()
+                    .insertBlock("paragraph");
             }
         }
     }
