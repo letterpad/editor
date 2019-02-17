@@ -19,7 +19,7 @@ const ImageButton = ({ editor, next }) => {
                 const src = window.prompt("Enter the URL of the image:");
                 if (!src) return next();
                 // const isActive = hasBlock(editor.value, "img");
-                insertImage(editor, src, isActive);
+                insertImage(editor, src);
             }}
         />
     );

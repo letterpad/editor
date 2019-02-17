@@ -3,7 +3,7 @@ import { ImagePlugin, ImageNode } from ".";
 import ImageButton from "./ImageButton";
 
 export default {
-    type: "block",
+    type: "inline",
     tag: "node",
     menuButtons: [],
     toolbarButtons: [<ImageButton />],

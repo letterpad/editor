@@ -16,7 +16,7 @@ export default {
             }
         }
     },
-    blocks: {
+    inline: {
         img: {
             isVoid: true
         }

@@ -7,7 +7,7 @@ export const insertImage = (editor, src, target) => {
     }
 
     editor
-        .insertBlock({
+        .insertInline({
             type: "img",
             data: { src }
         })

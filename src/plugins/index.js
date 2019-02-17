@@ -1,8 +1,5 @@
 import AutoReplace from "slate-auto-replace";
 
-// import { ImageButton, ImagePlugin } from "./image";
-// import { MarkdownPlugin } from "./markdown";
-
 export const pluginConfigs = (ctx => {
     let keys = ctx.keys();
     let values = keys.map(ctx);
@@ -22,9 +19,8 @@ export const plugins = [
     //     onlyIn: node => node.type === "code_block",
     //     getSyntax: node => node.data.get("syntax")
     // }),
-    // // ImagePlugin(),
-    // // MarkdownPlugin(),
 ];
+window.pluginsMap = pluginsMap;
 window.plugins = plugins;
 pluginConfigs.forEach(config => {
     if (!Array.isArray(config)) {
