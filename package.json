@@ -1,5 +1,5 @@
 {
-    "name": "slate-plugins",
+    "name": "letterpad-editor",
     "main": "./index.js",
     "scripts": {
         "dev": "webpack-dev-server --config=webpack.config.js"
