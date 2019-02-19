@@ -23,8 +23,7 @@ const html = new Html({ rules });
 
 class App extends Component {
     static propTypes = {
-        post: PropTypes.object,
-        update: PropTypes.func
+        onButtonClick: PropTypes.func
     };
 
     state = {
@@ -62,7 +61,6 @@ class App extends Component {
     };
 
     onChange = ({ value }) => {
-        console.log("value :", value);
         this.setState({ value });
     };
 
@@ -74,14 +72,24 @@ class App extends Component {
         editor.insertFragment(document);
     };
 
+    getCallbacks = () => {
+        const { onButtonClick, onBeforeRender } = this.props;
+        return { onButtonClick, onBeforeRender };
+    };
+
     renderEditor = (props, editor, next) => {
         const children = next();
         const data = { props, editor, next };
+        const callbacks = this.getCallbacks();
+
         return (
             <React.Fragment>
                 {children}
                 <StyledMenu ref={this.menuRef} className="menu hover-menu">
-                    {mapPropsToComponents(menuButtons, { ...data })}
+                    {mapPropsToComponents(menuButtons, {
+                        ...data,
+                        callbacks: { ...callbacks }
+                    })}
                 </StyledMenu>
                 <StyledToolBar>
                     <div className="menu toolbar-menu">
@@ -93,6 +101,7 @@ class App extends Component {
     };
 
     render() {
+        const callbacks = this.getCallbacks();
         return (
             <EditorWrapper>
                 <Editor
@@ -102,8 +111,8 @@ class App extends Component {
                     onChange={this.onChange}
                     onPaste={this.onPaste}
                     ref={this.editorRef}
-                    renderNode={renderNode}
-                    renderMark={renderMark}
+                    renderNode={(p, e, n) => renderNode(p, e, n, callbacks)}
+                    renderMark={(p, e, n) => renderMark(p, e, n, callbacks)}
                     renderEditor={this.renderEditor}
                     decorateNode={decorateNode}
                     placeholder="Compose a story.."
