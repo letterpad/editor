@@ -1,5 +1,4 @@
 const webpack = require("webpack");
-const path = require("path");
 
 module.exports = {
   mode: "development",
@@ -16,11 +15,6 @@ module.exports = {
   },
   module: {
     rules: [
-      //   {
-      //     test: /\.js$/,
-      //     exclude: /node_modules/,
-      //     use: ["babel-loader"]
-      //   },
       {
         test: /\.(j|t)sx?$/,
         use: "ts-loader",
