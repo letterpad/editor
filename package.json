@@ -1,45 +1,54 @@
 {
-    "name": "slate-plugins",
-    "main": "./index.js",
-    "scripts": {
-        "dev": "webpack-dev-server --config=webpack.config.js"
-    },
-    "dependencies": {
-        "classnames": "^2.2.6",
-        "exenv": "^1.2.2",
-        "immutable": "^4.0.0-rc.12",
-        "prismjs": "^1.15.0",
-        "react": "^16.7.0",
-        "react-dom": "^16.7.0",
-        "slate": "^0.44.10",
-        "slate-auto-replace": "^0.12.1",
-        "slate-edit-code": "^0.15.5",
-        "slate-html-serializer": "^0.7.34",
-        "slate-prism": "^0.5.0",
-        "slate-react": "^0.21.16",
-        "slate-schema-violations": "^0.1.39",
-        "styled-components": "^4.1.3",
-        "webpack-dev-server": "^3.1.14"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.2.2",
-        "@babel/plugin-proposal-class-properties": "^7.3.0",
-        "@babel/preset-env": "^7.3.1",
-        "@babel/preset-react": "^7.0.0",
-        "babel-loader": "^8.0.5",
-        "babel-plugin-styled-components": "^1.10.0",
-        "css-loader": "^2.1.0",
-        "postcss-cssnext": "^3.1.0",
-        "postcss-import": "^12.0.1",
-        "postcss-loader": "^3.0.0",
-        "postcss-nested": "^4.1.1",
-        "style-loader": "^0.23.1",
-        "webpack": "^4.29.0",
-        "webpack-cli": "^3.2.1"
-    },
-    "devServer": {
-        "inline": true,
-        "port": 8080,
-        "hot": true
-    }
+  "name": "slate-plugins",
+  "main": "./index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --config=webpack.config.js"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "exenv": "^1.2.2",
+    "immutable": "^4.0.0-rc.12",
+    "prismjs": "^1.15.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "slate": "^0.44.10",
+    "slate-auto-replace": "^0.12.1",
+    "slate-edit-code": "^0.15.5",
+    "slate-html-serializer": "^0.7.34",
+    "slate-prism": "^0.5.0",
+    "slate-react": "^0.21.16",
+    "slate-schema-violations": "^0.1.39",
+    "styled-components": "^4.1.3",
+    "ts-loader": "^5.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@types/classnames": "^2.2.7",
+    "@types/immutable": "^3.8.7",
+    "@types/react": "^16.8.4",
+    "@types/react-dom": "^16.8.2",
+    "@types/slate": "^0.43.9",
+    "@types/slate-html-serializer": "^0.6.3",
+    "@types/slate-react": "^0.20.3",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-styled-components": "^1.10.0",
+    "css-loader": "^2.1.0",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-nested": "^4.1.1",
+    "style-loader": "^0.23.1",
+    "typescript": "^3.3.3333",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "devServer": {
+    "inline": true,
+    "port": 8080,
+    "hot": true
+  }
 }
