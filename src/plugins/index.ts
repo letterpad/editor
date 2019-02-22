@@ -30,7 +30,9 @@ export interface PluginConfig {
   [key: string]: any;
 }
 
-export interface PluginOptions {}
+export interface PluginOptions {
+  [key: string]: any;
+}
 
 export type PluginConfigs = (PluginConfig | PluginConfig[])[];
 

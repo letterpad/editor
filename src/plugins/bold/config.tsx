@@ -1,6 +1,7 @@
-import { BoldButton, BoldPlugin } from ".";
+import { BoldPlugin } from ".";
 import BoldMark from "./BoldMark";
 import { AutoReplaceParams } from "slate-auto-replace";
+import BoldButton from "./BoldButton";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const text = matched.before[0].replace(/\*/g, "");
