@@ -3,7 +3,7 @@ import { hasBlock } from "../../helper/strategy";
 import { Editor } from "slate";
 import { isKeyboardEvent } from "../../helper/events";
 
-export const YoutubePlugin: PluginConfig["main"] = () => {
+export const YoutubePlugin: PluginConfig["slatePlugin"] = () => {
   return {
     onKeyDown(event: Event, editor: Editor, next: () => {}) {
       if (isKeyboardEvent(event)) {
