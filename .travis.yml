@@ -17,7 +17,7 @@ node_js:
 
 before_script:
   - |
-    if [[ "$TEST_SUITE" == "unit"]]; then
+    if [ "$TEST_SUITE" = "unit"]; then
       yarn tsc
     else
       yarn bundle
@@ -30,7 +30,7 @@ before_script:
 
 script:
   - |
-    if [[ "$TEST_SUITE" == "unit"]]; then
+    if [ "$TEST_SUITE" = "unit" ]; then
       yarn test --ci --no-cache
     else
       yarn integration
