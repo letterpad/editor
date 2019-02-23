@@ -23,5 +23,3 @@ export const YoutubePlugin: PluginConfig["main"] = () => {
     }
   };
 };
-
-export { YoutubePlugin, YoutubeNode, YoutubeButton };

@@ -29,6 +29,7 @@
     "@babel/preset-react": "^7.0.0",
     "@types/classnames": "^2.2.7",
     "@types/immutable": "^3.8.7",
+    "@types/node": "^11.9.5",
     "@types/react": "^16.8.4",
     "@types/react-dom": "^16.8.2",
     "@types/slate": "^0.43.9",
