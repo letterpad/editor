@@ -3,9 +3,9 @@ import { applyBlockquote } from "./BlockquoteUtils";
 import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
 
-import { MenuButtonComponent } from "..";
+import { EditorButtonComponent } from "..";
 
-const BlockquoteButton: MenuButtonComponent = ({ editor }) => {
+const BlockquoteButton: EditorButtonComponent = ({ editor }) => {
   if (!editor) return <span />;
   const type = "blockquote";
 

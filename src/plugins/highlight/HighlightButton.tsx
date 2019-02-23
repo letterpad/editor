@@ -1,9 +1,9 @@
 import React from "react";
 import { isMarkActive, applyMarkStrategy } from "../../helper/strategy";
 import Button from "../../components/Button";
-import { MenuButtonComponent } from "..";
+import { EditorButtonComponent } from "..";
 
-const highlightButton: MenuButtonComponent = ({ editor }) => {
+const highlightButton: EditorButtonComponent = ({ editor }) => {
   if (!editor) return <span />;
   const active = isMarkActive(editor.value, "code");
 

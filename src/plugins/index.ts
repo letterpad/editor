@@ -22,23 +22,14 @@ export interface EditorEventHandler {
   (event: Event, editor: Editor, next: () => any): any;
 }
 
-export type MenuButtonComponent = ComponentType<{
+export type EditorButtonComponent = ComponentType<{
   editor: Editor;
   type: string;
+  next: () => any;
 }>;
 
-export interface MenuButton<P = any> {
-  button: MenuButtonComponent;
-  props?: P;
-}
-
-export type ToolbarButtonComponent = ComponentType<{
-  editor: Editor;
-  type: string;
-}>;
-
-export interface ToolbarButton<P = any> {
-  button: ToolbarButtonComponent;
+export interface EditorButton<P = any> {
+  button: EditorButtonComponent;
   props?: P;
 }
 
@@ -47,8 +38,8 @@ export interface PluginConfig {
 
   tag?: string;
   identifier?: string[];
-  menuButtons?: MenuButton[];
-  toolbarButtons?: ToolbarButton[];
+  menuButtons?: EditorButton[];
+  toolbarButtons?: EditorButton[];
 
   main?: (options?: any) => Plugin;
   markdown?: AutoReplaceParams;
@@ -79,8 +70,8 @@ export const pluginConfigs: PluginConfigs = [
   youtubeConfig
 ] as any;
 
-export const menuButtons: MenuButton[] = [];
-export const toolbarButtons: ToolbarButton[] = [];
+export const menuButtons: EditorButton[] = [];
+export const toolbarButtons: EditorButton[] = [];
 
 interface PluginsMap {
   node: {

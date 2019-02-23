@@ -2,9 +2,9 @@ import React from "react";
 import { applyHeadings } from "./HeadingsUtils";
 import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
-import { ToolbarButtonComponent } from "..";
+import { EditorButtonComponent } from "..";
 
-const HeadingsButton: ToolbarButtonComponent = ({ editor, type }) => {
+const HeadingsButton: EditorButtonComponent = ({ editor, type }) => {
   if (!editor) return <span />;
 
   return (

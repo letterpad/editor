@@ -1,28 +1,27 @@
 import React from "react";
 // import FileExplorerModal from "../../../../modals/FileExplorerModal";
-import { insertInlineImage, insertImage } from "./ImageUtils";
+import { insertImage } from "./ImageUtils";
 import Button from "../../components/Button";
-import { hasBlock } from "../../helper/strategy";
-import { runInNewContext } from "vm";
+import { EditorButtonComponent } from "..";
 // import { uploadFile } from "../../../../../util";
 
-const ImageButton = ({ editor, next }) => {
-    if (!editor) return <span />;
+const ImageButton: EditorButtonComponent = ({ editor, next }) => {
+  if (!editor) return <span />;
 
-    return (
-        <Button
-            isActive={false}
-            icon="image"
-            onMouseDown={e => {
-                e.preventDefault();
+  return (
+    <Button
+      isActive={false}
+      icon="image"
+      onMouseUp={e => {
+        e.preventDefault();
 
-                const src = window.prompt("Enter the URL of the image:");
-                if (!src) return next();
-                // const isActive = hasBlock(editor.value, "img");
-                insertImage(editor, src);
-            }}
-        />
-    );
+        const src = window.prompt("Enter the URL of the image:");
+        if (!src) return next();
+        // const isActive = hasBlock(editor.value, "img");
+        insertImage(editor, src);
+      }}
+    />
+  );
 };
 
 // class ImageButton extends React.Component {
