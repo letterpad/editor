@@ -5,6 +5,7 @@
     "dev": "webpack-dev-server --config=webpack.config.js"
   },
   "dependencies": {
+    "@types/prismjs": "^1.9.1",
     "classnames": "^2.2.6",
     "exenv": "^1.2.2",
     "immutable": "^4.0.0-rc.12",

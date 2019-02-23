@@ -15,14 +15,23 @@ import linkConfig from "./link/config";
 import listConfig from "./list/config";
 import underlineConfig from "./underline/config";
 import youtubeConfig from "./youtube/config";
+import { ComponentType } from "react";
+import { Editor } from "slate";
+
+export type MenuButtonComponent = ComponentType<{ editor: Editor }>;
+
+export interface MenuButton<P = any> {
+  button: MenuButtonComponent;
+  props?: P;
+}
 
 export interface PluginConfig {
   type: string;
 
   tag?: string;
   identifier?: string[];
-  menuButtons?: JSX.Element[];
-  toolbarButtons?: JSX.Element[];
+  menuButtons?: MenuButton[];
+  toolbarButtons?: ComponentType[];
 
   main?: (options?: any) => Plugin;
   markdown?: AutoReplaceParams;
@@ -53,8 +62,8 @@ export const pluginConfigs: PluginConfigs = [
   youtubeConfig
 ] as any;
 
-export const menuButtons: JSX.Element[] = [];
-export const toolbarButtons: JSX.Element[] = [];
+export const menuButtons: MenuButton[] = [];
+export const toolbarButtons: ComponentType[] = [];
 
 interface PluginsMap {
   node: {
