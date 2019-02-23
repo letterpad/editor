@@ -3,7 +3,7 @@ import { applyMarkStrategy, isMarkActive } from "../../helper/strategy";
 import Button from "../../components/Button";
 import { Editor } from "slate";
 
-const ItalicButton = ({
+const BoldButton = ({
   editor,
   callbacks
 }: {
@@ -14,7 +14,7 @@ const ItalicButton = ({
   return (
     <Button
       isActive={isMarkActive(editor.value, "em")}
-      icon="format_italic"
+      icon="format_bold"
       onMouseUp={e => {
         callbacks.onButtonClick(e, "em");
         e.preventDefault();
@@ -23,4 +23,5 @@ const ItalicButton = ({
     />
   );
 };
-export default ItalicButton;
+
+export default BoldButton;
