@@ -4,6 +4,27 @@
   "scripts": {
     "dev": "webpack-dev-server --config=webpack.config.js"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "!**/__tests__/*",
+      "!**/__benchmarks__/*",
+      "**/*.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "^.+\\.d\\.ts$"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
+  },
   "dependencies": {
     "classnames": "^2.2.6",
     "exenv": "^1.2.2",
@@ -27,21 +48,26 @@
     "@babel/preset-react": "^7.0.0",
     "@types/classnames": "^2.2.7",
     "@types/immutable": "^3.8.7",
+    "@types/jest": "^24.0.6",
     "@types/node": "^11.9.5",
     "@types/prismjs": "^1.9.1",
     "@types/react": "^16.8.4",
     "@types/react-dom": "^16.8.2",
+    "@types/react-test-renderer": "^16.8.1",
     "@types/slate": "^0.43.9",
     "@types/slate-html-serializer": "^0.6.3",
     "@types/slate-react": "^0.20.3",
     "babel-loader": "^8.0.5",
     "babel-plugin-styled-components": "^1.10.0",
     "css-loader": "^2.1.0",
+    "jest": "^24.1.0",
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-nested": "^4.1.1",
+    "react-test-renderer": "^16.8.3",
     "style-loader": "^0.23.1",
+    "ts-jest": "^24.0.0",
     "ts-loader": "^5.3.3",
     "typescript": "^3.3.3333",
     "webpack": "^4.29.0",
