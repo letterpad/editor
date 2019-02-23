@@ -2,7 +2,7 @@ import scrollToCursor from "../../helper/scrollToCursor";
 import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 
-const AutoScrollPlugin: PluginConfig["main"] = () => {
+const AutoScrollPlugin: PluginConfig["slatePlugin"] = () => {
   return {
     onKeyDown(event, _, next) {
       if (
