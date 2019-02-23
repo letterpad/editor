@@ -103,23 +103,23 @@ pluginConfigs.forEach(config => {
       plugins.push(AutoReplace(plugin.markdown));
     }
 
-    /*|------------------------------------------------------------------------------
-        * create a map of plugins so that its easy to identify based on node/mark
-        * {
-        *   mark: {
-        *     bold: {
-        *       is: "b",
-        *       plugin: { ...config }
-                }
-        *   },
-        *   node: {
-        *      blockquote: {
-        *        is: "blockquote",
-        *        plugin: { ...config }
-        *      }
-        *   }
-        * }
-        *|------------------------------------------------------------------------------*/
+    /**
+     * create a map of plugins so that its easy to identify based on node/mark
+     * {
+     *   mark: {
+     *     bold: {
+     *       is: "b",
+     *       plugin: { ...config }
+     *   }
+     *   },
+     *   node: {
+     *      blockquote: {
+     *        is: "blockquote",
+     *        plugin: { ...config }
+     *      }
+     *   }
+     * }
+     */
     let { identifier, tag } = plugin;
     if (identifier != null && tag != null) {
       identifier.forEach(id => {
