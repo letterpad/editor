@@ -1,6 +1,7 @@
 import Prism from "prismjs";
 import { Block, Range, Value, Editor, Point, Node, Text } from "slate";
 import { isMod } from "../../helper/keyboard-event";
+import { Plugin } from "slate-react";
 
 export const getCodeBlockParent = (value: Value) => {
   let parentNode = value.anchorBlock;
@@ -57,10 +58,9 @@ export function isTextNode(node: Node): node is Text {
   return false;
 }
 
-export const decorateNode = (node: Node, _: any, next: () => any) => {
+export const decorateNode: Plugin["decorateNode"] = (node, _, next) => {
   const others: any[] = next() || [];
-  if (isTextNode(node)) return;
-
+  if (isTextNode(node)) return others;
   const block = node.nodes.get(0);
   const { type } = block as any;
   if (type != "code_block") return others;
