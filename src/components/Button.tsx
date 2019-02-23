@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 interface ButtonProps {
   onMouseUp: MouseEventHandler;
-  icon: string;
+  icon?: string;
   isActive?: boolean;
 }
 

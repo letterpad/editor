@@ -18,10 +18,27 @@ import youtubeConfig from "./youtube/config";
 import { ComponentType } from "react";
 import { Editor } from "slate";
 
-export type MenuButtonComponent = ComponentType<{ editor: Editor }>;
+export interface EditorEventHandler {
+  (event: Event, editor: Editor, next: () => any): any;
+}
+
+export type MenuButtonComponent = ComponentType<{
+  editor: Editor;
+  type: string;
+}>;
 
 export interface MenuButton<P = any> {
   button: MenuButtonComponent;
+  props?: P;
+}
+
+export type ToolbarButtonComponent = ComponentType<{
+  editor: Editor;
+  type: string;
+}>;
+
+export interface ToolbarButton<P = any> {
+  button: ToolbarButtonComponent;
   props?: P;
 }
 
@@ -31,7 +48,7 @@ export interface PluginConfig {
   tag?: string;
   identifier?: string[];
   menuButtons?: MenuButton[];
-  toolbarButtons?: ComponentType[];
+  toolbarButtons?: ToolbarButton[];
 
   main?: (options?: any) => Plugin;
   markdown?: AutoReplaceParams;
@@ -63,7 +80,7 @@ export const pluginConfigs: PluginConfigs = [
 ] as any;
 
 export const menuButtons: MenuButton[] = [];
-export const toolbarButtons: ComponentType[] = [];
+export const toolbarButtons: ToolbarButton[] = [];
 
 interface PluginsMap {
   node: {
