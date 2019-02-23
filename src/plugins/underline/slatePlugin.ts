@@ -4,7 +4,7 @@ import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 
 /* eslint-disable no-unused-vars */
-export const UnderlinePlugin: PluginConfig["main"] = () => {
+export const UnderlinePlugin: PluginConfig["slatePlugin"] = () => {
   return {
     onKeyDown(event, editor, next) {
       if (isKeyboardEvent(event)) {

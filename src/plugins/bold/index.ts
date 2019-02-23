@@ -18,7 +18,7 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
     .insertText(" ");
 };
 
-const BoldPlugin: PluginConfig["main"] = () => {
+const BoldPlugin: PluginConfig["slatePlugin"] = () => {
   return {
     onKeyDown(event, editor, next) {
       if (isKeyboardEvent(event)) {
