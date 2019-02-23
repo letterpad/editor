@@ -127,5 +127,5 @@ pluginConfigs.forEach(plugin => {
     });
   }
 });
-
+console.log("menuButtons :", menuButtons);
 export { pluginConfigs, pluginsMap, menuButtons, toolbarButtons, plugins };
