@@ -1,14 +1,11 @@
 import { PluginConfig } from "..";
-import YoutubeNode from "./YoutubeNode";
-import { applyYoutube } from "./YoutubeUtils";
-import YoutubeButton from "./YoutubeButton";
 import { hasBlock } from "../../helper/strategy";
-import { Editor } from "slate-react";
+import { Editor } from "slate";
 import { isKeyboardEvent } from "../../helper/events";
 
 export const YoutubePlugin: PluginConfig["main"] = () => {
   return {
-    onKeyDown(event: KeyboardEvent, editor: Editor, next: () => {}) {
+    onKeyDown(event: Event, editor: Editor, next: () => {}) {
       if (isKeyboardEvent(event)) {
         const type = "Youtube";
         if (event.key === "Enter") {

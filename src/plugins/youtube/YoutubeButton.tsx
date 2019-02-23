@@ -2,15 +2,9 @@ import React from "react";
 import { applyYoutube } from "./YoutubeUtils";
 import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
-import { Editor } from "slate";
+import { EditorButtonComponent } from "..";
 
-const YoutubeButton = ({
-  editor,
-  callbacks
-}: {
-  editor: Editor;
-  callbacks: { [key: string]: (...args: any[]) => any };
-}) => {
+const YoutubeButton: EditorButtonComponent = ({ editor, callbacks }) => {
   if (!editor) return <span />;
   const type = "iframe";
 

@@ -4,7 +4,7 @@ import {
   getNodeOfType,
   getBlockParent
 } from "../../helper/strategy";
-import { Editor, Value, Block, Node } from "slate";
+import { Editor, Value } from "slate";
 const itemType = "li";
 
 export const onTab = (event: KeyboardEvent, editor: Editor) => {

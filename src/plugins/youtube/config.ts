@@ -1,9 +1,9 @@
 import YoutubeButton from "./YoutubeButton";
 import YoutubeNode from "./YoutubeNode";
 import { YoutubePlugin } from ".";
-import { Editor } from "slate";
+import { PluginConfig } from "..";
 
-export default [
+const youtubeConfig: PluginConfig[] = [
   {
     type: "block",
     tag: "node",
@@ -15,7 +15,7 @@ export default [
     markdown: {
       trigger: "]",
       before: /(\[youtube=?.*)/,
-      change: (editor: Editor, event, matches) => {
+      change: (editor, _, matches) => {
         const src = matches.before[0].replace("[youtube=", "");
         return editor
           .setBlocks({ type: "iframe", data: { src: src } })
@@ -25,3 +25,5 @@ export default [
     }
   }
 ];
+
+export default youtubeConfig;

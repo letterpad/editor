@@ -1,6 +1,5 @@
 import { Editor, Value } from "slate";
 import { isTextNode } from "../plugins/codeblock/CodeblockUtils";
-import { node } from "prop-types";
 
 export const applyMarkStrategy = (editor: Editor, type: string) =>
   editor.toggleMark(type).focus();

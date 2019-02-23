@@ -21,10 +21,12 @@ const codeblockKeyboardShortcut = (
 
   if (!isKeyboardEvent(event)) return;
 
+  const which = event.which;
+
   if (
     value.selection.isExpanded &&
     !isMod(event) &&
-    isPrintableKeycode(event.which)
+    isPrintableKeycode(which)
   ) {
     editor.delete();
     return next();

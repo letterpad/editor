@@ -25,6 +25,9 @@ export interface EditorEventHandler {
 export type EditorButtonComponent = ComponentType<{
   editor: Editor;
   type: string;
+  callbacks: {
+    [key: string]: any;
+  };
   next: () => any;
 }>;
 
