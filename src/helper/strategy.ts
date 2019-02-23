@@ -15,7 +15,7 @@ export const isMarkActive = (value: Value, type: string) => {
  * @return {Boolean}
  */
 
-export const hasBlock = (value: Value, type: string) => {
+export const hasBlock = (value: Value, type: any): boolean => {
   return value.blocks.some(node => node != null && node.type == type);
 };
 

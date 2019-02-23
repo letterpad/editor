@@ -11,7 +11,7 @@ export interface EditorEventHandler {
 
 export type EditorButtonComponent = ComponentType<{
   editor: Editor;
-  type: string;
+  type?: string;
   callbacks: {
     [key: string]: any;
   };
@@ -31,7 +31,7 @@ export interface PluginConfig {
   menuButtons?: EditorButton[];
   toolbarButtons?: EditorButton[];
 
-  main?: (options?: any) => Plugin;
+  slatePlugin?: (options?: Plugin) => Plugin;
   markdown?: AutoReplaceParams;
 
   [key: string]: any;
@@ -91,8 +91,8 @@ pluginConfigs.forEach(plugin => {
   }
 
   // execute main if available
-  if (plugin.main) {
-    plugins.push(plugin.main());
+  if (plugin.slatePlugin) {
+    plugins.push(plugin.slatePlugin());
   }
 
   // render markdown if available

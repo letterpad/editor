@@ -20,7 +20,7 @@ const HeadingsButton: EditorButtonComponent = ({ editor, type }) => {
   );
 };
 
-const getType = (type: string) => {
+const getType = (type: any) => {
   switch (type) {
     case "h1":
       return "looks_one";

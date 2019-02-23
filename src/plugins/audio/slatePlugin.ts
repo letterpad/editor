@@ -2,7 +2,7 @@ import { hasBlock } from "../../helper/strategy";
 import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 
-const AudioPlugin: PluginConfig["main"] = () => ({
+const AudioPlugin: PluginConfig["slatePlugin"] = () => ({
   onKeyDown(event, editor, next) {
     const type = "audio";
     if (isKeyboardEvent(event) && event.key === "Enter") {
