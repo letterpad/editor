@@ -1,6 +1,7 @@
 import { AutoReplaceParams } from "slate-auto-replace";
 import { ItalicPlugin } from ".";
 import ItalicMark from "./ItalicMark";
+import ItalicButton from "./ItalicButton";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const text = matched.before[0].replace(/\*/g, "");
