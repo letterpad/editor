@@ -1,7 +1,7 @@
 import React from "react";
 import { unorderedListStrategy, isUnorderedList } from "./ListUtils";
 import Button from "../../components/Button";
-import { Editor } from "slate-react";
+import { Editor } from "slate";
 
 const UnorderedListButton = ({ editor }: { editor: Editor }) => {
   if (!editor) return <span />;

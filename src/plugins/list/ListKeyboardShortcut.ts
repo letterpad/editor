@@ -2,7 +2,7 @@ import { onTab, onBackspace, onEnter } from "./ListUtils";
 import { Editor } from "slate";
 
 const ListKeyboardShortcut = (
-  event: Event,
+  event: KeyboardEvent,
   editor: Editor,
   next: () => any
 ) => {
