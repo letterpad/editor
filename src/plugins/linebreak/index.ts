@@ -1,4 +1,4 @@
-import { LinebreakPlugin } from "./main";
+import { LinebreakPlugin } from "./slatePlugin";
 import LinebreakNode from "./LinebreakNode";
 import { PluginConfig } from "..";
 import LinebreakButton from "./LinebreakButton";
@@ -11,7 +11,7 @@ const linebreakConfig: PluginConfig[] = [
     toolbarButtons: [{ button: LinebreakButton }],
     render: LinebreakNode,
     identifier: ["hr"],
-    main: LinebreakPlugin,
+    slatePlugin: LinebreakPlugin,
     markdown: {
       trigger: "space",
       before: /^(-{3})$/,

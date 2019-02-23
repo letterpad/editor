@@ -1,7 +1,7 @@
 import UnderlineMark from "./UnderlineMark";
 import UnderlineButton from "./UnderlineButton";
 import { PluginConfig } from "..";
-import { UnderlinePlugin } from "./main";
+import { UnderlinePlugin } from "./slatePlugin";
 
 const underlineConfig: PluginConfig[] = [
   {
@@ -11,7 +11,7 @@ const underlineConfig: PluginConfig[] = [
     toolbarButtons: [],
     render: UnderlineMark,
     identifier: ["u"],
-    main: UnderlinePlugin
+    slatePlugin: UnderlinePlugin
   }
 ];
 

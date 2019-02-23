@@ -1,6 +1,6 @@
 import LinkButton from "./LinkButton";
 import LinkNode from "./LinkNode";
-import { LinkPlugin } from "./main";
+import { LinkPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
 
 const linkConfig: PluginConfig[] = [
@@ -11,7 +11,7 @@ const linkConfig: PluginConfig[] = [
     toolbarButtons: [],
     render: LinkNode,
     identifier: ["a"],
-    main: LinkPlugin,
+    slatePlugin: LinkPlugin,
     markdown: {
       trigger: "space",
       before: /[-a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?/,

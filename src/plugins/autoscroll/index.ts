@@ -1,10 +1,10 @@
-import { AutoScrollPlugin } from "./main";
+import { AutoScrollPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
 
 const autoscrollConfig: PluginConfig[] = [
   {
     type: "node",
-    main: AutoScrollPlugin
+    slatePlugin: AutoScrollPlugin
   }
 ];
 

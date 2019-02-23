@@ -1,5 +1,5 @@
 import { AutoReplaceParams } from "slate-auto-replace";
-import { ListPlugin } from "./main";
+import { ListPlugin } from "./slatePlugin";
 import ListButtonBar from "./ListButtonBar";
 import { RenderNode } from "./RenderNode";
 import { PluginConfig } from "..";
@@ -22,7 +22,7 @@ const listConfig: PluginConfig[] = [
       return RenderNode(props.node.type, props);
     },
     identifier: ["li", "ol", "ul"],
-    main: ListPlugin,
+    slatePlugin: ListPlugin,
     markdown: {
       trigger: "space",
       before: /^(\*|-)$/,

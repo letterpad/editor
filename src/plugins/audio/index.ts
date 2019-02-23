@@ -1,7 +1,7 @@
 import { AutoReplaceParams } from "slate-auto-replace";
 import AudioButton from "./AudioButton";
 import AudioNode from "./AudioNode";
-import { AudioPlugin } from "./main";
+import { AudioPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
@@ -20,7 +20,7 @@ const audioConfig: PluginConfig[] = [
     toolbarButtons: [{ button: AudioButton }],
     render: AudioNode,
     identifier: ["audio"],
-    main: AudioPlugin,
+    slatePlugin: AudioPlugin,
     markdown: {
       trigger: "]",
       before: /(\[audio=?.*)/,

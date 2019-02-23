@@ -1,7 +1,7 @@
 import ItalicMark from "./ItalicMark";
 import { AutoReplaceParams } from "slate-auto-replace";
 import ItalicButton from "./ItalicButton";
-import { ItalicPlugin } from "./main";
+import { ItalicPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
@@ -24,7 +24,7 @@ const italicConfig: PluginConfig[] = [
     toolbarButtons: [],
     render: ItalicMark,
     identifier: ["em"],
-    main: ItalicPlugin,
+    slatePlugin: ItalicPlugin,
     markdown: {
       trigger: "_",
       before: /(\_\_)(.*?)(\_)/,

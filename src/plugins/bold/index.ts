@@ -1,4 +1,4 @@
-import { BoldPlugin } from "./main";
+import { BoldPlugin } from "./slatePlugin";
 import BoldMark from "./BoldMark";
 import { AutoReplaceParams } from "slate-auto-replace";
 import BoldButton from "./BoldButton";
@@ -24,7 +24,7 @@ const boldConfig: PluginConfig[] = [
     toolbarButtons: [],
     render: BoldMark,
     identifier: ["strong"],
-    main: BoldPlugin,
+    slatePlugin: BoldPlugin,
     markdown: {
       trigger: "*",
       before: /(\*\*)(.*?)(\*)/,

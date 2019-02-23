@@ -1,11 +1,11 @@
 import { MarkdownPlugin } from ".";
 
 export default {
-    type: "",
-    tag: "",
-    menuButtons: [],
-    toolbarButtons: [],
-    render: () => {},
-    identifier: [],
-    main: MarkdownPlugin
+  type: "",
+  tag: "",
+  menuButtons: [],
+  toolbarButtons: [],
+  render: () => {},
+  identifier: [],
+  slatePlugin: MarkdownPlugin
 };

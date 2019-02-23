@@ -1,6 +1,6 @@
 import YoutubeButton from "./YoutubeButton";
 import YoutubeNode from "./YoutubeNode";
-import { YoutubePlugin } from "./main";
+import { YoutubePlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
 
 const youtubeConfig: PluginConfig[] = [
@@ -11,7 +11,7 @@ const youtubeConfig: PluginConfig[] = [
     toolbarButtons: [{ button: YoutubeButton }],
     render: YoutubeNode,
     identifier: ["iframe"],
-    main: YoutubePlugin,
+    slatePlugin: YoutubePlugin,
     markdown: {
       trigger: "]",
       before: /(\[youtube=?.*)/,

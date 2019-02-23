@@ -1,7 +1,7 @@
 import React from "react";
 import CodeblockButton from "./CodeblockButton";
 import CodeblockNode from "./CodeblockNode";
-import { CodeblockPlugin } from "./main";
+import { CodeblockPlugin } from "./slatePlugin";
 
 import { decorateNode } from "./CodeblockUtils";
 import { PluginConfig } from "..";
@@ -20,7 +20,7 @@ const plugins: PluginConfig[] = [
       return <CodeblockNode {...props} />;
     },
     identifier: ["pre"],
-    main: CodeblockPlugin
+    slatePlugin: CodeblockPlugin
   },
   {
     type: "mark",

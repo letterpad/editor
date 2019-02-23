@@ -1,6 +1,6 @@
 import BlockquoteButton from "./BlockquoteButton";
 import BlockquoteNode from "./BlockquoteNode";
-import { BlockquotePlugin } from "./main";
+import { BlockquotePlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
 
 const blockquotePluginConfig: PluginConfig[] = [
@@ -15,7 +15,7 @@ const blockquotePluginConfig: PluginConfig[] = [
     toolbarButtons: [],
     render: BlockquoteNode,
     identifier: ["blockquote"],
-    main: BlockquotePlugin,
+    slatePlugin: BlockquotePlugin,
     markdown: {
       trigger: "space",
       before: /^(>)$/,

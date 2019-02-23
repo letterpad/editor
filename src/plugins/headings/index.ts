@@ -1,6 +1,6 @@
 import HeadingsButton from "./HeadingsButton";
 import HeadingsNode from "./HeadingsNode";
-import { HeadingsPlugin } from "./main";
+import { HeadingsPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
 
 const headingsConfig: PluginConfig[] = [
@@ -18,7 +18,7 @@ const headingsConfig: PluginConfig[] = [
     ],
     render: HeadingsNode,
     identifier: ["h1", "h2", "h3", "h4", "h5", "h6"],
-    main: HeadingsPlugin,
+    slatePlugin: HeadingsPlugin,
     markdown: {
       trigger: "space",
       before: /^(#{1,5})$/,

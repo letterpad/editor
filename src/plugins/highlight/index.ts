@@ -1,6 +1,6 @@
 import HighlightButton from "./HighlightButton";
 import HighlightMark from "./HighlightMark";
-import { HighlightPlugin } from "./main";
+import { HighlightPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
 
 const highlightConfig: PluginConfig[] = [
@@ -15,7 +15,7 @@ const highlightConfig: PluginConfig[] = [
     ],
     render: HighlightMark,
     identifier: ["code"],
-    main: HighlightPlugin,
+    slatePlugin: HighlightPlugin,
     markdown: {
       trigger: "space",
       before: /\s?(`|``)((?!\1).)+?\1$/,

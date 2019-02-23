@@ -1,4 +1,4 @@
-import { ImagePlugin } from "./main";
+import { ImagePlugin } from "./slatePlugin";
 import ImageButton from "./ImageButton";
 import { PluginConfig } from "..";
 import ImageNode from "./ImageNode";
@@ -14,7 +14,7 @@ const imageConfig: PluginConfig[] = [
     ],
     render: ImageNode,
     identifier: ["img"],
-    main: ImagePlugin
+    slatePlugin: ImagePlugin
     // markdown: {
     //     trigger: "space",
     //     before: /^(>)$/,
