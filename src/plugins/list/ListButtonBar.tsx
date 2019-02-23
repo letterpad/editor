@@ -2,10 +2,7 @@ import React, { Fragment } from "react";
 import UnorderedListButton from "./UnorderedListButton";
 import OrderedListButton from "./OrderedListButton";
 
-// FIXME: Needs to handle assets files to work with SSR
-if (require("exenv").canUseDOM) {
-  require("./ListButtonBar.css");
-}
+// TODO(boopathi): import ListButtonBar.css -> or convert to Styled Components
 
 const ListButtonBar = (props: any) => (
   <Fragment>
