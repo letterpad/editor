@@ -1,6 +1,5 @@
-import App from "./App";
-
 import React, { Component } from "react";
+import { LetterpadEditor } from "./editor";
 
 class Demo extends Component {
   onButtonClick = (_: MouseEvent, type: string) => {
@@ -9,13 +8,13 @@ class Demo extends Component {
 
   onBeforeRender = (props: { type: string }) => {
     if (props.type == "strong") {
-      return <h3>hello</h3>;
+      console.log("foo");
     }
   };
 
   render() {
     return (
-      <App
+      <LetterpadEditor
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
       />
