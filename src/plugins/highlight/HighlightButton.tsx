@@ -11,7 +11,7 @@ const highlightButton: EditorButtonComponent = ({ editor }) => {
     <Button
       isActive={active}
       icon="border_color"
-      onMouseUp={e => {
+      onMouseDown={e => {
         e.preventDefault();
         return applyMarkStrategy(editor, "code");
       }}

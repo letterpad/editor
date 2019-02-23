@@ -12,7 +12,7 @@ const ImageButton: EditorButtonComponent = ({ editor, next }) => {
     <Button
       isActive={false}
       icon="image"
-      onMouseUp={e => {
+      onMouseDown={e => {
         e.preventDefault();
 
         const src = window.prompt("Enter the URL of the image:");

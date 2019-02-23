@@ -10,7 +10,7 @@ const LinkButton: EditorButtonComponent = ({ editor }) => {
     <Button
       isActive={hasLinks(editor.value)}
       icon="insert_link"
-      onMouseUp={e => {
+      onMouseDown={e => {
         e.preventDefault();
         return insertLinkStrategy(editor);
       }}

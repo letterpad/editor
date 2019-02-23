@@ -14,8 +14,8 @@ const BoldButton = ({
   return (
     <Button
       isActive={isMarkActive(editor.value, "em")}
-      icon="format_bold"
-      onMouseUp={e => {
+      icon="format_italic"
+      onMouseDown={e => {
         callbacks.onButtonClick(e, "em");
         e.preventDefault();
         return applyMarkStrategy(editor, "em");

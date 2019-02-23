@@ -11,7 +11,7 @@ const HeadingsButton: EditorButtonComponent = ({ editor, type }) => {
     <Button
       isActive={hasBlock(editor.value, type)}
       icon={getType(type)}
-      onMouseUp={e => {
+      onMouseDown={e => {
         e.preventDefault();
         const isActive = hasBlock(editor.value, type);
         return applyHeadings(editor, isActive ? "paragraph" : type);

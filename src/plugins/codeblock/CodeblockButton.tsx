@@ -10,7 +10,7 @@ const codeblockButton: EditorButtonComponent = ({ editor }) => (
   <Button
     isActive={hasBlock(editor.value, "u")}
     icon="code"
-    onMouseUp={() => {
+    onMouseDown={() => {
       return applyCodeblock(editor);
     }}
   />

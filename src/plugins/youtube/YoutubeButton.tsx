@@ -12,7 +12,7 @@ const YoutubeButton: EditorButtonComponent = ({ editor, callbacks }) => {
     <Button
       isActive={hasBlock(editor.value, type)}
       icon="queue_music"
-      onMouseUp={e => {
+      onMouseDown={e => {
         callbacks.onButtonClick(e, type);
         e.preventDefault();
         const src = window.prompt("Enter the URL of the Youtube:");

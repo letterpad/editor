@@ -9,7 +9,7 @@ const UnorderedListButton = ({ editor }: { editor: Editor }) => {
     <Button
       isActive={isUnorderedList(editor.value)}
       icon={"format_list_bulleted"}
-      onMouseUp={e => {
+      onMouseDown={e => {
         e.preventDefault();
         return unorderedListStrategy(editor);
       }}

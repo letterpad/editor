@@ -12,7 +12,7 @@ const AudioButton: EditorButtonComponent = ({ editor, callbacks }) => {
     <Button
       isActive={hasBlock(editor.value, type)}
       icon="queue_music"
-      onMouseUp={e => {
+      onMouseDown={e => {
         callbacks.onButtonClick(e, "audio");
         const src: any = window.prompt("Enter the URL of the audio:");
         const isActive = hasBlock(editor.value, type);

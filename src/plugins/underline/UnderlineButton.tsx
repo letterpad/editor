@@ -18,7 +18,7 @@
 //     <Button
 //       isActive={isMarkActive(editor.value, type)}
 //       icon="format_underline"
-//       onMouseUp={e => {
+//       onMouseDown={e => {
 //         callbacks.onButtonClick(e, type);
 //         e.preventDefault();
 //         return applyMarkStrategy(editor, type);
@@ -46,7 +46,7 @@ const UnderlineButton = ({
     <Button
       isActive={isMarkActive(editor.value, type)}
       icon="format_underline"
-      onMouseUp={e => {
+      onMouseDown={e => {
         callbacks.onButtonClick(e, type);
         e.preventDefault();
         return applyMarkStrategy(editor, type);

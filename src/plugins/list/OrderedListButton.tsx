@@ -10,7 +10,7 @@ const OrderedListButton: EditorButtonComponent = ({ editor }) => {
     <Button
       isActive={isOrderedList(editor.value)}
       icon={"format_list_numbered"}
-      onMouseUp={e => {
+      onMouseDown={e => {
         e.preventDefault();
         return orderedListStrategy(editor);
       }}
