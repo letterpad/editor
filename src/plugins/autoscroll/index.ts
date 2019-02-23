@@ -1,4 +1,4 @@
-import { AutoScrollPlugin } from ".";
+import { AutoScrollPlugin } from "./main";
 import { PluginConfig } from "..";
 
 const autoscrollConfig: PluginConfig[] = [

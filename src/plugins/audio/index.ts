@@ -1,19 +1,32 @@
-import { hasBlock } from "../../helper/strategy";
+import { AutoReplaceParams } from "slate-auto-replace";
+import AudioButton from "./AudioButton";
+import AudioNode from "./AudioNode";
+import { AudioPlugin } from "./main";
 import { PluginConfig } from "..";
-import { isKeyboardEvent } from "../../helper/events";
 
-const AudioPlugin: PluginConfig["main"] = () => ({
-  onKeyDown(event, editor, next) {
-    const type = "audio";
-    if (isKeyboardEvent(event) && event.key === "Enter") {
-      const isActive = hasBlock(editor.value, type);
-      if (isActive) {
-        event.preventDefault();
-        return editor.splitBlock(1).setBlocks("paragraph");
-      }
+const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
+  const src = matched.before[0].replace("[audio=", "");
+  return editor
+    .setBlocks({ type: "audio", data: { src: src } })
+    .moveToEndOfBlock()
+    .insertBlock("paragraph");
+};
+
+const audioConfig: PluginConfig[] = [
+  {
+    type: "block",
+    tag: "node",
+    menuButtons: [],
+    toolbarButtons: [{ button: AudioButton }],
+    render: AudioNode,
+    identifier: ["audio"],
+    main: AudioPlugin,
+    markdown: {
+      trigger: "]",
+      before: /(\[audio=?.*)/,
+      change: onChange
     }
-    return next();
   }
-});
+];
 
-export { AudioPlugin };
+export default audioConfig;

@@ -1,7 +1,4 @@
-import HeadingsNode from "./HeadingsNode";
 import HeadingsKeyboardShortcut from "./HeadingsKeyboardShortcut";
-import * as HeadingsUtils from "./HeadingsUtils";
-import HeadingsButton from "./HeadingsButton";
 import { hasBlock } from "../../helper/strategy";
 import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
@@ -28,10 +25,4 @@ const HeadingsPlugin: PluginConfig["main"] = () => ({
   }
 });
 
-export {
-  HeadingsPlugin,
-  HeadingsNode,
-  HeadingsKeyboardShortcut,
-  HeadingsUtils,
-  HeadingsButton
-};
+export { HeadingsPlugin };

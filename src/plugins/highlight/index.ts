@@ -1,6 +1,6 @@
 import HighlightButton from "./HighlightButton";
 import HighlightMark from "./HighlightMark";
-import { HighlightPlugin } from ".";
+import { HighlightPlugin } from "./main";
 import { PluginConfig } from "..";
 
 const highlightConfig: PluginConfig[] = [

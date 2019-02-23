@@ -1,6 +1,6 @@
 import LinkButton from "./LinkButton";
 import LinkNode from "./LinkNode";
-import { LinkPlugin } from ".";
+import { LinkPlugin } from "./main";
 import { PluginConfig } from "..";
 
 const linkConfig: PluginConfig[] = [

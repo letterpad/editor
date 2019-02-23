@@ -1,5 +1,5 @@
 import { AutoReplaceParams } from "slate-auto-replace";
-import { ListPlugin } from ".";
+import { ListPlugin } from "./main";
 import ListButtonBar from "./ListButtonBar";
 import { RenderNode } from "./RenderNode";
 import { PluginConfig } from "..";

@@ -1,5 +1,3 @@
-import HighlightMark from "./HighlightMark";
-import HighlightButton from "./HighlightButton";
 import { applyMarkStrategy } from "../../helper/strategy";
 import { isMod } from "../../helper/keyboard-event";
 import { PluginConfig } from "..";
@@ -15,4 +13,4 @@ const HighlightPlugin: PluginConfig["main"] = () => ({
   }
 });
 
-export { HighlightPlugin, HighlightMark, HighlightButton };
+export { HighlightPlugin };

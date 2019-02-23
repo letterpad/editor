@@ -1,6 +1,7 @@
-import { LinebreakButton, LinebreakPlugin } from ".";
+import { LinebreakPlugin } from "./main";
 import LinebreakNode from "./LinebreakNode";
 import { PluginConfig } from "..";
+import LinebreakButton from "./LinebreakButton";
 
 const linebreakConfig: PluginConfig[] = [
   {

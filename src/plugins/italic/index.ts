@@ -1,7 +1,7 @@
-import { BoldPlugin } from ".";
-import BoldMark from "./BoldMark";
+import ItalicMark from "./ItalicMark";
 import { AutoReplaceParams } from "slate-auto-replace";
-import BoldButton from "./BoldButton";
+import ItalicButton from "./ItalicButton";
+import { ItalicPlugin } from "./main";
 import { PluginConfig } from "..";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
@@ -10,27 +10,27 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   return editor
     .insertText(text)
     .moveFocusBackward(text.length)
-    .addMark("strong")
+    .addMark("em")
     .moveFocusForward(text.length)
-    .removeMark("strong")
+    .removeMark("em")
     .insertText(" ");
 };
 
-const boldConfig: PluginConfig[] = [
+const italicConfig: PluginConfig[] = [
   {
     type: "mark",
     tag: "mark",
-    menuButtons: [{ button: BoldButton }],
+    menuButtons: [{ button: ItalicButton }],
     toolbarButtons: [],
-    render: BoldMark,
-    identifier: ["strong"],
-    main: BoldPlugin,
+    render: ItalicMark,
+    identifier: ["em"],
+    main: ItalicPlugin,
     markdown: {
-      trigger: "*",
-      before: /(\*\*)(.*?)(\*)/,
+      trigger: "_",
+      before: /(\_\_)(.*?)(\_)/,
       change: onChange
     }
   }
 ];
 
-export default boldConfig;
+export default italicConfig;

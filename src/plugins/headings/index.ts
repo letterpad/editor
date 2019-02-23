@@ -1,6 +1,6 @@
 import HeadingsButton from "./HeadingsButton";
 import HeadingsNode from "./HeadingsNode";
-import { HeadingsPlugin } from ".";
+import { HeadingsPlugin } from "./main";
 import { PluginConfig } from "..";
 
 const headingsConfig: PluginConfig[] = [

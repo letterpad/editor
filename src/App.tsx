@@ -86,7 +86,7 @@ class App extends Component<AppProps> {
     const children = next();
     const data = { props, editor, next };
     const callbacks = this.getCallbacks();
-    console.log(menuButtons);
+
     return (
       <React.Fragment>
         {children}

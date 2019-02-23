@@ -1,6 +1,7 @@
-import { ImagePlugin, ImageNode } from ".";
+import { ImagePlugin } from "./main";
 import ImageButton from "./ImageButton";
 import { PluginConfig } from "..";
+import ImageNode from "./ImageNode";
 
 const imageConfig: PluginConfig[] = [
   {

@@ -1,22 +1,29 @@
+import YoutubeButton from "./YoutubeButton";
+import YoutubeNode from "./YoutubeNode";
+import { YoutubePlugin } from "./main";
 import { PluginConfig } from "..";
-import { hasBlock } from "../../helper/strategy";
-import { Editor } from "slate";
-import { isKeyboardEvent } from "../../helper/events";
 
-export const YoutubePlugin: PluginConfig["main"] = () => {
-  return {
-    onKeyDown(event: Event, editor: Editor, next: () => {}) {
-      if (isKeyboardEvent(event)) {
-        const type = "Youtube";
-        if (event.key === "Enter") {
-          const isActive = hasBlock(editor.value, type);
-          if (isActive) {
-            event.preventDefault();
-            return editor.splitBlock(1).setBlocks("paragraph");
-          }
-        }
+const youtubeConfig: PluginConfig[] = [
+  {
+    type: "block",
+    tag: "node",
+    menuButtons: [],
+    toolbarButtons: [{ button: YoutubeButton }],
+    render: YoutubeNode,
+    identifier: ["iframe"],
+    main: YoutubePlugin,
+    markdown: {
+      trigger: "]",
+      before: /(\[youtube=?.*)/,
+      change: (editor, _, matches) => {
+        const src = matches.before[0].replace("[youtube=", "");
+        return editor
+          .setBlocks({ type: "iframe", data: { src: src } })
+          .moveToEndOfBlock()
+          .insertBlock("paragraph");
       }
-      return next();
     }
-  };
-};
+  }
+];
+
+export default youtubeConfig;

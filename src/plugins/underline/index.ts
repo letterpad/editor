@@ -1,7 +1,7 @@
 import UnderlineMark from "./UnderlineMark";
 import UnderlineButton from "./UnderlineButton";
 import { PluginConfig } from "..";
-import { UnderlinePlugin } from ".";
+import { UnderlinePlugin } from "./main";
 
 const underlineConfig: PluginConfig[] = [
   {

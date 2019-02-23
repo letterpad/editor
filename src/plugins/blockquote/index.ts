@@ -1,6 +1,6 @@
 import BlockquoteButton from "./BlockquoteButton";
 import BlockquoteNode from "./BlockquoteNode";
-import { BlockquotePlugin } from ".";
+import { BlockquotePlugin } from "./main";
 import { PluginConfig } from "..";
 
 const blockquotePluginConfig: PluginConfig[] = [
