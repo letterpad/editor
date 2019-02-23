@@ -4,7 +4,7 @@ import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 
 /* eslint-disable no-unused-vars */
-export const ItalicPlugin: PluginConfig["main"] = () => {
+export const ItalicPlugin: PluginConfig["slatePlugin"] = () => {
   return {
     onKeyDown(event, editor, next) {
       if (isKeyboardEvent(event)) {

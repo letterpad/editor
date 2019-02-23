@@ -5,7 +5,7 @@ import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 
 /* eslint-disable no-unused-vars */
-const BlockquotePlugin: PluginConfig["main"] = () => ({
+const BlockquotePlugin: PluginConfig["slatePlugin"] = () => ({
   onKeyDown(event, editor, next) {
     const type = "blockquote";
     if (!isKeyboardEvent(event)) return;
