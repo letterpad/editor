@@ -1,14 +1,14 @@
 import React from "react";
-import { Editor as SlateEditor, Value } from "slate";
+import { Value } from "slate";
 import {
   Editor as SlateReactEditor,
   EventHook,
   getEventTransfer
 } from "slate-react";
-import { ComponentType, Component } from "react";
-import AutoReplace, { AutoReplaceParams } from "slate-auto-replace";
+import { Component } from "react";
+import AutoReplace from "slate-auto-replace";
 import { Plugin as SlateReactPlugin } from "slate-react";
-import { PluginConfig, pluginConfigs } from "./plugins";
+import { PluginConfig, pluginConfigs, EditorButton } from "./plugins";
 import { StyledMenu, StyledToolBar, EditorWrapper } from "./App.css";
 import { mapPropsToComponents } from "./helper/util";
 import schemaProps from "./helper/schema";
@@ -18,35 +18,6 @@ import { decorateNode } from "./plugins/codeblock/CodeblockUtils";
 import scrollToCursor from "./helper/scrollToCursor";
 import Html from "slate-html-serializer";
 import { showMenu } from "./helper/showMenu";
-
-export interface EditorEventHandler {
-  (event: Event, editor: SlateEditor, next: () => any): any;
-}
-
-export type EditorButtonComponent = ComponentType<{
-  editor: SlateEditor;
-  type: string;
-  callbacks: {
-    [key: string]: any;
-  };
-  next: () => any;
-}>;
-
-export interface EditorButton<P = any> {
-  button: EditorButtonComponent;
-  props?: P;
-}
-
-export interface LetterpadEditorPluginConfig {
-  type: string;
-  tag?: string;
-  identifier?: string[];
-  menuButtons?: EditorButton[];
-  toolbarButtons?: EditorButton[];
-  main?: (options?: any) => SlateReactPlugin;
-  markdown?: AutoReplaceParams;
-  [key: string]: any;
-}
 
 export interface LetterpadEditorProps {
   onButtonClick(e: MouseEvent, type: string): void;
