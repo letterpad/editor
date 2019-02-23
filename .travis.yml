@@ -1,6 +1,11 @@
-sudo: false
+dist: trusty
 language: node_js
 cache: yarn
+addons:
+  apt:
+    packages:
+      # This is required to run new chrome on old trusty
+      - libnss3
 
 node_js:
   - "10"
@@ -8,6 +13,13 @@ node_js:
 
 before_script:
   - yarn tsc
+  - yarn bundle
+  # Enable user namespace cloning
+  - "sysctl kernel.unprivileged_userns_clone=1"
+  # Launch XVFB
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 
 script:
   - yarn test --ci --no-cache
+  - yarn integration
