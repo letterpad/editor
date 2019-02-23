@@ -98,7 +98,7 @@ class App extends Component<AppProps> {
         </StyledMenu>
         <StyledToolBar>
           <div className="menu toolbar-menu">
-            {mapPropsToComponents(toolbarButtons, { ...data })}
+            {mapPropsToComponents(toolbarButtons, data)}
           </div>
         </StyledToolBar>
       </React.Fragment>

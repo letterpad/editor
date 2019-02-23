@@ -1,10 +1,11 @@
-import React, { ReactElement } from "react";
+import React from "react";
+import { EditorButton } from "../plugins";
 
 export const mapPropsToComponents = (
-  componentList: ReactElement[],
-  props: any
+  componentList: EditorButton[],
+  props?: any
 ) => {
   return componentList.map((item, index) => {
-    return React.cloneElement(item, { ...props, key: index });
+    return <item.button {...item.props} {...props} key={index} />;
   });
 };
