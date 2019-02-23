@@ -1,8 +1,10 @@
-import { BoldPlugin } from "./slatePlugin";
 import BoldMark from "./BoldMark";
 import { AutoReplaceParams } from "slate-auto-replace";
 import BoldButton from "./BoldButton";
 import { PluginConfig } from "..";
+import { isKeyboardEvent } from "../../helper/events";
+import { isMod } from "../../helper/keyboard-event";
+import { applyMarkStrategy } from "../../helper/strategy";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const text = matched.before[0].replace(/\*/g, "");
@@ -14,6 +16,18 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
     .moveFocusForward(text.length)
     .removeMark("strong")
     .insertText(" ");
+};
+
+const BoldPlugin: PluginConfig["main"] = () => {
+  return {
+    onKeyDown(event, editor, next) {
+      if (isKeyboardEvent(event)) {
+        if (!isMod(event) || event.key != "b") return next();
+        event.preventDefault();
+        applyMarkStrategy(editor, "b");
+      }
+    }
+  };
 };
 
 const boldConfig: PluginConfig[] = [
