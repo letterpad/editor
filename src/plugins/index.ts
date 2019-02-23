@@ -83,22 +83,22 @@ const plugins: Plugin[] = [
 
 pluginConfigs.forEach(config => {
   config.forEach(plugin => {
-    if (plugin.menuButtons != null && Array.isArray(plugin.menuButtons)) {
+    // collect menu buttons
+    if (plugin.menuButtons != null) {
       plugin.menuButtons.forEach(b => menuButtons.push(b));
     }
-    const _menuButtons = plugin.menuButtons;
-    if (Array.isArray(_menuButtons)) {
-      _menuButtons.forEach(buttonObj => {
-        menuButtons.push(buttonObj);
-      });
+
+    // collect toolbar buttons
+    if (plugin.toolbarButtons != null) {
+      plugin.toolbarButtons.forEach(b => toolbarButtons.push(b));
     }
-    const _toolbarButtons = plugin.toolbarButtons;
-    if (Array.isArray(_toolbarButtons)) {
-      _toolbarButtons.forEach(b => toolbarButtons.push(b));
-    }
+
+    // execute main if available
     if (plugin.main) {
       plugins.push(plugin.main());
     }
+
+    // render markdown if available
     if (plugin.markdown) {
       plugins.push(AutoReplace(plugin.markdown));
     }
