@@ -52,8 +52,8 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
     }
 
     // collect slate react plugins
-    if (pluginConfig.main != null) {
-      slateReactPlugins.push(pluginConfig.main());
+    if (pluginConfig.slatePlugin != null) {
+      slateReactPlugins.push(pluginConfig.slatePlugin());
     }
 
     // collect slate react plugins from markdown config
