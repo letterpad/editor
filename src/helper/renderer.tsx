@@ -10,7 +10,6 @@ export type OriginalRenderNodeProps = Parameters<
 export interface RenderNodeHandler {
   (
     props: OriginalRenderNodeProps[0],
-    editor: OriginalRenderNodeProps[1],
     next?: OriginalRenderNodeProps[2],
     callbacks?: {
       [key: string]: any;
@@ -19,7 +18,7 @@ export interface RenderNodeHandler {
 }
 
 // Search from the pluginsMap and give back the node to render
-export const renderNode: RenderNodeHandler = (props, _, next, callbacks) => {
+export const renderNode: RenderNodeHandler = (props, next, callbacks) => {
   if (pluginsMap.node[props.node.type]) {
     const RenderNode = pluginsMap.node[props.node.type].plugin.render;
     if (callbacks && callbacks.onBeforeRender) {
@@ -41,7 +40,6 @@ export type OriginalRenderMarkProps = Parameters<
 export interface RenderMarkHandler {
   (
     props: OriginalRenderMarkProps[0],
-    editor: OriginalRenderMarkProps[1],
     next?: OriginalRenderMarkProps[2],
     callbacks?: {
       [key: string]: any;
@@ -50,7 +48,7 @@ export interface RenderMarkHandler {
 }
 
 // Search from the pluginsMap and give back the mark to render
-export const renderMark: RenderMarkHandler = (props, _, next, callbacks) => {
+export const renderMark: RenderMarkHandler = (props, next, callbacks) => {
   if (pluginsMap.mark[props.mark.type]) {
     const RenderMark = pluginsMap.mark[props.mark.type].plugin.render;
     if (callbacks && callbacks.onBeforeRender) {

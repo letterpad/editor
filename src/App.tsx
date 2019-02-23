@@ -9,7 +9,7 @@ import { Editor, Plugin } from "slate-react";
 import schema from "./helper/schema";
 import rules from "./helper/rules";
 import scrollToCursor from "./helper/scrollToCursor";
-import { renderNode, renderMark } from "./helper/renderer";
+import { renderMark, renderNode } from "./helper/renderer";
 import { showMenu } from "./helper/showMenu";
 
 import { menuButtons, toolbarButtons, plugins } from "./plugins";
@@ -115,8 +115,8 @@ class App extends Component<AppProps> {
           value={this.state.value}
           onChange={this.onChange}
           onPaste={this.onPaste}
-          renderNode={(p, e, n) => renderNode(p, e, n, callbacks)}
-          renderMark={(p, e, n) => renderMark(p, e, n, callbacks)}
+          renderNode={(p, _, n) => renderNode(p, n, callbacks)}
+          renderMark={(p, _, n) => renderMark(p, n, callbacks)}
           renderEditor={this.renderEditor}
           decorateNode={decorateNode}
           placeholder="Compose a story.."
