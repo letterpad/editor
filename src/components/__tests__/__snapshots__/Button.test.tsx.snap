@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components Button snapshot 1`] = `
+<span
+  className="button"
+  onMouseDown={[MockFunction]}
+>
+  <span
+    className="material-icons"
+  />
+</span>
+`;
+
+exports[`components Button snapshot 2`] = `
+<span
+  className="button"
+  onMouseDown={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+>
+  <span
+    className="material-icons"
+  />
+</span>
+`;
