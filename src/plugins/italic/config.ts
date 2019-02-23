@@ -2,6 +2,7 @@ import ItalicMark from "./ItalicMark";
 import { AutoReplaceParams } from "slate-auto-replace";
 import ItalicButton from "./ItalicButton";
 import { ItalicPlugin } from ".";
+import { PluginConfig } from "..";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const text = matched.before[0].replace(/\*/g, "");
@@ -15,17 +16,21 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
     .insertText(" ");
 };
 
-export default {
-  type: "mark",
-  tag: "mark",
-  menuButtons: [{ button: ItalicButton }],
-  toolbarButtons: [],
-  render: ItalicMark,
-  identifier: ["em"],
-  main: ItalicPlugin,
-  markdown: {
-    trigger: "_",
-    before: /(\_\_)(.*?)(\_)/,
-    change: onChange
+const italicConfig: PluginConfig[] = [
+  {
+    type: "mark",
+    tag: "mark",
+    menuButtons: [{ button: ItalicButton }],
+    toolbarButtons: [],
+    render: ItalicMark,
+    identifier: ["em"],
+    main: ItalicPlugin,
+    markdown: {
+      trigger: "_",
+      before: /(\_\_)(.*?)(\_)/,
+      change: onChange
+    }
   }
-};
+];
+
+export default italicConfig;

@@ -2,15 +2,9 @@ import React from "react";
 import { applyAudio } from "./AudioUtils";
 import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
-import { Editor } from "slate-react";
+import { EditorButtonComponent } from "..";
 
-const AudioButton = ({
-  editor,
-  callbacks
-}: {
-  editor: Editor;
-  callbacks: { [key: string]: (...args: any[]) => any };
-}) => {
+const AudioButton: EditorButtonComponent = ({ editor, callbacks }) => {
   if (!editor) return <span />;
   const type = "audio";
 

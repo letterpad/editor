@@ -2,6 +2,7 @@ import { BoldPlugin } from ".";
 import BoldMark from "./BoldMark";
 import { AutoReplaceParams } from "slate-auto-replace";
 import BoldButton from "./BoldButton";
+import { PluginConfig } from "..";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const text = matched.before[0].replace(/\*/g, "");
@@ -15,17 +16,21 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
     .insertText(" ");
 };
 
-export default {
-  type: "mark",
-  tag: "mark",
-  menuButtons: [{ button: BoldButton }],
-  toolbarButtons: [],
-  render: BoldMark,
-  identifier: ["strong"],
-  main: BoldPlugin,
-  markdown: {
-    trigger: "*",
-    before: /(\*\*)(.*?)(\*)/,
-    change: onChange
+const boldConfig: PluginConfig[] = [
+  {
+    type: "mark",
+    tag: "mark",
+    menuButtons: [{ button: BoldButton }],
+    toolbarButtons: [],
+    render: BoldMark,
+    identifier: ["strong"],
+    main: BoldPlugin,
+    markdown: {
+      trigger: "*",
+      before: /(\*\*)(.*?)(\*)/,
+      change: onChange
+    }
   }
-};
+];
+
+export default boldConfig;

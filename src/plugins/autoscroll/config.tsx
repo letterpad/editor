@@ -1,6 +1,11 @@
 import { AutoScrollPlugin } from ".";
+import { PluginConfig } from "..";
 
-export default {
-  type: "node",
-  main: AutoScrollPlugin
-};
+const autoscrollConfig: PluginConfig[] = [
+  {
+    type: "node",
+    main: AutoScrollPlugin
+  }
+];
+
+export default autoscrollConfig;

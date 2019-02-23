@@ -1,11 +1,11 @@
-// import { applyAudio } from "./AudioUtils";
 import { hasBlock } from "../../helper/strategy";
-import { Editor } from "slate";
+import { PluginConfig } from "..";
+import { isKeyboardEvent } from "../../helper/events";
 
-const AudioPlugin = () => ({
-  onKeyDown(event: KeyboardEvent, editor: Editor, next: () => {}) {
+const AudioPlugin: PluginConfig["main"] = () => ({
+  onKeyDown(event, editor, next) {
     const type = "audio";
-    if (event.key === "Enter") {
+    if (isKeyboardEvent(event) && event.key === "Enter") {
       const isActive = hasBlock(editor.value, type);
       if (isActive) {
         event.preventDefault();

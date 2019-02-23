@@ -1,22 +1,6 @@
 import AutoReplace, { AutoReplaceParams } from "slate-auto-replace";
 import { Plugin } from "slate-react";
-import * as ___configs from "./plugins";
-
-console.log(___configs);
-// import audioConfig from "./audio/config";
-// import autoscrollConfig from "./autoscroll/config";
-// import blockquoteConfig from "./blockquote/config";
-// import boldConfig from "./bold/config";
-// import codeblockConfig from "./codeblock/config";
-// import headingsConfig from "./headings/config";
-// import highlightConfig from "./highlight/config";
-// import imageConfig from "./image/config";
-// import italicConfig from "./italic/config";
-// import linebreakConfig from "./linebreak/config";
-// import linkConfig from "./link/config";
-// import listConfig from "./list/config";
-// import underlineConfig from "./underline/config";
-import youtubeConfig from "./youtube/config";
+import pluginConfigs from "./pluginConfigs";
 
 import { ComponentType } from "react";
 import { Editor } from "slate";
@@ -57,24 +41,7 @@ export interface PluginOptions {
   [key: string]: any;
 }
 
-export type PluginConfigs = (PluginConfig | PluginConfig[])[];
-
-const pluginConfigs: PluginConfigs = [
-  // audioConfig,
-  // autoscrollConfig,
-  // blockquoteConfig,
-  // boldConfig,
-  // codeblockConfig,
-  // headingsConfig,
-  // highlightConfig,
-  // imageConfig,
-  // italicConfig,
-  // linebreakConfig,
-  // linkConfig,
-  // listConfig,
-  // underlineConfig,
-  youtubeConfig[0]
-] as Array<any>;
+export type PluginConfigs = PluginConfig[][];
 
 const menuButtons: EditorButton[] = [];
 const toolbarButtons: EditorButton[] = [];
@@ -115,9 +82,6 @@ const plugins: Plugin[] = [
 ];
 
 pluginConfigs.forEach(config => {
-  if (!Array.isArray(config)) {
-    config = [config];
-  }
   config.forEach(plugin => {
     if (plugin.menuButtons != null && Array.isArray(plugin.menuButtons)) {
       plugin.menuButtons.forEach(b => menuButtons.push(b));

@@ -2,6 +2,7 @@ import { AutoReplaceParams } from "slate-auto-replace";
 import AudioButton from "./AudioButton";
 import AudioNode from "./AudioNode";
 import { AudioPlugin } from ".";
+import { PluginConfig } from "..";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const src = matched.before[0].replace("[audio=", "");
@@ -11,7 +12,7 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
     .insertBlock("paragraph");
 };
 
-export default [
+const audioConfig: PluginConfig[] = [
   {
     type: "block",
     tag: "node",
@@ -27,3 +28,5 @@ export default [
     }
   }
 ];
+
+export default audioConfig;
