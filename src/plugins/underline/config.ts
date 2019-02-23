@@ -1,5 +1,6 @@
-import { UnderlineButton, UnderlinePlugin } from ".";
+import { UnderlinePlugin } from ".";
 import UnderlineMark from "./UnderlineMark";
+import UnderlineButton from "./UnderlineButton";
 
 export default {
   type: "mark",
