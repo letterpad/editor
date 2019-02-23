@@ -12,7 +12,7 @@ const LinkButton: EditorButtonComponent = ({ editor }) => {
       icon="insert_link"
       onMouseUp={e => {
         e.preventDefault();
-        return insertLinkStrategy(editor, "code");
+        return insertLinkStrategy(editor);
       }}
     />
   );
