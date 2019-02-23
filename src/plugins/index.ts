@@ -56,7 +56,7 @@ export interface PluginOptions {
 
 export type PluginConfigs = (PluginConfig | PluginConfig[])[];
 
-export const pluginConfigs: PluginConfigs = [
+const pluginConfigs: PluginConfigs = [
   audioConfig,
   autoscrollConfig,
   blockquoteConfig,
@@ -73,8 +73,8 @@ export const pluginConfigs: PluginConfigs = [
   youtubeConfig
 ] as any;
 
-export const menuButtons: EditorButton[] = [];
-export const toolbarButtons: EditorButton[] = [];
+const menuButtons: EditorButton[] = [];
+const toolbarButtons: EditorButton[] = [];
 
 interface PluginsMap {
   node: {
@@ -97,14 +97,14 @@ interface PluginsMap {
   };
 }
 
-export const pluginsMap: PluginsMap = {
+const pluginsMap: PluginsMap = {
   node: {},
   mark: {},
   inline: {}
 };
 
 // Apply plugins
-export const plugins: Plugin[] = [
+const plugins: Plugin[] = [
   // PluginPrism({
   //     onlyIn: node => node.type === "code_block",
   //     getSyntax: node => node.data.get("syntax")
@@ -121,7 +121,9 @@ pluginConfigs.forEach(config => {
     }
     const _menuButtons = plugin.menuButtons;
     if (Array.isArray(_menuButtons)) {
-      _menuButtons.forEach(b => menuButtons.push(b));
+      _menuButtons.forEach(buttonObj => {
+        menuButtons.push(buttonObj);
+      });
     }
     const _toolbarButtons = plugin.toolbarButtons;
     if (Array.isArray(_toolbarButtons)) {
@@ -162,3 +164,5 @@ pluginConfigs.forEach(config => {
     }
   });
 });
+
+export { pluginConfigs, pluginsMap, menuButtons, toolbarButtons, plugins };
