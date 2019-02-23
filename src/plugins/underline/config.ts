@@ -1,8 +1,9 @@
 import { UnderlinePlugin } from ".";
 import UnderlineMark from "./UnderlineMark";
 import UnderlineButton from "./UnderlineButton";
+import { PluginConfig } from "..";
 
-export default {
+const underlineConfig: PluginConfig = {
   type: "mark",
   tag: "mark",
   menuButtons: [{ button: UnderlineButton }],
@@ -11,3 +12,5 @@ export default {
   identifier: ["u"],
   main: UnderlinePlugin
 };
+
+export default underlineConfig;
