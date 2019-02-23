@@ -13,6 +13,7 @@ node_js:
 
 before_script:
   - yarn tsc
+  - yarn bundle
   # Enable user namespace cloning
   - "sysctl kernel.unprivileged_userns_clone=1"
   # Launch XVFB
