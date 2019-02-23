@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`functionalities adding some text 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>Hello World!</span></span></span></div></body></html>"`;
+
+exports[`functionalities bold 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>This is a </span></span><span><strong><span>sample</span></strong></span><span><span> text</span></span></span></div></body></html>"`;
+
+exports[`functionalities clearing editor 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span><span contenteditable=\\"false\\" style=\\"pointer-events: none; display: inline-block; width: 0px; max-width: 100%; white-space: nowrap; opacity: 0.333;\\">Compose a story..</span><span>&#xFEFF;<br></span></span></span></span></div></body></html>"`;
