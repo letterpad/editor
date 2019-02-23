@@ -1,12 +1,11 @@
-import React, { SFC } from "react";
+import React from "react";
 import { applyBlockquote } from "./BlockquoteUtils";
 import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
-import { Editor } from "slate";
 
-const BlockquoteButton: SFC<{
-  editor: Editor;
-}> = ({ editor }) => {
+import { MenuButtonComponent } from "..";
+
+const BlockquoteButton: MenuButtonComponent = ({ editor }) => {
   if (!editor) return <span />;
   const type = "blockquote";
 

@@ -9,8 +9,11 @@ const plugins: PluginConfig[] = [
   {
     type: "block",
     tag: "node",
-    menuButtons: [{ button: CodeblockButton }],
-    toolbarButtons: [],
+    menuButtons: [
+      {
+        button: CodeblockButton
+      }
+    ],
     decorator: decorateNode,
     render: (props: any) => {
       return <CodeblockNode {...props} />;
