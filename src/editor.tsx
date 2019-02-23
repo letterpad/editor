@@ -106,9 +106,7 @@ export class LetterpadEditor extends Component<
   private menuRef = React.createRef<HTMLDivElement>();
   private html = new Html();
 
-  state = getInitialState(
-    pluginConfigs.reduce((acc, cur) => [...acc, ...cur], [])
-  );
+  state = getInitialState(pluginConfigs);
 
   onChange = ({ value }: { value: Value }) => {
     this.setState({ value });

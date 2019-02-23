@@ -12,23 +12,23 @@ import { default as linkConfig } from "./link";
 import { default as listConfig } from "./list";
 import { default as underlineConfig } from "./underline";
 import { default as youtubeConfig } from "./youtube";
-import { PluginConfigs } from ".";
+import { PluginConfig } from ".";
 
-const pluginConfigs: PluginConfigs = [
-  audioConfig,
-  italicConfig,
-  autoscrollConfig,
-  blockquoteConfig,
-  boldConfig,
-  codeblockConfig,
-  headingsConfig,
-  highlightConfig,
-  imageConfig,
-  linebreakConfig,
-  linkConfig,
-  listConfig,
-  underlineConfig,
-  youtubeConfig
+const pluginConfigs: PluginConfig[] = [
+  ...audioConfig,
+  ...italicConfig,
+  ...autoscrollConfig,
+  ...blockquoteConfig,
+  ...boldConfig,
+  ...codeblockConfig,
+  ...headingsConfig,
+  ...highlightConfig,
+  ...imageConfig,
+  ...linebreakConfig,
+  ...linkConfig,
+  ...listConfig,
+  ...underlineConfig,
+  ...youtubeConfig
 ];
 
 export default pluginConfigs;

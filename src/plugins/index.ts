@@ -41,8 +41,6 @@ export interface PluginOptions {
   [key: string]: any;
 }
 
-export type PluginConfigs = PluginConfig[][];
-
 const menuButtons: EditorButton[] = [];
 const toolbarButtons: EditorButton[] = [];
 
@@ -81,55 +79,53 @@ const plugins: Plugin[] = [
   // }),
 ];
 
-pluginConfigs.forEach(config => {
-  config.forEach(plugin => {
-    // collect menu buttons
-    if (plugin.menuButtons != null) {
-      plugin.menuButtons.forEach(b => menuButtons.push(b));
-    }
+pluginConfigs.forEach(plugin => {
+  // collect menu buttons
+  if (plugin.menuButtons != null) {
+    plugin.menuButtons.forEach(b => menuButtons.push(b));
+  }
 
-    // collect toolbar buttons
-    if (plugin.toolbarButtons != null) {
-      plugin.toolbarButtons.forEach(b => toolbarButtons.push(b));
-    }
+  // collect toolbar buttons
+  if (plugin.toolbarButtons != null) {
+    plugin.toolbarButtons.forEach(b => toolbarButtons.push(b));
+  }
 
-    // execute main if available
-    if (plugin.main) {
-      plugins.push(plugin.main());
-    }
+  // execute main if available
+  if (plugin.main) {
+    plugins.push(plugin.main());
+  }
 
-    // render markdown if available
-    if (plugin.markdown) {
-      plugins.push(AutoReplace(plugin.markdown));
-    }
+  // render markdown if available
+  if (plugin.markdown) {
+    plugins.push(AutoReplace(plugin.markdown));
+  }
 
-    /**
-     * create a map of plugins so that its easy to identify based on node/mark
-     * {
-     *   mark: {
-     *     bold: {
-     *       is: "b",
-     *       plugin: { ...config }
-     *   }
-     *   },
-     *   node: {
-     *      blockquote: {
-     *        is: "blockquote",
-     *        plugin: { ...config }
-     *      }
-     *   }
-     * }
-     */
-    let { identifier, tag } = plugin;
-    if (identifier != null && tag != null) {
-      identifier.forEach(id => {
-        pluginsMap[tag as keyof PluginsMap][id] = {
-          plugin,
-          is: id
-        };
-      });
-    }
-  });
+  /**
+   * create a map of plugins so that its easy to identify based on node/mark
+   * {
+   *   mark: {
+   *     bold: {
+   *       is: "b",
+   *       plugin: { ...config }
+   *   }
+   *   },
+   *   node: {
+   *      blockquote: {
+   *        is: "blockquote",
+   *        plugin: { ...config }
+   *      }
+   *   }
+   * }
+   */
+  let { identifier, tag } = plugin;
+  if (identifier != null && tag != null) {
+    identifier.forEach(id => {
+      pluginsMap[tag as keyof PluginsMap][id] = {
+        plugin,
+        is: id
+      };
+    });
+  }
 });
-console.log("menuButtons :", menuButtons);
+
 export { pluginConfigs, pluginsMap, menuButtons, toolbarButtons, plugins };
