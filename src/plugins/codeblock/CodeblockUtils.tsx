@@ -50,22 +50,22 @@ export const applyCodeblock = (editor: Editor) => {
   return editor.wrapBlock("code_block");
 };
 
-function isTextNode(node: Node): node is Text {
+export function isTextNode(node: Node): node is Text {
   if (Object.prototype.hasOwnProperty.call(node, "nodes")) {
     return true;
   }
   return false;
 }
 
-export const decorateNode = (node: Node, _: any, next: () => {}) => {
-  const others = next() || [];
+export const decorateNode = (node: Node, _: any, next: () => any) => {
+  const others: any[] = next() || [];
   if (isTextNode(node)) return;
 
   const block = node.nodes.get(0);
-  const { type } = block;
+  const { type } = block as any;
   if (type != "code_block") return others;
 
-  const language = block.data.get("language") || "javascript";
+  const language = (block as any).data.get("language") || "javascript";
   const texts = node.getTexts().toArray();
   const string = texts.map(t => t.text).join("\n");
   const grammar = Prism.languages[language];
@@ -80,6 +80,7 @@ export const decorateNode = (node: Node, _: any, next: () => {}) => {
   for (const token of tokens) {
     startText = endText;
     startOffset = endOffset;
+    if (startText == null) break;
 
     const content = getContent(token);
     const newlines = content.split("\n").length - 1;
@@ -93,12 +94,14 @@ export const decorateNode = (node: Node, _: any, next: () => {}) => {
 
     while (available < remaining && texts.length > 0) {
       endText = texts.shift();
+      if (endText == null) break;
+
       remaining = length - available;
       available = endText.text.length;
       endOffset = remaining;
     }
 
-    if (typeof token != "string") {
+    if (typeof token != "string" && endText != null) {
       const dec = {
         anchor: {
           key: startText.key,
@@ -166,9 +169,12 @@ export const decorateNode = (node: Node, _: any, next: () => {}) => {
 //     };
 // };
 
-export const insertNewLineBeforeCodeBlock = change => {
+export const insertNewLineBeforeCodeBlock = (change: Editor) => {
   const anchor = change.value.anchorBlock;
   const codeBlock = change.value.document.getParent(anchor.key);
+
+  if (codeBlock == null) return;
+  if (isTextNode(codeBlock)) return;
 
   if (codeBlock.type !== "code_block") return;
 
@@ -176,6 +182,8 @@ export const insertNewLineBeforeCodeBlock = change => {
   if (codeBlock.nodes.findIndex(node => node === anchor) !== 0) return;
 
   const parentContainer = change.value.document.getParent(codeBlock.key);
+  if (parentContainer == null) return;
+  if (isTextNode(parentContainer)) return;
   const index = parentContainer.nodes.findIndex(node => node === codeBlock);
 
   change.insertNodeByKey(
@@ -189,16 +197,20 @@ export const insertNewLineBeforeCodeBlock = change => {
   return true;
 };
 
-export const deleteNewLineBeforeCodeBlock = change => {
+export const deleteNewLineBeforeCodeBlock = (change: Editor) => {
   const anchor = change.value.anchorBlock;
   const codeBlock = change.value.document.getParent(anchor.key);
 
+  if (codeBlock == null) return;
+  if (isTextNode(codeBlock)) return;
   if (codeBlock.type !== "code_block") return;
 
   // is it the first element in codeblock
   if (codeBlock.nodes.findIndex(node => node === anchor) !== 0) return;
 
   const parentContainer = change.value.document.getParent(codeBlock.key);
+  if (parentContainer == null) return;
+  if (isTextNode(parentContainer)) return;
   const index = parentContainer.nodes.findIndex(node => node === codeBlock);
 
   if (index === 0) {
@@ -210,10 +222,12 @@ export const deleteNewLineBeforeCodeBlock = change => {
   }
 };
 
-export const preserveIndentationForCodeBlock = change => {
+export const preserveIndentationForCodeBlock = (change: Editor) => {
   const anchor = change.value.anchorBlock;
   const codeBlock = getCodeBlockParent(change.value);
 
+  if (codeBlock == null) return;
+  if (isTextNode(codeBlock)) return;
   if (codeBlock.type !== "code_block") return;
 
   const lines = anchor.text.split(/\r?\n/);
@@ -233,10 +247,16 @@ export const preserveIndentationForCodeBlock = change => {
   return true;
 };
 
-export const unindentClosingBlocks = change => {
+export const unindentClosingBlocks = (change: Editor) => {
   const anchor = change.value.anchorBlock;
   const codeBlock = change.value.document.getParent(anchor.key);
-  if (codeBlock.type !== "code_block") return;
+  if (
+    codeBlock != null &&
+    !isTextNode(codeBlock) &&
+    codeBlock.type !== "code_block"
+  ) {
+    return;
+  }
 
   const lines = anchor.text.split(/\r?\n/);
   const lastLine = lines[lines.length - 1];
@@ -248,7 +268,7 @@ export const unindentClosingBlocks = change => {
   }
 };
 
-export const isPrintableKeycode = keycode => {
+export const isPrintableKeycode = (keycode: number) => {
   return (
     (keycode > 47 && keycode < 58) || // number keys
     keycode == 32 ||
@@ -260,21 +280,30 @@ export const isPrintableKeycode = keycode => {
   ); // [\]' (in order)
 };
 
-export const handleCommandAInCodeBlock = (event, change) => {
+export const handleCommandAInCodeBlock = (event: Event, change: Editor) => {
   if (!isMod(event)) return;
 
   const anchor = change.value.anchorBlock;
   const codeBlock = change.value.document.getParent(anchor.key);
-  if (codeBlock.type !== "code_block") return;
+  if (codeBlock == null) return;
+  if (isTextNode(codeBlock)) return;
+  if (codeBlock.type !== "code_block") {
+    return;
+  }
 
-  const startNode = codeBlock.nodes.get(0).nodes.get(0);
-  const lastNode = codeBlock.nodes.get(codeBlock.nodes.size - 1).nodes.get(0);
+  const firstNode = codeBlock.nodes.get(0);
+  if (isTextNode(firstNode)) return;
+  const lastNode = codeBlock.nodes.get(codeBlock.nodes.size - 1);
+  if (isTextNode(lastNode)) return;
+
+  const startNode = firstNode.nodes.get(0);
+  const endNode = lastNode.nodes.get(0);
 
   change.select(
     Range.create({
-      anchor: startNode,
-      focus: lastNode,
-      mark: { type: "code_block" }
+      anchor: startNode as any,
+      focus: endNode as any
+      // mark: { type: "code_block" }
       // anchorKey: startNode.key,
       // anchorOffset: 0,
       // focusKey: lastNode.key,
@@ -296,12 +325,14 @@ export const handleCommandAInCodeBlock = (event, change) => {
  * @return {String}
  */
 
-function getContent(token) {
+function getContent(token: string | Prism.Token): string {
   if (typeof token == "string") {
     return token;
   } else if (typeof token.content == "string") {
     return token.content;
-  } else {
+  } else if (Array.isArray(token.content)) {
     return token.content.map(getContent).join("");
+  } else {
+    return getContent(token);
   }
 }

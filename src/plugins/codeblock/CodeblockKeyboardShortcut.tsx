@@ -1,60 +1,68 @@
 import {
-    insertNewLineBeforeCodeBlock,
-    deleteNewLineBeforeCodeBlock,
-    isPrintableKeycode,
-    preserveIndentationForCodeBlock,
-    unindentClosingBlocks,
-    handleCommandAInCodeBlock,
-    getCodeBlockParent
+  insertNewLineBeforeCodeBlock,
+  deleteNewLineBeforeCodeBlock,
+  isPrintableKeycode,
+  preserveIndentationForCodeBlock,
+  unindentClosingBlocks,
+  handleCommandAInCodeBlock,
+  getCodeBlockParent
 } from "./CodeblockUtils";
 import { isMod } from "../../helper/keyboard-event";
+import { Editor } from "slate";
+import { isKeyboardEvent } from "../../helper/events";
 
 /* eslint-disable react/prop-types */
-const codeblockKeyboardShortcut = (event, editor, next) => {
-    const { value } = editor;
+const codeblockKeyboardShortcut = (
+  event: Event,
+  editor: Editor,
+  next: () => any
+) => {
+  const { value } = editor;
 
-    if (
-        value.selection.isExpanded &&
-        !isMod(event) &&
-        isPrintableKeycode(event.which)
-    ) {
-        editor.delete();
-        return next();
-    }
+  if (!isKeyboardEvent(event)) return;
 
-    if (!getCodeBlockParent(value)) return next();
+  if (
+    value.selection.isExpanded &&
+    !isMod(event) &&
+    isPrintableKeycode(event.which)
+  ) {
+    editor.delete();
+    return next();
+  }
 
-    switch (event.key) {
-        case "Enter":
-            if (value.startOffset === 0) {
-                const done = insertNewLineBeforeCodeBlock(editor);
-                if (done) return next();
-            }
-            return preserveIndentationForCodeBlock(editor);
+  if (!getCodeBlockParent(value)) return next();
 
-        case "Backspace":
-            if (value.startOffset === 0) {
-                return deleteNewLineBeforeCodeBlock(editor);
-            }
-            break;
+  switch (event.key) {
+    case "Enter":
+      if ((value as any).startOffset === 0) {
+        const done = insertNewLineBeforeCodeBlock(editor);
+        if (done) return next();
+      }
+      return preserveIndentationForCodeBlock(editor);
 
-        case "Tab":
-            event.preventDefault();
-            // insert 2 spaces
-            editor.insertText("  ");
-            return next();
+    case "Backspace":
+      if ((value as any).startOffset === 0) {
+        return deleteNewLineBeforeCodeBlock(editor);
+      }
+      break;
 
-        case "a":
-            return handleCommandAInCodeBlock(event, editor);
+    case "Tab":
+      event.preventDefault();
+      // insert 2 spaces
+      editor.insertText("  ");
+      return next();
 
-        case "}":
-        case ")":
-        case "]":
-            return unindentClosingBlocks(editor);
+    case "a":
+      return handleCommandAInCodeBlock(event, editor);
 
-        default:
-            return next();
-    }
+    case "}":
+    case ")":
+    case "]":
+      return unindentClosingBlocks(editor);
+
+    default:
+      return next();
+  }
 };
 
 export default codeblockKeyboardShortcut;
