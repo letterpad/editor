@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const EditorWrapper = styled.div`
-  font-size: 1.25rem;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 200;
   font-style: normal;
-  font-family: "EB Garamond", serif;
+  font-family: "Roboto", sans-serif;
 
   padding: 2rem;
-  line-height: 1.5;
+  line-height: 1.625;
 
   h1 {
     font-family: "Raleway", "Lucida Sans", "Lucida Sans Regular",
