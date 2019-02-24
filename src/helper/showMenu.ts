@@ -1,5 +1,9 @@
 import { Value } from "slate";
 
+// When the menu positioning is beyond the screen, leave a padding
+// of DEFAULT_MARGIN to the side and the top
+const DEFAULT_MARGIN = 5;
+
 export const showMenu = (menu: HTMLElement, value: Value) => {
   const { fragment, selection } = value;
 
@@ -11,11 +15,19 @@ export const showMenu = (menu: HTMLElement, value: Value) => {
   const native = window.getSelection();
   const range = native.getRangeAt(0);
   const rect = range.getBoundingClientRect();
-  menu.style.opacity = "1";
-  menu.style.top = `${rect.top + window.pageYOffset - menu.offsetHeight}px`;
 
-  menu.style.left = `${rect.left +
-    window.pageXOffset -
-    menu.offsetWidth / 2 +
-    rect.width / 2}px`;
+  menu.style.opacity = "1";
+  let top = rect.top + window.pageYOffset - menu.offsetHeight;
+  if (top < DEFAULT_MARGIN) {
+    top = DEFAULT_MARGIN;
+  }
+
+  let left =
+    rect.left + window.pageXOffset - menu.offsetWidth / 2 + rect.width / 2;
+  if (left < DEFAULT_MARGIN) {
+    left = DEFAULT_MARGIN;
+  }
+
+  menu.style.top = `${top}px`;
+  menu.style.left = `${left}px`;
 };
