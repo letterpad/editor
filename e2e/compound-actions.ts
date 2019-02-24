@@ -43,3 +43,22 @@ export async function applyEditorFeatureToSampleText(
   featureHandlers[0].click();
   await page.waitFor(50);
 }
+
+export async function fillSampleList(editorHandle: EditorHandle) {
+  await clearEditor(editorHandle);
+  await page.keyboard.type("- Item 1");
+  await page.keyboard.press("Enter");
+  await page.keyboard.type("Item 2");
+  await page.keyboard.press("Enter");
+  await page.keyboard.press("Tab");
+  await page.keyboard.type("Item 2.1");
+  await page.keyboard.press("Enter");
+  await page.keyboard.type("Item 2.2");
+  await page.keyboard.press("Enter");
+  await page.keyboard.press("Tab");
+  await page.keyboard.type("Item 2.2.1");
+  await page.keyboard.press("Enter");
+  await page.keyboard.type("Item 2.2.2");
+  await page.keyboard.press("Enter");
+  await page.keyboard.type("Item 2.2.3");
+}

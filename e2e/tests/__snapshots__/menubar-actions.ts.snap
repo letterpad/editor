@@ -2,7 +2,7 @@
 
 exports[`features adding some text 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>Hello World!</span></span></span></div></body></html>"`;
 
-exports[`features blockquote 1`] = `"<html><head></head><body><blockquote><span><span><span>These is a sample line of textThese is a sample line of text</span></span></span></blockquote><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;<br></span></span></span></div></body></html>"`;
+exports[`features blockquote 1`] = `"<html><head></head><body><blockquote><span><span><span>These is a sample line of text</span></span></span></blockquote><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;<br></span></span></span></div></body></html>"`;
 
 exports[`features bold 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>This is a </span></span><span><strong><span>sample</span></strong></span><span><span> text</span></span></span></div></body></html>"`;
 
