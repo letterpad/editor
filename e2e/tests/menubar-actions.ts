@@ -1,12 +1,9 @@
-import {
-  EditorHandle,
-  getHtmlContents
-} from "../integration-tests-utils/serialize";
-import { clearEditor } from "../integration-tests-utils/simple-actions";
+import { EditorHandle, getHtmlContents } from "../serialize";
+import { clearEditor } from "../simple-actions";
 import {
   applyEditorFeatureToSampleText,
   applyEditorFeatureToLine
-} from "../integration-tests-utils/compound-actions";
+} from "../compound-actions";
 
 describe("features", () => {
   let editorHandle: EditorHandle;
