@@ -1,22 +1,12 @@
 import Prism from "prismjs";
-import { Block, Range, Value, Editor, Point, Node, Text } from "slate";
+import { Block, Range, Editor, Point, Node, Text } from "slate";
 import { isMod } from "../../helper/keyboard-event";
+import { getCodeBlockParent } from "../../helper/util";
 import { Plugin } from "slate-react";
-
-export const getCodeBlockParent = (value: Value) => {
-  let parentNode = value.anchorBlock;
-  do {
-    if (parentNode.type === "pre") {
-      return parentNode;
-    }
-  } while (((parentNode as any) = value.document.getParent(parentNode.key)));
-
-  return null;
-};
 
 export const applyCodeblock = (editor: Editor) => {
   const { value } = editor;
-  const codeBlock = getCodeBlockParent(value);
+  const codeBlock = getCodeBlockParent(value, "pre");
 
   if (codeBlock) {
     const firstNode = codeBlock.nodes.get(0);
@@ -58,6 +48,64 @@ export function isTextNode(node: Node): node is Text {
   return false;
 }
 
+const getAllDecorations = (tokens: any, texts: any): [] => {
+  const decorations: any = [];
+  let startText = texts.shift();
+
+  const setDecoration = (tokens: any): void => {
+    let startOffset = 0;
+    let endOffset = 0;
+    let start = 0;
+    let endText = startText;
+    for (const token of tokens) {
+      startText = endText;
+      startOffset = endOffset;
+      if (startText == null) break;
+
+      const content = getContent(token);
+      const length = content.length;
+      const end = start + length;
+
+      let available = startText.text.length - startOffset;
+      let remaining = length;
+
+      endOffset = startOffset + remaining;
+      while (available <= remaining && texts.length > 0) {
+        endText = texts.shift();
+        if (endText == null) break;
+
+        remaining = length - available;
+        available = endText.text.length;
+        endOffset = remaining;
+      }
+      if (typeof token === "object" && token.type === "tag") {
+        setDecoration(token.content);
+      }
+
+      if (typeof token != "string" && endText != null && token.type !== "tag") {
+        const dec = {
+          anchor: {
+            key: startText.key,
+            offset: startOffset
+          },
+          focus: {
+            key: endText.key,
+            offset: endOffset
+          },
+          mark: {
+            type: token.type
+          }
+        };
+        decorations.push(dec);
+      }
+
+      start = end;
+    }
+  };
+  setDecoration(tokens);
+
+  return decorations;
+};
 export const decorateNode: Plugin["decorateNode"] = (
   document,
   editor,
@@ -76,100 +124,11 @@ export const decorateNode: Plugin["decorateNode"] = (
   const grammar = Prism.languages[language];
 
   const tokens = Prism.tokenize(string, grammar);
-  const decorations = [];
-  let startText = texts.shift();
-  let endText = startText;
-  let startOffset = 0;
-  let endOffset = 0;
-  let start = 0;
 
-  for (const token of tokens) {
-    startText = endText;
-    startOffset = endOffset;
-    if (startText == null) break;
-
-    const content = getContent(token);
-    const length = content.length;
-    const end = start + length;
-
-    let available = startText.text.length - startOffset;
-    let remaining = length;
-
-    endOffset = startOffset + remaining;
-    while (available <= remaining && texts.length > 0) {
-      endText = texts.shift();
-      if (endText == null) break;
-
-      remaining = length - available;
-      available = endText.text.length;
-      endOffset = remaining;
-    }
-    if (typeof token != "string" && endText != null) {
-      const dec = {
-        anchor: {
-          key: startText.key,
-          offset: startOffset
-        },
-        focus: {
-          key: endText.key,
-          offset: endOffset
-        },
-        mark: {
-          type: token.type
-        }
-      };
-      decorations.push(dec);
-    }
-
-    start = end;
-  }
+  const decorations = getAllDecorations(tokens, texts);
 
   return [...others, ...decorations];
 };
-
-// /**
-//  * Return a decoration range for the given text.
-//  */
-// const createDecoration = ({
-//     text,
-//     textStart,
-//     textEnd,
-//     start,
-//     end,
-//     className
-// }) => {
-//     if (start >= textEnd || end <= textStart) {
-//         // Ignore, the token is not in the text
-//         return null;
-//     }
-
-//     // Shrink to this text boundaries
-//     start = Math.max(start, textStart);
-//     end = Math.min(end, textEnd);
-
-//     // Now shift offsets to be relative to this text
-//     start -= textStart;
-//     end -= textStart;
-
-//     return {
-//         anchor: {
-//             key: text.key,
-//             path: [1],
-//             offset: start
-//         },
-//         focus: {
-//             key: text.key,
-//             path: [2],
-//             offset: text.text.length
-//         }
-
-//         // anchorKey: text.key,
-//         // anchorOffset: start,
-//         // focusKey: text.key,
-//         // focusOffset: end,
-//         // marks: [{ type: "prism-token", data: { className } }]
-//     };
-// };
 
 export const insertNewLineBeforeCodeBlock = (change: Editor) => {
   const anchor = change.value.anchorBlock;
@@ -226,7 +185,7 @@ export const deleteNewLineBeforeCodeBlock = (change: Editor) => {
 
 export const preserveIndentationForCodeBlock = (change: Editor) => {
   const anchor = change.value.anchorBlock;
-  const codeBlock = getCodeBlockParent(change.value);
+  const codeBlock = getCodeBlockParent(change.value, "pre");
 
   if (codeBlock == null) return;
   if (isTextNode(codeBlock)) return;
@@ -264,18 +223,6 @@ export const unindentClosingBlocks = (change: Editor) => {
     change.deleteBackward(2);
     return true;
   }
-};
-
-export const isPrintableKeycode = (keycode: number) => {
-  return (
-    (keycode > 47 && keycode < 58) || // number keys
-    keycode == 32 ||
-    keycode == 13 || // spacebar & return key(s) (if you want to allow carriage returns)
-    (keycode > 64 && keycode < 91) || // letter keys
-    (keycode > 95 && keycode < 112) || // numpad keys
-    (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
-    (keycode > 218 && keycode < 223)
-  ); // [\]' (in order)
 };
 
 export const handleCommandAInCodeBlock = (event: Event, change: Editor) => {
@@ -334,49 +281,3 @@ function getContent(token: string | Prism.Token): string {
     return getContent(token);
   }
 }
-
-// /**
-//  * Return a decoration range for the given text.
-//  */
-// function createDecoration({
-//   text,
-//   textStart,
-//   textEnd,
-//   start,
-//   end,
-//   className
-// }: {
-//   text: Text; // The text being decorated
-//   textStart: number; // Its start position in the whole text
-//   textEnd: number; // Its end position in the whole text
-//   start: number; // The position in the whole text where the token starts
-//   end: number; // The position in the whole text where the token ends
-//   className: string; // The prism token classname
-// }) {
-//   if (start >= textEnd || end <= textStart) {
-//     // Ignore, the token is not in the text
-//     return null;
-//   }
-
-//   // Shrink to this text boundaries
-//   start = Math.max(start, textStart);
-//   end = Math.min(end, textEnd);
-
-//   // Now shift offsets to be relative to this text
-//   start -= textStart;
-//   end -= textStart;
-
-//   return {
-//     anchor: {
-//       key: text.key,
-//       offset: start,
-//       path: []
-//     },
-//     focus: {
-//       key: text.key,
-//       offset: end,
-//       path: []
-//     },
-//     marks: [{ type: "prism-token", data: { className } }]
-//   };
-// }
