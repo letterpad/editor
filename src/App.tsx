@@ -19,9 +19,6 @@ import initialValue from "./value";
 import { StyledMenu, EditorWrapper, StyledToolBar } from "./App.css";
 import { mapPropsToComponents } from "./helper/util";
 
-console.log(plugins);
-// const rules = getRules(plugins);
-
 const html = new Html({ rules });
 
 interface AppProps {

@@ -75,7 +75,7 @@ export class LetterpadEditor extends Component<
   LetterpadEditorProps,
   LetterpadEditorState
 > {
-  private rules = getRules(pluginConfigs);
+  private rules = getRules();
 
   private menuRef = React.createRef<HTMLDivElement>();
   private html = new Html({ rules: this.rules });
