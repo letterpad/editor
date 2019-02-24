@@ -1,6 +1,6 @@
 import React from "react";
 import { EditorButton } from "../plugins";
-import { Block } from "slate";
+import { Block, Value } from "slate";
 
 export const mapPropsToComponents = (
   componentList: EditorButton[],
@@ -36,4 +36,27 @@ export const getAttributesFromNode = (node: Block) => {
     }
   });
   return attrs;
+};
+
+export const getCodeBlockParent = (value: Value, tagName: string) => {
+  let parentNode = value.anchorBlock;
+  do {
+    if (parentNode.type === tagName) {
+      return parentNode;
+    }
+  } while (((parentNode as any) = value.document.getParent(parentNode.key)));
+
+  return null;
+};
+
+export const isPrintableKeycode = (keycode: number) => {
+  return (
+    (keycode > 47 && keycode < 58) || // number keys
+    keycode == 32 ||
+    keycode == 13 || // spacebar & return key(s) (if you want to allow carriage returns)
+    (keycode > 64 && keycode < 91) || // letter keys
+    (keycode > 95 && keycode < 112) || // numpad keys
+    (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
+    (keycode > 218 && keycode < 223)
+  ); // [\]' (in order)
 };

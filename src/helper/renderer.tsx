@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { ReactNode } from "react";
 import { PluginsMap } from "../plugins";
 import { Plugin } from "slate-react";
@@ -25,10 +24,6 @@ export const renderNode: RenderNodeHandler = ({
   callbacks,
   pluginsMap
 }) => {
-  console.log(
-    "pluginsMap.node[props.node.type] :",
-    pluginsMap.node[props.node.type]
-  );
   if (pluginsMap.node[props.node.type]) {
     const RenderNode = pluginsMap.node[props.node.type].plugin.render;
     if (callbacks && callbacks.onBeforeRender) {
