@@ -4,6 +4,7 @@ import pluginConfigs from "./pluginConfigs";
 
 import { ComponentType } from "react";
 import { Editor } from "slate";
+import { Rule } from "slate-html-serializer";
 
 export interface EditorEventHandler {
   (event: Event, editor: Editor, next: () => any): any;
@@ -35,6 +36,7 @@ export interface PluginConfig {
   markdown?: AutoReplaceParams;
 
   [key: string]: any;
+  rules?: Rule;
 }
 
 export interface PluginOptions {

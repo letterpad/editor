@@ -18,6 +18,7 @@ import { decorateNode } from "./plugins/codeblock/CodeblockUtils";
 import scrollToCursor from "./helper/scrollToCursor";
 import Html from "slate-html-serializer";
 import { showMenu } from "./helper/showMenu";
+import { getRules } from "./helper/rules";
 
 export interface LetterpadEditorProps {
   onButtonClick(e: MouseEvent, type: string): void;
@@ -74,8 +75,10 @@ export class LetterpadEditor extends Component<
   LetterpadEditorProps,
   LetterpadEditorState
 > {
+  private rules = getRules(pluginConfigs);
+
   private menuRef = React.createRef<HTMLDivElement>();
-  private html = new Html();
+  private html = new Html({ rules: this.rules });
 
   state = getInitialState(pluginConfigs);
 

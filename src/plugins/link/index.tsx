@@ -1,7 +1,10 @@
+import React from "react";
 import LinkButton from "./LinkButton";
 import LinkNode from "./LinkNode";
 import { LinkPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
+
+const TAGNAME = "a";
 
 const linkConfig: PluginConfig[] = [
   {
@@ -10,7 +13,7 @@ const linkConfig: PluginConfig[] = [
     menuButtons: [{ button: LinkButton }],
     toolbarButtons: [],
     render: LinkNode,
-    identifier: ["a"],
+    identifier: [TAGNAME],
     slatePlugin: LinkPlugin,
     markdown: {
       trigger: "space",
@@ -21,9 +24,34 @@ const linkConfig: PluginConfig[] = [
         const href = lastWord.startsWith("http")
           ? lastWord
           : `https://${lastWord}`;
-        editor.wrapInline({ type: "a", data: { href } }); // set URL inline
+        editor.wrapInline({ type: TAGNAME, data: { href } }); // set URL inline
         editor.moveFocusForward(lastWord.length).insertText(" "); // deselect it
         return editor;
+      }
+    },
+    rules: {
+      serialize: (obj, children) => {
+        if (obj.object !== "inline") {
+          return;
+        }
+        const props = { children, node: obj, attributes: {} };
+        if (obj.type === TAGNAME) {
+          return <LinkNode {...props} />;
+        }
+      },
+      deserialize: (el, next) => {
+        const type = el.tagName.toLowerCase();
+        if (type === TAGNAME) {
+          return {
+            object: "block",
+            type: type,
+            data: {
+              className: el.getAttribute("class"),
+              href: el.getAttribute("href") || null
+            },
+            nodes: next(el.childNodes)
+          };
+        }
       }
     }
   }

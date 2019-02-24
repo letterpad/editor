@@ -1,3 +1,4 @@
+import React from "react";
 import BoldMark from "./BoldMark";
 import { AutoReplaceParams } from "slate-auto-replace";
 import BoldButton from "./BoldButton";
@@ -43,6 +44,24 @@ const boldConfig: PluginConfig[] = [
       trigger: "*",
       before: /(\*\*)(.*?)(\*)/,
       change: onChange
+    },
+    rules: {
+      deserialize(el, next) {
+        const type = el.tagName.toLowerCase();
+        if (type === "strong") {
+          return {
+            object: "mark",
+            type: type,
+            nodes: next(el.childNodes)
+          };
+        }
+      },
+      serialize(obj, children) {
+        if (obj.object === "mark") {
+          const props = { children };
+          return <BoldMark {...props} />;
+        }
+      }
     }
   }
 ];
