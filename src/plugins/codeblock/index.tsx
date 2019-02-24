@@ -5,6 +5,31 @@ import { CodeblockPlugin } from "./slatePlugin";
 
 import { decorateNode } from "./CodeblockUtils";
 import { PluginConfig } from "..";
+import { AutoReplaceParams } from "slate-auto-replace";
+import { Range, Point } from "slate";
+
+const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
+  const { texts } = editor.value;
+  const currentTextNode = texts.get(0);
+  const currentLineText = currentTextNode.text;
+
+  const currentLineRange = {
+    anchor: Point.create({
+      key: currentTextNode.key,
+      path: null,
+      offset: matched.before.index
+    }),
+    focus: Point.create({
+      key: currentTextNode.key,
+      path: null,
+      offset: matched.before.index + currentLineText.length
+    })
+  };
+  return editor
+    .deleteAtRange(Range.create(currentLineRange))
+    .insertBlock("pre")
+    .focus();
+};
 
 const plugins: PluginConfig[] = [
   {
@@ -20,7 +45,12 @@ const plugins: PluginConfig[] = [
       return <CodeblockNode {...props} />;
     },
     identifier: ["pre"],
-    slatePlugin: CodeblockPlugin
+    slatePlugin: CodeblockPlugin,
+    markdown: {
+      trigger: "enter",
+      before: /^```[a-z]/m,
+      change: onChange
+    }
   },
   {
     type: "mark",
