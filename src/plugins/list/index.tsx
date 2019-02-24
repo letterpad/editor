@@ -12,6 +12,8 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matches) => {
   }
 };
 
+const identifier = ["li", "ol", "ul"];
+
 const listConfig: PluginConfig[] = [
   {
     type: "block",
@@ -21,12 +23,37 @@ const listConfig: PluginConfig[] = [
     render: ({ next, ...props }: { next: () => {}; [key: string]: any }) => {
       return RenderNode(props.node.type, props);
     },
-    identifier: ["li", "ol", "ul"],
+    identifier,
     slatePlugin: ListPlugin,
     markdown: {
       trigger: "space",
       before: /^(\*|-)$/,
       change: onChange
+    },
+    rules: {
+      serialize: (obj, children) => {
+        if (obj.object !== "block") {
+          return;
+        }
+        const props = { children, node: obj, attributes: {} };
+        if (identifier.indexOf(obj.type) >= 0) {
+          return RenderNode(props.node.type, props);
+        }
+      },
+      deserialize: (el, next) => {
+        const type = el.tagName.toLowerCase();
+        if (identifier.indexOf(type) >= 0) {
+          return {
+            object: "block",
+            type: type,
+            data: {
+              className: el.getAttribute("class"),
+              style: el.getAttribute("style")
+            },
+            nodes: next(el.childNodes)
+          };
+        }
+      }
     }
   }
 ];

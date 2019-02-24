@@ -1,10 +1,6 @@
-import React, {
-  SFC,
-  DetailedHTMLProps,
-  HTMLAttributes,
-  ReactElement
-} from "react";
+import React, { SFC, DetailedHTMLProps, HTMLAttributes } from "react";
 import { Block } from "slate";
+import { getAttributesFromNode } from "../../helper/util";
 
 const AudioNode: SFC<{
   attributes: DetailedHTMLProps<
@@ -12,11 +8,13 @@ const AudioNode: SFC<{
     HTMLAudioElement
   >;
   node: Block;
-  children: ReactElement;
-}> = ({ attributes, node, children }) => (
-  <audio {...attributes} controls src={node.data.get("src")}>
-    {children}
-  </audio>
-);
+}> = ({ attributes, node, children }) => {
+  const attrs = getAttributesFromNode(node);
+  return (
+    <audio {...attributes} controls {...attrs}>
+      {children}
+    </audio>
+  );
+};
 
 export default AudioNode;
