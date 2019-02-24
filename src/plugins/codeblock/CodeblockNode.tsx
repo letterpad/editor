@@ -40,18 +40,21 @@ class CodeblockNode extends Component<{
     const { node, editor } = this.props;
     this.setState({ language: event.target && event.target.value });
     editor.setNodeByKey(node.key, {
-      type: "",
       data: {
         language: event.target.value
-      } as any
-    });
+      }
+    } as any);
   };
 
   render() {
     const { attributes, children } = this.props;
     return (
       <CodeblockContainer>
-        <pre className="prism-dark" {...attributes} data-language="javascript">
+        <pre
+          className="prism-dark"
+          {...attributes}
+          data-language={this.state.language}
+        >
           {children}
         </pre>
         <CodeblockLang contentEditable={false}>

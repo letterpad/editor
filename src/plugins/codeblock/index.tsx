@@ -12,6 +12,7 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const { texts } = editor.value;
   const currentTextNode = texts.get(0);
   const currentLineText = currentTextNode.text;
+  const language = currentLineText.replace(/`/g, "");
 
   const currentLineRange = {
     anchor: Point.create({
@@ -27,7 +28,7 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   };
   return editor
     .deleteAtRange(Range.create(currentLineRange))
-    .insertBlock("pre")
+    .insertBlock({ type: "pre", data: { language } })
     .focus();
 };
 
@@ -42,12 +43,13 @@ const plugins: PluginConfig[] = [
     ],
     decorator: decorateNode,
     render: (props: any) => {
+      console.log(props.node.type);
       return <CodeblockNode {...props} />;
     },
     identifier: ["pre"],
     slatePlugin: CodeblockPlugin,
     markdown: {
-      trigger: "enter",
+      trigger: "space",
       before: /^```[a-z]/m,
       change: onChange
     }
@@ -57,6 +59,14 @@ const plugins: PluginConfig[] = [
     tag: "mark",
     menuButtons: [],
     toolbarButtons: [],
+    identifier: [
+      "comment",
+      "keyword",
+      "puntuation",
+      "tag",
+      "constant",
+      "selector"
+    ],
     render: ({ next, ...props }: { next: () => {}; [key: string]: any }) => {
       const { attributes, children, mark } = props;
       const className = "prism-token token " + mark.type;
@@ -102,10 +112,19 @@ const plugins: PluginConfig[] = [
               {children}
             </span>
           );
+        case "selector":
+          return (
+            <span
+              {...attributes}
+              className={className}
+              style={{ color: "red" }}
+            >
+              {children}
+            </span>
+          );
       }
       return null;
-    },
-    identifier: ["comment", "keyword", "puntuation", "tag", "constant"]
+    }
   }
 ];
 

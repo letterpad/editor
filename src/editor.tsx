@@ -8,7 +8,12 @@ import {
 import { Component } from "react";
 import AutoReplace from "slate-auto-replace";
 import { Plugin as SlateReactPlugin } from "slate-react";
-import { PluginConfig, pluginConfigs, EditorButton } from "./plugins";
+import {
+  PluginConfig,
+  pluginConfigs,
+  EditorButton,
+  PluginsMap
+} from "./plugins";
 import {
   StyledMenu,
   StyledToolBar,
@@ -34,6 +39,7 @@ interface LetterpadEditorState {
   menuButtons: EditorButton[];
   toolbarButtons: EditorButton[];
   slateReactPlugins: SlateReactPlugin[];
+  pluginsMap: PluginsMap;
   value: Value;
 }
 
@@ -44,6 +50,11 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
   const menuButtons: LetterpadEditorState["menuButtons"] = [];
   const toolbarButtons: LetterpadEditorState["toolbarButtons"] = [];
   const slateReactPlugins: LetterpadEditorState["slateReactPlugins"] = [];
+  const pluginsMap: LetterpadEditorState["pluginsMap"] = {
+    node: {},
+    mark: {},
+    inline: {}
+  };
 
   // Collect all necessary things
   for (const pluginConfig of pluginConfigs) {
@@ -66,12 +77,23 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
     if (pluginConfig.markdown != null) {
       slateReactPlugins.push(AutoReplace(pluginConfig.markdown));
     }
+
+    let { identifier, tag } = pluginConfig;
+    if (identifier != null && tag != null) {
+      identifier.forEach(id => {
+        pluginsMap[tag as keyof PluginsMap][id] = {
+          plugin: pluginConfig,
+          is: id
+        };
+      });
+    }
   }
 
   return {
     menuButtons,
     toolbarButtons,
     slateReactPlugins,
+    pluginsMap,
     value: Value.fromJSON(initialValue)
   };
 }
@@ -136,6 +158,10 @@ export class LetterpadEditor extends Component<
       editor,
       next
     };
+    const callbacks = {
+      onBeforeRender: this.props.onBeforeRender,
+      onButtonClick: this.props.onButtonClick
+    };
 
     return (
       <>
@@ -143,20 +169,14 @@ export class LetterpadEditor extends Component<
         <StyledMenu ref={this.menuRef} className="menu hover-menu">
           {mapPropsToComponents(this.state.menuButtons, {
             ...data,
-            callbacks: {
-              onBeforeRender: this.props.onBeforeRender,
-              onButtonClick: this.props.onButtonClick
-            }
+            callbacks
           })}
         </StyledMenu>
         <StyledToolBar>
           <div className="menu toolbar-menu">
             {mapPropsToComponents(this.state.toolbarButtons, {
               ...data,
-              callbacks: {
-                onBeforeRender: this.props.onBeforeRender,
-                onButtonClick: this.props.onButtonClick
-              }
+              callbacks
             })}
           </div>
         </StyledToolBar>
@@ -169,7 +189,6 @@ export class LetterpadEditor extends Component<
       onBeforeRender: this.props.onBeforeRender,
       onButtonClick: this.props.onButtonClick
     };
-
     return (
       <EditorWrapper>
         <SlateReactEditor
@@ -178,8 +197,22 @@ export class LetterpadEditor extends Component<
           value={this.state.value}
           onChange={this.onChange}
           onPaste={this.onPaste}
-          renderNode={(p, _, n) => renderNode(p, n, eventHandlers)}
-          renderMark={(p, _, n) => renderMark(p, n, eventHandlers)}
+          renderNode={(props, _, next) =>
+            renderNode({
+              props,
+              next,
+              callbacks: eventHandlers,
+              pluginsMap: this.state.pluginsMap
+            })
+          }
+          renderMark={(props, _, next) =>
+            renderMark({
+              props,
+              next,
+              callbacks: eventHandlers,
+              pluginsMap: this.state.pluginsMap
+            })
+          }
           renderEditor={this.renderEditor}
           decorateNode={decorateNode}
           placeholder="Compose a story.."
