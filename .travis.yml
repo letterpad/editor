@@ -9,7 +9,7 @@ addons:
 
 env:
   - TEST_SUITE=unit
-  - TEST_SUITE=integration
+  - TEST_SUITE=e2e
 
 node_js:
   - "10"
@@ -18,7 +18,7 @@ node_js:
 before_script:
   - |
     if [ "$TEST_SUITE" = "unit" ]; then
-      yarn tsc
+      yarn build
     else
       yarn bundle
       # Enable user namespace cloning
@@ -33,5 +33,5 @@ script:
     if [ "$TEST_SUITE" = "unit" ]; then
       yarn test --ci --no-cache
     else
-      yarn integration
+      yarn e2e --ci --no-cache
     fi
