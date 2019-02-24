@@ -1,6 +1,6 @@
 import {
   insertNewLineBeforeCodeBlock,
-  deleteNewLineBeforeCodeBlock,
+  // deleteNewLineBeforeCodeBlock,
   isPrintableKeycode,
   preserveIndentationForCodeBlock,
   unindentClosingBlocks,
@@ -41,12 +41,6 @@ const codeblockKeyboardShortcut = (
         if (done) return next();
       }
       return preserveIndentationForCodeBlock(editor);
-
-    case "Backspace":
-      if ((value as any).startOffset === 0) {
-        return deleteNewLineBeforeCodeBlock(editor);
-      }
-      break;
 
     case "Tab":
       event.preventDefault();

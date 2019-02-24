@@ -6,7 +6,7 @@ import { Plugin } from "slate-react";
 export const getCodeBlockParent = (value: Value) => {
   let parentNode = value.anchorBlock;
   do {
-    if (parentNode.type === "code_block") {
+    if (parentNode.type === "pre") {
       return parentNode;
     }
   } while (((parentNode as any) = value.document.getParent(parentNode.key)));
@@ -44,11 +44,11 @@ export const applyCodeblock = (editor: Editor) => {
 
     return editor
       .removeMark("highlight")
-      .unwrapBlockByKey(codeBlock.key, "code_block")
+      .unwrapBlockByKey(codeBlock.key, "pre")
       .focus();
   }
 
-  return editor.wrapBlock("code_block");
+  return editor.wrapBlock("pre");
 };
 
 export function isTextNode(node: Node): node is Text {
@@ -60,12 +60,15 @@ export function isTextNode(node: Node): node is Text {
 
 export const decorateNode: Plugin["decorateNode"] = (node, _, next) => {
   const others: any[] = next() || [];
-  if (isTextNode(node)) return others;
-  const block = node.nodes.get(0);
-  const { type } = block as any;
-  if (type != "code_block") return others;
+  const codeBlock = getCodeBlockParent(_.value);
+  if (!codeBlock) {
+    return others;
+  } else if (isTextNode(node)) return others;
+  // const block = node.nodes.get(0);
+  const { type } = codeBlock;
+  if (type != "pre") return others;
 
-  const language = (block as any).data.get("language") || "javascript";
+  const language = (codeBlock as any).data.get("language") || "javascript";
   const texts = node.getTexts().toArray();
   const string = texts.map(t => t.text).join("\n");
   const grammar = Prism.languages[language];
@@ -176,7 +179,7 @@ export const insertNewLineBeforeCodeBlock = (change: Editor) => {
   if (codeBlock == null) return;
   if (isTextNode(codeBlock)) return;
 
-  if (codeBlock.type !== "code_block") return;
+  if (codeBlock.type !== "pre") return;
 
   // is it the first element in codeblock
   if (codeBlock.nodes.findIndex(node => node === anchor) !== 0) return;
@@ -203,7 +206,7 @@ export const deleteNewLineBeforeCodeBlock = (change: Editor) => {
 
   if (codeBlock == null) return;
   if (isTextNode(codeBlock)) return;
-  if (codeBlock.type !== "code_block") return;
+  if (codeBlock.type !== "pre") return;
 
   // is it the first element in codeblock
   if (codeBlock.nodes.findIndex(node => node === anchor) !== 0) return;
@@ -228,7 +231,7 @@ export const preserveIndentationForCodeBlock = (change: Editor) => {
 
   if (codeBlock == null) return;
   if (isTextNode(codeBlock)) return;
-  if (codeBlock.type !== "code_block") return;
+  if (codeBlock.type !== "pre") return;
 
   const lines = anchor.text.split(/\r?\n/);
   const lastLine = lines[lines.length - 1];
@@ -250,11 +253,7 @@ export const preserveIndentationForCodeBlock = (change: Editor) => {
 export const unindentClosingBlocks = (change: Editor) => {
   const anchor = change.value.anchorBlock;
   const codeBlock = change.value.document.getParent(anchor.key);
-  if (
-    codeBlock != null &&
-    !isTextNode(codeBlock) &&
-    codeBlock.type !== "code_block"
-  ) {
+  if (codeBlock != null && !isTextNode(codeBlock) && codeBlock.type !== "pre") {
     return;
   }
 
@@ -287,7 +286,7 @@ export const handleCommandAInCodeBlock = (event: Event, change: Editor) => {
   const codeBlock = change.value.document.getParent(anchor.key);
   if (codeBlock == null) return;
   if (isTextNode(codeBlock)) return;
-  if (codeBlock.type !== "code_block") {
+  if (codeBlock.type !== "pre") {
     return;
   }
 
@@ -303,7 +302,7 @@ export const handleCommandAInCodeBlock = (event: Event, change: Editor) => {
     Range.create({
       anchor: startNode as any,
       focus: endNode as any
-      // mark: { type: "code_block" }
+      // mark: { type: "pre" }
       // anchorKey: startNode.key,
       // anchorOffset: 0,
       // focusKey: lastNode.key,
@@ -335,4 +334,50 @@ function getContent(token: string | Prism.Token): string {
   } else {
     return getContent(token);
   }
+}
+
+/**
+ * Return a decoration range for the given text.
+ */
+function createDecoration({
+  text,
+  textStart,
+  textEnd,
+  start,
+  end,
+  className
+}: {
+  text: Text; // The text being decorated
+  textStart: number; // Its start position in the whole text
+  textEnd: number; // Its end position in the whole text
+  start: number; // The position in the whole text where the token starts
+  end: number; // The position in the whole text where the token ends
+  className: string; // The prism token classname
+}) {
+  if (start >= textEnd || end <= textStart) {
+    // Ignore, the token is not in the text
+    return null;
+  }
+
+  // Shrink to this text boundaries
+  start = Math.max(start, textStart);
+  end = Math.min(end, textEnd);
+
+  // Now shift offsets to be relative to this text
+  start -= textStart;
+  end -= textStart;
+
+  return {
+    anchor: {
+      key: text.key,
+      offset: start,
+      path: []
+    },
+    focus: {
+      key: text.key,
+      offset: end,
+      path: []
+    },
+    marks: [{ type: "prism-token", data: { className } }]
+  };
 }
