@@ -12,7 +12,7 @@ export interface RenderNodeHandler {
     props: OriginalRenderNodeProps[0],
     next?: OriginalRenderNodeProps[2],
     callbacks?: {
-      [key: string]: any;
+      [key: string]: (...args: any[]) => any;
     }
   ): ReactNode;
 }
