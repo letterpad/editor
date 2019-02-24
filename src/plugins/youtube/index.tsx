@@ -1,10 +1,29 @@
 import React from "react";
 import YoutubeNode from "./YoutubeNode";
 import YoutubeButton from "./YoutubeButton";
-import { YoutubePlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
+import { isKeyboardEvent } from "../../helper/events";
+import { hasBlock } from "../../helper/strategy";
 
 const TAGNAME = "iframe";
+
+export const YoutubePlugin: PluginConfig["slatePlugin"] = () => {
+  return {
+    onKeyDown(event, editor, next) {
+      if (isKeyboardEvent(event)) {
+        const type = "Youtube";
+        if (event.key === "Enter") {
+          const isActive = hasBlock(editor.value, type);
+          if (isActive) {
+            event.preventDefault();
+            return editor.splitBlock(1).setBlocks("paragraph");
+          }
+        }
+      }
+      return next();
+    }
+  };
+};
 
 const youtubeConfig: PluginConfig[] = [
   {

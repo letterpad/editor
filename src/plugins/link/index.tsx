@@ -1,10 +1,16 @@
 import React from "react";
 import LinkButton from "./LinkButton";
 import LinkNode from "./LinkNode";
-import { LinkPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
+import LinkKeyboardShortcut from "./LinkKeyboardShortcut";
 
 const TAGNAME = "a";
+
+const LinkPlugin: PluginConfig["slatePlugin"] = () => ({
+  onKeyDown(...args) {
+    return LinkKeyboardShortcut(...args);
+  }
+});
 
 const linkConfig: PluginConfig[] = [
   {
