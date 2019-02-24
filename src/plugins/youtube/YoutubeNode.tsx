@@ -1,21 +1,25 @@
 import React, { SFC } from "react";
 import { Block } from "slate";
+import { getAttributesFromNode } from "../../helper/util";
 
 const YoutubeNode: SFC<{
   attributes: any;
   node: Block;
-}> = ({ node, attributes, children }) => (
-  <iframe
-    {...attributes}
-    id="ytplayer"
-    type="text/html"
-    width="640"
-    height="360"
-    src={node.data.get("src")}
-    frameborder="0"
-  >
-    {children}
-  </iframe>
-);
+}> = ({ node, attributes, children }) => {
+  const attrs = getAttributesFromNode(node);
+  return (
+    <iframe
+      {...attributes}
+      id="ytplayer"
+      type="text/html"
+      width="640"
+      height="360"
+      frameBorder="0"
+      {...attrs}
+    >
+      {children}
+    </iframe>
+  );
+};
 
 export default YoutubeNode;
