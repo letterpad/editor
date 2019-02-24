@@ -1,13 +1,20 @@
 import React, { SFC, DetailedHTMLProps, BlockquoteHTMLAttributes } from "react";
+import { Block } from "slate";
+import { getAttributesFromNode } from "../../helper/util";
 
-/* eslint-disable react/prop-types */
 const BlockquoteNode: SFC<{
   attributes: DetailedHTMLProps<
     BlockquoteHTMLAttributes<HTMLElement>,
     HTMLElement
   >;
-}> = ({ attributes, children }) => (
-  <blockquote {...attributes}>{children}</blockquote>
-);
+  node: Block;
+}> = ({ attributes, children, node }) => {
+  const attrs = getAttributesFromNode(node);
+  return (
+    <blockquote {...attributes} {...attrs}>
+      {children}
+    </blockquote>
+  );
+};
 
 export default BlockquoteNode;

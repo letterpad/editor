@@ -1,17 +1,12 @@
 import React, { SFC } from "react";
 import { Block } from "slate";
+import { getAttributesFromNode } from "../../helper/util";
 
 const YoutubeNode: SFC<{
   attributes: any;
   node: Block;
 }> = ({ node, attributes, children }) => {
-  const attrs: { [key: string]: string } = {};
-  node.data.map((value, attr) => {
-    if (typeof attr === "string") {
-      attrs[attr] = value;
-    }
-  });
-
+  const attrs = getAttributesFromNode(node);
   return (
     <iframe
       {...attributes}

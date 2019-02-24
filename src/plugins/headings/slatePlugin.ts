@@ -5,7 +5,6 @@ import { isKeyboardEvent } from "../../helper/events";
 
 const types = ["h1", "h1", "h3", "h4", "h5"];
 
-/* eslint-disable no-unused-vars */
 const HeadingsPlugin: PluginConfig["slatePlugin"] = () => ({
   onKeyDown(event, editor, next) {
     if (!isKeyboardEvent(event)) return;

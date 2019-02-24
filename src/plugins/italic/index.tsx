@@ -2,10 +2,24 @@ import React from "react";
 import ItalicMark from "./ItalicMark";
 import { AutoReplaceParams } from "slate-auto-replace";
 import ItalicButton from "./ItalicButton";
-import { ItalicPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
+import { applyMarkStrategy } from "../../helper/strategy";
+import { isKeyboardEvent } from "../../helper/events";
+import { isMod } from "../../helper/keyboard-event";
 
 const TAGNAME = "em";
+
+const ItalicPlugin: PluginConfig["slatePlugin"] = () => {
+  return {
+    onKeyDown(event, editor, next) {
+      if (isKeyboardEvent(event)) {
+        if (!isMod(event) || event.key != "em") return next();
+        event.preventDefault();
+        applyMarkStrategy(editor, "em");
+      }
+    }
+  };
+};
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const text = matched.before[0].replace(/\*/g, "");

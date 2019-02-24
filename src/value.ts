@@ -35,15 +35,6 @@ const initialValue: ValueJSON = {
             ]
           }
         ]
-      },
-      {
-        object: "block",
-        type: "iframe",
-        data: {
-          src: "https://www.youtube.com/embed/tgbNymZ7vqY",
-          width: 200,
-          height: 200
-        }
       }
     ]
   }

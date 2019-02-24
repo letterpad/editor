@@ -4,7 +4,7 @@ module.exports = {
     port: 4343
   },
   launch: {
-    headless: true
+    headless: false
   },
   browserContext: "default"
 };

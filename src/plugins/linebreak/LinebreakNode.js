@@ -1,18 +1,21 @@
 import React from "react";
-/* eslint-disable react/prop-types */
-const LinebreakNode = ({ attributes, children }) => {
-    return (
-        <span
-            {...attributes}
-            style={{
-                borderBottom: "2px solid #000",
-                display: "block",
-                opacity: 0.2
-            }}
-        >
-            {children}
-        </span>
-    );
+import { getAttributesFromNode } from "../../helper/util";
+
+const LinebreakNode = ({ attributes, children, node }) => {
+  const props = getAttributesFromNode(node);
+  return (
+    <span
+      {...attributes}
+      style={{
+        borderBottom: "2px solid #000",
+        display: "block",
+        opacity: 0.2
+      }}
+      {...props}
+    >
+      {children}
+    </span>
+  );
 };
 
 export default LinebreakNode;
