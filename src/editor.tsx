@@ -9,7 +9,7 @@ import { Component } from "react";
 import AutoReplace from "slate-auto-replace";
 import { Plugin as SlateReactPlugin } from "slate-react";
 import { PluginConfig, pluginConfigs, EditorButton } from "./plugins";
-import { StyledMenu, StyledToolBar, EditorWrapper } from "./App.css";
+import { StyledMenu, StyledToolBar, EditorWrapper } from "./editor.css";
 import { mapPropsToComponents } from "./helper/util";
 import schemaProps from "./helper/schema";
 import initialValue from "./value";

@@ -1,10 +1,34 @@
 import styled from "styled-components";
 
 export const EditorWrapper = styled.div`
-  font-size: 18px;
-  line-height: 1.8;
-  padding-top: 80px;
-  margin: 0px 80px;
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "EB Garamond", serif;
+
+  padding: 2rem;
+  line-height: 1.5;
+
+  h1 {
+    font-family: "Raleway", "Lucida Sans", "Lucida Sans Regular",
+      "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-weight: 200;
+    font-size: 3.25rem;
+    line-height: 1rem;
+    margin-top: 3.25rem;
+    color: #3a3a3a;
+  }
+
+  ul {
+    list-style: none;
+    li:before {
+      padding: 0 1rem;
+      font-size: 1rem;
+      content: "⁃";
+      color: #3a3a3a;
+    }
+  }
+
   hr {
     border: none !important;
     margin-top: 52px;
