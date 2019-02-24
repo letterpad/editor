@@ -1,8 +1,8 @@
 import {
   hasBlock,
   hasParentOfType,
-  getNodeOfType,
-  getBlockParent
+  getNodeOfType
+  // getBlockParent
 } from "../../helper/strategy";
 import { Editor, Value } from "slate";
 const itemType = "li";
@@ -21,17 +21,7 @@ export const onBackspace = (_: any, editor: Editor, next: () => {}) => {
   if (value.selection.start.offset === 0) {
     const node = getNodeOfType(value, itemType);
     if (!node) return;
-    const depth = value.document.getDepth(node.key);
-    if (depth > 2) {
-      return decreaseListDepthStrategy(editor);
-    } else {
-      editor.setBlocks("paragraph");
-      if (getBlockParent(value, "ul")) {
-        return editor.unwrapBlock("ul");
-      } else if (getBlockParent(value, "ol")) {
-        return editor.unwrapBlock("ol");
-      }
-    }
+    deepRemoveList(editor);
   }
 
   next();
@@ -134,13 +124,12 @@ const deepRemoveList = (editor: Editor) => {
   const node = getNodeOfType(value, itemType);
   const depth = document.getDepth(node.key);
 
-  Array(depth)
-    .fill(".")
-    .forEach(() => {
-      const parent: any = document.getParent(node.key);
-      if (parent.type === "ul") removeUnorderedList(editor);
-      else removeOrderedList(editor);
-    });
+  for (let i = 0; i < depth; i++) {
+    const parent: any = document.getParent(node.key);
+    if (parent.type === "ul") removeUnorderedList(editor);
+    else removeOrderedList(editor);
+  }
+
   return editor;
 };
 
