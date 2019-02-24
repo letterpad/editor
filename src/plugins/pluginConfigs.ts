@@ -14,20 +14,28 @@ import { default as underlineConfig } from "./underline";
 import { default as youtubeConfig } from "./youtube";
 import { PluginConfig } from ".";
 
+/**
+ * Order of displaying in the menubar
+ */
 const pluginConfigs: PluginConfig[] = [
-  ...audioConfig,
-  ...italicConfig,
-  ...autoscrollConfig,
-  ...blockquoteConfig,
   ...boldConfig,
-  ...codeblockConfig,
+  ...italicConfig,
+  ...underlineConfig,
+
   ...headingsConfig,
+
+  ...linkConfig,
   ...highlightConfig,
+  ...blockquoteConfig,
+  ...codeblockConfig,
+
+  ...listConfig,
+
+  // others
+  ...audioConfig,
+  ...autoscrollConfig,
   ...imageConfig,
   ...linebreakConfig,
-  ...linkConfig,
-  ...listConfig,
-  ...underlineConfig,
   ...youtubeConfig
 ];
 
