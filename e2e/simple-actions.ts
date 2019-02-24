@@ -11,3 +11,12 @@ export async function clearEditor(_: EditorHandle): Promise<any> {
   await page.keyboard.press("Delete");
   await page.waitFor(1);
 }
+
+export async function clickXPath(xPath: string): Promise<any> {
+  const featureHandlers = await page.$x(xPath);
+  if (featureHandlers.length < 1) {
+    throw new Error(`Feature Button xpath="${xPath}" not found`);
+  }
+
+  await featureHandlers[0].click();
+}
