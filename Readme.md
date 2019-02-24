@@ -1,5 +1,7 @@
 # Letterpad Editor
 
+[![Build Status](https://travis-ci.com/letterpad/editor.svg?branch=master)](https://travis-ci.com/letterpad/editor)
+
 This editor is an extract from the
 [Letterpad CMS](http://github.com/letterpad/letterpad-cms).
 
