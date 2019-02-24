@@ -65,65 +65,21 @@ const plugins: PluginConfig[] = [
       "puntuation",
       "tag",
       "constant",
-      "selector"
+      "selector",
+      "property",
+      "number",
+      "important",
+      "attr-name",
+      "attr-value"
     ],
     render: ({ next, ...props }: { next: () => {}; [key: string]: any }) => {
       const { attributes, children, mark } = props;
       const className = "prism-token token " + mark.type;
-
-      switch (props.mark.type) {
-        case "comment":
-          return (
-            <span
-              {...attributes}
-              className={className}
-              style={{ opacity: "0.33" }}
-            >
-              {children}
-            </span>
-          );
-        case "keyword":
-          return (
-            <span
-              {...attributes}
-              className={className}
-              style={{ fontWeight: "bold" }}
-            >
-              {children}
-            </span>
-          );
-        case "tag":
-          return (
-            <span
-              {...attributes}
-              className={className}
-              style={{ fontWeight: "bold" }}
-            >
-              {children}
-            </span>
-          );
-        case "punctuation":
-          return (
-            <span
-              {...attributes}
-              className={className}
-              style={{ opacity: "0.75" }}
-            >
-              {children}
-            </span>
-          );
-        case "selector":
-          return (
-            <span
-              {...attributes}
-              className={className}
-              style={{ color: "red" }}
-            >
-              {children}
-            </span>
-          );
-      }
-      return null;
+      return (
+        <span {...attributes} className={className}>
+          {children}
+        </span>
+      );
     }
   }
 ];
