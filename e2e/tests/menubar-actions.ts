@@ -4,13 +4,14 @@ import {
   applyEditorFeatureToSampleText,
   applyEditorFeatureToLine
 } from "../compound-actions";
+import params from "../params";
 
 describe("features", () => {
   let editorHandle: EditorHandle;
 
   beforeAll(async () => {
-    await page.goto("http://localhost:4343");
-    await page.waitForXPath("/html/body/div");
+    await page.goto(params.testServer);
+    await page.waitForXPath("//div[@contenteditable='true']");
     const handle = await page.$('div[contenteditable="true"]');
     editorHandle = handle!;
     await editorHandle.focus();
