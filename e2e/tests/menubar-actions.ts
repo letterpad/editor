@@ -1,5 +1,5 @@
 import { EditorHandle, getHtmlContents } from "../serialize";
-import { clearEditor } from "../simple-actions";
+import { clearEditor, repeatKey, clickXPath } from "../simple-actions";
 import {
   applyEditorFeatureToSampleText,
   applyEditorFeatureToLine
@@ -71,5 +71,26 @@ describe("features", () => {
       "//span[contains(text(), 'format_quote')]"
     );
     expect(await getHtmlContents(editorHandle)).toMatchSnapshot();
+  });
+
+  describe("markdown", () => {
+    test("bold", async () => {
+      await clearEditor(editorHandle);
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'format_bold')]");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      await page.keyboard.type("**foo**");
+      // because this transformation adds an extra space
+      await page.keyboard.press("Backspace");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
   });
 });
