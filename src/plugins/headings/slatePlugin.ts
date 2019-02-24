@@ -3,7 +3,7 @@ import { hasBlock } from "../../helper/strategy";
 import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 
-const types = ["h1", "h1", "h3", "h4", "h5"];
+const types = ["h1", "h2", "h3", "h4", "h5"];
 
 const HeadingsPlugin: PluginConfig["slatePlugin"] = () => ({
   onKeyDown(event, editor, next) {
