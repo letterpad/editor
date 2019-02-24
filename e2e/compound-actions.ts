@@ -1,5 +1,5 @@
 import { EditorHandle } from "./serialize";
-import { clearEditor, repeatKey } from "./simple-actions";
+import { clearEditor, repeatKey, clickXPath } from "./simple-actions";
 
 export async function applyEditorFeatureToLine(
   editorHandle: EditorHandle,
@@ -14,13 +14,7 @@ export async function applyEditorFeatureToLine(
   await page.keyboard.up("Shift");
 
   // find and click
-  const featureHandlers = await page.$x(xPath);
-  if (featureHandlers.length < 1) {
-    throw new Error(`Feature Button xpath="${xPath}" not found`);
-  }
-
-  featureHandlers[0].click();
-  await page.waitFor(50);
+  await clickXPath(xPath);
 }
 
 export async function applyEditorFeatureToSampleText(
@@ -34,14 +28,7 @@ export async function applyEditorFeatureToSampleText(
   await repeatKey("ArrowLeft", 6); // move 6 left
   await page.keyboard.up("Shift");
   await page.waitFor(50);
-
-  const featureHandlers = await page.$x(xPath);
-  if (featureHandlers.length < 1) {
-    throw new Error(`Feature Button xpath="${xPath}" not found`);
-  }
-
-  featureHandlers[0].click();
-  await page.waitFor(50);
+  await clickXPath(xPath);
 }
 
 export async function fillSampleList(editorHandle: EditorHandle) {
