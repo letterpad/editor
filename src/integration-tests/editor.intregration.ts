@@ -3,7 +3,10 @@ import {
   getHtmlContents
 } from "../integration-tests-utils/serialize";
 import { clearEditor } from "../integration-tests-utils/simple-actions";
-import { applyEditorFeatureToSampleText } from "../integration-tests-utils/compound-actions";
+import {
+  applyEditorFeatureToSampleText,
+  applyEditorFeatureToLine
+} from "../integration-tests-utils/compound-actions";
 
 describe("features", () => {
   let editorHandle: EditorHandle;
@@ -43,10 +46,31 @@ describe("features", () => {
     expect(await getHtmlContents(editorHandle)).toMatchSnapshot();
   });
 
-  test.only("underline", async () => {
+  test("underline", async () => {
     await applyEditorFeatureToSampleText(
       editorHandle,
       "//span[contains(text(), 'format_underline')]"
+    );
+    expect(await getHtmlContents(editorHandle)).toMatchSnapshot();
+  });
+
+  test("headings", async () => {
+    await applyEditorFeatureToLine(
+      editorHandle,
+      "//span[contains(text(), 'looks_one')]"
+    );
+    expect(await getHtmlContents(editorHandle)).toMatchSnapshot();
+    await applyEditorFeatureToLine(
+      editorHandle,
+      "//span[contains(text(), 'looks_two')]"
+    );
+    expect(await getHtmlContents(editorHandle)).toMatchSnapshot();
+  });
+
+  test("blockquote", async () => {
+    await applyEditorFeatureToLine(
+      editorHandle,
+      "//span[contains(text(), 'format_quote')]"
     );
     expect(await getHtmlContents(editorHandle)).toMatchSnapshot();
   });

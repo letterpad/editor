@@ -7,6 +7,20 @@ export async function applyEditorFeatureToLine(
 ) {
   await clearEditor(editorHandle);
   await page.keyboard.type("These is a sample line of text");
+
+  // select some text to show the menubar
+  await page.keyboard.down("Shift");
+  await repeatKey("ArrowLeft", 1);
+  await page.keyboard.up("Shift");
+
+  // find and click
+  const featureHandlers = await page.$x(xPath);
+  if (featureHandlers.length < 1) {
+    throw new Error(`Feature Button xpath="${xPath}" not found`);
+  }
+
+  featureHandlers[0].click();
+  await page.waitFor(50);
 }
 
 export async function applyEditorFeatureToSampleText(

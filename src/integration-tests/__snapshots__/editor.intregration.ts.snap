@@ -2,9 +2,15 @@
 
 exports[`features adding some text 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>Hello World!</span></span></span></div></body></html>"`;
 
+exports[`features blockquote 1`] = `"<html><head></head><body><blockquote><span><span><span>These is a sample line of textThese is a sample line of text</span></span></span></blockquote><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;<br></span></span></span></div></body></html>"`;
+
 exports[`features bold 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>This is a </span></span><span><strong><span>sample</span></strong></span><span><span> text</span></span></span></div></body></html>"`;
 
 exports[`features clearing editor 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span><span contenteditable=\\"false\\" style=\\"pointer-events: none; display: inline-block; width: 0px; max-width: 100%; white-space: nowrap; opacity: 0.333;\\">Compose a story..</span><span>&#xFEFF;<br></span></span></span></span></div></body></html>"`;
+
+exports[`features headings 1`] = `"<html><head></head><body><h1><span><span><span>These is a sample line of text</span></span></span></h1><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;<br></span></span></span></div></body></html>"`;
+
+exports[`features headings 2`] = `"<html><head></head><body><h2><span><span><span>These is a sample line of text</span></span></span></h2><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;<br></span></span></span></div></body></html>"`;
 
 exports[`features italics 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>This is a </span></span><span><em><span>sample</span></em></span><span><span> text</span></span></span></div></body></html>"`;
 
