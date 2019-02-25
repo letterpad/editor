@@ -8,6 +8,6 @@ export async function repeatKey(key: string, times: number): Promise<any> {
 
 export async function clearEditor(_: EditorHandle): Promise<any> {
   await page.evaluate(`void window.__letterpadEditor.moveToRangeOfDocument()`);
-  await page.keyboard.press("Delete");
-  await page.waitFor(1);
+  await page.keyboard.press("Backspace");
+  await page.waitFor(5);
 }

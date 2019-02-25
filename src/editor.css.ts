@@ -19,16 +19,6 @@ export const EditorWrapper = styled.div`
     color: #3a3a3a;
   }
 
-  ul {
-    list-style: none;
-    li:before {
-      padding: 0 1rem;
-      font-size: 1rem;
-      content: "⁃";
-      color: #3a3a3a;
-    }
-  }
-
   hr {
     border: none !important;
     margin-top: 52px;
