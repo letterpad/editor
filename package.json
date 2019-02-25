@@ -5,7 +5,7 @@
     "build": "tsc --build tsconfig.build.json",
     "bundle": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server --config=webpack.config.js",
-    "e2e": "jest -c test-utils/puppeteer.config.js",
+    "e2e": "jest --runInBand -c test-utils/puppeteer.config.js",
     "test": "jest -c test-utils/unit.config.js"
   },
   "dependencies": {
