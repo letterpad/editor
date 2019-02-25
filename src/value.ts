@@ -38,7 +38,7 @@ const initialValue: ValueJSON = {
             leaves: [
               {
                 object: "leaf",
-                text: "Letterpad Editor Features"
+                text: "Letterpad"
               }
             ]
           }

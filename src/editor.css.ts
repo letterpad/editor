@@ -5,6 +5,14 @@ export const EditorWrapper = styled.div`
   font-weight: 200;
   font-style: normal;
   font-family: "Roboto", sans-serif;
+  text-rendering: optimizeLegibility;
+  color: #1a1a1a;
+
+  * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
 
   padding: 2rem;
   line-height: 1.625;
@@ -13,10 +21,17 @@ export const EditorWrapper = styled.div`
     font-family: "Raleway", "Lucida Sans", "Lucida Sans Regular",
       "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     font-weight: 200;
-    font-size: 3.25rem;
-    line-height: 1rem;
-    margin-top: 3.25rem;
+    font-size: 3.5rem;
+    text-rendering: optimizeLegibility;
+    line-height: 1;
+    margin-top: 3.5rem;
     color: #3a3a3a;
+    border-bottom: solid 1px #3a3a3a;
+  }
+
+  ul,
+  ol {
+    margin: 2em 0;
   }
 
   hr {
