@@ -6,7 +6,7 @@ module.exports = {
   entry: "./index.js",
   output: {
     path: __dirname + "/bundles",
-    publicPath: "/",
+    publicPath: "/bundles/",
     filename: "bundle.js"
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
