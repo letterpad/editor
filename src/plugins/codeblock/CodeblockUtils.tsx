@@ -1,7 +1,7 @@
 import Prism from "prismjs";
 import { Block, Range, Editor, Point, Node, Text } from "slate";
 import { isMod } from "../../helper/keyboard-event";
-import { getCodeBlockParent } from "../../helper/util";
+import { getCodeBlockParent, getAllDecorations } from "../../helper/util";
 import { Plugin } from "slate-react";
 
 export const applyCodeblock = (editor: Editor) => {
@@ -48,64 +48,6 @@ export function isTextNode(node: Node): node is Text {
   return false;
 }
 
-const getAllDecorations = (tokens: any, texts: any): [] => {
-  const decorations: any = [];
-  let startText = texts.shift();
-
-  const setDecoration = (tokens: any): void => {
-    let startOffset = 0;
-    let endOffset = 0;
-    let start = 0;
-    let endText = startText;
-    for (const token of tokens) {
-      startText = endText;
-      startOffset = endOffset;
-      if (startText == null) break;
-
-      const content = getContent(token);
-      const length = content.length;
-      const end = start + length;
-
-      let available = startText.text.length - startOffset;
-      let remaining = length;
-
-      endOffset = startOffset + remaining;
-      while (available <= remaining && texts.length > 0) {
-        endText = texts.shift();
-        if (endText == null) break;
-
-        remaining = length - available;
-        available = endText.text.length;
-        endOffset = remaining;
-      }
-      if (typeof token === "object" && token.type === "tag") {
-        setDecoration(token.content);
-      }
-
-      if (typeof token != "string" && endText != null && token.type !== "tag") {
-        const dec = {
-          anchor: {
-            key: startText.key,
-            offset: startOffset
-          },
-          focus: {
-            key: endText.key,
-            offset: endOffset
-          },
-          mark: {
-            type: token.type
-          }
-        };
-        decorations.push(dec);
-      }
-
-      start = end;
-    }
-  };
-  setDecoration(tokens);
-
-  return decorations;
-};
 export const decorateNode: Plugin["decorateNode"] = (
   document,
   editor,
@@ -262,22 +204,3 @@ export const handleCommandAInCodeBlock = (event: Event, change: Editor) => {
   event.preventDefault();
   return true;
 };
-
-/**
- * A helper function to return the content of a Prism `token`.
- *
- * @param {Object} token
- * @return {String}
- */
-
-function getContent(token: string | Prism.Token): string {
-  if (typeof token == "string") {
-    return token;
-  } else if (typeof token.content == "string") {
-    return token.content;
-  } else if (Array.isArray(token.content)) {
-    return token.content.map(getContent).join("");
-  } else {
-    return getContent(token);
-  }
-}
