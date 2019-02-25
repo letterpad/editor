@@ -5,7 +5,6 @@ const fs = require("fs");
 const path = require("path");
 
 const app = http.createServer(async (req, res) => {
-  console.log("req.url :", req.url);
   switch (req.url) {
     case "/":
       res.setHeader("Content-Type", "text/html");
