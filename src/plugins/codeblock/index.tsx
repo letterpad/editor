@@ -63,7 +63,6 @@ const plugins: PluginConfig[] = [
       "comment",
       "keyword",
       "puntuation",
-      "tag",
       "constant",
       "selector",
       "property",
@@ -75,7 +74,6 @@ const plugins: PluginConfig[] = [
     render: ({ next, ...props }: { next: () => {}; [key: string]: any }) => {
       const { attributes, children, mark } = props;
       const className = "prism-token token " + mark.type;
-      console.log(className);
       return (
         <span {...attributes} className={className}>
           {children}

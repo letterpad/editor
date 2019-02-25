@@ -114,7 +114,7 @@ export const getAllDecorations = (tokens: any, texts: any): [] => {
         setDecoration(token.content);
       }
 
-      if (typeof token != "string" && endText != null && token.type !== "tag") {
+      if (typeof token != "string" && endText != null) {
         const dec = {
           anchor: {
             key: startText.key,
@@ -125,7 +125,7 @@ export const getAllDecorations = (tokens: any, texts: any): [] => {
             offset: endOffset
           },
           mark: {
-            type: token.type
+            type: token.type || "constant"
           }
         };
         decorations.push(dec);
