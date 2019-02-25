@@ -5,18 +5,17 @@ const fs = require("fs");
 const path = require("path");
 
 const app = http.createServer(async (req, res) => {
+  console.log("req.url :", req.url);
   switch (req.url) {
     case "/":
       res.setHeader("Content-Type", "text/html");
       fs.createReadStream(path.join(__dirname, "../index.html")).pipe(res);
       break;
 
-    case "/bundle.js":
+    case "/bundles/bundle.js":
       res.setHeader("Content-Type", "application/javascript");
-    case "/bundle.js.map":
-      fs.createReadStream(path.join(__dirname, "../bundles", req.url)).pipe(
-        res
-      );
+    case "/bundles/bundle.js.map":
+      fs.createReadStream(path.join(__dirname, "../", req.url)).pipe(res);
       break;
   }
 });
