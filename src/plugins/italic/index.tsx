@@ -13,16 +13,16 @@ const ItalicPlugin: PluginConfig["slatePlugin"] = () => {
   return {
     onKeyDown(event, editor, next) {
       if (isKeyboardEvent(event)) {
-        if (!isMod(event) || event.key != "em") return next();
+        if (!isMod(event) || event.key != "i") return next();
         event.preventDefault();
-        applyMarkStrategy(editor, "em");
+        applyMarkStrategy(editor, TAGNAME);
       }
     }
   };
 };
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
-  const text = matched.before[0].replace(/\*/g, "");
+  const text = matched.before[0].replace(/\_/g, "");
 
   return editor
     .insertText(text)

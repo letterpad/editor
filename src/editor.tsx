@@ -9,7 +9,12 @@ import { Component } from "react";
 import AutoReplace from "slate-auto-replace";
 import { Plugin as SlateReactPlugin } from "slate-react";
 import { PluginConfig, pluginConfigs, EditorButton } from "./plugins";
-import { StyledMenu, StyledToolBar, EditorWrapper } from "./editor.css";
+import {
+  StyledMenu,
+  StyledToolBar,
+  EditorWrapper,
+  StyledContent
+} from "./editor.css";
 import { mapPropsToComponents } from "./helper/util";
 import schemaProps from "./helper/schema";
 import initialValue from "./value";
@@ -134,7 +139,7 @@ export class LetterpadEditor extends Component<
 
     return (
       <>
-        {children}
+        <StyledContent>{children}</StyledContent>
         <StyledMenu ref={this.menuRef} className="menu hover-menu">
           {mapPropsToComponents(this.state.menuButtons, {
             ...data,
