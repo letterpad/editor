@@ -78,7 +78,7 @@ export const StyledToolBar = styled.div`
   width: 100%;
   left: 0px;
   z-index: 9;
-
+  background: #fff;
   display: flex;
   flex-flow: column-reverse;
   .toolbar-menu {
@@ -137,4 +137,8 @@ export const StyledMenu = styled.div`
       padding: 2px;
     }
   }
+`;
+
+export const StyledContent = styled.div`
+  padding-bottom: 120px;
 `;

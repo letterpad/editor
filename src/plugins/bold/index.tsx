@@ -7,15 +7,17 @@ import { isKeyboardEvent } from "../../helper/events";
 import { isMod } from "../../helper/keyboard-event";
 import { applyMarkStrategy } from "../../helper/strategy";
 
+const TAGNAME = "strong";
+
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const text = matched.before[0].replace(/\*/g, "");
 
   return editor
     .insertText(text)
     .moveFocusBackward(text.length)
-    .addMark("strong")
+    .addMark(TAGNAME)
     .moveFocusForward(text.length)
-    .removeMark("strong")
+    .removeMark(TAGNAME)
     .insertText(" ");
 };
 
@@ -25,7 +27,7 @@ const BoldPlugin: PluginConfig["slatePlugin"] = () => {
       if (isKeyboardEvent(event)) {
         if (!isMod(event) || event.key != "b") return next();
         event.preventDefault();
-        applyMarkStrategy(editor, "b");
+        applyMarkStrategy(editor, TAGNAME);
       }
     }
   };
@@ -38,7 +40,7 @@ const boldConfig: PluginConfig[] = [
     menuButtons: [{ button: BoldButton }],
     toolbarButtons: [],
     render: BoldMark,
-    identifier: ["strong"],
+    identifier: [TAGNAME],
     slatePlugin: BoldPlugin,
     markdown: {
       trigger: "*",
@@ -48,7 +50,7 @@ const boldConfig: PluginConfig[] = [
     rules: {
       deserialize(el, next) {
         const type = el.tagName.toLowerCase();
-        if (type === "strong") {
+        if (type === TAGNAME) {
           return {
             object: "mark",
             type: type,
