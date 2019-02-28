@@ -14,7 +14,6 @@ export async function clearEditor(_: EditorHandle): Promise<any> {
 
 export async function clickXPath(xPath: string): Promise<any> {
   const featureHandlers = await page.$x(xPath);
-  console.log("featureHandlers :", featureHandlers);
   if (featureHandlers.length < 1) {
     throw new Error(`Feature Button xpath="${xPath}" not found`);
   }
