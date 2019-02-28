@@ -92,5 +92,93 @@ describe("features", () => {
 
       expect(expected).toBe(actual);
     });
+
+    test("italic", async () => {
+      await clearEditor(editorHandle);
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'format_italic')]");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      await page.keyboard.type("__foo__");
+      // because this transformation adds an extra space
+      await page.keyboard.press("Backspace");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
+
+    test("blockquote", async () => {
+      await clearEditor(editorHandle);
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length - 2);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'format_quote')]");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      await page.keyboard.type("> foo");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
+
+    test("heading", async () => {
+      await clearEditor(editorHandle);
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length - 2);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'looks_one')]");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      await page.keyboard.type("# foo");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
+
+    test.only("bullet-list", async () => {
+      await clearEditor(editorHandle);
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length - 2);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'format_list_bulleted')]");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      await page.keyboard.type("- foo");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
+
+    test.only("link", async () => {
+      await clearEditor(editorHandle);
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length - 2);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'link')]");
+
+      await page.waitFor(1000);
+      await page.keyboard.type("http://www.letterpad.com");
+      await page.keyboard.press("Backspace");
+
+      const actual = await getHtmlContents(editorHandle);
+
+      expect(actual).toMatchInlineSnapshot();
+    });
   });
 });
