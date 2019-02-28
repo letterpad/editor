@@ -163,45 +163,69 @@ describe("features", () => {
       expect(expected).toBe(actual);
     });
 
-    // test.only("link", async () => {
-    //   await clearEditor(editorHandle);
-    //   const text = "foo";
-    //   await page.keyboard.type(text);
-    //   await page.keyboard.down("Shift");
-    //   await repeatKey("ArrowLeft", text.length - 2);
-    //   await page.keyboard.up("Shift");
-    //   await clickXPath("//span[contains(text(), 'link')]");
-
-    //   await page.waitFor(1000);
-    //   await page.keyboard.type("http://www.letterpad.com");
-    //   await page.keyboard.press("Backspace");
-
-    //   const actual = await getHtmlContents(editorHandle);
-
-    //   expect(actual).toMatchInlineSnapshot();
-    // });
-
-    test("audio", async () => {
+    test("link", async () => {
       await clearEditor(editorHandle);
-      const text = "[audio=http://a.com/a.mp3]";
+      page.evaluate(() => {
+        window.prompt = () => "http://google.com";
+      });
+      const text = "foo";
       await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'link')]");
+
+      await page.waitFor(1000);
 
       const actual = await getHtmlContents(editorHandle);
 
       expect(actual).toMatchSnapshot();
+    });
+
+    test("audio", async () => {
+      await clearEditor(editorHandle);
+      const text = "[audio=http://localhost/embed/link]";
+      await page.keyboard.type(text);
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      page.evaluate(() => {
+        window.prompt = () => "http://localhost/embed/link";
+      });
+      await clickXPath("//span[contains(text(), 'queue_music')]");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
     });
 
     test("youtube", async () => {
       await clearEditor(editorHandle);
-      const text = "[youtube=http://a.com/a.mp3]";
+      const text = "[youtube=http://youtube.com/embed/link]";
       await page.keyboard.type(text);
-
       const actual = await getHtmlContents(editorHandle);
 
-      expect(actual).toMatchSnapshot();
+      await clearEditor(editorHandle);
+      page.evaluate(() => {
+        window.prompt = () => "http://youtube.com/embed/link";
+      });
+      await clickXPath("//span[contains(text(), 'music_video')]");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
     });
 
-    test.only("separator", async () => {
+    test.only("image", async () => {
+      await clearEditor(editorHandle);
+      page.evaluate(() => {
+        window.prompt = () => "http://a.com/a.jpg";
+      });
+      await clickXPath("//span[contains(text(), 'image')]");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toMatchSnapshot();
+    });
+
+    test("separator", async () => {
       await clearEditor(editorHandle);
 
       await clickXPath("//span[contains(text(), 'more_horiz')]");
