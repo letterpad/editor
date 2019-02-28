@@ -17,9 +17,6 @@ const ImageNode: SFC<{
   return (
     <div>
       <img src={node.data.get("src")} {...attributes} />
-      <div>
-        <small>dsac</small>
-      </div>
     </div>
   );
 };

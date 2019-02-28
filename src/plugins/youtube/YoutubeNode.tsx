@@ -10,7 +10,6 @@ const YoutubeNode: SFC<{
   return (
     <iframe
       {...attributes}
-      id="ytplayer"
       type="text/html"
       width="640"
       height="360"

@@ -2,16 +2,23 @@ import React from "react";
 import { applyYoutube } from "./YoutubeUtils";
 import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
-import { EditorButtonComponent } from "..";
+import { Editor } from "slate";
 
-const YoutubeButton: EditorButtonComponent = ({ editor, callbacks }) => {
+const YoutubeButton = ({
+  editor,
+  callbacks
+}: {
+  editor: Editor;
+  callbacks: { [key: string]: (...args: any[]) => any };
+}) => {
   if (!editor) return <span />;
+
   const type = "iframe";
 
   return (
     <Button
       isActive={hasBlock(editor.value, type)}
-      icon="queue_music"
+      icon="music_video"
       onMouseDown={e => {
         callbacks.onButtonClick(e, type);
         e.preventDefault();

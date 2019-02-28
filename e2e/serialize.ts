@@ -17,7 +17,6 @@ export async function getHtmlContents(handle: EditorHandle): Promise<string> {
       }
     }
   }
-
   return cHtml.html();
 }
 
