@@ -151,7 +151,13 @@ export class LetterpadEditor extends Component<
         </StyledMenu>
         <StyledToolBar>
           <div className="menu toolbar-menu">
-            {mapPropsToComponents(this.state.toolbarButtons, data)}
+            {mapPropsToComponents(this.state.toolbarButtons, {
+              ...data,
+              callbacks: {
+                onBeforeRender: this.props.onBeforeRender,
+                onButtonClick: this.props.onButtonClick
+              }
+            })}
           </div>
         </StyledToolBar>
       </>

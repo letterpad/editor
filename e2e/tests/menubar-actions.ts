@@ -146,7 +146,7 @@ describe("features", () => {
       expect(expected).toBe(actual);
     });
 
-    test.only("bullet-list", async () => {
+    test("bullet-list", async () => {
       await clearEditor(editorHandle);
       const text = "foo";
       await page.keyboard.type(text);
@@ -163,22 +163,50 @@ describe("features", () => {
       expect(expected).toBe(actual);
     });
 
-    test.only("link", async () => {
-      await clearEditor(editorHandle);
-      const text = "foo";
-      await page.keyboard.type(text);
-      await page.keyboard.down("Shift");
-      await repeatKey("ArrowLeft", text.length - 2);
-      await page.keyboard.up("Shift");
-      await clickXPath("//span[contains(text(), 'link')]");
+    // test.only("link", async () => {
+    //   await clearEditor(editorHandle);
+    //   const text = "foo";
+    //   await page.keyboard.type(text);
+    //   await page.keyboard.down("Shift");
+    //   await repeatKey("ArrowLeft", text.length - 2);
+    //   await page.keyboard.up("Shift");
+    //   await clickXPath("//span[contains(text(), 'link')]");
 
-      await page.waitFor(1000);
-      await page.keyboard.type("http://www.letterpad.com");
-      await page.keyboard.press("Backspace");
+    //   await page.waitFor(1000);
+    //   await page.keyboard.type("http://www.letterpad.com");
+    //   await page.keyboard.press("Backspace");
+
+    //   const actual = await getHtmlContents(editorHandle);
+
+    //   expect(actual).toMatchInlineSnapshot();
+    // });
+
+    test("audio", async () => {
+      await clearEditor(editorHandle);
+      const text = "[audio=http://a.com/a.mp3]";
+      await page.keyboard.type(text);
 
       const actual = await getHtmlContents(editorHandle);
 
-      expect(actual).toMatchInlineSnapshot();
+      expect(actual).toMatchSnapshot();
+    });
+
+    test("youtube", async () => {
+      await clearEditor(editorHandle);
+      const text = "[youtube=http://a.com/a.mp3]";
+      await page.keyboard.type(text);
+
+      const actual = await getHtmlContents(editorHandle);
+
+      expect(actual).toMatchSnapshot();
+    });
+
+    test.only("separator", async () => {
+      await clearEditor(editorHandle);
+
+      await clickXPath("//span[contains(text(), 'more_horiz')]");
+      const actual = await getHtmlContents(editorHandle);
+      expect(actual).toMatchSnapshot();
     });
   });
 });
