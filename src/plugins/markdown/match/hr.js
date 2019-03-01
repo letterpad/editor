@@ -3,7 +3,7 @@ export default (type, currentTextNode, change) => {
     .removeNodeByKey(currentTextNode.key)
     .insertBlock({
       type,
-      isVoid: true,
+      isVoid: true
     })
     .collapseToStartOfNextBlock();
 };

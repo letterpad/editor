@@ -10,16 +10,16 @@ export default (type, currentTextNode, matched, change) => {
         anchorKey: currentTextNode.key,
         focusKey: currentTextNode.key,
         anchorOffset: matched.index,
-        focusOffset: matched.index + matchedLength,
-      }),
+        focusOffset: matched.index + matchedLength
+      })
     )
-    .call(trailingSpace, currentTextNode, matched.index)
+    .command(trailingSpace, currentTextNode, matched.index)
     .insertText(matched[1])
     .extend(0 - matched[1].length)
     .wrapInline({
       type,
-      data: { href: matched[2] },
+      data: { href: matched[2] }
     })
     .collapseToEnd()
-    .call(trailingSpace, currentTextNode, matched.index);
+    .command(trailingSpace, currentTextNode, matched.index);
 };
