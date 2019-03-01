@@ -1,15 +1,13 @@
 import {
   insertNewLineBeforeCodeBlock,
-  deleteNewLineBeforeCodeBlock,
-  isPrintableKeycode,
   preserveIndentationForCodeBlock,
   unindentClosingBlocks,
-  handleCommandAInCodeBlock,
-  getCodeBlockParent
+  handleCommandAInCodeBlock
 } from "./CodeblockUtils";
 import { isMod } from "../../helper/keyboard-event";
 import { Editor } from "slate";
 import { isKeyboardEvent } from "../../helper/events";
+import { isPrintableKeycode, getCodeBlockParent } from "../../helper/util";
 
 /* eslint-disable react/prop-types */
 const codeblockKeyboardShortcut = (
@@ -32,7 +30,7 @@ const codeblockKeyboardShortcut = (
     return next();
   }
 
-  if (!getCodeBlockParent(value)) return next();
+  if (!getCodeBlockParent(value, "pre")) return next();
 
   switch (event.key) {
     case "Enter":
@@ -41,12 +39,6 @@ const codeblockKeyboardShortcut = (
         if (done) return next();
       }
       return preserveIndentationForCodeBlock(editor);
-
-    case "Backspace":
-      if ((value as any).startOffset === 0) {
-        return deleteNewLineBeforeCodeBlock(editor);
-      }
-      break;
 
     case "Tab":
       event.preventDefault();

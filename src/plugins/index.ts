@@ -1,10 +1,48 @@
-import AutoReplace, { AutoReplaceParams } from "slate-auto-replace";
-import { Plugin } from "slate-react";
-import pluginConfigs from "./pluginConfigs";
-
 import { ComponentType } from "react";
+import { AutoReplaceParams } from "slate-auto-replace";
+import { Plugin } from "slate-react";
+
 import { Editor } from "slate";
 import { Rule } from "slate-html-serializer";
+import { default as audioConfig } from "./audio";
+import { default as autoscrollConfig } from "./autoscroll";
+import { default as blockquoteConfig } from "./blockquote";
+import { default as boldConfig } from "./bold";
+import { default as codeblockConfig } from "./codeblock";
+import { default as headingsConfig } from "./headings";
+import { default as highlightConfig } from "./highlight";
+import { default as imageConfig } from "./image";
+import { default as italicConfig } from "./italic";
+import { default as linebreakConfig } from "./linebreak";
+import { default as linkConfig } from "./link";
+import { default as listConfig } from "./list";
+import { default as underlineConfig } from "./underline";
+import { default as youtubeConfig } from "./youtube";
+
+/**
+ * Order of displaying in the menubar
+ */
+const pluginConfigs: PluginConfig[] = [
+  ...codeblockConfig,
+
+  ...boldConfig,
+  ...italicConfig,
+  ...underlineConfig,
+
+  ...headingsConfig,
+
+  ...linkConfig,
+  ...highlightConfig,
+  ...blockquoteConfig,
+  ...listConfig,
+
+  // others
+  ...audioConfig,
+  ...autoscrollConfig,
+  ...imageConfig,
+  ...linebreakConfig,
+  ...youtubeConfig
+];
 
 export interface EditorEventHandler {
   (event: Event, editor: Editor, next: () => any): any;
@@ -31,7 +69,7 @@ export interface PluginConfig {
   identifier?: string[];
   menuButtons?: EditorButton[];
   toolbarButtons?: EditorButton[];
-
+  render?: any;
   slatePlugin?: (options?: Plugin) => Plugin;
   markdown?: AutoReplaceParams;
 
@@ -43,10 +81,7 @@ export interface PluginOptions {
   [key: string]: any;
 }
 
-const menuButtons: EditorButton[] = [];
-const toolbarButtons: EditorButton[] = [];
-
-interface PluginsMap {
+export interface PluginsMap {
   node: {
     [key: string]: {
       plugin: PluginConfig;
@@ -67,67 +102,4 @@ interface PluginsMap {
   };
 }
 
-const pluginsMap: PluginsMap = {
-  node: {},
-  mark: {},
-  inline: {}
-};
-
-// Apply plugins
-const plugins: Plugin[] = [
-  // PluginPrism({
-  //     onlyIn: node => node.type === "code_block",
-  //     getSyntax: node => node.data.get("syntax")
-  // }),
-];
-
-pluginConfigs.forEach(plugin => {
-  // collect menu buttons
-  if (plugin.menuButtons != null) {
-    plugin.menuButtons.forEach(b => menuButtons.push(b));
-  }
-
-  // collect toolbar buttons
-  if (plugin.toolbarButtons != null) {
-    plugin.toolbarButtons.forEach(b => toolbarButtons.push(b));
-  }
-
-  // execute main if available
-  if (plugin.slatePlugin) {
-    plugins.push(plugin.slatePlugin());
-  }
-
-  // render markdown if available
-  if (plugin.markdown) {
-    plugins.push(AutoReplace(plugin.markdown));
-  }
-
-  /**
-   * create a map of plugins so that its easy to identify based on node/mark
-   * {
-   *   mark: {
-   *     bold: {
-   *       is: "b",
-   *       plugin: { ...config }
-   *   }
-   *   },
-   *   node: {
-   *      blockquote: {
-   *        is: "blockquote",
-   *        plugin: { ...config }
-   *      }
-   *   }
-   * }
-   */
-  let { identifier, tag } = plugin;
-  if (identifier != null && tag != null) {
-    identifier.forEach(id => {
-      pluginsMap[tag as keyof PluginsMap][id] = {
-        plugin,
-        is: id
-      };
-    });
-  }
-});
-console.log("menuButtons :", menuButtons);
-export { pluginConfigs, pluginsMap, menuButtons, toolbarButtons, plugins };
+export { pluginConfigs };

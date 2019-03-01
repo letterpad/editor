@@ -14,12 +14,12 @@ const imageConfig: PluginConfig[] = [
     ],
     render: ImageNode,
     identifier: ["img"],
-    slatePlugin: ImagePlugin
-    // markdown: {
-    //     trigger: "space",
-    //     before: /^(>)$/,
-    //     change: change => change.setBlocks("blockquote")
-    // }
+    slatePlugin: ImagePlugin,
+    markdown: {
+      trigger: "space",
+      before: /^(>)$/,
+      change: change => change.setBlocks("blockquote")
+    }
   }
 ];
 
