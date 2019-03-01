@@ -5,10 +5,7 @@ import { pluginConfigs } from "../plugins";
 const rules: Rule[] = [
   {
     deserialize(el, next) {
-      if (
-        el.tagName.toLowerCase() == "p" ||
-        el.tagName.toLowerCase() == "div"
-      ) {
+      if (el.tagName.toLowerCase() == "p") {
         return {
           object: "block",
           type: "paragraph",

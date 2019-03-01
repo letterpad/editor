@@ -59,7 +59,7 @@ export const decorateNode: Plugin["decorateNode"] = (
   const { type } = node;
   if (type != "pre") return others;
 
-  const language = node.data.get("language");
+  const language = node.data.get("language") || "js";
 
   const texts = node.getTexts().toArray();
   const string = texts.map(t => t.text).join("\n");

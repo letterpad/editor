@@ -120,7 +120,10 @@ export class LetterpadEditor extends Component<
       return (event: any) => {
         if (this.editor) {
           const node = this.editor.value.fragment.nodes.first();
-          console.log(node.type);
+          const plugin = this.state.pluginsMap.node[node.type];
+          if (plugin && plugin.plugin.allowChildTransform === false) {
+            return false;
+          }
         }
         return isHotkey(originalTrigger)(event);
       };
@@ -133,7 +136,7 @@ export class LetterpadEditor extends Component<
       const node = value.fragment.nodes.first();
       const plugin = this.state.pluginsMap.node[node.type];
       if (plugin) {
-        if (plugin.plugin.displayMenu === false) {
+        if (plugin.plugin.allowChildTransform === false) {
           if (this.menuRef && this.menuRef.current) {
             this.menuRef.current.removeAttribute("style");
             return;
@@ -145,7 +148,7 @@ export class LetterpadEditor extends Component<
       const mark = value.activeMarks.first();
       const plugin = this.state.pluginsMap.mark[mark.type];
       if (plugin) {
-        if (plugin.plugin.displayMenu === false) {
+        if (plugin.plugin.allowChildTransform === false) {
           if (this.menuRef && this.menuRef.current) {
             this.menuRef.current.removeAttribute("style");
             return;

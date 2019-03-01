@@ -64,7 +64,7 @@ export interface EditorButton<P = any> {
 
 export interface PluginConfig {
   type: string;
-
+  allowChildTransform?: boolean;
   tag?: string;
   identifier?: string[];
   menuButtons?: EditorButton[];

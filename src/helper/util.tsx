@@ -29,10 +29,10 @@ export const getAttributesFromNode = (node: Block) => {
   const attrs: { [key: string]: string } = {};
   node.data.map((value, attr) => {
     if (typeof attr === "string") {
-      if (attr === "style") {
-        value = convertStyleToObject(value);
+      if (attr !== "style") {
+        // value = convertStyleToObject(value);
+        attrs[attr] = value;
       }
-      attrs[attr] = value;
     }
   });
   return attrs;

@@ -36,7 +36,7 @@ const plugins: PluginConfig[] = [
   {
     type: "block",
     tag: "node",
-    displayMenu: false,
+    allowChildTransform: false,
     menuButtons: [
       {
         button: CodeblockButton
@@ -69,6 +69,25 @@ const plugins: PluginConfig[] = [
             nodes: next(childNodes)
           };
         }
+        let parentElement = el.parentElement;
+
+        do {
+          console.log(
+            "(parentElement as any).tagName :",
+            (parentElement as any).tagName
+          );
+          if ((parentElement as any).tagName === "PRE") {
+            return {
+              object: "text",
+              leaves: [
+                {
+                  object: "leaf",
+                  text: (el as any).innerText
+                }
+              ]
+            };
+          }
+        } while ((parentElement = (parentElement as any).parentElement));
       }
     }
   },
@@ -87,7 +106,9 @@ const plugins: PluginConfig[] = [
       "number",
       "important",
       "attr-name",
-      "attr-value"
+      "attr-value",
+      "function",
+      "string"
     ],
     render: ({ next, ...props }: { next: () => {}; [key: string]: any }) => {
       const { attributes, children, mark } = props;

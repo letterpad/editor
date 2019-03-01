@@ -42,7 +42,7 @@ const boldConfig: PluginConfig[] = [
     render: BoldMark,
     identifier: [TAGNAME],
     slatePlugin: BoldPlugin,
-    displayMenu: false,
+    allowChildTransform: false,
     markdown: {
       trigger: "*",
       before: /(\*\*)(.*?)(\*)/,
