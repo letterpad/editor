@@ -8,7 +8,12 @@ import {
 import { Component } from "react";
 import AutoReplace from "slate-auto-replace";
 import { Plugin as SlateReactPlugin } from "slate-react";
-import { PluginConfig, pluginConfigs, EditorButton } from "./plugins";
+import {
+  PluginConfig,
+  pluginConfigs,
+  EditorButton,
+  PluginsMap
+} from "./plugins";
 import {
   StyledMenu,
   StyledToolBar,
@@ -35,6 +40,7 @@ interface LetterpadEditorState {
   menuButtons: EditorButton[];
   toolbarButtons: EditorButton[];
   slateReactPlugins: SlateReactPlugin[];
+  pluginsMap: PluginsMap;
   value: Value;
 }
 
@@ -48,6 +54,11 @@ function getInitialState(
   const menuButtons: LetterpadEditorState["menuButtons"] = [];
   const toolbarButtons: LetterpadEditorState["toolbarButtons"] = [];
   const slateReactPlugins: LetterpadEditorState["slateReactPlugins"] = [];
+  const pluginsMap: LetterpadEditorState["pluginsMap"] = {
+    node: {},
+    mark: {},
+    inline: {}
+  };
 
   // Collect all necessary things
   for (const pluginConfig of pluginConfigs) {
@@ -74,12 +85,23 @@ function getInitialState(
       };
       slateReactPlugins.push(AutoReplace(opts));
     }
+
+    let { identifier, tag } = pluginConfig;
+    if (identifier != null && tag != null) {
+      identifier.forEach(id => {
+        pluginsMap[tag as keyof PluginsMap][id] = {
+          plugin: pluginConfig,
+          is: id
+        };
+      });
+    }
   }
 
   return {
     menuButtons,
     toolbarButtons,
     slateReactPlugins,
+    pluginsMap,
     value: Value.fromJSON(initialValue)
   };
 }
@@ -107,14 +129,43 @@ export class LetterpadEditor extends Component<
 
   onChange = ({ value }: { value: Value }) => {
     this.setState({ value });
+    if (value.fragment.nodes.size > 0) {
+      const node = value.fragment.nodes.first();
+      const plugin = this.state.pluginsMap.node[node.type];
+      if (plugin) {
+        if (plugin.plugin.displayMenu === false) {
+          if (this.menuRef && this.menuRef.current) {
+            this.menuRef.current.removeAttribute("style");
+            return;
+          }
+        }
+      }
+    }
+    if (value.activeMarks.size > 0) {
+      const mark = value.activeMarks.first();
+      const plugin = this.state.pluginsMap.mark[mark.type];
+      if (plugin) {
+        if (plugin.plugin.displayMenu === false) {
+          if (this.menuRef && this.menuRef.current) {
+            this.menuRef.current.removeAttribute("style");
+            return;
+          }
+        }
+      }
+    }
   };
 
   onPaste: EventHook = (event, editor, next) => {
     scrollToCursor();
     const transfer = getEventTransfer(event);
     if (transfer.type != "html") return next();
+
+    // remove style attr
+    const REMOVE_STYLE_ATTR = /style="[^\"]*"/gi;
+    const html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
+
     // TODO: fix the transfer as any
-    const { document } = this.html.deserialize((transfer as any).html);
+    const { document } = this.html.deserialize(html);
     editor.insertFragment(document);
   };
 
@@ -155,6 +206,10 @@ export class LetterpadEditor extends Component<
       editor,
       next
     };
+    const callbacks = {
+      onBeforeRender: this.props.onBeforeRender,
+      onButtonClick: this.props.onButtonClick
+    };
 
     return (
       <>
@@ -162,20 +217,14 @@ export class LetterpadEditor extends Component<
         <StyledMenu ref={this.menuRef} className="menu hover-menu">
           {mapPropsToComponents(this.state.menuButtons, {
             ...data,
-            callbacks: {
-              onBeforeRender: this.props.onBeforeRender,
-              onButtonClick: this.props.onButtonClick
-            }
+            callbacks
           })}
         </StyledMenu>
         <StyledToolBar>
           <div className="menu toolbar-menu">
             {mapPropsToComponents(this.state.toolbarButtons, {
               ...data,
-              callbacks: {
-                onBeforeRender: this.props.onBeforeRender,
-                onButtonClick: this.props.onButtonClick
-              }
+              callbacks
             })}
           </div>
         </StyledToolBar>
@@ -188,7 +237,6 @@ export class LetterpadEditor extends Component<
       onBeforeRender: this.props.onBeforeRender,
       onButtonClick: this.props.onButtonClick
     };
-
     return (
       <EditorWrapper>
         <SlateReactEditor
@@ -197,8 +245,22 @@ export class LetterpadEditor extends Component<
           value={this.state.value}
           onChange={this.onChange}
           onPaste={this.onPaste}
-          renderNode={(p, _, n) => renderNode(p, n, eventHandlers)}
-          renderMark={(p, _, n) => renderMark(p, n, eventHandlers)}
+          renderNode={(props, _, next) =>
+            renderNode({
+              props,
+              next,
+              callbacks: eventHandlers,
+              pluginsMap: this.state.pluginsMap
+            })
+          }
+          renderMark={(props, _, next) =>
+            renderMark({
+              props,
+              next,
+              callbacks: eventHandlers,
+              pluginsMap: this.state.pluginsMap
+            })
+          }
           renderEditor={this.renderEditor}
           decorateNode={decorateNode}
           placeholder="Compose a story.."

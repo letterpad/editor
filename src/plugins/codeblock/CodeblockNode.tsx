@@ -33,31 +33,34 @@ class CodeblockNode extends Component<{
   state = {
     language:
       (!isTextNode(this.props.node) && this.props.node.data.get("language")) ||
-      "javascript"
+      "js"
   };
 
   onChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { node, editor } = this.props;
     this.setState({ language: event.target && event.target.value });
     editor.setNodeByKey(node.key, {
-      type: "",
       data: {
         language: event.target.value
-      } as any
-    });
+      }
+    } as any);
   };
 
   render() {
     const { attributes, children } = this.props;
     return (
       <CodeblockContainer>
-        <pre className="prism-dark" {...attributes} data-language="javascript">
+        <pre
+          className="prism-dark"
+          {...attributes}
+          data-language={this.state.language}
+        >
           {children}
         </pre>
         <CodeblockLang contentEditable={false}>
           <select value={this.state.language} onChange={this.onChange}>
             <option value="css">CSS</option>
-            <option value="javascript">JavaScript</option>
+            <option value="js">JavaScript</option>
             <option value="html">HTML</option>
           </select>
         </CodeblockLang>

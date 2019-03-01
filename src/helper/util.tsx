@@ -1,6 +1,6 @@
 import React from "react";
 import { EditorButton } from "../plugins";
-import { Block } from "slate";
+import { Block, Value } from "slate";
 
 export const mapPropsToComponents = (
   componentList: EditorButton[],
@@ -36,4 +36,105 @@ export const getAttributesFromNode = (node: Block) => {
     }
   });
   return attrs;
+};
+
+export const getCodeBlockParent = (value: Value, tagName: string) => {
+  let parentNode = value.anchorBlock;
+  do {
+    if (parentNode.type === tagName) {
+      return parentNode;
+    }
+  } while (((parentNode as any) = value.document.getParent(parentNode.key)));
+
+  return null;
+};
+
+export const isPrintableKeycode = (keycode: number) => {
+  return (
+    (keycode > 47 && keycode < 58) || // number keys
+    keycode == 32 ||
+    keycode == 13 || // spacebar & return key(s) (if you want to allow carriage returns)
+    (keycode > 64 && keycode < 91) || // letter keys
+    (keycode > 95 && keycode < 112) || // numpad keys
+    (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
+    (keycode > 218 && keycode < 223)
+  ); // [\]' (in order)
+};
+
+/**
+ * A helper function to return the content of a Prism `token`.
+ *
+ * @param {Object} token
+ * @return {String}
+ */
+
+function getContent(token: string | Prism.Token): string {
+  if (typeof token == "string") {
+    return token;
+  } else if (typeof token.content == "string") {
+    return token.content;
+  } else if (Array.isArray(token.content)) {
+    return token.content.map(getContent).join("");
+  } else {
+    return getContent(token);
+  }
+}
+
+export const getAllDecorations = (tokens: any, texts: any): [] => {
+  const decorations: any = [];
+  let startText = texts.shift();
+
+  const setDecoration = (tokens: any): void => {
+    let startOffset = 0;
+    let endOffset = 0;
+    let start = 0;
+    let endText = startText;
+    for (const token of tokens) {
+      startText = endText;
+      startOffset = endOffset;
+      if (startText == null) break;
+
+      const content = getContent(token);
+      const length = content.length;
+      const end = start + length;
+
+      let available = startText.text.length - startOffset;
+      let remaining = length;
+
+      endOffset = startOffset + remaining;
+      while (available <= remaining && texts.length > 0) {
+        endText = texts.shift();
+        if (endText == null) break;
+
+        remaining = length - available;
+        available = endText.text.length;
+        endOffset = remaining;
+      }
+      if (typeof token === "object" && token.type === "tag") {
+        setDecoration(token.content);
+      }
+
+      if (typeof token != "string" && endText != null) {
+        const dec = {
+          anchor: {
+            key: startText.key,
+            offset: startOffset
+          },
+          focus: {
+            key: endText.key,
+            offset: endOffset
+          },
+          mark: {
+            type: token.type || "constant"
+          }
+        };
+        decorations.push(dec);
+      }
+
+      start = end;
+    }
+  };
+  setDecoration(tokens);
+
+  return decorations;
 };

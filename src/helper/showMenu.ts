@@ -6,7 +6,7 @@ const DEFAULT_MARGIN = 5;
 
 export const showMenu = (menu: HTMLElement, value: Value) => {
   const { fragment, selection } = value;
-
+  console.log("fragment :", fragment);
   if (selection.isBlurred || selection.isCollapsed || fragment.text === "") {
     menu.removeAttribute("style");
     return;
