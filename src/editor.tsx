@@ -96,7 +96,10 @@ export class LetterpadEditor extends Component<
   state = getInitialState(pluginConfigs, {
     onTrigger: (originalTrigger: any) => {
       return (event: any) => {
-        console.log(this.editor);
+        if (this.editor) {
+          const node = this.editor.value.fragment.nodes.first();
+          console.log(node.type);
+        }
         return isHotkey(originalTrigger)(event);
       };
     }
