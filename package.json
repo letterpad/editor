@@ -12,6 +12,7 @@
     "classnames": "^2.2.6",
     "exenv": "^1.2.2",
     "immutable": "^4.0.0-rc.12",
+    "is-hotkey": "^0.1.4",
     "jest-puppeteer": "^4.0.0",
     "prismjs": "^1.15.0",
     "react": "^16.7.0",

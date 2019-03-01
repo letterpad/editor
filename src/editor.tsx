@@ -1,5 +1,5 @@
 import React from "react";
-import { Value } from "slate";
+import { Value, Editor } from "slate";
 import {
   Editor as SlateReactEditor,
   EventHook,
@@ -24,6 +24,7 @@ import scrollToCursor from "./helper/scrollToCursor";
 import Html from "slate-html-serializer";
 import { showMenu } from "./helper/showMenu";
 import { getRules } from "./helper/rules";
+import isHotkey from "is-hotkey";
 
 export interface LetterpadEditorProps {
   onButtonClick(e: MouseEvent, type: string): void;
@@ -40,7 +41,10 @@ interface LetterpadEditorState {
 /**
  * Initial state for the Letterpad Editor
  */
-function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
+function getInitialState(
+  pluginConfigs: PluginConfig[],
+  { onTrigger }: { onTrigger: any }
+): LetterpadEditorState {
   const menuButtons: LetterpadEditorState["menuButtons"] = [];
   const toolbarButtons: LetterpadEditorState["toolbarButtons"] = [];
   const slateReactPlugins: LetterpadEditorState["slateReactPlugins"] = [];
@@ -64,7 +68,11 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
 
     // collect slate react plugins from markdown config
     if (pluginConfig.markdown != null) {
-      slateReactPlugins.push(AutoReplace(pluginConfig.markdown));
+      const opts = {
+        ...pluginConfig.markdown,
+        trigger: onTrigger(pluginConfig.markdown.trigger)
+      };
+      slateReactPlugins.push(AutoReplace(opts));
     }
   }
 
@@ -81,11 +89,18 @@ export class LetterpadEditor extends Component<
   LetterpadEditorState
 > {
   private rules = getRules();
-
+  private editor: Editor | undefined;
   private menuRef = React.createRef<HTMLDivElement>();
   private html = new Html({ rules: this.rules });
 
-  state = getInitialState(pluginConfigs);
+  state = getInitialState(pluginConfigs, {
+    onTrigger: (originalTrigger: any) => {
+      return (event: any) => {
+        console.log(this.editor);
+        return isHotkey(originalTrigger)(event);
+      };
+    }
+  });
 
   onChange = ({ value }: { value: Value }) => {
     this.setState({ value });
@@ -130,6 +145,7 @@ export class LetterpadEditor extends Component<
 
   renderEditor: SlateReactPlugin["renderEditor"] = (props, editor, next) => {
     const children = next();
+    this.editor = editor;
 
     const data = {
       props,
