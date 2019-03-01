@@ -61,6 +61,66 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
+        type: "paragraph",
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "paragraph",
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "paragraph",
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "paragraph",
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
         type: "ul",
         nodes: features.map(
           feature =>

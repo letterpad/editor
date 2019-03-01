@@ -73,9 +73,8 @@ export const EditorWrapper = styled.div`
 `;
 
 export const StyledToolBar = styled.div`
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
+  opacity: 0;
+  position: absolute;
   left: 0px;
   z-index: 9;
   background: #fff;
@@ -83,7 +82,6 @@ export const StyledToolBar = styled.div`
   flex-flow: column-reverse;
   .toolbar-menu {
     padding: 8px;
-    box-shadow: 0px -6px 20px rgba(0, 0, 0, 0.42);
     background: var(--bg-base);
     text-align: center;
     user-select: none;
