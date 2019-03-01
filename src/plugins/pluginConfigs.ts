@@ -18,6 +18,8 @@ import { PluginConfig } from ".";
  * Order of displaying in the menubar
  */
 const pluginConfigs: PluginConfig[] = [
+  ...codeblockConfig,
+
   ...boldConfig,
   ...italicConfig,
   ...underlineConfig,
@@ -27,8 +29,6 @@ const pluginConfigs: PluginConfig[] = [
   ...linkConfig,
   ...highlightConfig,
   ...blockquoteConfig,
-  ...codeblockConfig,
-
   ...listConfig,
 
   // others
