@@ -13,13 +13,13 @@ export default (type, currentTextNode, matched, change) => {
         anchorKey: currentTextNode.key,
         focusKey: currentTextNode.key,
         anchorOffset: matched.index,
-        focusOffset: matched.index + matchedLength,
-      }),
+        focusOffset: matched.index + matchedLength
+      })
     )
     .insertTextByKey(currentTextNode.key, matched.index, addText, [
       Mark.create({ type: "bold" }),
-      Mark.create({ type: "italic" }),
+      Mark.create({ type: "italic" })
     ])
-    .call(trailingSpace, currentTextNode, matched.index)
-    .call(removeAllMark);
+    .command(trailingSpace, currentTextNode, matched.index)
+    .command(removeAllMark);
 };

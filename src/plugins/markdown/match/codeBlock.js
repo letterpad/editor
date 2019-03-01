@@ -16,8 +16,8 @@ export default (codeOption, currentTextNode, matched, change, lang) => {
         anchorKey: currentTextNode.key,
         focusKey: currentTextNode.key,
         anchorOffset: matched.index,
-        focusOffset: matched.index + matchedLength,
-      }),
-    ),
+        focusOffset: matched.index + matchedLength
+      })
+    )
   );
 };

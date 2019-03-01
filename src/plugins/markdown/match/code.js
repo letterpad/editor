@@ -13,12 +13,12 @@ export default (type, currentTextNode, matched, change) => {
         anchorOffset: matched.index,
         focusKey: currentTextNode.key,
         focusOffset: matched.index + matchedLength,
-        isBackward: false,
-      }),
+        isBackward: false
+      })
     )
     .insertTextByKey(currentTextNode.key, matched.index, addText, [
-      Mark.create({ type }),
+      Mark.create({ type })
     ])
-    .call(trailingSpace, currentTextNode, matched.index)
-    .call(removeAllMark);
+    .command(trailingSpace, currentTextNode, matched.index)
+    .command(removeAllMark);
 };
