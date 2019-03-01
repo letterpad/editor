@@ -36,6 +36,7 @@ const plugins: PluginConfig[] = [
   {
     type: "block",
     tag: "node",
+    displayMenu: false,
     menuButtons: [
       {
         button: CodeblockButton
@@ -43,7 +44,6 @@ const plugins: PluginConfig[] = [
     ],
     decorator: decorateNode,
     render: (props: any) => {
-      console.log(props.node.type);
       return <CodeblockNode {...props} />;
     },
     identifier: ["pre"],
@@ -52,6 +52,24 @@ const plugins: PluginConfig[] = [
       trigger: "space",
       before: /^```[a-z]/m,
       change: onChange
+    },
+    rules: {
+      // Special case for code blocks, which need to grab the nested childNodes.
+      deserialize(el, next) {
+        if (el.tagName.toLowerCase() == "pre") {
+          const code = el.childNodes[0];
+          const childNodes =
+            code && (code as any).tagName.toLowerCase() == "code"
+              ? code.childNodes
+              : el.childNodes;
+
+          return {
+            object: "block",
+            type: "code",
+            nodes: next(childNodes)
+          };
+        }
+      }
     }
   },
   {

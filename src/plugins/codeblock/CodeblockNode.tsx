@@ -33,7 +33,7 @@ class CodeblockNode extends Component<{
   state = {
     language:
       (!isTextNode(this.props.node) && this.props.node.data.get("language")) ||
-      "javascript"
+      "js"
   };
 
   onChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -60,7 +60,7 @@ class CodeblockNode extends Component<{
         <CodeblockLang contentEditable={false}>
           <select value={this.state.language} onChange={this.onChange}>
             <option value="css">CSS</option>
-            <option value="javascript">JavaScript</option>
+            <option value="js">JavaScript</option>
             <option value="html">HTML</option>
           </select>
         </CodeblockLang>

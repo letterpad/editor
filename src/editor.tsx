@@ -111,14 +111,43 @@ export class LetterpadEditor extends Component<
 
   onChange = ({ value }: { value: Value }) => {
     this.setState({ value });
+    if (value.fragment.nodes.size > 0) {
+      const node = value.fragment.nodes.first();
+      const plugin = this.state.pluginsMap.node[node.type];
+      if (plugin) {
+        if (plugin.plugin.displayMenu === false) {
+          if (this.menuRef && this.menuRef.current) {
+            this.menuRef.current.removeAttribute("style");
+            return;
+          }
+        }
+      }
+    }
+    if (value.activeMarks.size > 0) {
+      const mark = value.activeMarks.first();
+      const plugin = this.state.pluginsMap.mark[mark.type];
+      if (plugin) {
+        if (plugin.plugin.displayMenu === false) {
+          if (this.menuRef && this.menuRef.current) {
+            this.menuRef.current.removeAttribute("style");
+            return;
+          }
+        }
+      }
+    }
   };
 
   onPaste: EventHook = (event, editor, next) => {
     scrollToCursor();
     const transfer = getEventTransfer(event);
     if (transfer.type != "html") return next();
+
+    // remove style attr
+    const REMOVE_STYLE_ATTR = /style="[^\"]*"/gi;
+    const html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
+
     // TODO: fix the transfer as any
-    const { document } = this.html.deserialize((transfer as any).html);
+    const { document } = this.html.deserialize(html);
     editor.insertFragment(document);
   };
 
