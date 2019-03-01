@@ -14,7 +14,12 @@ import {
   EditorButton,
   PluginsMap
 } from "./plugins";
-import { StyledMenu, StyledToolBar, EditorWrapper } from "./editor.css";
+import {
+  StyledMenu,
+  StyledToolBar,
+  EditorWrapper,
+  StyledContent
+} from "./editor.css";
 import { mapPropsToComponents } from "./helper/util";
 import schemaProps from "./helper/schema";
 import initialValue from "./value";
@@ -156,7 +161,7 @@ export class LetterpadEditor extends Component<
 
     return (
       <>
-        {children}
+        <StyledContent>{children}</StyledContent>
         <StyledMenu ref={this.menuRef} className="menu hover-menu">
           {mapPropsToComponents(this.state.menuButtons, {
             ...data,
@@ -168,7 +173,13 @@ export class LetterpadEditor extends Component<
         </StyledMenu>
         <StyledToolBar>
           <div className="menu toolbar-menu">
-            {mapPropsToComponents(this.state.toolbarButtons, data)}
+            {mapPropsToComponents(this.state.toolbarButtons, {
+              ...data,
+              callbacks: {
+                onBeforeRender: this.props.onBeforeRender,
+                onButtonClick: this.props.onButtonClick
+              }
+            })}
           </div>
         </StyledToolBar>
       </>

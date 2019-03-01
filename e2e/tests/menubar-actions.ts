@@ -29,6 +29,7 @@ describe("features", () => {
   });
 
   test("bold", async () => {
+    await clearEditor(editorHandle);
     await applyEditorFeatureToSampleText(
       editorHandle,
       "//span[contains(text(), 'format_bold')]"
@@ -74,6 +75,86 @@ describe("features", () => {
   });
 
   describe("markdown", () => {
+    beforeEach(async () => {
+      await page.reload();
+      await page.waitForXPath("//div[@contenteditable='true']");
+      const handle = await page.$('div[contenteditable="true"]');
+      editorHandle = handle!;
+      await editorHandle.focus();
+    });
+    test("italic", async () => {
+      await clearEditor(editorHandle);
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'format_italic')]");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      await page.keyboard.type("__foo__");
+      // because this transformation adds an extra space
+      await page.keyboard.press("Backspace");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
+
+    test("bullet-list", async () => {
+      await clearEditor(editorHandle);
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length - 2);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'format_list_bulleted')]");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      await page.keyboard.type("- foo");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
+
+    test("link", async () => {
+      await clearEditor(editorHandle);
+      page.evaluate(() => {
+        window.prompt = () => "http://google.com";
+      });
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'link')]");
+
+      await page.waitFor(1000);
+
+      const actual = await getHtmlContents(editorHandle);
+
+      expect(actual).toMatchSnapshot();
+    });
+
+    test("audio", async () => {
+      await clearEditor(editorHandle);
+      const text = "[audio=http://localhost/embed/link]";
+      await page.keyboard.type(text);
+      // because this transformation adds an extra space
+      await page.keyboard.press("Backspace");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      page.evaluate(() => {
+        window.prompt = () => "http://localhost/embed/link";
+      });
+      await clickXPath("//span[contains(text(), 'queue_music')]");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
+
     test("bold", async () => {
       await clearEditor(editorHandle);
       const text = "foo";
@@ -88,6 +169,74 @@ describe("features", () => {
       await page.keyboard.type("**foo**");
       // because this transformation adds an extra space
       await page.keyboard.press("Backspace");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
+    test("youtube", async () => {
+      await clearEditor(editorHandle);
+      page.evaluate(() => {
+        window.prompt = () => "http://youtube.com/embed/link";
+      });
+      await clickXPath("//span[contains(text(), 'music_video')]");
+      const expected1 = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      const text = "[youtube=http://youtube.com/embed/link]";
+      await page.keyboard.type(text);
+      // because this transformation adds an extra space
+      await page.keyboard.press("Backspace");
+      const expected2 = await getHtmlContents(editorHandle);
+
+      expect(expected1).toMatchSnapshot();
+      expect(expected2).toMatchSnapshot();
+    });
+    test("heading", async () => {
+      await clearEditor(editorHandle);
+      const text = "bar";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length - 2);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'looks_one')]");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      await page.keyboard.type("# bar");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
+    test("image", async () => {
+      await clearEditor(editorHandle);
+      page.evaluate(() => {
+        window.prompt = () => "http://a.com/a.jpg";
+      });
+      await clickXPath("//span[contains(text(), 'image')]");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toMatchSnapshot();
+    });
+
+    test("separator", async () => {
+      await clearEditor(editorHandle);
+
+      await clickXPath("//span[contains(text(), 'more_horiz')]");
+      const actual = await getHtmlContents(editorHandle);
+      expect(actual).toMatchSnapshot();
+    });
+    test("blockquote", async () => {
+      await clearEditor(editorHandle);
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length - 2);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'format_quote')]");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      await page.keyboard.type("> foo");
       const expected = await getHtmlContents(editorHandle);
 
       expect(expected).toBe(actual);
