@@ -126,6 +126,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
   const [Placeholder, setPlaceholder] = useState<PlaceholderState | null>(null);
   const root = useRef<HTMLDivElement>();
   const menu = useRef<HTMLDivElement>();
+  const placeholder = useRef<HTMLInputElement>();
 
   document.addEventListener("mousedown", e => {
     if (!root.current) return;
@@ -146,6 +147,11 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
     setPlaceholder({
       component
     });
+    setTimeout(() => {
+      if (placeholder.current) {
+        placeholder.current.focus();
+      }
+    }, 1);
   }
 
   function completePlaceholder() {
@@ -185,6 +191,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
       {Placeholder != null && (
         <PlaceholderContainer width={position.width}>
           <Placeholder.component
+            ref={placeholder}
             editor={editor}
             onComplete={completePlaceholder}
           />
