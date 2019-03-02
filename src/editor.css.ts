@@ -82,6 +82,8 @@ export const StyledToolBar = styled.div`
   flex-direction: row;
   .button-wrapper {
     cursor: pointer;
+    display: flex;
+    align-items: flex-end;
     .toggle-button {
       transition: 0.1s transform ease-in-out;
       border: 1px solid #ddd;
@@ -91,9 +93,18 @@ export const StyledToolBar = styled.div`
       user-select: none;
     }
   }
+  @keyframes toolbarOpen {
+    0% {
+      transform: scaleX(0);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
+
   .toolbar-menu {
-    display: inline-block;
-    padding: 8px;
+    display: none;
+    padding-left: 10px;
     background: var(--bg-base);
     text-align: center;
     user-select: none;
@@ -101,6 +112,7 @@ export const StyledToolBar = styled.div`
     margin-top: -4px;
     transition: 0.1s transform ease-in-out;
     transform-origin: left center;
+    animation: toolbarOpen 0.2s;
     .material-icons {
       font-size: 18px;
       vertical-align: text-bottom;
@@ -117,12 +129,10 @@ export const StyledToolBar = styled.div`
     }
     .toolbar-menu {
       transform: scaleX(1);
+      display: inline-block;
     }
   }
 
-  > * {
-    display: inline-block;
-  }
   > * + * {
     margin-left: 8px;
   }

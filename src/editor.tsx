@@ -130,8 +130,8 @@ export class LetterpadEditor extends Component<
           const { top, left } = cursorBlockNode.getBoundingClientRect();
           if (current) {
             current.style.opacity = "1";
-            current.style.top = top + window.scrollY + "px";
-            current.style.left = left - 20 + "px";
+            current.style.top = top + window.scrollY - 8 + "px";
+            current.style.left = left - 60 + "px";
           }
         }
       }
@@ -214,6 +214,9 @@ export class LetterpadEditor extends Component<
       const classes = this.toolbarRef.current.classList;
       if (classes.contains("active")) {
         classes.remove("active");
+        if (this.editor) {
+          this.editor.focus();
+        }
       } else {
         classes.add("active");
       }
@@ -224,14 +227,16 @@ export class LetterpadEditor extends Component<
     const children = next();
     this.editor = editor;
 
-    const data = {
-      props,
-      editor,
-      next
-    };
     const callbacks = {
       onBeforeRender: this.props.onBeforeRender,
       onButtonClick: this.props.onButtonClick
+    };
+    const data = {
+      props,
+      editor,
+      next,
+      callbacks,
+      onClick: this.toggleToolbarClass
     };
 
     return (
@@ -239,8 +244,7 @@ export class LetterpadEditor extends Component<
         <StyledContent>{children}</StyledContent>
         <StyledMenu ref={this.menuRef} className="menu hover-menu">
           {mapPropsToComponents(this.state.menuButtons, {
-            ...data,
-            callbacks
+            ...data
           })}
         </StyledMenu>
         <StyledToolBar ref={this.toolbarRef}>
@@ -251,13 +255,9 @@ export class LetterpadEditor extends Component<
             >
               add
             </span>
-            <div
-              className="menu toolbar-menu"
-              onClick={this.toggleToolbarClass}
-            >
+            <div className="menu toolbar-menu">
               {mapPropsToComponents(this.state.toolbarButtons, {
-                ...data,
-                callbacks
+                ...data
               })}
             </div>
           </div>
