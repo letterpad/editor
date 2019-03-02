@@ -1,4 +1,4 @@
-import { ComponentType } from "react";
+import { ComponentType, MouseEventHandler } from "react";
 import { AutoReplaceParams } from "slate-auto-replace";
 import { Plugin } from "slate-react";
 
@@ -51,6 +51,7 @@ export interface EditorEventHandler {
 export type EditorButtonComponent = ComponentType<{
   editor: Editor;
   type?: string;
+  onClick?: MouseEventHandler;
   callbacks: {
     [key: string]: any;
   };

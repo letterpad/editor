@@ -14,14 +14,6 @@ exports[`features headings 2`] = `"<html><head></head><body><h2><span><span><spa
 
 exports[`features italics 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>This is a </span></span><span><em><span>sample</span></em></span><span><span> text</span></span></span></div></body></html>"`;
 
-exports[`features markdown image 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;</span></span></span><span contenteditable=\\"false\\"><span style=\\"height: 0px; color: transparent; outline: none; position: absolute;\\"><span><span><span>&#xFEFF;</span></span></span></span><span contenteditable=\\"false\\"><div><img src=\\"http://a.com/a.jpg\\"></div></span></span><span><span><span>&#xFEFF;<br></span></span></span></div><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;<br></span></span></span></div></body></html>"`;
-
 exports[`features markdown link 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;</span></span></span><a class=\\"link-node\\" href=\\"http://google.com\\"><span><span><span>foo</span></span></span></a><span><span><span>&#xFEFF;</span></span></span></div></body></html>"`;
-
-exports[`features markdown separator 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;<br></span></span></span></div><span style=\\"border-bottom: 2px solid rgb(0, 0, 0); display: block; opacity: 0.2;\\"><span><span><span>&#xFEFF;<br></span></span></span></span><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;<br></span></span></span></div></body></html>"`;
-
-exports[`features markdown youtube 1`] = `"<html><head></head><body><iframe type=\\"text/html\\" width=\\"640\\" height=\\"360\\" frameborder=\\"0\\" src=\\"http://youtube.com/embed/link\\"><span data-key=\\"2\\"><span data-slate-leaf=\\"true\\" data-offset-key=\\"2:0\\"><span data-slate-zero-width=\\"n\\" data-slate-length=\\"0\\">﻿<br></span></span></span></iframe><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;<br></span></span></span></div></body></html>"`;
-
-exports[`features markdown youtube 2`] = `"<html><head></head><body><iframe type=\\"text/html\\" width=\\"640\\" height=\\"360\\" frameborder=\\"0\\" src=\\"http://youtube.com/embed/link\\"><span data-key=\\"64\\"><span data-slate-leaf=\\"true\\" data-offset-key=\\"64:0\\"><span data-slate-zero-width=\\"n\\" data-slate-length=\\"0\\">﻿<br></span></span></span></iframe><div style=\\"position: relative;\\"><span><span><span>&#xFEFF;<br></span></span></span></div></body></html>"`;
 
 exports[`features underline 1`] = `"<html><head></head><body><div style=\\"position: relative;\\"><span><span><span>This is a </span></span><span><u><span>sample</span></u></span><span><span> text</span></span></span></div></body></html>"`;
