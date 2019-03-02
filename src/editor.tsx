@@ -113,6 +113,10 @@ export class LetterpadEditor extends Component<
 
   onChange = ({ value }: { value: Value }) => {
     this.setState({ value });
+    if (this.toolbarRef.current) {
+      const classes = this.toolbarRef.current.classList;
+      classes.remove("active");
+    }
     if (this.editor) {
       let cursorBlockNode: any;
       try {
@@ -250,6 +254,7 @@ export class LetterpadEditor extends Component<
         <StyledToolBar ref={this.toolbarRef}>
           <div className="button-wrapper">
             <span
+              id="letterpad-editor-toolbar-toggle-button"
               className="material-icons toggle-button"
               onClick={this.toggleToolbarClass}
             >
