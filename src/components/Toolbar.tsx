@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useState, useRef } from "react";
+import React, {
+  FunctionComponent,
+  useState,
+  useRef,
+  ComponentType
+} from "react";
 import { Editor } from "slate";
 import styled from "styled-components";
 import { mapPropsToComponents } from "../helper/util";
@@ -17,7 +22,7 @@ const ToggleButton = styled.span`
 const ButtonWrapper = styled.div`
   cursor: pointer;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   background: #fff;
 `;
 
@@ -31,6 +36,7 @@ const ToolbarMenu = styled.div`
   margin-top: -4px;
   transition: 0.1s transform ease-in-out;
   transform-origin: left center;
+  margin-top: 4px;
 
   @keyframes toolbarOpen {
     0% {
@@ -52,6 +58,12 @@ const ToolbarMenu = styled.div`
     margin-right: 5px;
     vertical-align: text-bottom;
   }
+`;
+
+const PlaceholderContainer = styled.div`
+  display: flex;
+  flex: 1;
+  width: ${(props: any) => props.width}px;
 `;
 
 const StyledToolBar = styled.div`
@@ -96,7 +108,12 @@ interface ToolbarProps {
   position: {
     top: number;
     left: number;
+    width: number;
   };
+}
+
+interface PlaceholderState {
+  component: ComponentType<any>;
 }
 
 const Toolbar: FunctionComponent<ToolbarProps> = ({
@@ -107,13 +124,16 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
   position
 }) => {
   const [menuActive, setMenuActive] = useState(false);
+  const [Placeholder, setPlaceholder] = useState<PlaceholderState | null>(null);
   const root = useRef<HTMLDivElement>();
   const menu = useRef<HTMLDivElement>();
+  const placeholder = useRef<HTMLInputElement>();
 
   document.addEventListener("mousedown", e => {
     if (!root.current) return;
     if (!root.current.contains(e.target as Node)) {
-      return setMenuActive(false);
+      setMenuActive(false);
+      setPlaceholder(null);
     }
   });
   if (menu.current) {
@@ -123,6 +143,30 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
       });
     });
   }
+
+  function showPlaceholder(component: ComponentType) {
+    setPlaceholder({
+      component
+    });
+    /**
+     * The set timeout is because the component is not rendered immediately
+     * so the placeholder.current is null. we delay this by 1ms and then
+     * capture the component that's rendered and focus it.
+     *
+     * if in case 1ms fails, then increase the timeout
+     */
+    setTimeout(() => {
+      if (placeholder.current) {
+        placeholder.current.focus();
+      }
+    }, 1);
+  }
+
+  function completePlaceholder() {
+    setPlaceholder(null);
+  }
+
+  data.callbacks.showPlaceholder = showPlaceholder;
 
   return (
     <StyledToolBar
@@ -152,6 +196,15 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
           })}
         </ToolbarMenu>
       </ButtonWrapper>
+      {Placeholder != null && (
+        <PlaceholderContainer width={position.width}>
+          <Placeholder.component
+            ref={placeholder}
+            editor={editor}
+            onComplete={completePlaceholder}
+          />
+        </PlaceholderContainer>
+      )}
     </StyledToolBar>
   );
 };
