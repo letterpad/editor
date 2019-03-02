@@ -14,7 +14,7 @@ export const EditorWrapper = styled.div`
     box-sizing: border-box;
   }
 
-  padding: 2rem;
+  padding: 5rem;
   line-height: 1.625;
 
   h1 {
@@ -69,79 +69,6 @@ export const EditorWrapper = styled.div`
     font-size: 17px;
     color: #bbb;
     margin: 30px 0;
-  }
-`;
-
-export const StyledToolBar = styled.div`
-  opacity: 0;
-  position: absolute;
-  left: 0px;
-  z-index: 9;
-  background: #fff;
-  display: flex;
-  flex-direction: row;
-  .button-wrapper {
-    cursor: pointer;
-    display: flex;
-    align-items: flex-end;
-    .toggle-button {
-      transition: 0.1s transform ease-in-out;
-      border: 1px solid #ddd;
-      border-radius: 100%;
-      padding: 4px;
-      font-size: 30px;
-      user-select: none;
-    }
-  }
-  @keyframes toolbarOpen {
-    0% {
-      transform: scaleX(0);
-    }
-    100% {
-      transform: scaleX(1);
-    }
-  }
-
-  .toolbar-menu {
-    display: none;
-    padding-left: 10px;
-    background: var(--bg-base);
-    text-align: center;
-    user-select: none;
-    transform: scaleX(0);
-    margin-top: -4px;
-    transition: 0.1s transform ease-in-out;
-    transform-origin: left center;
-    animation: toolbarOpen 0.2s;
-    .material-icons {
-      font-size: 18px;
-      vertical-align: text-bottom;
-      padding: 6px 6px;
-      border: 1px solid #eee;
-      border-radius: 50%;
-      margin-right: 5px;
-      vertical-align: text-bottom;
-    }
-  }
-  &.active {
-    .button-wrapper .toggle-button {
-      transform: rotate(45deg);
-    }
-    .toolbar-menu {
-      transform: scaleX(1);
-      display: inline-block;
-    }
-  }
-
-  > * + * {
-    margin-left: 8px;
-  }
-  .button {
-    color: #ccc;
-    cursor: pointer;
-    .material-icons {
-      vertical-align: text-bottom;
-    }
   }
 `;
 
