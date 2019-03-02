@@ -22,8 +22,13 @@ const AudioInput: FunctionComponent<any> = ({ onComplete, editor }) => {
       onKeyUp={(e: any) => {
         if (e.keyCode == 13) {
           onComplete();
-          const isActive = hasBlock(editor.value, type);
-          applyAudio(editor, isActive ? "paragraph" : type, url);
+          // if the url is not empty
+          if (url) {
+            const isActive = hasBlock(editor.value, type);
+            applyAudio(editor, isActive ? "paragraph" : type, url);
+          } else {
+            editor.focus();
+          }
         }
       }}
       type="text"

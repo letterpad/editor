@@ -62,6 +62,7 @@ const ToolbarMenu = styled.div`
 const PlaceholderContainer = styled.div`
   display: flex;
   flex: 1;
+  width: ${(props: any) => props.width}px;
 `;
 
 const StyledToolBar = styled.div`
@@ -159,8 +160,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
       className={cx({ hidden, active: menuActive })}
       style={{
         top: position.top,
-        left: position.left,
-        width: position.width
+        left: position.left
       }}
     >
       <ButtonWrapper>
@@ -183,7 +183,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
         </ToolbarMenu>
       </ButtonWrapper>
       {Placeholder != null && (
-        <PlaceholderContainer>
+        <PlaceholderContainer width={position.width}>
           <Placeholder.component
             editor={editor}
             onComplete={completePlaceholder}

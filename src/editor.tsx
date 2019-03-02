@@ -128,7 +128,12 @@ export class LetterpadEditor extends Component<
       value.focusBlock.type !== "paragraph"
     ) {
       this.setState({
-        toolbarActive: false
+        toolbarActive: false,
+        toolbarPosition: {
+          left: this.state.toolbarPosition.left,
+          top: this.state.toolbarPosition.top,
+          width: 0
+        }
       });
     } else {
       let cursorNode;
