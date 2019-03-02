@@ -22,7 +22,7 @@ const ToggleButton = styled.span`
 const ButtonWrapper = styled.div`
   cursor: pointer;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   background: #fff;
 `;
 
@@ -36,6 +36,7 @@ const ToolbarMenu = styled.div`
   margin-top: -4px;
   transition: 0.1s transform ease-in-out;
   transform-origin: left center;
+  margin-top: 4px;
 
   @keyframes toolbarOpen {
     0% {
@@ -147,6 +148,13 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
     setPlaceholder({
       component
     });
+    /**
+     * The set timeout is because the component is not rendered immediately
+     * so the placeholder.current is null. we delay this by 1ms and then
+     * capture the component that's rendered and focus it.
+     *
+     * if in case 1ms fails, then increase the timeout
+     */
     setTimeout(() => {
       if (placeholder.current) {
         placeholder.current.focus();
