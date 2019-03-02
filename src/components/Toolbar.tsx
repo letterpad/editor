@@ -60,7 +60,8 @@ const ToolbarMenu = styled.div`
 `;
 
 const PlaceholderContainer = styled.div`
-  width: 100%;
+  display: flex;
+  flex: 1;
 `;
 
 const StyledToolBar = styled.div`
@@ -105,6 +106,7 @@ interface ToolbarProps {
   position: {
     top: number;
     left: number;
+    width: number;
   };
 }
 
@@ -157,7 +159,8 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
       className={cx({ hidden, active: menuActive })}
       style={{
         top: position.top,
-        left: position.left
+        left: position.left,
+        width: position.width
       }}
     >
       <ButtonWrapper>

@@ -39,6 +39,7 @@ interface LetterpadEditorState {
   toolbarPosition: {
     top: number;
     left: number;
+    width: number;
   };
   slateReactPlugins: SlateReactPlugin[];
   pluginsMap: PluginsMap;
@@ -100,7 +101,8 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
     toolbarActive: false,
     toolbarPosition: {
       top: 0,
-      left: 0
+      left: 0,
+      width: 0
     }
   };
 }
@@ -134,12 +136,13 @@ export class LetterpadEditor extends Component<
         cursorNode = findDOMNode(this.editor!.value.focusBlock);
       } catch (e) {}
       if (cursorNode) {
-        const { top, left } = cursorNode.getBoundingClientRect();
+        const { top, left, width } = cursorNode.getBoundingClientRect();
         this.setState({
           toolbarActive: true,
           toolbarPosition: {
             top: top + window.scrollY - 8,
-            left: left - 60
+            left: left - 60,
+            width: width + 60
           }
         });
       }

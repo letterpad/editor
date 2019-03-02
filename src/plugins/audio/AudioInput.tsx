@@ -4,8 +4,10 @@ import { hasBlock } from "../../helper/strategy";
 import { applyAudio } from "./AudioUtils";
 
 const StyledInput = styled.input`
-  font-size: larger;
+  font-size: medium;
   width: 100%;
+  border: none;
+  outline: none;
 `;
 
 const type = "audio";

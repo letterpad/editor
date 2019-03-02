@@ -1,5 +1,4 @@
 import React from "react";
-import { applyAudio } from "./AudioUtils";
 import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
 import { EditorButtonComponent } from "..";
@@ -13,14 +12,10 @@ const AudioButton: EditorButtonComponent = ({ editor, callbacks }) => {
     <Button
       isActive={hasBlock(editor.value, type)}
       icon="queue_music"
-      onMouseDown={e => {
+      onMouseDown={() => {
         if (callbacks.showPlaceholder) {
           callbacks.showPlaceholder(AudioInput);
         }
-        console.log(applyAudio, e);
-        // const src: any = window.prompt("Enter the URL of the audio:");
-        // const isActive = hasBlock(editor.value, type);
-        // return applyAudio(editor, isActive ? "paragraph" : type, src);
       }}
     />
   );
