@@ -18,6 +18,7 @@ const ButtonWrapper = styled.div`
   cursor: pointer;
   display: flex;
   align-items: flex-end;
+  background: #fff;
 `;
 
 const ToolbarMenu = styled.div`
@@ -107,12 +108,21 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
 }) => {
   const [menuActive, setMenuActive] = useState(false);
   const root = useRef<HTMLDivElement>();
+  const menu = useRef<HTMLDivElement>();
 
   document.addEventListener("mousedown", e => {
-    if (root.current && !root.current.contains(e.target as Node)) {
-      setMenuActive(false);
+    if (!root.current) return;
+    if (!root.current.contains(e.target as Node)) {
+      return setMenuActive(false);
     }
   });
+  if (menu.current) {
+    menu.current.querySelectorAll(".material-icons").forEach(node => {
+      node.addEventListener("mousedown", () => {
+        menuActive && setMenuActive(false);
+      });
+    });
+  }
 
   return (
     <StyledToolBar
@@ -136,7 +146,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
         >
           add
         </ToggleButton>
-        <ToolbarMenu className="menu">
+        <ToolbarMenu className="menu" ref={menu}>
           {mapPropsToComponents(buttons, {
             ...data
           })}
