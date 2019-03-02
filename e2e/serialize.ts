@@ -1,23 +1,30 @@
 import { ElementHandle } from "puppeteer";
-import cheerio from "cheerio";
+import { parseFragment, serialize } from "parse5";
 
 export type EditorHandle = ElementHandle<Element>;
+
+function removeData(root: any) {
+  if (root.tagName === "iframe") {
+    root.childNodes = [];
+  }
+  if (root.attrs) {
+    root.attrs = root.attrs.filter(
+      (attr: any) => !attr.name.startsWith("data-")
+    );
+  }
+  if (root.childNodes) {
+    for (const node of root.childNodes) {
+      removeData(node);
+    }
+  }
+}
 
 export async function getHtmlContents(handle: EditorHandle): Promise<string> {
   const context = await handle.executionContext();
   const html = await context.evaluate(node => node.innerHTML, handle);
-
-  const cHtml = cheerio.load(html);
-  const allNodes = cHtml("*");
-  for (let i = 0; i < allNodes.length; i++) {
-    const node = allNodes[i];
-    for (let attr in node.attribs) {
-      if (attr.startsWith("data-")) {
-        allNodes.removeAttr(attr);
-      }
-    }
-  }
-  return cHtml.html();
+  const fragment = parseFragment(html);
+  removeData(fragment);
+  return serialize(fragment);
 }
 
 export async function textContent(handle: EditorHandle): Promise<any> {
