@@ -120,7 +120,11 @@ export class LetterpadEditor extends Component<
   onChange = ({ value }: { value: Value }) => {
     this.setState({ value });
 
-    if (!value.focusBlock || value.focusBlock.text) {
+    if (
+      !value.focusBlock ||
+      value.focusBlock.text ||
+      value.focusBlock.type !== "paragraph"
+    ) {
       this.setState({
         toolbarActive: false
       });
@@ -209,20 +213,11 @@ export class LetterpadEditor extends Component<
     this.updateMenu();
   };
 
-  toggleToolbar = () => {
-    this.setState({
-      toolbarActive: !this.state.toolbarActive
-    });
-  };
-
   toggleToolbarClass = () => {
     if (this.toolbarRef.current) {
       const classes = this.toolbarRef.current.classList;
       if (classes.contains("active")) {
         classes.remove("active");
-        if (this.editor) {
-          this.editor.focus();
-        }
       } else {
         classes.add("active");
       }

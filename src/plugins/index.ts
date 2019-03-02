@@ -58,8 +58,13 @@ export type EditorButtonComponent = ComponentType<{
   next: () => any;
 }>;
 
+export type PlaceholderComponent = ComponentType<{
+  editor: Editor;
+}>;
+
 export interface EditorButton<P = any> {
   button: EditorButtonComponent;
+  placeholder?: PlaceholderComponent;
   props?: P;
 }
 

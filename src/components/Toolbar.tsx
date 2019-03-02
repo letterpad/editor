@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useState, useRef } from "react";
+import React, {
+  FunctionComponent,
+  useState,
+  useRef,
+  ComponentType
+} from "react";
 import { Editor } from "slate";
 import styled from "styled-components";
 import { mapPropsToComponents } from "../helper/util";
@@ -54,6 +59,10 @@ const ToolbarMenu = styled.div`
   }
 `;
 
+const PlaceholderContainer = styled.div`
+  width: 100%;
+`;
+
 const StyledToolBar = styled.div`
   opacity: 1;
   position: absolute;
@@ -99,6 +108,10 @@ interface ToolbarProps {
   };
 }
 
+interface PlaceholderState {
+  component: ComponentType<any>;
+}
+
 const Toolbar: FunctionComponent<ToolbarProps> = ({
   hidden,
   editor,
@@ -107,13 +120,15 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
   position
 }) => {
   const [menuActive, setMenuActive] = useState(false);
+  const [Placeholder, setPlaceholder] = useState<PlaceholderState | null>(null);
   const root = useRef<HTMLDivElement>();
   const menu = useRef<HTMLDivElement>();
 
   document.addEventListener("mousedown", e => {
     if (!root.current) return;
     if (!root.current.contains(e.target as Node)) {
-      return setMenuActive(false);
+      setMenuActive(false);
+      setPlaceholder(null);
     }
   });
   if (menu.current) {
@@ -123,6 +138,18 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
       });
     });
   }
+
+  function showPlaceholder(component: ComponentType) {
+    setPlaceholder({
+      component
+    });
+  }
+
+  function completePlaceholder() {
+    setPlaceholder(null);
+  }
+
+  data.callbacks.showPlaceholder = showPlaceholder;
 
   return (
     <StyledToolBar
@@ -152,6 +179,14 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
           })}
         </ToolbarMenu>
       </ButtonWrapper>
+      {Placeholder != null && (
+        <PlaceholderContainer>
+          <Placeholder.component
+            editor={editor}
+            onComplete={completePlaceholder}
+          />
+        </PlaceholderContainer>
+      )}
     </StyledToolBar>
   );
 };
