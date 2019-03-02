@@ -209,6 +209,17 @@ export class LetterpadEditor extends Component<
     this.updateMenu();
   };
 
+  toggleToolbarClass = () => {
+    if (this.toolbarRef.current) {
+      const classes = this.toolbarRef.current.classList;
+      if (classes.contains("active")) {
+        classes.remove("active");
+      } else {
+        classes.add("active");
+      }
+    }
+  };
+
   renderEditor: SlateReactPlugin["renderEditor"] = (props, editor, next) => {
     const children = next();
     this.editor = editor;
@@ -233,11 +244,22 @@ export class LetterpadEditor extends Component<
           })}
         </StyledMenu>
         <StyledToolBar ref={this.toolbarRef}>
-          <div className="menu toolbar-menu">
-            {mapPropsToComponents(this.state.toolbarButtons, {
-              ...data,
-              callbacks
-            })}
+          <div className="button-wrapper">
+            <span
+              className="material-icons toggle-button"
+              onClick={this.toggleToolbarClass}
+            >
+              add
+            </span>
+            <div
+              className="menu toolbar-menu"
+              onClick={this.toggleToolbarClass}
+            >
+              {mapPropsToComponents(this.state.toolbarButtons, {
+                ...data,
+                callbacks
+              })}
+            </div>
           </div>
         </StyledToolBar>
       </>
