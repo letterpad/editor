@@ -64,7 +64,6 @@ export type PlaceholderComponent = ComponentType<{
 
 export interface EditorButton<P = any> {
   button: EditorButtonComponent;
-  placeholder?: PlaceholderComponent;
   props?: P;
 }
 

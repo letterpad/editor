@@ -5,7 +5,6 @@ import { PluginConfig } from "..";
 import AudioNode from "./AudioNode";
 import { isKeyboardEvent } from "../../helper/events";
 import { hasBlock } from "../../helper/strategy";
-import AudioInput from "./AudioInput";
 
 const TAGNAME = "audio";
 
@@ -36,7 +35,7 @@ const audioConfig: PluginConfig[] = [
     type: "block",
     tag: "node",
     menuButtons: [],
-    toolbarButtons: [{ button: AudioButton, placeholder: AudioInput }],
+    toolbarButtons: [{ button: AudioButton }],
     render: AudioNode,
     identifier: [TAGNAME],
     slatePlugin: AudioPlugin,
