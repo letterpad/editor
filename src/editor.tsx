@@ -15,12 +15,7 @@ import {
   EditorButton,
   PluginsMap
 } from "./plugins";
-import {
-  StyledMenu,
-  StyledToolBar,
-  EditorWrapper,
-  StyledContent
-} from "./editor.css";
+import { StyledMenu, EditorWrapper, StyledContent } from "./editor.css";
 import { mapPropsToComponents } from "./helper/util";
 import schemaProps from "./helper/schema";
 import initialValue from "./value";
@@ -30,6 +25,7 @@ import scrollToCursor from "./helper/scrollToCursor";
 import Html from "slate-html-serializer";
 import { showMenu } from "./helper/showMenu";
 import { getRules } from "./helper/rules";
+import Toolbar from "./components/Toolbar";
 
 export interface LetterpadEditorProps {
   onButtonClick(e: MouseEvent, type: string): void;
@@ -39,6 +35,11 @@ export interface LetterpadEditorProps {
 interface LetterpadEditorState {
   menuButtons: EditorButton[];
   toolbarButtons: EditorButton[];
+  toolbarActive: boolean;
+  toolbarPosition: {
+    top: number;
+    left: number;
+  };
   slateReactPlugins: SlateReactPlugin[];
   pluginsMap: PluginsMap;
   value: Value;
@@ -95,7 +96,12 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
     toolbarButtons,
     slateReactPlugins,
     pluginsMap,
-    value: Value.fromJSON(initialValue)
+    value: Value.fromJSON(initialValue),
+    toolbarActive: false,
+    toolbarPosition: {
+      top: 0,
+      left: 0
+    }
   };
 }
 
@@ -113,31 +119,25 @@ export class LetterpadEditor extends Component<
 
   onChange = ({ value }: { value: Value }) => {
     this.setState({ value });
-    if (this.toolbarRef.current) {
-      const classes = this.toolbarRef.current.classList;
-      classes.remove("active");
-    }
-    if (this.editor) {
-      let cursorBlockNode: any;
+
+    if (!value.focusBlock || value.focusBlock.text) {
+      this.setState({
+        toolbarActive: false
+      });
+    } else {
+      let cursorNode;
       try {
-        cursorBlockNode = findDOMNode(this.editor.value.focusBlock);
-      } catch (e) {
-        //..
-      }
-      if (cursorBlockNode) {
-        const { current } = this.toolbarRef;
-        if (!value.focusBlock || value.focusBlock.text) {
-          if (current) {
-            current.style.opacity = "0";
+        cursorNode = findDOMNode(this.editor!.value.focusBlock);
+      } catch (e) {}
+      if (cursorNode) {
+        const { top, left } = cursorNode.getBoundingClientRect();
+        this.setState({
+          toolbarActive: true,
+          toolbarPosition: {
+            top: top + window.scrollY - 8,
+            left: left - 60
           }
-        } else {
-          const { top, left } = cursorBlockNode.getBoundingClientRect();
-          if (current) {
-            current.style.opacity = "1";
-            current.style.top = top + window.scrollY - 8 + "px";
-            current.style.left = left - 60 + "px";
-          }
-        }
+        });
       }
     }
 
@@ -165,11 +165,7 @@ export class LetterpadEditor extends Component<
         }
       }
     }
-
-    // this.renderOptions();
   };
-
-  renderOptions = () => {};
 
   onPaste: EventHook = (event, editor, next) => {
     scrollToCursor();
@@ -213,6 +209,12 @@ export class LetterpadEditor extends Component<
     this.updateMenu();
   };
 
+  toggleToolbar = () => {
+    this.setState({
+      toolbarActive: !this.state.toolbarActive
+    });
+  };
+
   toggleToolbarClass = () => {
     if (this.toolbarRef.current) {
       const classes = this.toolbarRef.current.classList;
@@ -251,22 +253,13 @@ export class LetterpadEditor extends Component<
             ...data
           })}
         </StyledMenu>
-        <StyledToolBar ref={this.toolbarRef}>
-          <div className="button-wrapper">
-            <span
-              id="letterpad-editor-toolbar-toggle-button"
-              className="material-icons toggle-button"
-              onClick={this.toggleToolbarClass}
-            >
-              add
-            </span>
-            <div className="menu toolbar-menu">
-              {mapPropsToComponents(this.state.toolbarButtons, {
-                ...data
-              })}
-            </div>
-          </div>
-        </StyledToolBar>
+        <Toolbar
+          hidden={!this.state.toolbarActive}
+          position={this.state.toolbarPosition}
+          editor={this.editor}
+          buttons={this.state.toolbarButtons}
+          data={data}
+        />
       </>
     );
   };
