@@ -109,10 +109,9 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
   const root = useRef<HTMLDivElement>();
 
   document.addEventListener("mousedown", e => {
-    if (root.current && root.current.contains(e.target as Node)) {
-      return;
+    if (root.current && !root.current.contains(e.target as Node)) {
+      setMenuActive(false);
     }
-    setMenuActive(false);
   });
 
   return (
