@@ -60,8 +60,10 @@ describe("features", () => {
 
     test("image", async () => {
       await clickXPath("//span[contains(text(), 'image')]");
+      await page.waitFor(200);
+      await page.keyboard.type("image.jpg");
+      await page.keyboard.press("Enter");
       const expected = await getHtmlContents(editorHandle);
-
       expect(expected).toMatchSnapshot();
     });
 

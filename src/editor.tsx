@@ -125,7 +125,8 @@ export class LetterpadEditor extends Component<
     if (
       !value.focusBlock ||
       value.focusBlock.text ||
-      value.focusBlock.type !== "paragraph"
+      value.focusBlock.type !== "paragraph" ||
+      value.inlines.size > 0
     ) {
       this.setState({
         toolbarActive: false,
