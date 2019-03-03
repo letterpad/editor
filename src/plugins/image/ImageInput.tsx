@@ -6,7 +6,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   &:before {
-    content: "🎧";
+    content: "📷";
     font-size: x-large;
     display: flex;
     align-items: center;
