@@ -1,4 +1,4 @@
 const { setup } = require("jest-environment-puppeteer");
-module.exports = () => {
-  return setup();
+module.exports = config => {
+  return setup(config);
 };
