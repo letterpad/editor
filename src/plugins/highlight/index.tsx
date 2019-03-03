@@ -29,21 +29,21 @@ const highlightConfig: PluginConfig[] = [
     render: HighlightMark,
     identifier: [TAGNAME],
     slatePlugin: HighlightPlugin,
-    // markdown: {
-    //   trigger: "space",
-    //   before: /\s?(`|``)((?!\1).)+?\1$/, // needs to be corrected
-    //   change: (editor, _, matched) => {
-    //     const text = matched.before[0].replace(/\`/g, "");
-
-    //     return editor
-    //       .insertText(text)
-    //       .moveFocusBackward(text.length)
-    //       .addMark(TAGNAME)
-    //       .moveFocusForward(text.length)
-    //       .removeMark(TAGNAME)
-    //       .insertText(" ");
-    //   }
-    // },
+    markdown: {
+      trigger: "`",
+      before: /`([^`\n\r]+)/, // needs to be corrected
+      change: (editor, _, matched) => {
+        const text = matched.before[0].replace(/\`/g, "");
+        return editor
+          .deleteBackward(1)
+          .insertText(text)
+          .moveFocusBackward(text.length)
+          .addMark(TAGNAME)
+          .moveFocusForward(text.length)
+          .removeMark(TAGNAME)
+          .insertText(" ");
+      }
+    },
     rules: {
       deserialize(el, next) {
         const type = el.tagName.toLowerCase();

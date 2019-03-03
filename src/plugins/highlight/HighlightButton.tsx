@@ -10,7 +10,7 @@ const highlightButton: EditorButtonComponent = ({ editor }) => {
   return (
     <Button
       isActive={active}
-      icon="border_color"
+      icon="highlight"
       onMouseDown={e => {
         e.preventDefault();
         return applyMarkStrategy(editor, "code");

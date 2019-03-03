@@ -11,14 +11,10 @@ const headingsConfig: PluginConfig[] = [
     type: "block",
     tag: "node",
     menuButtons: [
-      { button: HeadingsButton, props: { type: "h1" } },
-      { button: HeadingsButton, props: { type: "h2" } }
+      { button: HeadingsButton, props: { type: "h2" } },
+      { button: HeadingsButton, props: { type: "h3" } }
     ],
-    toolbarButtons: [
-      { button: HeadingsButton, props: { type: "h3" } },
-      { button: HeadingsButton, props: { type: "h4" } },
-      { button: HeadingsButton, props: { type: "h5" } }
-    ],
+    toolbarButtons: [{ button: HeadingsButton, props: { type: "h1" } }],
     render: HeadingsNode,
     identifier,
     slatePlugin: HeadingsPlugin,
