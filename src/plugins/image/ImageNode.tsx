@@ -28,7 +28,7 @@ const applyStyles = (type: string) => {
     }
     case "wide": {
       return `
-      left: -100px;
+        left: -100px;
         width: calc(100% + 200px);
       `;
     }

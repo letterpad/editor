@@ -14,6 +14,6 @@ exports[`features headings 2`] = `"<h3><span><span><span>These is a sample line 
 
 exports[`features italics 1`] = `"<p><span><span><span>This is a </span></span><span><em><span>sample</span></em></span><span><span> text</span></span></span></p>"`;
 
-exports[`features markdown link 1`] = `"<p><span><span><span>﻿</span></span></span><a class=\\"link-node\\" href=\\"http://google.com\\"><span><span><span>foo</span></span></span></a><span><span><span>﻿</span></span></span></p>"`;
+exports[`features markdown link 1`] = `"<p><span><span><span>﻿</span></span></span><a href=\\"http://google.com\\"><span><span><span>foo</span></span></span></a><span><span><span>﻿</span></span></span></p>"`;
 
 exports[`features underline 1`] = `"<p><span><span><span>This is a </span></span><span><u><span>sample</span></u></span><span><span> text</span></span></span></p>"`;

@@ -9,7 +9,7 @@ function removeData(root: any) {
   }
   if (root.attrs) {
     root.attrs = root.attrs.filter(
-      (attr: any) => !attr.name.startsWith("data-")
+      (attr: any) => !attr.name.startsWith("data-") && attr.name !== "class"
     );
   }
   if (root.childNodes) {
