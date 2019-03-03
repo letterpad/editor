@@ -1,19 +1,19 @@
 import React from "react";
-import YoutubeNode from "./YoutubeNode";
-import YoutubeButton from "./YoutubeButton";
+import VideoNode from "./VideoNode";
+import VideoButton from "./VideoButton";
 import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 import { hasBlock } from "../../helper/strategy";
+import { parseUrl, insertVideo } from "./VideoUtils";
 
 const TAGNAME = "iframe";
 
-export const YoutubePlugin: PluginConfig["slatePlugin"] = () => {
+export const VideoPlugin: PluginConfig["slatePlugin"] = () => {
   return {
     onKeyDown(event, editor, next) {
       if (isKeyboardEvent(event)) {
-        const type = "Youtube";
         if (event.key === "Enter") {
-          const isActive = hasBlock(editor.value, type);
+          const isActive = hasBlock(editor.value, TAGNAME);
           if (isActive) {
             event.preventDefault();
             return editor.splitBlock(1).setBlocks("paragraph");
@@ -25,24 +25,25 @@ export const YoutubePlugin: PluginConfig["slatePlugin"] = () => {
   };
 };
 
-const youtubeConfig: PluginConfig[] = [
+const videoConfig: PluginConfig[] = [
   {
     type: "block",
     tag: "node",
     menuButtons: [],
-    toolbarButtons: [{ button: YoutubeButton }],
-    render: YoutubeNode,
+    toolbarButtons: [{ button: VideoButton }],
+    render: VideoNode,
     identifier: [TAGNAME],
-    slatePlugin: YoutubePlugin,
+    slatePlugin: VideoPlugin,
     markdown: {
       trigger: "]",
-      before: /(\[youtube=?.*)/,
+      before: /(\[video=?.*)/,
       change: (editor, _, matches) => {
-        const src = matches.before[0].replace("[youtube=", "");
-        return editor
-          .setBlocks({ type: TAGNAME, data: { src: src } })
-          .moveToEndOfBlock()
-          .insertBlock("paragraph");
+        const src = matches.before[0].replace("[video=", "");
+        const parsedSrc = parseUrl(src);
+        if (parsedSrc) {
+          return insertVideo(editor, TAGNAME, parsedSrc);
+        }
+        return editor.focus();
       }
     },
     rules: {
@@ -52,7 +53,7 @@ const youtubeConfig: PluginConfig[] = [
         }
         const props = { children, node: obj, attributes: {} };
         if (obj.type === TAGNAME) {
-          return <YoutubeNode {...props} />;
+          return <VideoNode {...props} />;
         }
       },
       deserialize: (el, next) => {
@@ -73,4 +74,4 @@ const youtubeConfig: PluginConfig[] = [
   }
 ];
 
-export default youtubeConfig;
+export default videoConfig;

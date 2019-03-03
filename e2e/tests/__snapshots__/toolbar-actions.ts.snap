@@ -3,7 +3,3 @@
 exports[`features markdown image 1`] = `"<div style=\\"position: relative;\\"><span><span><span>﻿</span></span></span><span contenteditable=\\"false\\"><span style=\\"height: 0px; color: transparent; outline: none; position: absolute;\\"><span><span><span>﻿</span></span></span></span><span contenteditable=\\"false\\"><div type=\\"center\\" class=\\"sc-gzVnrw gEIHeu\\"><img width=\\"100%\\" src=\\"image.jpg\\"></div></span></span><span><span><span>﻿<br></span></span></span></div><div style=\\"position: relative;\\"><span><span><span>﻿<br></span></span></span></div>"`;
 
 exports[`features markdown separator 1`] = `"<div style=\\"position: relative;\\"><span><span><span>﻿<br></span></span></span></div><span style=\\"border-bottom: 2px solid rgb(0, 0, 0); display: block; opacity: 0.2;\\"><span><span><span>﻿<br></span></span></span></span><div style=\\"position: relative;\\"><span><span><span>﻿<br></span></span></span></div><div style=\\"position: relative;\\"><span><span><span>﻿<br></span></span></span></div>"`;
-
-exports[`features markdown youtube 1`] = `"<iframe type=\\"text/html\\" width=\\"640\\" height=\\"360\\" frameborder=\\"0\\" src=\\"http://localhost/embed/link\\"></iframe><div style=\\"position: relative;\\"><span><span><span>﻿<br></span></span></span></div>"`;
-
-exports[`features markdown youtube 2`] = `"<iframe type=\\"text/html\\" width=\\"640\\" height=\\"360\\" frameborder=\\"0\\" src=\\"http://localhost/embed/link\\"></iframe><div style=\\"position: relative;\\"><span><span><span>﻿<br></span></span></span></div>"`;
