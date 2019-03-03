@@ -43,15 +43,15 @@ describe("features", () => {
       expect(expected).toBe(actual);
     });
 
-    test("video", async () => {
-      await clickXPath("//span[contains(text(), 'music_video')]");
+    test("embed", async () => {
+      await clickXPath("//span[contains(text(), 'code')]");
       await page.waitFor(200);
       await page.keyboard.type("http://youtube.com/embed/link");
       await page.keyboard.press("Enter");
       const expected1 = await getHtmlContents(editorHandle);
 
       await clearEditor(editorHandle);
-      const text = "[video=http://youtube.com/embed/link]";
+      const text = "[embed=http://youtube.com/embed/link]";
       await page.keyboard.type(text);
       // because this transformation adds an extra space
       await page.keyboard.press("Backspace");
