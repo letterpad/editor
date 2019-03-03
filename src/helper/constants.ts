@@ -1,7 +1,7 @@
 import { pluginConfigs } from "../plugins";
 
 export const BLOCK_TAGS: { [key: string]: string } = {
-  p: "paragraph"
+  p: "p"
 };
 
 export const MARK_TAGS: { [key: string]: string } = {};

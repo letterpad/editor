@@ -14,7 +14,7 @@ const HeadingsButton: EditorButtonComponent = ({ editor, type }) => {
       onMouseDown={e => {
         e.preventDefault();
         const isActive = hasBlock(editor.value, type);
-        return applyHeadings(editor, isActive ? "paragraph" : type);
+        return applyHeadings(editor, isActive ? "p" : type);
       }}
     />
   );

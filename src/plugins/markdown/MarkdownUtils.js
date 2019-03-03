@@ -89,7 +89,7 @@ export const onSpace = (event, change, next) => {
     return matchHr("line-break", currentTextNode, matched, change);
   }
 
-  // if (change.value.blocks.get(0).type !== "paragraph") return;
+  // if (change.value.blocks.get(0).type !== "p") return;
   let type = getType(currentLineText);
 
   if (!type) return;
