@@ -9,6 +9,9 @@ class Demo extends Component {
     type: string,
     callbacks: { [key: string]: any }
   ) => {
+    return false;
+    // the below is a demo to fetch images from giphy based on a search term.
+    // remove the above return to check it
     if (type == "img") {
       if (callbacks.showPlaceholder) {
         callbacks.showPlaceholder(Gallery);

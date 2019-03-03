@@ -1,35 +1,77 @@
-import React, { Component } from "react";
-import { StyledGallery } from "./Gallery.css";
+import React, { Component, useState } from "react";
+import { StyledGallery, Container, StyledInput } from "./Gallery.css";
 import { insertImage } from "./plugins/image/ImageUtils";
 
-const imgUrls = [
-  "https://source.unsplash.com/PC_lbSSxCZE/800x600",
-  "https://source.unsplash.com/lVmR1YaBGG4/800x600",
-  "https://source.unsplash.com/5KvPQc1Uklk/800x600",
-  "https://source.unsplash.com/GtYFwFrFbMA/800x600",
-  "https://source.unsplash.com/Igct8iZucFI/800x600",
-  "https://source.unsplash.com/M01DfkOqz7I/800x600",
-  "https://source.unsplash.com/MoI_cHNcSK8/800x600",
-  "https://source.unsplash.com/M0WbGFRTXqU/800x600",
-  "https://source.unsplash.com/s48nn4NtlZ4/800x600",
-  "https://source.unsplash.com/E4944K_4SvI/800x600",
-  "https://source.unsplash.com/F5Dxy9i8bxc/800x600",
-  "https://source.unsplash.com/iPum7Ket2jo/800x600"
-];
+const ImageInput = React.forwardRef(({ editor, onSearch }, ref) => {
+  const [url, setUrl] = useState("");
+
+  return (
+    <Container>
+      <StyledInput
+        ref={ref}
+        value={url}
+        onChange={e => setUrl(e.target.value)}
+        onKeyUp={e => {
+          if (e.keyCode == 13) {
+            // if the url is not empty
+            if (url) {
+              onSearch(url);
+            } else {
+              editor.focus();
+            }
+          }
+        }}
+        type="text"
+        placeholder="Paste an Image link and press Enter"
+      />
+    </Container>
+  );
+});
 
 class Gallery extends React.Component {
-  state = { currentIndex: null };
+  state = {
+    imgUrls: [],
+    currentIndex: null,
+    isActiveSearch: true,
+    query: ""
+  };
 
-  renderImageContent = (src, index) => {
+  componentDidMount() {}
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.query !== this.state.query) {
+      fetch(
+        "http://api.giphy.com/v1/gifs/search?q=" +
+          this.state.query +
+          "&api_key=dc6zaTOxFJmzC&limit=52"
+      )
+        .then(data => data.json())
+        .then(({ data }) => {
+          const imgUrls = [];
+          data.map(item => {
+            item.image = item.images.original.webp.replace(
+              /.*\.giphy\.com/,
+              "//i.giphy.com"
+            );
+            console.log("item :", item);
+            imgUrls.push(item);
+          });
+          this.setState({ imgUrls, query: this.state.query });
+        });
+    }
+  }
+
+  renderImageContent = (imageObj, index) => {
+    console.log("object :", imageObj);
     return (
       <div
         className="image-wrapper"
         onClick={e => {
           this.props.onComplete();
-          insertImage(this.props.editor, src);
+          insertImage(this.props.editor, imageObj.image);
         }}
       >
-        <img src={src} key={src} />
+        <img src={imageObj.image} key={imageObj.image} />
       </div>
     );
   };
@@ -59,11 +101,22 @@ class Gallery extends React.Component {
     }));
   };
   render() {
+    if (this.state.isActiveSearch) {
+      return (
+        <ImageInput
+          {...this.props}
+          onSearch={query => {
+            this.setState({ isActiveSearch: false, query });
+          }}
+        />
+      );
+    }
+    const { imgUrls } = this.state;
     return (
       <StyledGallery className="x">
         <div className="gallery-container">
           <div className="gallery-grid">
-            {imgUrls.map(this.renderImageContent)}
+            {this.state.imgUrls.map(this.renderImageContent)}
           </div>
           <GalleryModal
             closeModal={this.closeModal}

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledGallery = styled.div`
   .gallery-container {
     border-top: 8px solid #fff;
+    width: 100vw;
     background: #fff;
     position: fixed;
     left: 0px;
@@ -112,4 +113,24 @@ export const StyledGallery = styled.div`
       }
     }
   }
+`;
+
+export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  &:before {
+    content: "🎧";
+    font-size: x-large;
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    padding: 0 8px;
+  }
+`;
+
+export const StyledInput = styled.input`
+  font-size: medium;
+  width: 100%;
+  border: none;
+  outline: none;
 `;
