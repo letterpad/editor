@@ -1,18 +1,18 @@
 import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 import { hasBlock } from "../../helper/strategy";
-import { insertVideo } from "./VideoUtils";
-import { parseUrl } from "./VideoUtils";
+import { insertEmbed } from "./EmbedUtils";
+import { parseUrl } from "./EmbedUtils";
 
 const Container = styled.div`
   width: 100%;
   display: flex;
   &:before {
-    content: "🎧";
+    content: "‹›";
     font-size: x-large;
     display: flex;
     align-items: center;
-    margin-top: 4px;
+    margin-top: 0px;
     padding: 0 8px;
   }
 `;
@@ -41,17 +41,17 @@ const VideoInput: FunctionComponent<any> = React.forwardRef(
               onComplete();
               // if the url is not empty
 
-              const parsedUrl = parseUrl(url);
-              if (parsedUrl) {
+              const embedObj = parseUrl(url);
+              if (embedObj && Object.keys(embedObj).length > 0) {
                 const isActive = hasBlock(editor.value, type);
-                insertVideo(editor, isActive ? "paragraph" : type, parsedUrl);
+                insertEmbed(editor, isActive ? "paragraph" : type, embedObj);
               } else {
                 editor.focus();
               }
             }
           }}
           type="text"
-          placeholder="Paste a youtube or vimeo video link and press Enter"
+          placeholder="Paste a youtube or vimeo video link or an embed code and press Enter"
         />
       </Container>
     );
