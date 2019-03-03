@@ -1,5 +1,8 @@
+/**
+ * Note: This is used for the e2e tests
+ */
 import React, { Component } from "react";
-import { LetterpadEditor } from "./editor";
+import { LetterpadEditor } from "../../src/editor";
 import { Editor } from "slate";
 import Gallery from "./Gallery";
 
