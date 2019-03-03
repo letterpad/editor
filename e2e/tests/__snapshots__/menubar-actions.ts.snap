@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`features adding some text 1`] = `"<p><span><span><span>Hello World!</span></span></span></p>"`;
+exports[`features adding some text 1`] = `"<section><span><span><span>Hello World!</span></span></span></section>"`;
 
-exports[`features blockquote 1`] = `"<blockquote><span><span><span>These is a sample line of text</span></span></span></blockquote><p><span><span><span>﻿<br></span></span></span></p>"`;
+exports[`features blockquote 1`] = `"<blockquote><span><span><span>These is a sample line of text</span></span></span></blockquote><section><span><span><span>﻿<br></span></span></span></section>"`;
 
-exports[`features bold 1`] = `"<p><span><span><span>This is a </span></span><span><strong><span>sample</span></strong></span><span><span> text</span></span></span></p>"`;
+exports[`features bold 1`] = `"<section><span><span><span>This is a </span></span><span><strong><span>sample</span></strong></span><span><span> text</span></span></span></section>"`;
 
-exports[`features clearing editor 1`] = `"<p><span><span><span><span contenteditable=\\"false\\" style=\\"pointer-events: none; display: inline-block; width: 0px; max-width: 100%; white-space: nowrap; opacity: 0.333;\\">Compose a story..</span><span>﻿<br></span></span></span></span></p>"`;
+exports[`features clearing editor 1`] = `"<section><span><span><span><span contenteditable=\\"false\\" style=\\"pointer-events: none; display: inline-block; width: 0px; max-width: 100%; white-space: nowrap; opacity: 0.333;\\">Compose a story..</span><span>﻿<br></span></span></span></span></section>"`;
 
-exports[`features headings 1`] = `"<h2><span><span><span>These is a sample line of text</span></span></span></h2><p><span><span><span>﻿<br></span></span></span></p>"`;
+exports[`features headings 1`] = `"<h2><span><span><span>These is a sample line of text</span></span></span></h2><section><span><span><span>﻿<br></span></span></span></section>"`;
 
-exports[`features headings 2`] = `"<h3><span><span><span>These is a sample line of text</span></span></span></h3><p><span><span><span>﻿<br></span></span></span></p>"`;
+exports[`features headings 2`] = `"<h3><span><span><span>These is a sample line of text</span></span></span></h3><section><span><span><span>﻿<br></span></span></span></section>"`;
 
-exports[`features italics 1`] = `"<p><span><span><span>This is a </span></span><span><em><span>sample</span></em></span><span><span> text</span></span></span></p>"`;
+exports[`features italics 1`] = `"<section><span><span><span>This is a </span></span><span><em><span>sample</span></em></span><span><span> text</span></span></span></section>"`;
 
-exports[`features markdown link 1`] = `"<p><span><span><span>﻿</span></span></span><a class=\\"link-node\\" href=\\"http://google.com\\"><span><span><span>foo</span></span></span></a><span><span><span>﻿</span></span></span></p>"`;
+exports[`features markdown link 1`] = `"<section><span><span><span>﻿</span></span></span><a href=\\"http://google.com\\"><span><span><span>foo</span></span></span></a><span><span><span>﻿</span></span></span></section>"`;
 
-exports[`features underline 1`] = `"<p><span><span><span>This is a </span></span><span><u><span>sample</span></u></span><span><span> text</span></span></span></p>"`;
+exports[`features underline 1`] = `"<section><span><span><span>This is a </span></span><span><u><span>sample</span></u></span><span><span> text</span></span></span></section>"`;
