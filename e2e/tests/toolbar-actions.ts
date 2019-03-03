@@ -19,7 +19,7 @@ describe("features", () => {
       await editorHandle.focus();
       await clearEditor(editorHandle);
       await page.evaluate(() => {
-        window.prompt = () => "http://localhost/embed/link";
+        window.prompt = () => "http://youtube.com/embed/link";
       });
       await page.evaluate(
         'document.querySelector("#letterpad-editor-toolbar-toggle-button").click()'
@@ -34,7 +34,7 @@ describe("features", () => {
       const expected = await getHtmlContents(editorHandle);
 
       await clearEditor(editorHandle);
-      const text = "[audio=http://localhost/embed/link]";
+      const text = "[audio=http://youtube.com/embed/link]";
       await page.keyboard.type(text);
       // because this transformation adds an extra space
       await page.keyboard.press("Backspace");
@@ -43,19 +43,21 @@ describe("features", () => {
       expect(expected).toBe(actual);
     });
 
-    test("youtube", async () => {
+    test("video", async () => {
       await clickXPath("//span[contains(text(), 'music_video')]");
+      await page.waitFor(200);
+      await page.keyboard.type("http://youtube.com/embed/link");
+      await page.keyboard.press("Enter");
       const expected1 = await getHtmlContents(editorHandle);
 
       await clearEditor(editorHandle);
-      const text = "[youtube=http://localhost/embed/link]";
+      const text = "[video=http://youtube.com/embed/link]";
       await page.keyboard.type(text);
       // because this transformation adds an extra space
       await page.keyboard.press("Backspace");
       const expected2 = await getHtmlContents(editorHandle);
 
-      expect(expected1).toMatchSnapshot();
-      expect(expected2).toMatchSnapshot();
+      expect(expected1).toBe(expected2);
     });
 
     test("image", async () => {
