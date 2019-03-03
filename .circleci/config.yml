@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:10
 
     steps:
       - checkout
@@ -23,9 +23,9 @@ jobs:
             - ~/.cache/yarn
 
       - run:
-          name: Bundle demo
-          command: yarn bundle
+          name: Build
+          command: yarn build
 
       - run:
-          name: E2E Puppeteer Tests
-          command: yarn e2e --ci --no-cache
+          name: Test
+          command: yarn test --ci --no-cache
