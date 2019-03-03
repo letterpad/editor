@@ -28,4 +28,6 @@ jobs:
 
       - run:
           name: E2E Puppeteer Tests
+          environment:
+            CHROME_FLAGS: "--no-sandbox --disable-setuid-sandbox"
           command: yarn e2e --ci --no-cache
