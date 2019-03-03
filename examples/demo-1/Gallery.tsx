@@ -1,44 +1,66 @@
-import React, { Component, useState } from "react";
+import React, {
+  Component,
+  useState,
+  FunctionComponent,
+  KeyboardEventHandler
+} from "react";
 import { StyledGallery, Container, StyledInput } from "./Gallery.css";
-import { insertImage } from "./plugins/image/ImageUtils";
+import { insertImage } from "../../src/plugins/image/ImageUtils";
+import { Editor } from "slate";
 
-const ImageInput = React.forwardRef(({ editor, onSearch }, ref) => {
-  const [url, setUrl] = useState("");
+interface ImageInputProps {
+  editor: Editor;
+  onSearch: any;
+}
 
-  return (
-    <Container>
-      <StyledInput
-        ref={ref}
-        value={url}
-        onChange={e => setUrl(e.target.value)}
-        onKeyUp={e => {
-          if (e.keyCode == 13) {
-            // if the url is not empty
-            if (url) {
-              onSearch(url);
-            } else {
-              editor.focus();
+const ImageInput: FunctionComponent<ImageInputProps> = React.forwardRef(
+  ({ editor, onSearch }, ref: React.Ref<HTMLInputElement>) => {
+    const [url, setUrl] = useState("");
+
+    return (
+      <Container>
+        <StyledInput
+          ref={ref}
+          value={url}
+          onChange={(e: any) => setUrl(e.target.value)}
+          onKeyUp={(e: any) => {
+            if (e.keyCode == 13) {
+              // if the url is not empty
+              if (url) {
+                onSearch(url);
+              } else {
+                editor.focus();
+              }
             }
-          }
-        }}
-        type="text"
-        placeholder="Paste an Image link and press Enter"
-      />
-    </Container>
-  );
-});
+          }}
+          type="text"
+          placeholder="Paste an Image link and press Enter"
+        />
+      </Container>
+    );
+  }
+);
 
-class Gallery extends React.Component {
+interface GalleryProps {
+  onComplete: () => any;
+  editor: Editor;
+}
+interface GalleryState {
+  imgUrls: string[];
+  currentIndex: number;
+  isActiveSearch: boolean;
+  query: string;
+}
+
+class Gallery extends React.Component<GalleryProps, GalleryState> {
   state = {
-    imgUrls: [],
-    currentIndex: null,
+    imgUrls: [] as string[],
+    currentIndex: -1,
     isActiveSearch: true,
     query: ""
   };
 
-  componentDidMount() {}
-
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_: any, prevState: any) {
     if (prevState.query !== this.state.query) {
       fetch(
         "http://api.giphy.com/v1/gifs/search?q=" +
@@ -47,8 +69,8 @@ class Gallery extends React.Component {
       )
         .then(data => data.json())
         .then(({ data }) => {
-          const imgUrls = [];
-          data.map(item => {
+          const imgUrls: string[] = [];
+          data.map((item: any) => {
             item.image = item.images.original.webp.replace(
               /.*\.giphy\.com/,
               "//i.giphy.com"
@@ -61,12 +83,12 @@ class Gallery extends React.Component {
     }
   }
 
-  renderImageContent = (imageObj, index) => {
+  renderImageContent = (imageObj: any) => {
     console.log("object :", imageObj);
     return (
       <div
         className="image-wrapper"
-        onClick={e => {
+        onClick={() => {
           this.props.onComplete();
           insertImage(this.props.editor, imageObj.image);
         }}
@@ -75,16 +97,16 @@ class Gallery extends React.Component {
       </div>
     );
   };
-  openModal = (e, index) => {
+  openModal = (_: any, index: number) => {
     this.setState({ currentIndex: index });
   };
-  closeModal = e => {
+  closeModal = (e: Event) => {
     if (e != undefined) {
       e.preventDefault();
     }
-    this.setState({ currentIndex: null });
+    this.setState({ currentIndex: -1 });
   };
-  findPrev = e => {
+  findPrev = (e: Event) => {
     if (e != undefined) {
       e.preventDefault();
     }
@@ -92,7 +114,7 @@ class Gallery extends React.Component {
       currentIndex: prevState.currentIndex - 1
     }));
   };
-  findNext = e => {
+  findNext = (e: Event) => {
     if (e != undefined) {
       e.preventDefault();
     }
@@ -105,7 +127,7 @@ class Gallery extends React.Component {
       return (
         <ImageInput
           {...this.props}
-          onSearch={query => {
+          onSearch={(query: string) => {
             this.setState({ isActiveSearch: false, query });
           }}
         />
@@ -132,18 +154,25 @@ class Gallery extends React.Component {
   }
 }
 
-class GalleryModal extends Component {
+class GalleryModal extends Component<{
+  closeModal: (...args: any[]) => any;
+  hasPrev: boolean;
+  hasNext: boolean;
+  findPrev: (...args: any[]) => any;
+  findNext: (...args: any[]) => any;
+  src: string;
+}> {
   componentDidMount() {
-    document.body.addEventListener("keydown", this.handleKeyDown);
+    document.body.addEventListener("keydown", this.handleKeyDown as any);
   }
   componentWillUnMount() {
-    document.body.removeEventListener("keydown", this.handleKeyDown);
+    document.body.removeEventListener("keydown", this.handleKeyDown as any);
   }
-  handleKeyDown(e) {
+  handleKeyDown: KeyboardEventHandler = e => {
     if (e.keyCode === 27) this.props.closeModal();
     if (e.keyCode === 37 && this.props.hasPrev) this.props.findPrev();
     if (e.keyCode === 39 && this.props.hasNext) this.props.findNext();
-  }
+  };
   render() {
     const {
       closeModal,
@@ -153,14 +182,14 @@ class GalleryModal extends Component {
       findPrev,
       src
     } = this.props;
+
     if (!src) {
-      console.log("whut");
       return null;
     }
     return (
       <div>
         <div className="modal-overlay" onClick={closeModal} />
-        <div isOpen={!!src} className="modal">
+        <div className="modal">
           <div className="modal-body">
             <a
               href="#"

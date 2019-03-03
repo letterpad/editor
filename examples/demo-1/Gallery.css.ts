@@ -81,8 +81,6 @@ export const StyledGallery = styled.div`
           font-weight: lighter;
           background: #fff;
           border-radius: 5px;
-          height: 40px;
-          width: 40px;
           text-align: center;
         }
         .modal-close {
