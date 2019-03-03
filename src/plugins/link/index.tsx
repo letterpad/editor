@@ -49,7 +49,7 @@ const linkConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === TAGNAME) {
           return {
-            object: "block",
+            object: "inline",
             type: type,
             data: {
               className: el.getAttribute("class"),

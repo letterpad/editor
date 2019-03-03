@@ -53,7 +53,7 @@ const ToolbarMenu = styled.div`
     font-size: 18px;
     vertical-align: text-bottom;
     padding: 6px 6px;
-    border: 1px solid #eee;
+    border: 1px solid #111;
     border-radius: 50%;
     margin-right: 5px;
     vertical-align: text-bottom;
@@ -92,7 +92,7 @@ const StyledToolBar = styled.div`
   }
 
   .button {
-    color: #ccc;
+    color: #111;
     cursor: pointer;
     .material-icons {
       vertical-align: text-bottom;
