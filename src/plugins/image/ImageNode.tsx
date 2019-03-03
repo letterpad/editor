@@ -38,7 +38,7 @@ const applyStyles = (type: string) => {
         width: 100vw;
         left: -1rem;
         @media screen and (min-width: 740px) {
-          left: calc((-100vw + 740px - 2rem) / 2);
+          left: calc((-100vw + 100%) / 2);
         }
     `;
     }

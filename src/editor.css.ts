@@ -1,9 +1,17 @@
 import styled from "styled-components";
 
 export const EditorWrapper = styled.div`
+  --editorPadding: 1rem;
+  --fontSize: 1.1rem;
+  --spacingTop: 2rem;
+  --spacingTopSmall: 0.5rem;
+  --spacingBottom: 1rem;
+  --editorWidth: ${({ width }: { width?: number }) => (width ? width : 740)}px;
+
+  /* reset native styles */
+  box-sizing: border-box;
+  margin: 0;
   & * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
 
     /* remove defaults */
@@ -12,17 +20,17 @@ export const EditorWrapper = styled.div`
     border: 0;
   }
 
-  width: ${({ width }: { width?: number }) => (width ? width : 740)}px;
+  width: var(--editorWidth);
   margin: auto;
 
-  font-size: 1.1rem;
+  font-size: var(--fontSize);
   font-weight: 200;
   font-style: normal;
   font-family: "Libre Baskerville", serif;
   text-rendering: optimizeLegibility;
   color: #000000;
 
-  padding: 1rem;
+  padding: var(--editorPadding);
   line-height: 2;
 
   h1,
@@ -32,8 +40,8 @@ export const EditorWrapper = styled.div`
     font-family: "Libre Franklin", sans-serif;
     text-rendering: optimizeLegibility;
     line-height: 1;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-top: var(--spacingTop);
+    padding-bottom: var(--spacingBottom);
   }
 
   h1 {
@@ -60,34 +68,34 @@ export const EditorWrapper = styled.div`
     font-size: 1.5rem;
   }
 
-  p {
+  section {
     padding: 0;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-top: var(--spacingTop);
+    padding-bottom: var(--spacingBottom);
     text-align: justify;
   }
 
-  h1 + p {
-    padding-top: 1rem;
+  h1 + section {
+    padding-top: var(--spacingTop);
   }
 
-  h2 + p,
-  h3 + p,
-  h4 + p {
-    padding-top: 0.5rem;
+  h2 + section,
+  h3 + section,
+  h4 + section {
+    padding-top: var(--spacingTopSmall);
   }
 
   h1 + h2,
   h2 + h3,
   h3 + h4 {
-    padding-top: 1rem;
+    padding-top: var(--spacingTop);
   }
 
   ul,
   ol {
     padding: 2rem;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-top: var(--spacingTop);
+    padding-bottom: var(--spacingBottom);
   }
 
   hr {
