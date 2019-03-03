@@ -1,10 +1,10 @@
 import React from "react";
-import { applyYoutube } from "./YoutubeUtils";
 import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
 import { Editor } from "slate";
+import VideoInput from "./VideoInput";
 
-const YoutubeButton = ({
+const VideoButton = ({
   editor,
   callbacks
 }: {
@@ -19,14 +19,12 @@ const YoutubeButton = ({
     <Button
       isActive={hasBlock(editor.value, type)}
       icon="music_video"
-      onMouseDown={e => {
-        callbacks.onButtonClick(e, type);
-        e.preventDefault();
-        const src = window.prompt("Enter the URL of the Youtube:");
-        const isActive = hasBlock(editor.value, type);
-        return applyYoutube(editor, isActive ? "paragraph" : type, src);
+      onMouseDown={_ => {
+        if (callbacks.showPlaceholder) {
+          callbacks.showPlaceholder(VideoInput);
+        }
       }}
     />
   );
 };
-export default YoutubeButton;
+export default VideoButton;

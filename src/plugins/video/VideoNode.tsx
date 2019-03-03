@@ -2,7 +2,7 @@ import React, { SFC } from "react";
 import { Block } from "slate";
 import { getAttributesFromNode } from "../../helper/util";
 
-const YoutubeNode: SFC<{
+const VideoNode: SFC<{
   attributes: any;
   node: Block;
 }> = ({ node, attributes, children }) => {
@@ -21,4 +21,4 @@ const YoutubeNode: SFC<{
   );
 };
 
-export default YoutubeNode;
+export default VideoNode;

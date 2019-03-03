@@ -11,7 +11,7 @@ import { default as linebreakConfig } from "./linebreak";
 import { default as linkConfig } from "./link";
 import { default as listConfig } from "./list";
 import { default as underlineConfig } from "./underline";
-import { default as youtubeConfig } from "./youtube";
+import { default as videoConfig } from "./video";
 import { PluginConfig } from ".";
 
 /**
@@ -36,7 +36,7 @@ const pluginConfigs: PluginConfig[] = [
   ...autoscrollConfig,
   ...imageConfig,
   ...linebreakConfig,
-  ...youtubeConfig
+  ...videoConfig
 ];
 
 export default pluginConfigs;
