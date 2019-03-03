@@ -24,7 +24,7 @@ const ImageNode: SFC<{
 }> = ({ attributes, node }) => {
   if (isTextNode(node)) return null;
   const [alignOption, setAlignOption] = useState("center");
-  const [caption, setCaption] = useState("");
+  const [caption, setCaption] = useState("Image caption");
   const [captionActive, setCaptionActive] = useState(false);
 
   const [menu, setMenu] = useState(false);
@@ -93,7 +93,7 @@ const ImageNode: SFC<{
           }, 10);
         }}
       >
-        {caption}
+        {caption || " "}
       </StyledCaption>
     );
   };
