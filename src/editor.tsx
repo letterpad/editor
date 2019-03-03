@@ -190,11 +190,11 @@ export class LetterpadEditor extends Component<
     if (transfer.type != "html") return next();
 
     // remove style attr
-    const REMOVE_STYLE_ATTR = /style="[^\"]*"/gi;
-    const html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
+    // const REMOVE_STYLE_ATTR = /style="[^\"]*"/gi;
+    // const html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
 
     // TODO: fix the transfer as any
-    const { document } = this.html.deserialize(html);
+    const { document } = this.html.deserialize((transfer as any).html);
     editor.insertFragment(document);
   };
 
