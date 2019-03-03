@@ -20,3 +20,8 @@ before_script:
 
 script:
   - yarn e2e --ci --no-cache
+
+# Build PRs and master branch alone
+branches:
+  only:
+    - master
