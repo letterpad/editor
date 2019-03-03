@@ -34,6 +34,7 @@ export interface LetterpadEditorProps {
     callbacks: { [key: string]: Function }
   ): void;
   onBeforeRender(props: { type: string }): void;
+  width?: number;
 }
 
 interface LetterpadEditorState {
@@ -150,7 +151,7 @@ export class LetterpadEditor extends Component<
         this.setState({
           toolbarActive: true,
           toolbarPosition: {
-            top: top + window.scrollY - 8,
+            top: top + window.scrollY + 28,
             left: left - 60,
             width: width + 60
           }
@@ -278,7 +279,7 @@ export class LetterpadEditor extends Component<
       onButtonClick: this.props.onButtonClick
     };
     return (
-      <EditorWrapper>
+      <EditorWrapper width={this.props.width}>
         <SlateReactEditor
           schema={schemaProps}
           plugins={this.state.slateReactPlugins}

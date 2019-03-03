@@ -36,7 +36,10 @@ const applyStyles = (type: string) => {
     case "full": {
       return `
         width: 100vw;
-        margin-left: -25vw;
+        left: -1rem;
+        @media screen and (min-width: 740px) {
+          left: calc((-100vw + 740px - 2rem) / 2);
+        }
     `;
     }
   }
