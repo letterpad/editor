@@ -6,6 +6,7 @@ const StyledCode = styled.code`
   font-size: large;
   padding: 2px 4px;
   border-radius: 4px;
+  font-family: inherit;
 `;
 /* eslint-disable react/prop-types */
 const highlightMark: SFC = ({ children }) => {
