@@ -4,34 +4,33 @@ const applyStyles = (type: string) => {
   switch (type) {
     case "left": {
       return `
-          margin-left: -100px;
-          max-width: 400px;
-          display: inline-block;
-          float: left;
-          margin-right: 40px;
-        `;
+        margin-left: -100px;
+        max-width: 400px;
+        display: inline-block;
+        float: left;
+        margin-right: 40px;
+      `;
     }
     case "center": {
       return `
-          margin-left: initial;
-          max-width: 100%;
-        `;
+        margin-left: initial;
+        max-width: 100%;
+      `;
     }
     case "wide": {
       return `
-          margin-left: -100px;
-          max-width: calc(100% + 200px);
-          margin-right: -300px;
-        `;
+        left: -100px;
+        width: calc(100% + 200px);
+      `;
     }
     case "full": {
       return `
-          width: 100vw;
-          left: -1rem;
-          @media screen and (min-width: 740px) {
-            left: calc((-100vw + 740px - 2rem) / 2);
-          }
-      `;
+        width: 100vw;
+        left: calc(-1.5 * var(--editorPadding) );
+        @media screen and (min-width: 740px) {
+          left: calc((-100vw + 100%) / 2);
+        }
+    `;
     }
   }
 };

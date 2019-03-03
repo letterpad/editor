@@ -9,12 +9,12 @@ const paragraphConfig: PluginConfig[] = [
     tag: "node",
     identifier,
     render: ({ children, attributes }: any) => (
-      <p {...attributes}>{children}</p>
+      <section {...attributes}>{children}</section>
     ),
     rules: {
       serialize(obj: any, children: any) {
         if (obj.object === "block" && obj.type === "p") {
-          return <p>{children}</p>;
+          return <section>{children}</section>;
         }
       },
       deserialize(el, next) {

@@ -54,6 +54,36 @@ const initialValue: ValueJSON = {
           }
         ]
       },
+      {
+        object: "block",
+        type: "p",
+        nodes: [
+          {
+            object: "inline",
+            type: "img",
+            data: {
+              src:
+                "https://cdn.pixabay.com/photo/2017/12/29/18/47/nature-3048299__340.jpg"
+            }
+          }
+        ]
+      },
+
+      {
+        object: "block",
+        type: "p",
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: ""
+              }
+            ]
+          }
+        ]
+      },
       ...(introParas.map(para => ({
         object: "block",
         type: "p",
@@ -72,21 +102,6 @@ const initialValue: ValueJSON = {
           }
         ]
       })) as any),
-      {
-        object: "block",
-        type: "p",
-        nodes: [
-          {
-            object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: ""
-              }
-            ]
-          }
-        ]
-      },
       {
         object: "block",
         type: "p",
