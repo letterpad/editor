@@ -2,17 +2,17 @@ import React, { SFC } from "react";
 import { Block } from "slate";
 import { getAttributesFromNode } from "../../helper/util";
 
-const VideoNode: SFC<{
+const EmbedNode: SFC<{
   attributes: any;
   node: Block;
 }> = ({ node, attributes, children }) => {
   const attrs = getAttributesFromNode(node);
+
   return (
     <iframe
       {...attributes}
       type="text/html"
-      width="640"
-      height="360"
+      width="100%"
       frameBorder="0"
       {...attrs}
     >
@@ -21,4 +21,4 @@ const VideoNode: SFC<{
   );
 };
 
-export default VideoNode;
+export default EmbedNode;

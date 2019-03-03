@@ -1,14 +1,14 @@
 import React from "react";
-import VideoNode from "./VideoNode";
-import VideoButton from "./VideoButton";
+import EmbedNode from "./EmbedNode";
+import EmbedButton from "./EmbedButton";
 import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 import { hasBlock } from "../../helper/strategy";
-import { parseUrl, insertVideo } from "./VideoUtils";
+import { parseUrl, insertEmbed } from "./EmbedUtils";
 
 const TAGNAME = "iframe";
 
-export const VideoPlugin: PluginConfig["slatePlugin"] = () => {
+export const EmbedPlugin: PluginConfig["slatePlugin"] = () => {
   return {
     onKeyDown(event, editor, next) {
       if (isKeyboardEvent(event)) {
@@ -25,23 +25,23 @@ export const VideoPlugin: PluginConfig["slatePlugin"] = () => {
   };
 };
 
-const videoConfig: PluginConfig[] = [
+const EmbedConfig: PluginConfig[] = [
   {
     type: "block",
     tag: "node",
     menuButtons: [],
-    toolbarButtons: [{ button: VideoButton }],
-    render: VideoNode,
+    toolbarButtons: [{ button: EmbedButton }],
+    render: EmbedNode,
     identifier: [TAGNAME],
-    slatePlugin: VideoPlugin,
+    slatePlugin: EmbedPlugin,
     markdown: {
       trigger: "]",
-      before: /(\[video=?.*)/,
+      before: /(\[embed=?.*)/,
       change: (editor, _, matches) => {
-        const src = matches.before[0].replace("[video=", "");
+        const src = matches.before[0].replace("[embed=", "");
         const parsedSrc = parseUrl(src);
         if (parsedSrc) {
-          return insertVideo(editor, TAGNAME, parsedSrc);
+          return insertEmbed(editor, TAGNAME, parsedSrc);
         }
         return editor.focus();
       }
@@ -53,7 +53,7 @@ const videoConfig: PluginConfig[] = [
         }
         const props = { children, node: obj, attributes: {} };
         if (obj.type === TAGNAME) {
-          return <VideoNode {...props} />;
+          return <EmbedNode {...props} />;
         }
       },
       deserialize: (el, next) => {
@@ -74,4 +74,4 @@ const videoConfig: PluginConfig[] = [
   }
 ];
 
-export default videoConfig;
+export default EmbedConfig;
