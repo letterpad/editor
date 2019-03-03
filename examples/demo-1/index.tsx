@@ -35,7 +35,6 @@ class Demo extends Component {
       <LetterpadEditor
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
-        // pluginCallbacks
       />
     );
   }

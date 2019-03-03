@@ -5,10 +5,18 @@ export const EditorWrapper = styled.div`
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+
+    /* remove defaults */
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
 
+  width: ${({ width }: { width?: number }) => (width ? width : 740)}px;
+  margin: auto;
+
   font-size: 1.1rem;
-  font-weight: 300;
+  font-weight: 200;
   font-style: normal;
   font-family: "Libre Baskerville", serif;
   text-rendering: optimizeLegibility;
@@ -24,7 +32,8 @@ export const EditorWrapper = styled.div`
     font-family: "Libre Franklin", sans-serif;
     text-rendering: optimizeLegibility;
     line-height: 1;
-    margin-top: 3.5rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
   }
 
   h1 {
@@ -51,9 +60,34 @@ export const EditorWrapper = styled.div`
     font-size: 1.5rem;
   }
 
+  p {
+    padding: 0;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    text-align: justify;
+  }
+
+  h1 + p {
+    padding-top: 1rem;
+  }
+
+  h2 + p,
+  h3 + p,
+  h4 + p {
+    padding-top: 0.5rem;
+  }
+
+  h1 + h2,
+  h2 + h3,
+  h3 + h4 {
+    padding-top: 1rem;
+  }
+
   ul,
   ol {
-    margin: 2em 0;
+    padding: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
   }
 
   hr {
