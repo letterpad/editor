@@ -8,7 +8,7 @@ const paragraphConfig: PluginConfig[] = [
     type: "block",
     tag: "node",
     identifier,
-    render: (props: any) => <p {...props} />
+    render: ({ children, attributes }: any) => <p {...attributes}>{children}</p>
   }
 ];
 
