@@ -20,7 +20,8 @@ export const EditorWrapper = styled.div`
     border: 0;
   }
 
-  width: var(--editorWidth);
+  max-width: var(--editorWidth);
+  min-width: 360px;
   margin: auto;
 
   font-size: var(--fontSize);

@@ -28,15 +28,14 @@ const applyStyles = (type: string) => {
     }
     case "wide": {
       return `
-        margin-left: -100px;
-        max-width: calc(100% + 200px);
-        margin-right: -300px;
+      left: -100px;
+        width: calc(100% + 200px);
       `;
     }
     case "full": {
       return `
         width: 100vw;
-        left: -1rem;
+        left: calc(-1.5 * var(--editorPadding) );
         @media screen and (min-width: 740px) {
           left: calc((-100vw + 100%) / 2);
         }
