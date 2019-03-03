@@ -56,12 +56,12 @@ describe("features", () => {
   test("headings", async () => {
     await applyEditorFeatureToLine(
       editorHandle,
-      "//span[contains(text(), 'looks_one')]"
+      "//span[contains(text(), 'looks_two')]"
     );
     expect(await getHtmlContents(editorHandle)).toMatchSnapshot();
     await applyEditorFeatureToLine(
       editorHandle,
-      "//span[contains(text(), 'looks_two')]"
+      "//span[contains(text(), 'looks_3')]"
     );
     expect(await getHtmlContents(editorHandle)).toMatchSnapshot();
   });
@@ -163,11 +163,11 @@ describe("features", () => {
       await page.keyboard.down("Shift");
       await repeatKey("ArrowLeft", text.length - 2);
       await page.keyboard.up("Shift");
-      await clickXPath("//span[contains(text(), 'looks_one')]");
+      await clickXPath("//span[contains(text(), 'looks_two')]");
       const actual = await getHtmlContents(editorHandle);
 
       await clearEditor(editorHandle);
-      await page.keyboard.type("# bar");
+      await page.keyboard.type("## bar");
       const expected = await getHtmlContents(editorHandle);
 
       expect(expected).toBe(actual);
