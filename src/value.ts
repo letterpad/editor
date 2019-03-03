@@ -1,14 +1,24 @@
 import { ValueJSON, BlockJSON } from "slate";
 
-const introPara = `
-Letterpad is an open-source and a high
-performant publishing engine for blogs with a state-of-the-art
-technology. It uses React, GraphQL, Express and Sequelize ORM.
-Few of the core features are listed below:
-`
-  .trim()
-  .split("\n")
-  .join(" ");
+const introParas = [
+  `
+  Lorem Ipsum is simply dummy text of the printing and typesetting
+  industry. Lorem Ipsum has been the industry's standard dummy text
+  ever since the 1500s, when an unknown printer took a galley of
+  type and scrambled it to make a type specimen book. It has survived
+  not only five centuries, but also the leap into electronic
+  typesetting, remaining essentially unchanged. It was popularised
+  in the 1960s with the release of Letraset sheets containing Lorem
+  Ipsum passages, and more recently with desktop publishing software
+  like Aldus PageMaker including versions of Lorem Ipsum.
+  `,
+  `
+  Letterpad is an open-source and a high
+  performant publishing engine for blogs with a state-of-the-art
+  technology. It uses React, GraphQL, Express and Sequelize ORM.
+  Few of the core features are listed below:
+  `
+];
 
 const features = [
   "Server side rendering",
@@ -44,39 +54,27 @@ const initialValue: ValueJSON = {
           }
         ]
       },
-      {
+      ...(introParas.map(para => ({
         object: "block",
-        type: "paragraph",
+        type: "p",
         nodes: [
           {
             object: "text",
             leaves: [
               {
                 object: "leaf",
-                text: introPara
+                text: para
+                  .trim()
+                  .split("\n")
+                  .join(" ")
               }
             ]
           }
         ]
-      },
+      })) as any),
       {
         object: "block",
-        type: "paragraph",
-        nodes: [
-          {
-            object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: ""
-              }
-            ]
-          }
-        ]
-      },
-      {
-        object: "block",
-        type: "paragraph",
+        type: "p",
         nodes: [
           {
             object: "text",
@@ -91,7 +89,7 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "paragraph",
+        type: "p",
         nodes: [
           {
             object: "text",
@@ -106,7 +104,22 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "paragraph",
+        type: "p",
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
         nodes: [
           {
             object: "text",
@@ -143,7 +156,7 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "paragraph",
+        type: "p",
         nodes: [
           {
             object: "inline",

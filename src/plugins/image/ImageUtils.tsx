@@ -17,7 +17,7 @@ export const insertImage = (
       data: { src }
     })
     .moveToEndOfBlock()
-    .insertBlock("paragraph");
+    .insertBlock("p");
 };
 
 export const updateInlineImage = ({

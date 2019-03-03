@@ -15,7 +15,7 @@ const AudioPlugin: PluginConfig["slatePlugin"] = () => ({
       const isActive = hasBlock(editor.value, type);
       if (isActive) {
         event.preventDefault();
-        return editor.splitBlock(1).setBlocks("paragraph");
+        return editor.splitBlock(1).setBlocks("p");
       }
     }
     return next();
@@ -27,7 +27,7 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   return editor
     .setBlocks({ type: "audio", data: { src: src } })
     .moveToEndOfBlock()
-    .insertBlock("paragraph");
+    .insertBlock("p");
 };
 
 const audioConfig: PluginConfig[] = [

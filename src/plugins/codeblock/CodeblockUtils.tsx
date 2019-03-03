@@ -93,7 +93,7 @@ export const insertNewLineBeforeCodeBlock = (change: Editor) => {
     parentContainer.key,
     index,
     Block.create({
-      type: "paragraph"
+      type: "p"
     })
   );
 

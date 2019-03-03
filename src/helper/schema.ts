@@ -4,13 +4,13 @@ const schemaProps: SchemaProperties = {
   document: {
     last: [
       {
-        type: "paragraph"
+        type: "p"
       }
     ],
     normalize: (editor, { code, node }) => {
       switch (code) {
         case "last_child_type_invalid": {
-          const paragraph = Block.create("paragraph");
+          const paragraph = Block.create("p");
           return editor.insertNodeByKey(node.key, node.nodes.size, paragraph);
         }
       }

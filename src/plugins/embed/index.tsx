@@ -16,7 +16,7 @@ export const EmbedPlugin: PluginConfig["slatePlugin"] = () => {
           const isActive = hasBlock(editor.value, TAGNAME);
           if (isActive) {
             event.preventDefault();
-            return editor.splitBlock(1).setBlocks("paragraph");
+            return editor.splitBlock(1).setBlocks("p");
           }
         }
       }

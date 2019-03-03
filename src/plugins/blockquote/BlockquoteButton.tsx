@@ -15,7 +15,7 @@ const BlockquoteButton: EditorButtonComponent = ({ editor }) => {
       icon="format_quote"
       onMouseDown={() => {
         const isActive = hasBlock(editor.value, type);
-        return applyBlockquote(editor, isActive ? "paragraph" : type);
+        return applyBlockquote(editor, isActive ? "p" : type);
       }}
     />
   );
