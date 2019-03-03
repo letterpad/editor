@@ -172,10 +172,10 @@
   resolved "https://registry.yarnpkg.com/@types/jest-diff/-/jest-diff-20.0.1.tgz#35cc15b9c4f30a18ef21852e255fdb02f6d59b89"
   integrity sha512-yALhelO3i0hqZwhjtcr6dYyaLoCHbAMshwtj6cGxTvHZAKXHsYGdff6E8EPw3xLKY0ELUTQ69Q1rQiJENnccMA==
 
-"@types/jest-environment-puppeteer@^2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@types/jest-environment-puppeteer/-/jest-environment-puppeteer-2.2.1.tgz#ececed13f3950ea6a7f8846537d3a1f6fc598646"
-  integrity sha512-jY3BOc+oAMls2Yl0HSXulCoqQoDgHBIgshulIcKwl9ZS+rlIdDPwfdN1Mvl973D2sl7FgwCfjI+pVkiaZBCqcw==
+"@types/jest-environment-puppeteer@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/jest-environment-puppeteer/-/jest-environment-puppeteer-4.0.0.tgz#0e696618965e7472471e4f1ae25adb72bcf38433"
+  integrity sha512-On6C1NKiruviCSUaZgNW4yR0J05rLZTgOyIFMiT9F66rR8zwCQu1Wj9+c50+f5r6m207+hjxtPy1Tgrr+nkfkw==
   dependencies:
     "@types/puppeteer" "*"
 
@@ -186,10 +186,15 @@
   dependencies:
     "@types/jest-diff" "*"
 
-"@types/node@*", "@types/node@^11.9.5":
+"@types/node@*":
   version "11.9.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.9.5.tgz#011eece9d3f839a806b63973e228f85967b79ed3"
   integrity sha512-vVjM0SVzgaOUpflq4GYBvCpozes8OgIIS5gVXVka+OfK3hvnkC1i93U8WiY2OtNE4XUWyyy/86Kf6e0IHTQw1Q==
+
+"@types/node@^11.10.4":
+  version "11.10.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.10.4.tgz#3f5fc4f0f322805f009e00ab35a2ff3d6b778e42"
+  integrity sha512-wa09itaLE8L705aXd8F80jnFpxz3Y1/KRHfKsYL2bPc0XF+wEWu8sR9n5bmeu8Ba1N9z2GRNzm/YdHcghLkLKg==
 
 "@types/parse5@^5.0.0":
   version "5.0.0"
@@ -243,10 +248,10 @@
     "@types/react" "*"
     "@types/slate" "*"
 
-"@types/slate-react@^0.20.3":
-  version "0.20.3"
-  resolved "https://registry.yarnpkg.com/@types/slate-react/-/slate-react-0.20.3.tgz#a2a09c448954b03d518a6c651ac3b4f7b6e91e1a"
-  integrity sha512-ScWFHtM1Yk0JFvwjacQtc0CU5fDnE3ilJuocG6mY5oqETQ3OLNw8CYD8AjW9Fs3X9idnvtIOXiHJWbLt1vdJIQ==
+"@types/slate-react@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@types/slate-react/-/slate-react-0.21.0.tgz#cf2526acd6cc650d64ff20e2bfcb8f306a234883"
+  integrity sha512-4j7ZsWUF8OuKHACcfoO69jeKxyyxof18uDVTGom8jNLDj81Ssm1VnbYL3O8TbrS8y1gGNbekA7YbjRWldchNOw==
   dependencies:
     "@types/react" "*"
     "@types/slate" "*"

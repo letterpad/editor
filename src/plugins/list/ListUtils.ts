@@ -4,7 +4,7 @@ import {
   getNodeOfType
   // getBlockParent
 } from "../../helper/strategy";
-import { Editor, Value } from "slate";
+import { Editor, Value, Text, Node, Path } from "slate";
 const itemType = "li";
 
 export const onTab = (event: KeyboardEvent, editor: Editor) => {
@@ -12,6 +12,10 @@ export const onTab = (event: KeyboardEvent, editor: Editor) => {
   if (event.shiftKey) return decreaseListDepthStrategy(editor);
   return increaseListDepthStrategy(editor);
 };
+
+export function isTextNode(node: Node): node is Text {
+  return node.object === "text";
+}
 
 export const onBackspace = (_: any, editor: Editor, next: () => {}) => {
   const { value } = editor;
@@ -21,10 +25,55 @@ export const onBackspace = (_: any, editor: Editor, next: () => {}) => {
   if (value.selection.start.offset === 0) {
     const node = getNodeOfType(value, itemType);
     if (!node) return;
-    deepRemoveList(editor);
+
+    const currentUl = value.document.getParent(node.key);
+    if (!currentUl) return next();
+    if (isTextNode(currentUl)) return next();
+    if (currentUl.type !== "ul") return next();
+
+    const previousBlock = value.document.getPreviousNode(node.key);
+
+    if (previousBlock && !isTextNode(previousBlock)) {
+      // if it's a parent
+      console.log(previousBlock.hasDescendant(node.key));
+
+      if (previousBlock.hasDescendant(node.key)) {
+        return decreaseListDepthStrategy(editor);
+      }
+
+      switch (previousBlock.type) {
+        case "li":
+          const previousUl = value.document.getParent(previousBlock.key);
+
+          if (
+            previousUl &&
+            !isTextNode(previousUl) &&
+            currentUl.type === "ul" &&
+            previousUl.type === "ul"
+          ) {
+            if (currentUl === previousUl) {
+              if (node.text) {
+                editor.mergeNodeByKey(node.key);
+              } else {
+                editor.removeNodeByKey(node.key);
+              }
+            } else {
+              editor.mergeNodeByKey(currentUl.key);
+            }
+          }
+          return;
+        case "paragraph":
+          if (!previousBlock.text) {
+            editor.removeNodeByKey(previousBlock.key);
+          } else {
+            deepRemoveList(editor);
+          }
+          return;
+      }
+    }
   }
 
-  next();
+  return next();
 };
 
 export const onEnter = (
@@ -158,7 +207,31 @@ export const increaseListDepthStrategy = (editor: Editor) => {
   // If it is not a list, kill the action immediately.
   if (!hasBlock(value, itemType)) return editor;
 
-  if (isUnorderedList(value)) return applyUnorderedList(editor);
+  if (isUnorderedList(value)) {
+    const anchor = editor.value.anchorBlock;
+    const previousLi = editor.value.document.getPreviousSibling(
+      getPath(editor, anchor.key)
+    );
+    if (previousLi && !isTextNode(previousLi)) {
+      const lastNode = previousLi.nodes.last();
+
+      if (isTextNode(lastNode)) {
+        editor = editor.wrapBlockByPath(getPath(editor, lastNode.key), "span");
+      }
+
+      return editor
+        .moveNodeByPath(
+          getPath(editor, editor.value.anchorBlock.key),
+          getPath(editor, previousLi.key),
+          previousLi.nodes.size
+        )
+        .wrapBlockByKey(editor.value.anchorBlock.key, "ul")
+        .focus();
+    } else {
+      return editor.focus();
+    }
+  }
+
   if (isOrderedList(value)) return applyOrderedList(editor);
   return editor;
 };
@@ -175,3 +248,7 @@ export const decreaseListDepthStrategy = (editor: Editor) => {
   if (isOrderedList(value) && depth > 2) return onlyRemoveOrderedList(editor);
   return editor;
 };
+
+export function getPath(editor: Editor, key: string): Path {
+  return editor.value.document.getPath(key);
+}
