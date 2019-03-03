@@ -56,12 +56,12 @@ describe("features", () => {
   test("headings", async () => {
     await applyEditorFeatureToLine(
       editorHandle,
-      "//span[contains(text(), 'looks_one')]"
+      "//span[contains(text(), 'looks_two')]"
     );
     expect(await getHtmlContents(editorHandle)).toMatchSnapshot();
     await applyEditorFeatureToLine(
       editorHandle,
-      "//span[contains(text(), 'looks_two')]"
+      "//span[contains(text(), 'looks_3')]"
     );
     expect(await getHtmlContents(editorHandle)).toMatchSnapshot();
   });
@@ -163,11 +163,11 @@ describe("features", () => {
       await page.keyboard.down("Shift");
       await repeatKey("ArrowLeft", text.length - 2);
       await page.keyboard.up("Shift");
-      await clickXPath("//span[contains(text(), 'looks_one')]");
+      await clickXPath("//span[contains(text(), 'looks_two')]");
       const actual = await getHtmlContents(editorHandle);
 
       await clearEditor(editorHandle);
-      await page.keyboard.type("# bar");
+      await page.keyboard.type("## bar");
       const expected = await getHtmlContents(editorHandle);
 
       expect(expected).toBe(actual);
@@ -184,6 +184,25 @@ describe("features", () => {
 
       await clearEditor(editorHandle);
       await page.keyboard.type("> foo");
+      const expected = await getHtmlContents(editorHandle);
+
+      expect(expected).toBe(actual);
+    });
+
+    test("code highlight", async () => {
+      await clearEditor(editorHandle);
+      const text = "foo";
+      await page.keyboard.type(text);
+      await page.keyboard.down("Shift");
+      await repeatKey("ArrowLeft", text.length);
+      await page.keyboard.up("Shift");
+      await clickXPath("//span[contains(text(), 'highlight')]");
+      const actual = await getHtmlContents(editorHandle);
+
+      await clearEditor(editorHandle);
+      await page.keyboard.type("`foo`");
+      // because this transformation adds an extra space
+      await page.keyboard.press("Backspace");
       const expected = await getHtmlContents(editorHandle);
 
       expect(expected).toBe(actual);
