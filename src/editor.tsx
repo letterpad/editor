@@ -28,7 +28,11 @@ import { getRules } from "./helper/rules";
 import Toolbar from "./components/Toolbar";
 
 export interface LetterpadEditorProps {
-  onButtonClick(e: MouseEvent, type: string): void;
+  onButtonClick(
+    e: MouseEvent,
+    type: string,
+    callbacks: { [key: string]: Function }
+  ): void;
   onBeforeRender(props: { type: string }): void;
 }
 

@@ -156,7 +156,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
      * if in case 1ms fails, then increase the timeout
      */
     setTimeout(() => {
-      if (placeholder.current) {
+      if (placeholder.current && placeholder.current.focus) {
         placeholder.current.focus();
       }
     }, 1);
