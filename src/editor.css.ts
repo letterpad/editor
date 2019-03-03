@@ -1,32 +1,54 @@
 import styled from "styled-components";
 
 export const EditorWrapper = styled.div`
-  font-size: 1rem;
-  font-weight: 200;
-  font-style: normal;
-  font-family: "Roboto", sans-serif;
-  text-rendering: optimizeLegibility;
-  color: #1a1a1a;
-
-  * {
+  & * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
 
-  padding: 5rem;
-  line-height: 1.625;
+  font-size: 1.1rem;
+  font-weight: 300;
+  font-style: normal;
+  font-family: "Libre Baskerville", serif;
+  text-rendering: optimizeLegibility;
+  color: #000000;
 
-  h1 {
-    font-family: "Raleway", "Lucida Sans", "Lucida Sans Regular",
-      "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    font-weight: 200;
-    font-size: 3.5rem;
+  padding: 1rem;
+  line-height: 2;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Libre Franklin", sans-serif;
     text-rendering: optimizeLegibility;
     line-height: 1;
     margin-top: 3.5rem;
-    color: #3a3a3a;
-    border-bottom: solid 1px #3a3a3a;
+  }
+
+  h1 {
+    font-size: 4rem;
+    color: #171717;
+    border-bottom: solid 1px #171717;
+  }
+
+  h2,
+  h3,
+  h4 {
+    color: #000000;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
   }
 
   ul,

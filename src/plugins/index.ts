@@ -8,7 +8,6 @@ import { default as audioConfig } from "./audio";
 import { default as autoscrollConfig } from "./autoscroll";
 import { default as blockquoteConfig } from "./blockquote";
 import { default as boldConfig } from "./bold";
-import { default as codeblockConfig } from "./codeblock";
 import { default as headingsConfig } from "./headings";
 import { default as highlightConfig } from "./highlight";
 import { default as imageConfig } from "./image";
@@ -18,12 +17,13 @@ import { default as linkConfig } from "./link";
 import { default as listConfig } from "./list";
 import { default as underlineConfig } from "./underline";
 import { default as embedConfig } from "./embed";
+import { default as paragraphConfig } from "./paragraph";
 
 /**
  * Order of displaying in the menubar
  */
 const pluginConfigs: PluginConfig[] = [
-  ...codeblockConfig,
+  ...paragraphConfig,
 
   ...boldConfig,
   ...italicConfig,

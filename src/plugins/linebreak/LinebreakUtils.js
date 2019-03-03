@@ -4,6 +4,6 @@ export const applyLinebreak = (editor, type) => {
       type: type,
       isVoid: true
     })
-    .insertBlock("paragraph")
+    .insertBlock("p")
     .focus();
 };

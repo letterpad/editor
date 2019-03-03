@@ -44,7 +44,7 @@ const VideoInput: FunctionComponent<any> = React.forwardRef(
               const embedObj = parseUrl(url);
               if (embedObj && Object.keys(embedObj).length > 0) {
                 const isActive = hasBlock(editor.value, type);
-                insertEmbed(editor, isActive ? "paragraph" : type, embedObj);
+                insertEmbed(editor, isActive ? "p" : type, embedObj);
               } else {
                 editor.focus();
               }

@@ -65,7 +65,7 @@ export const getOrderedListNode = (value: Value) => {
 
 export const removeUnorderedList = (editor: Editor) => {
   editor
-    .setBlocks("paragraph")
+    .setBlocks("p")
     .unwrapBlock("ul")
     .focus();
 };
@@ -79,7 +79,7 @@ export const switchToOrderedList = (editor: Editor) => {
 
 export const removeOrderedList = (editor: Editor) => {
   return editor
-    .setBlocks("paragraph")
+    .setBlocks("p")
     .unwrapBlock("ol")
     .focus();
 };

@@ -5,7 +5,7 @@ const initialValue: ValueJSON = {
     nodes: [
       {
         object: "block",
-        type: "paragraph",
+        type: "p",
         nodes: [
           {
             object: "text",
