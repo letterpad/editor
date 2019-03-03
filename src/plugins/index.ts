@@ -17,7 +17,7 @@ import { default as linebreakConfig } from "./linebreak";
 import { default as linkConfig } from "./link";
 import { default as listConfig } from "./list";
 import { default as underlineConfig } from "./underline";
-import { default as videoConfig } from "./video";
+import { default as embedConfig } from "./embed";
 
 /**
  * Order of displaying in the menubar
@@ -41,7 +41,7 @@ const pluginConfigs: PluginConfig[] = [
   ...autoscrollConfig,
   ...imageConfig,
   ...linebreakConfig,
-  ...videoConfig
+  ...embedConfig
 ];
 
 export interface EditorEventHandler {
