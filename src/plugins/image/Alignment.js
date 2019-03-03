@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 const StyledAlignment = styled.div`
   position: absolute;
-  margin-left: -90px;
+  margin-left: -70px !important;
   left: 50%;
 
   .letterpad-image-options-inner {
