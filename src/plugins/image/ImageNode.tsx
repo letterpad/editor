@@ -24,7 +24,7 @@ const ImageNode: SFC<{
 }> = ({ attributes, node }) => {
   if (isTextNode(node)) return null;
   const [alignOption, setAlignOption] = useState("center");
-  const [caption, setCaption] = useState("Caption..");
+  const [caption, setCaption] = useState("");
   const [captionActive, setCaptionActive] = useState(false);
 
   const [menu, setMenu] = useState(false);
