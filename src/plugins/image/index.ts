@@ -1,7 +1,8 @@
-import { ImagePlugin } from "./slatePlugin";
 import ImageButton from "./ImageButton";
 import { PluginConfig } from "..";
 import ImageNode from "./ImageNode";
+
+const ImagePlugin: PluginConfig["slatePlugin"] = () => ({});
 
 const imageConfig: PluginConfig[] = [
   {
@@ -14,12 +15,12 @@ const imageConfig: PluginConfig[] = [
     ],
     render: ImageNode,
     identifier: ["img"],
-    slatePlugin: ImagePlugin,
-    markdown: {
-      trigger: "space",
-      before: /^(>)$/,
-      change: change => change.setBlocks("blockquote")
-    }
+    slatePlugin: ImagePlugin
+    // markdown: {
+    //   trigger: "space",
+    //   before: /^(>)$/,
+    //   change: change => change.setBlocks("blockquote")
+    // }
   }
 ];
 
