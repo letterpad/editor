@@ -45,6 +45,9 @@ describe("features", () => {
 
     test("video", async () => {
       await clickXPath("//span[contains(text(), 'music_video')]");
+      await page.waitFor(200);
+      await page.keyboard.type("http://youtube.com/embed/link");
+      await page.keyboard.press("Enter");
       const expected1 = await getHtmlContents(editorHandle);
 
       await clearEditor(editorHandle);
@@ -54,8 +57,7 @@ describe("features", () => {
       await page.keyboard.press("Backspace");
       const expected2 = await getHtmlContents(editorHandle);
 
-      expect(expected1).toMatchSnapshot();
-      expect(expected2).toMatchSnapshot();
+      expect(expected1).toBe(expected2);
     });
 
     test("image", async () => {
