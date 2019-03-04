@@ -23,7 +23,7 @@ const StyledInput = styled.input`
 `;
 
 const ImageInput: FunctionComponent<any> = React.forwardRef(
-  ({ onComplete, editor }, ref) => {
+  ({ onComplete, editor, node }, ref) => {
     const [url, setUrl] = useState("");
 
     return (
@@ -35,9 +35,15 @@ const ImageInput: FunctionComponent<any> = React.forwardRef(
           onKeyUp={(e: any) => {
             if (e.keyCode == 13) {
               onComplete();
+              let align = "center";
+              let title = "";
               // if the url is not empty
+              if (node && node.data) {
+                align = node.data.get("align");
+                title = node.data.get("title");
+              }
               if (url) {
-                insertImage(editor, url);
+                insertImage(editor, url, align, title);
               } else {
                 editor.focus();
               }
