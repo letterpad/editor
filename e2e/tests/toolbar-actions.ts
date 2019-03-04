@@ -60,7 +60,7 @@ describe("features", () => {
       expect(expected1).toBe(expected2);
     });
 
-    test("image", async () => {
+    test.only("image", async () => {
       await clickXPath("//span[contains(text(), 'image')]");
       await page.waitFor(200);
       await page.keyboard.type("image.jpg");

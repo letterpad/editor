@@ -7,47 +7,11 @@ import React, {
 import { Node, Editor } from "slate";
 import { isTextNode } from "../codeblock/CodeblockUtils";
 import Alignment from "./Alignment";
-import styled from "styled-components";
-
-const applyStyles = (type: string) => {
-  switch (type) {
-    case "left": {
-      return `
-        margin-left: -100px;
-        max-width: 400px;
-        display: inline-block;
-        float: left;
-        margin-right: 40px;
-      `;
-    }
-    case "center": {
-      return `
-        margin-left: initial;
-        max-width: 100%;
-      `;
-    }
-    case "wide": {
-      return `
-        left: -100px;
-        width: calc(100% + 200px);
-      `;
-    }
-    case "full": {
-      return `
-        width: 100vw;
-        left: calc(-1.5 * var(--editorPadding) );
-        @media screen and (min-width: 740px) {
-          left: calc((-100vw + 100%) / 2);
-        }
-    `;
-    }
-  }
-};
-
-const NodeWrapper = styled.div`
-  ${(props: any) => applyStyles(props.type)}
-  position: relative;
-`;
+import {
+  StyledCaption,
+  NodeWrapper,
+  StyledCaptionInput
+} from "./ImageNode.css";
 
 const ImageNode: SFC<{
   attributes: DetailedHTMLProps<
@@ -59,11 +23,23 @@ const ImageNode: SFC<{
   isFocused: boolean;
 }> = ({ attributes, node }) => {
   if (isTextNode(node)) return null;
-  const [alignOption, setAlignOption] = useState("center");
-  const [menu, setMenu] = useState(false);
-  const alignmentRef = React.createRef<HTMLDivElement>();
+  const align = node.data.get("align");
+  const title = node.data.get("title");
 
-  const showOptions = () => {
+  const [alignOption, setAlignOption] = useState(align || "center");
+  const [caption, setCaption] = useState(title || "Image caption");
+  const [captionActive, setCaptionActive] = useState(false);
+
+  const [menu, setMenu] = useState(false);
+  const alignmentRef = React.useRef<HTMLDivElement>();
+  const captionInputRef = React.useRef<any>();
+
+  const showOptions = (e: any) => {
+    if (e.target.tagName === "INPUT") {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
     setMenu(true);
   };
 
@@ -73,15 +49,62 @@ const ImageNode: SFC<{
 
   document.addEventListener("mousedown", e => {
     if (!alignmentRef.current) return;
+
     if (!alignmentRef.current.contains(e.target as any)) {
       setMenu(false);
     }
   });
 
+  const setImageCaption = (e: any) => {
+    setCaption(e.target.value);
+  };
+
+  const renderCaptionInput = () => {
+    return (
+      <StyledCaptionInput
+        type="text"
+        ref={captionInputRef}
+        onClick={(e: any) => {
+          e.stopPropagation();
+        }}
+        onBlur={(e: any) => {
+          e.stopPropagation();
+          e.preventDefault();
+          setCaptionActive(false);
+        }}
+        placeholder="Enter a caption of the image"
+        onChange={setImageCaption}
+        value={caption}
+      />
+    );
+  };
+
+  const renderCaption = () => {
+    return (
+      <StyledCaption
+        onMouseDown={(e: any) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setCaptionActive(true);
+          setTimeout(() => {
+            // on clicking the caption, we display the input box.
+            // due to the render the focus is lost. This will try to fix that.
+            if (captionInputRef.current) {
+              captionInputRef.current.focus();
+            }
+          }, 10);
+        }}
+      >
+        {caption || " "}
+      </StyledCaption>
+    );
+  };
   return (
     <NodeWrapper type={alignOption} ref={alignmentRef} onClick={showOptions}>
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
       <img width="100%" src={node.data.get("src")} {...attributes} />
+      {!captionActive && renderCaption()}
+      {captionActive && renderCaptionInput()}
     </NodeWrapper>
   );
 };
