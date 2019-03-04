@@ -20,7 +20,6 @@ import { mapPropsToComponents } from "./helper/util";
 import schemaProps from "./helper/schema";
 import initialValue from "./value";
 import { renderNode, renderMark } from "./helper/renderer";
-// import { decorateNode } from "./plugins/codeblock/CodeblockUtils";
 import scrollToCursor from "./helper/scrollToCursor";
 import Html from "slate-html-serializer";
 import { showMenu } from "./helper/showMenu";

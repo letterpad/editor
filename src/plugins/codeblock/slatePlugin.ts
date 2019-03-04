@@ -5,9 +5,6 @@ import { PluginConfig } from "..";
 const CodeblockPlugin: PluginConfig["slatePlugin"] = () => ({
   onKeyDown(...args) {
     return CodeblockKeyboardShortcut(...args);
-  },
-  onPaste(e) {
-    console.log("e :", e);
   }
 });
 

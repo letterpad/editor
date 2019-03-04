@@ -9,7 +9,8 @@ const CodeblockContainer = styled.div`
     color: inherit;
     padding: 16px;
     line-height: 23px;
-    font-size: 18px;
+    font-size: 16px;
+    overflow-x: scroll;
   }
 `;
 

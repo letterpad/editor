@@ -99,7 +99,6 @@ const ImageNode: SFC<{
       </StyledCaption>
     );
   };
-
   return (
     <NodeWrapper type={alignOption} ref={alignmentRef} onClick={showOptions}>
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
