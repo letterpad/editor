@@ -18,8 +18,8 @@ export const insertImage = (
       type: "img",
       data: { src, align, title }
     })
-    .moveToEndOfBlock()
-    .insertBlock("p");
+    .moveAnchorToStartOfNextBlock()
+    .focus();
 };
 
 export const updateInlineImage = ({

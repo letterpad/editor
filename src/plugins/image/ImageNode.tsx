@@ -23,8 +23,8 @@ const ImageNode: SFC<{
   isFocused: boolean;
 }> = ({ attributes, node }) => {
   if (isTextNode(node)) return null;
-  const align = (node as any).data.get("align");
-  const title = (node as any).data.get("title");
+  const align = node.data.get("align");
+  const title = node.data.get("title");
 
   const [alignOption, setAlignOption] = useState(align || "center");
   const [caption, setCaption] = useState(title || "Image caption");

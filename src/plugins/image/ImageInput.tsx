@@ -35,14 +35,15 @@ const ImageInput: FunctionComponent<any> = React.forwardRef(
           onKeyUp={(e: any) => {
             if (e.keyCode == 13) {
               onComplete();
+              let align = "center";
+              let title = "";
               // if the url is not empty
+              if (node && node.data) {
+                align = node.data.get("align");
+                title = node.data.get("title");
+              }
               if (url) {
-                insertImage(
-                  editor,
-                  url,
-                  node.data.get("align"),
-                  node.data.get("title")
-                );
+                insertImage(editor, url, align, title);
               } else {
                 editor.focus();
               }
