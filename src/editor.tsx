@@ -20,7 +20,7 @@ import { mapPropsToComponents } from "./helper/util";
 import schemaProps from "./helper/schema";
 import initialValue from "./value";
 import { renderNode, renderMark } from "./helper/renderer";
-import { decorateNode } from "./plugins/codeblock/CodeblockUtils";
+// import { decorateNode } from "./plugins/codeblock/CodeblockUtils";
 import scrollToCursor from "./helper/scrollToCursor";
 import Html from "slate-html-serializer";
 import { showMenu } from "./helper/showMenu";
@@ -190,6 +190,15 @@ export class LetterpadEditor extends Component<
     const transfer = getEventTransfer(event);
     if (transfer.type != "html") return next();
 
+    const parentTag = editor.value.blocks.first().type; // p, pre, etc
+    for (let i = 0; i < pluginConfigs.length; i++) {
+      const config = pluginConfigs[i];
+      if (config.onPasteReturnHtml === false) {
+        if (config.identifier && config.identifier.indexOf(parentTag) >= 0) {
+          return editor.insertText((transfer as any).text);
+        }
+      }
+    }
     // remove style attr
     const REMOVE_STYLE_ATTR = /style="[^\"]*"/gi;
     const html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
@@ -303,7 +312,6 @@ export class LetterpadEditor extends Component<
             })
           }
           renderEditor={this.renderEditor}
-          decorateNode={decorateNode}
           placeholder="Compose a story.."
         />
       </EditorWrapper>

@@ -1,9 +1,9 @@
-import React from "react";
+// import React from "react";
 import CodeblockButton from "./CodeblockButton";
 import CodeblockNode from "./CodeblockNode";
 import { CodeblockPlugin } from "./slatePlugin";
 
-import { decorateNode } from "./CodeblockUtils";
+// import { decorateNode } from "./CodeblockUtils";
 import { PluginConfig } from "..";
 import { AutoReplaceParams } from "slate-auto-replace";
 import { Range, Point } from "slate";
@@ -41,44 +41,14 @@ const plugins: PluginConfig[] = [
         button: CodeblockButton
       }
     ],
-    decorator: decorateNode,
-    render: (props: any) => {
-      console.log(props.node.type);
-      return <CodeblockNode {...props} />;
-    },
+    onPasteReturnHtml: false,
+    render: CodeblockNode,
     identifier: ["pre"],
     slatePlugin: CodeblockPlugin,
     markdown: {
       trigger: "space",
-      before: /^```[a-z]/m,
+      before: /^```/m,
       change: onChange
-    }
-  },
-  {
-    type: "mark",
-    tag: "mark",
-    menuButtons: [],
-    toolbarButtons: [],
-    identifier: [
-      "comment",
-      "keyword",
-      "puntuation",
-      "constant",
-      "selector",
-      "property",
-      "number",
-      "important",
-      "attr-name",
-      "attr-value"
-    ],
-    render: ({ next, ...props }: { next: () => {}; [key: string]: any }) => {
-      const { attributes, children, mark } = props;
-      const className = "prism-token token " + mark.type;
-      return (
-        <span {...attributes} className={className}>
-          {children}
-        </span>
-      );
     }
   }
 ];

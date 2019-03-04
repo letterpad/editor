@@ -42,8 +42,20 @@ const codeblockKeyboardShortcut = (
 
     case "Tab":
       event.preventDefault();
-      // insert 2 spaces
-      editor.insertText("  ");
+      if (event.shiftKey) {
+        // check if there is space available to deindent
+        const allowed = true; //editor.value.anchorText.text.startsWith("  ");
+        if (allowed) {
+          getIndexLastCharOfLine();
+          // editor.moveFocusToStartOfInline();
+          // editor.moveStartToStartOfText();
+          // .deleteForward(2)
+          // .moveToEndOfInline();
+        }
+      } else {
+        // insert 2 spaces
+        editor.insertText("  ");
+      }
       return next();
 
     case "a":
@@ -60,3 +72,23 @@ const codeblockKeyboardShortcut = (
 };
 
 export default codeblockKeyboardShortcut;
+
+function getIndexLastCharOfLine() {
+  const selection = window.getSelection();
+  const range = selection.getRangeAt(0);
+  const caretIndex = range.startOffset;
+  const rect = range.getBoundingClientRect();
+  const container = range.startContainer;
+  const lastIndex = (container as any).length;
+
+  for (let i = caretIndex; i < lastIndex; i++) {
+    const rangeTest = document.createRange();
+    rangeTest.setStart(container, i);
+    const rectTest = rangeTest.getBoundingClientRect();
+    console.log("rect, rectText :", rect, rectTest);
+    // if the y is different it means the test range is in a different line
+    //if (rectTest.y !== rect.y) return i - 1;
+  }
+
+  return lastIndex;
+}
