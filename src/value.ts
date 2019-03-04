@@ -41,7 +41,7 @@ const initialValue: ValueJSON = {
     nodes: [
       {
         object: "block",
-        type: "h1",
+        type: "h3",
         nodes: [
           {
             object: "text",
@@ -56,34 +56,30 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "p",
-        nodes: [
-          {
-            object: "inline",
-            type: "img",
-            data: {
-              src:
-                "https://cdn.pixabay.com/photo/2017/12/29/18/47/nature-3048299__340.jpg"
-            }
-          }
-        ]
-      },
-
-      {
-        object: "block",
-        type: "p",
+        type: "section",
         nodes: [
           {
             object: "text",
             leaves: [
               {
                 object: "leaf",
-                text: ""
+                text: "Demo of letterpad editor."
               }
             ]
+          },
+          {
+            object: "inline",
+            type: "img",
+            data: {
+              align: "full",
+              title: "https://unsplash.com/photos/5bYxXawHOQg",
+              src:
+                "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=500&q=60"
+            }
           }
         ]
       },
+
       ...(introParas.map(para => ({
         object: "block",
         type: "p",
@@ -104,58 +100,31 @@ const initialValue: ValueJSON = {
       })) as any),
       {
         object: "block",
-        type: "p",
+        type: "section",
         nodes: [
           {
             object: "inline",
             type: "img",
             data: {
+              align: "left",
+              title: "https://unsplash.com/photos/2LJ4rqK2qfU",
               src:
-                "https://cdn.pixabay.com/photo/2017/12/29/18/47/nature-3048299__340.jpg"
+                "https://images.unsplash.com/photo-1501349800519-48093d60bde0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
             }
           }
         ]
       },
       {
         object: "block",
-        type: "p",
+        type: "section",
         nodes: [
           {
             object: "text",
             leaves: [
               {
                 object: "leaf",
-                text: ""
-              }
-            ]
-          }
-        ]
-      },
-      {
-        object: "block",
-        type: "p",
-        nodes: [
-          {
-            object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: ""
-              }
-            ]
-          }
-        ]
-      },
-      {
-        object: "block",
-        type: "p",
-        nodes: [
-          {
-            object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: ""
+                text:
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting   industry. Lorem Ipsum has been the industry's standard dummy text   ever since the 1500s, when an unknown printer took a galley of   type and scrambled it to make a type specimen book. It has survived   not only five centuries, but also the leap into electronic   typesetting, remaining essentially unchanged. It was popularised   in the 1960s with the release of Letraset sheets containing Lorem   Ipsum passages, and more recently with desktop publishing software   like Aldus PageMaker including versions of Lorem Ipsum."
               }
             ]
           }
@@ -186,25 +155,17 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "p",
+        type: "section",
         nodes: [
           {
             object: "inline",
-            type: "a",
+            type: "img",
             data: {
-              href: "https://en.wikipedia.org/wiki/Hypertext"
-            },
-            nodes: [
-              {
-                object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "hyperlinks"
-                  }
-                ]
-              }
-            ]
+              align: "wide",
+              title: "https://unsplash.com/photos/l3N9Q27zULw",
+              src:
+                "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80"
+            }
           }
         ]
       }

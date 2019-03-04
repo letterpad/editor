@@ -4,6 +4,8 @@ import { Editor, RangeProperties, Range } from "slate";
 export const insertImage = (
   editor: Editor,
   src: string,
+  align?: string,
+  title?: string,
   target?: Range | RangeProperties
 ) => {
   scrollToCursor();
@@ -14,7 +16,7 @@ export const insertImage = (
   editor
     .insertInline({
       type: "img",
-      data: { src }
+      data: { src, align, title }
     })
     .moveToEndOfBlock()
     .insertBlock("p");

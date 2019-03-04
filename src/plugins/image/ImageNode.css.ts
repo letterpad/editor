@@ -4,11 +4,11 @@ const applyStyles = (type: string) => {
   switch (type) {
     case "left": {
       return `
-        margin-left: -100px;
+        left: -100px;
         max-width: 400px;
         display: inline-block;
         float: left;
-        margin-right: 40px;
+
       `;
     }
     case "center": {

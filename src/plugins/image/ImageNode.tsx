@@ -23,8 +23,11 @@ const ImageNode: SFC<{
   isFocused: boolean;
 }> = ({ attributes, node }) => {
   if (isTextNode(node)) return null;
-  const [alignOption, setAlignOption] = useState("center");
-  const [caption, setCaption] = useState("Image caption");
+  const align = (node as any).data.get("align");
+  const title = (node as any).data.get("title");
+
+  const [alignOption, setAlignOption] = useState(align || "center");
+  const [caption, setCaption] = useState(title || "Image caption");
   const [captionActive, setCaptionActive] = useState(false);
 
   const [menu, setMenu] = useState(false);
@@ -46,7 +49,6 @@ const ImageNode: SFC<{
 
   document.addEventListener("mousedown", e => {
     if (!alignmentRef.current) return;
-    if (!captionInputRef.current) return;
 
     if (!alignmentRef.current.contains(e.target as any)) {
       setMenu(false);
