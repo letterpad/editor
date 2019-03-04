@@ -30,9 +30,11 @@ const linkConfig: PluginConfig[] = [
         const href = lastWord.startsWith("http")
           ? lastWord
           : `https://${lastWord}`;
-        editor.wrapInline({ type: TAGNAME, data: { href } }); // set URL inline
-        editor.moveFocusForward(lastWord.length).insertText(" "); // deselect it
-        return editor;
+
+        return editor
+          .wrapInline({ type: TAGNAME, data: { href } })
+          .moveFocusForward(href.length)
+          .insertText(" ");
       }
     },
     rules: {
