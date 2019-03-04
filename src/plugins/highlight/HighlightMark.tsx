@@ -2,7 +2,7 @@ import React, { SFC } from "react";
 import styled from "styled-components";
 
 const StyledCode = styled.code`
-  background: #bbf7b8;
+  background: #fbff8f;
   font-size: large;
   padding: 2px 4px;
   border-radius: 4px;

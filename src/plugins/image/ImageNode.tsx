@@ -19,8 +19,8 @@ const ImageNode: SFC<{
     HTMLImageElement
   >;
   node: Node;
-  editor: Editor;
-  isFocused: boolean;
+  editor?: Editor;
+  isFocused?: boolean;
 }> = ({ attributes, node }) => {
   if (isTextNode(node)) return null;
   const align = node.data.get("align");
