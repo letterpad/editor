@@ -6,6 +6,8 @@ import { PluginConfig } from "..";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matches) => {
   if (matches.before[0] === "*") {
+    return editor.setBlocks("li").wrapBlock("ul");
+  } else if (matches.before[0] === "1.") {
     return editor.setBlocks("li").wrapBlock("ol");
   } else {
     return editor.setBlocks("li").wrapBlock("ul");
@@ -26,7 +28,7 @@ const listConfig: PluginConfig[] = [
     slatePlugin: ListPlugin,
     markdown: {
       trigger: "space",
-      before: /^(\*|-)$/,
+      before: /^(\*|-|1\.)$/,
       change: onChange
     },
     rules: {
