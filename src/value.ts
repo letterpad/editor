@@ -41,21 +41,6 @@ const initialValue: ValueJSON = {
     nodes: [
       {
         object: "block",
-        type: "h3",
-        nodes: [
-          {
-            object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Letterpad"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        object: "block",
         type: "section",
         nodes: [
           {
