@@ -4,6 +4,7 @@ import { Plugin } from "slate-react";
 
 import { Editor } from "slate";
 import { Rule } from "slate-html-serializer";
+import { default as codeblockConfig } from "./codeblock";
 import { default as audioConfig } from "./audio";
 import { default as autoscrollConfig } from "./autoscroll";
 import { default as blockquoteConfig } from "./blockquote";
@@ -23,8 +24,8 @@ import { default as paragraphConfig } from "./paragraph";
  * Order of displaying in the menubar
  */
 const pluginConfigs: PluginConfig[] = [
+  ...codeblockConfig,
   ...paragraphConfig,
-
   ...boldConfig,
   ...italicConfig,
   ...underlineConfig,
@@ -77,7 +78,7 @@ export interface PluginConfig {
   render?: any;
   slatePlugin?: (options?: Plugin) => Plugin;
   markdown?: AutoReplaceParams;
-
+  onPasteReturnHtml?: boolean;
   [key: string]: any;
   rules?: Rule;
 }
