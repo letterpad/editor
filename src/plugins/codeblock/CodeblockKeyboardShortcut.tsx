@@ -1,15 +1,14 @@
 import {
-  insertNewLineBeforeCodeBlock,
-  preserveIndentationForCodeBlock,
   unindentClosingBlocks,
-  handleCommandAInCodeBlock
+  handleSelectAll,
+  getTextAtCurrentLine,
+  getAnchorOffsetAtCurrentLine
 } from "./CodeblockUtils";
 import { isMod } from "../../helper/keyboard-event";
 import { Editor } from "slate";
 import { isKeyboardEvent } from "../../helper/events";
 import { isPrintableKeycode, getCodeBlockParent } from "../../helper/util";
 
-/* eslint-disable react/prop-types */
 const codeblockKeyboardShortcut = (
   event: Event,
   editor: Editor,
@@ -34,17 +33,33 @@ const codeblockKeyboardShortcut = (
 
   switch (event.key) {
     case "Enter":
-      if ((value as any).startOffset === 0) {
-        const done = insertNewLineBeforeCodeBlock(editor);
-        if (done) return next();
+      const textAtCurrentLine = getTextAtCurrentLine(value);
+      let nSpaces = textAtCurrentLine.search(/\S|$/);
+      // react the last char of this line
+      const lastChar = textAtCurrentLine.charAt(textAtCurrentLine.length - 1);
+      if (["{", "[", "length("].indexOf(lastChar) >= 0) {
+        return editor.insertText("\n" + " ".repeat(2 + nSpaces));
       }
-      return preserveIndentationForCodeBlock(editor);
+      if (nSpaces === 0) {
+        return editor.insertText("\n");
+      }
+      return editor.insertText("\n" + " ".repeat(nSpaces));
 
     case "Tab":
       event.preventDefault();
       if (event.shiftKey) {
         // check if there is space available to deindent
-        // TODO handle this action
+        const textAtCurrentLine = getTextAtCurrentLine(value);
+        const anchorOffsetAtCurrentLine = getAnchorOffsetAtCurrentLine(value);
+        let nSpaces = textAtCurrentLine.search(/\S|$/);
+        let indentSpace = 2;
+        if (nSpaces >= indentSpace) {
+          const offset = window.getSelection().anchorOffset;
+          return editor
+            .moveTo(offset - anchorOffsetAtCurrentLine + indentSpace)
+            .deleteBackward(indentSpace)
+            .moveTo(offset - indentSpace);
+        }
       } else {
         // insert 2 spaces
         editor.insertText("  ");
@@ -52,7 +67,7 @@ const codeblockKeyboardShortcut = (
       return next();
 
     case "a":
-      return handleCommandAInCodeBlock(event, editor);
+      return handleSelectAll(event, editor);
 
     case "}":
     case ")":

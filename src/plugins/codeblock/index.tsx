@@ -39,11 +39,12 @@ const plugins: PluginConfig[] = [
       }
     ],
     onPasteReturnHtml: false,
+    allowChildTransforms: false,
     render: CodeblockNode,
     identifier: ["pre"],
     slatePlugin: CodeblockPlugin,
     markdown: {
-      trigger: "space",
+      trigger: "Enter",
       before: /^```/m,
       change: onChange
     }
