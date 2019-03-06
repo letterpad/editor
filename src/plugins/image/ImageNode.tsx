@@ -10,8 +10,12 @@ import Alignment from "./Alignment";
 import {
   StyledCaption,
   NodeWrapper,
-  StyledCaptionInput
+  StyledCaptionInput,
+  Image,
+  Figure,
+  Row
 } from "./ImageNode.css";
+import { splitUp, randomIntBetween } from "./ImageUtils";
 
 const ImageNode: SFC<{
   attributes: DetailedHTMLProps<
@@ -21,7 +25,7 @@ const ImageNode: SFC<{
   node: Node;
   editor?: Editor;
   isFocused?: boolean;
-}> = ({ attributes, node }) => {
+}> = ({ attributes, node, children }) => {
   if (isTextNode(node)) return null;
   const align = node.data.get("align");
   const title = node.data.get("title");
@@ -31,7 +35,7 @@ const ImageNode: SFC<{
   const [captionActive, setCaptionActive] = useState(false);
 
   const [menu, setMenu] = useState(false);
-  const alignmentRef = React.useRef<HTMLDivElement>();
+  const alignmentRef = React.useRef<any>();
   const captionInputRef = React.useRef<any>();
 
   const showOptions = (e: any) => {
@@ -99,10 +103,19 @@ const ImageNode: SFC<{
       </StyledCaption>
     );
   };
+  if (node.type === "figure") {
+    return <figure>{children}</figure>;
+  }
+
   return (
     <NodeWrapper type={alignOption} ref={alignmentRef} onClick={showOptions}>
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
-      <img width="100%" src={node.data.get("src")} {...attributes} />
+      <img
+        className="imagenode"
+        width="100%"
+        src={(node as any).data.get("src")}
+        {...attributes}
+      />
       {!captionActive && renderCaption()}
       {captionActive && renderCaptionInput()}
     </NodeWrapper>

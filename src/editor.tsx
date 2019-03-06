@@ -261,7 +261,6 @@ export class LetterpadEditor extends Component<
       callbacks,
       onClick: this.toggleToolbarClass
     };
-
     return (
       <>
         <StyledContent>{children}</StyledContent>

@@ -19,6 +19,7 @@ import { default as listConfig } from "./list";
 import { default as underlineConfig } from "./underline";
 import { default as embedConfig } from "./embed";
 import { default as paragraphConfig } from "./paragraph";
+import { default as galleryConfig } from "./gallery";
 
 /**
  * Order of displaying in the menubar
@@ -42,7 +43,8 @@ const pluginConfigs: PluginConfig[] = [
   ...autoscrollConfig,
   ...imageConfig,
   ...linebreakConfig,
-  ...embedConfig
+  ...embedConfig,
+  ...galleryConfig
 ];
 
 export interface EditorEventHandler {

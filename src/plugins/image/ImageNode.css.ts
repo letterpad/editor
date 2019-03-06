@@ -35,9 +35,10 @@ const applyStyles = (type: string) => {
   }
 };
 
-export const NodeWrapper = styled.section`
+export const NodeWrapper = styled.p`
   ${(props: any) => applyStyles(props.type)}
   position: relative;
+  z-index: 1;
 `;
 
 export const StyledCaptionInput = styled.input`
@@ -50,10 +51,32 @@ export const StyledCaptionInput = styled.input`
   color: #888;
 `;
 
-export const StyledCaption = styled.div`
+export const StyledCaption = styled.figcaption`
   text-align: center;
   font-size: 12px;
   margin-top: 4px;
   color: #888;
   font-style: italic;
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+export const Figure = styled.figure`
+  ${(props: any) => applyStyles(props.type)}
+  position: relative;
+  z-index: 1;
+  padding: 2px !important;
+  display: inline-block;
+  width: ${(p: any) => p.width};
+  /* background: url(${(p: any) => p.src});
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 2px solid #fff; */
+`;
+
+export const Row = styled.div`
+  display: flex;
 `;
