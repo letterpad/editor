@@ -1,76 +1,75 @@
-import React, {
-  SFC,
-  DetailedHTMLProps,
-  ImgHTMLAttributes,
-  useState
-} from "react";
-import { Node, Editor } from "slate";
-import { isTextNode } from "../codeblock/CodeblockUtils";
-import { NodeWrapper, Image, Figure, Row } from "./GalleryNode.css";
+import React, { Component } from "react";
+import { Node, Editor, Block } from "slate";
+import {
+  getFigureNodesFromChildren,
+  computeGrid,
+  getImageRatiosFromFigures,
+  calculateImageDimensions
+} from "./GalleryUtils";
+import { Row, Figure, Image } from "./GalleryNode.css";
 
-let delKey = "";
-
-const GalleryNode: SFC<{
-  attributes: DetailedHTMLProps<
-    ImgHTMLAttributes<HTMLImageElement>,
-    HTMLImageElement
-  >;
+class GalleryNode extends Component<{
   node: Node;
   editor?: Editor;
-  isFocused?: boolean;
-}> = ({ attributes, node, children, editor }) => {
-  if (isTextNode(node)) return null;
-
-  const [selected, selectImage] = useState(-1);
-  const [deleteKey, setDeleteKey] = useState("");
-  console.log("deleteKey :", deleteKey);
-  if (node.type === "section") {
-    document.body.addEventListener("keyup", (e: any) => {
-      if (delKey !== "" && e.keyCode === 8) {
-        editor!.removeNodeByKey(delKey);
-        setDeleteKey("");
-      }
-    });
-    let figures: any = [];
-    React.Children.forEach(children, (element: any) => {
-      figures = element.props.block
-        .getBlocksAsArray()
-        .filter((block: any) => block.type === "figure" && block.data);
-    });
-
-    if (figures.length === 0)
-      return <NodeWrapper {...attributes}>{children}</NodeWrapper>;
-
-    // const imageArrs = getImageAttrs(figures);
-
+  attributes: any;
+}> {
+  state = { grid: [], selected: "" };
+  componentDidMount() {
+    let figures = getFigureNodesFromChildren(this.props.children);
     const grid = computeGrid(figures);
+    this.setState({ grid });
+  }
 
-    const imgs = grid.map((figures, imgIdx) => {
-      const ratios = figures.map((data: any) => {
-        const imgNode = data.nodes
-          .filter((node: any) => {
-            return node.type === "img";
-          })
-          .first();
-        return imgNode.data.get("width") / imgNode.data.get("height");
-      });
-      const diffs = [];
-
-      for (let i = 10; i < 500; i++) {
-        let sum = 0;
-        for (let j = 0; j < figures.length; j++) {
-          sum += ratios[j] * i;
-        }
-        if (sum < 1000) diffs.push(1000 - sum);
-        else diffs.push(100000);
+  static getDerivedStateFromProps(props: any, state: any) {
+    let figures = getFigureNodesFromChildren(props.children);
+    const grid = computeGrid(figures);
+    if (state.grid.length === grid.length) {
+      return { grid, selected: state.selected };
+    }
+    let selected = state.selected;
+    for (let i = 0; i < figures.length; i++) {
+      const figure = figures[i];
+      if (parseInt(figure.key) > parseInt(state.selected)) {
+        selected = figures[i + 1].key;
+        break;
       }
+    }
 
-      const min = Math.min(...diffs);
-      const mul = 10 + diffs.indexOf(min);
-      const newWidths = ratios.map((r: any) => r * mul);
+    return { grid, selected };
+  }
+  componentDidUpdate() {
+    if (this.props.editor && this.state.selected !== "") {
+      const element = document.querySelector(
+        `[data-key="${this.state.selected}"]`
+      );
+      if (element) {
+        setTimeout(() => {
+          console.log(element);
+          element.scrollIntoView();
+        }, 10);
+      }
+    }
+  }
+
+  getNextKey = () => {};
+
+  selectImage = (key: string) => {
+    this.setState({ selected: key });
+  };
+
+  render() {
+    const { attributes } = this.props;
+
+    const images = this.state.grid.map((figures: Block[], idx: number) => {
+      const ratios = getImageRatiosFromFigures(figures);
+
+      const { newWidths, height } = calculateImageDimensions(
+        ratios,
+        figures.length
+      );
 
       return (
-        <Row {...attributes}>
+        <Row {...attributes} key={idx}>
           {figures.map((node: any, i: number) => {
             const imgNode = node.nodes
               .filter((node: any) => {
@@ -78,36 +77,29 @@ const GalleryNode: SFC<{
               })
               .first();
             const data = imgNode.data;
+            const isSelected = this.state.selected === node.key;
             return (
               <Figure
-                height={mul}
+                key={i}
+                height={height}
                 width={newWidths[i]}
                 src={data.get("src")}
-                selected={selected === data.get("src") + i}
-                className={selected === data.get("src") + i ? "active" : ""}
-                active={selected}
+                selected={isSelected}
+                className={
+                  isSelected ? "letterpad-image-active-for-delete" : ""
+                }
                 data-key={node.key}
-                contentEditable={false}
-                onMouseOver={() => {
-                  selectImage(data.get("src") + i);
-                }}
-                onMouseOut={() => {
-                  selectImage(-1);
-                }}
                 onClick={(e: any) => {
-                  setDeleteKey(e.currentTarget.dataset.key);
-                  delKey = e.currentTarget.dataset.key;
-                  console.log(editor!.moveAnchorTo(node.key));
-                  console.log(editor!.moveFocusTo(node.key));
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return this.selectImage(e.currentTarget.dataset.key);
                 }}
               >
                 <Image
-                  height={mul}
+                  height={height}
+                  data-key={imgNode.key}
                   width={newWidths[i]}
                   src={data.get("src")}
-                  onClick={(e: any) => {
-                    selectImage(data.get("src") + i);
-                  }}
                 />
               </Figure>
             );
@@ -115,47 +107,10 @@ const GalleryNode: SFC<{
         </Row>
       );
     });
-    return imgs as any;
+    if (images.length > 0) return images;
+
+    return <section {...this.props.attributes}>{this.props.children}</section>;
   }
-  return null;
-};
+}
 
 export default GalleryNode;
-
-const getImageAttrs = (figures: any) => {
-  // get image sizes from figureset
-  const images = [] as any;
-  figures.forEach((figure: any) => {
-    // get the image node
-    const imgNode = figure.nodes
-      .filter((node: any) => {
-        return node.type === "img";
-      })
-      .first();
-    if (imgNode) {
-      images.push(imgNode.data);
-    }
-  });
-
-  return images;
-};
-
-const computeGrid = (images: any[]) => {
-  const grid = [];
-  for (let i = 0; i < images.length; i++) {
-    if (i % 3 === 0) {
-      grid.push([images[i]]);
-    } else {
-      grid[grid.length - 1].push(images[i]);
-    }
-  }
-  if (grid.length > 1 && grid[grid.length - 1].length === 1) {
-    const lastImg = grid[grid.length - 1][0];
-    if (lastImg.width < lastImg.height) {
-      grid[grid.length - 2].push(lastImg);
-      grid.pop();
-    }
-  }
-
-  return grid;
-};

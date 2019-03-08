@@ -10,8 +10,8 @@
     "pretty": true,
     "allowJs": true,
     "outDir": "dist",
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "jsx": "react",
     "resolveJsonModule": true
   }

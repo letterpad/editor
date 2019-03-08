@@ -2,8 +2,24 @@ import React from "react";
 import GalleryButton from "./GalleryButton";
 import { PluginConfig } from "..";
 import GalleryNode from "./GalleryNode";
+import { isKeyboardEvent } from "../../helper/events";
 
-const GalleryPlugin: PluginConfig["slatePlugin"] = () => ({});
+const GalleryPlugin: PluginConfig["slatePlugin"] = () => {
+  return {
+    onKeyDown: (event, editor, next) => {
+      if (isKeyboardEvent(event) && event.key === "Backspace") {
+        const selectedImg: HTMLDivElement | null = document.querySelector(
+          ".letterpad-image-active-for-delete"
+        );
+
+        if (selectedImg && selectedImg.dataset && selectedImg.dataset.key) {
+          return editor.removeNodeByKey(selectedImg.dataset.key);
+        }
+      }
+      next();
+    }
+  };
+};
 
 const GalleryConfig: PluginConfig[] = [
   {
@@ -15,7 +31,7 @@ const GalleryConfig: PluginConfig[] = [
       }
     ],
     render: GalleryNode,
-    identifier: ["section", "figure"],
+    identifier: ["section"],
     slatePlugin: GalleryPlugin,
     rules: {
       deserialize: (el, next) => {

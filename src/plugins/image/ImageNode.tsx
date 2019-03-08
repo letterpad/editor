@@ -9,13 +9,10 @@ import { isTextNode } from "../codeblock/CodeblockUtils";
 import Alignment from "./Alignment";
 import {
   StyledCaption,
-  NodeWrapper,
-  StyledCaptionInput,
-  Image,
   Figure,
-  Row
+  StyledCaptionInput,
+  Wrapper
 } from "./ImageNode.css";
-import { splitUp, randomIntBetween } from "./ImageUtils";
 
 const ImageNode: SFC<{
   attributes: DetailedHTMLProps<
@@ -104,11 +101,20 @@ const ImageNode: SFC<{
     );
   };
   if (node.type === "figure") {
-    return <figure>{children}</figure>;
+    return (
+      <Figure
+        contentEditable={false}
+        type={alignOption}
+        ref={alignmentRef}
+        {...attributes}
+      >
+        {children}
+      </Figure>
+    );
   }
 
   return (
-    <NodeWrapper type={alignOption} ref={alignmentRef} onClick={showOptions}>
+    <Wrapper {...attributes} onClick={showOptions} type={alignOption}>
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
       <img
         className="imagenode"
@@ -118,7 +124,7 @@ const ImageNode: SFC<{
       />
       {!captionActive && renderCaption()}
       {captionActive && renderCaptionInput()}
-    </NodeWrapper>
+    </Wrapper>
   );
 };
 

@@ -45,7 +45,7 @@ export const Figure = styled.figure`
       opacity: 1;
     }
   }
-  opacity: ${(p: any) => (p.active === -1 ? 1 : p.selected ? 1 : 0.7)};
+
   transition: 0.3s opacity ease-in-out;
 `;
 

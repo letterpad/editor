@@ -15,7 +15,7 @@ const getBlock = (props: any) => {
           width: props.w,
           height: props.h,
           align: "wide",
-          title: "https://unsplash.com/photos/5bYxXawHOQg",
+          title: "",
           src: props.src
         }
       }
@@ -31,7 +31,7 @@ const ImageButton: EditorButtonComponent = ({ editor, callbacks }) => {
     for (let i = 0; i < files.length; ++i) {
       let file = files[i];
       attributes.push(
-        new Promise((resolve, reject) => {
+        new Promise((resolve, _) => {
           let src = URL.createObjectURL(file);
           let img = new Image();
           img.onload = () => {

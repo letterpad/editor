@@ -18,10 +18,10 @@ export const insertImage = (
       type: "img",
       data: { src, align, title }
     })
-    .wrapBlock({ type: "figure", data: { src } })
-    .moveAnchorToStartOfNextBlock()
-    .moveFocusToStartOfNextBlock()
-    .focus();
+    .wrapBlock({ type: "figure", data: { src } });
+  // .moveAnchorToStartOfNextBlock()
+  // .moveFocusToStartOfNextBlock()
+  // .focus();
 };
 
 export const updateInlineImage = ({

@@ -35,7 +35,12 @@ const applyStyles = (type: string) => {
   }
 };
 
-export const NodeWrapper = styled.p`
+export const Figure = styled.figure`
+  ${(props: any) => applyStyles(props.type)}
+  position: relative;
+  z-index: 1;
+`;
+export const Wrapper = styled.div`
   ${(props: any) => applyStyles(props.type)}
   position: relative;
   z-index: 1;
@@ -64,18 +69,18 @@ export const Image = styled.img`
   height: 100%;
 `;
 
-export const Figure = styled.figure`
-  ${(props: any) => applyStyles(props.type)}
-  position: relative;
-  z-index: 1;
-  padding: 2px !important;
-  display: inline-block;
-  width: ${(p: any) => p.width};
-  /* background: url(${(p: any) => p.src});
+// export const Figure = styled.figure`
+//   ${(props: any) => applyStyles(props.type)}
+//   position: relative;
+//   z-index: 1;
+//   padding: 2px !important;
+//   display: inline-block;
+//   width: ${(p: any) => p.width};
+/* background: url(${(p: any) => p.src});
   background-size: cover;
   background-repeat: no-repeat;
   border: 2px solid #fff; */
-`;
+// `;
 
 export const Row = styled.div`
   display: flex;
