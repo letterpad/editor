@@ -18,10 +18,10 @@ export const insertImage = (
       type: "img",
       data: { src, align, title }
     })
-    .wrapBlock({ type: "figure", data: { src } });
-  // .moveAnchorToStartOfNextBlock()
-  // .moveFocusToStartOfNextBlock()
-  // .focus();
+    .wrapBlock({ type: "figure", data: { src } })
+    .moveAnchorToStartOfNextBlock()
+    .moveFocusToStartOfNextBlock()
+    .focus();
 };
 
 export const updateInlineImage = ({
@@ -54,24 +54,3 @@ export const forceClickUploadButton = (editor: Editor) => {
     el.click();
   }
 };
-
-export const splitUp = (arr: any, min: number, max: number) => {
-  let arrs = [],
-    size = 1;
-  min = min || 1;
-  max = max || min || 1;
-  while (arr.length > 0) {
-    size = Math.min(max, Math.floor(Math.random() * max + min));
-    arrs.push(arr.splice(0, size));
-  }
-  return arrs;
-};
-
-export const randomIntBetween = (
-  min: number,
-  max: number // min and max included
-) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-// export const decorateNode = (node, editor, next) => {};
