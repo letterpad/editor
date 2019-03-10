@@ -130,7 +130,7 @@ export class LetterpadEditor extends Component<
     if (
       !value.focusBlock ||
       value.focusBlock.text ||
-      value.focusBlock.type !== "p" ||
+      ["section", "p"].indexOf(value.focusBlock.type) === -1 ||
       value.inlines.size > 0
     ) {
       this.setState({

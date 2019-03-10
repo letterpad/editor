@@ -13,101 +13,128 @@ class GalleryNode extends Component<{
   editor?: Editor;
   attributes: any;
 }> {
-  state = { grid: [], selected: "" };
+  state = { grid: [], selected: -1, imageCount: 0 };
+
+  wrapperRef = React.createRef<HTMLDivElement>();
+
   componentDidMount() {
+    // We wil extract all the <figure> nodes from children.
+    // Each figure node is suppose to contain an <img> tag.
     let figures = getFigureNodesFromChildren(this.props.children);
+    // Compute a [3,X] grid in way that all images can fit without leaving
+    // an empty space.
     const grid = computeGrid(figures);
-    this.setState({ grid });
+    // set it in the state
+    this.setState({ grid, imageCount: figures.length });
   }
 
   static getDerivedStateFromProps(props: any, state: any) {
-    let figures = getFigureNodesFromChildren(props.children);
+    const figures = getFigureNodesFromChildren(props.children);
+    if (state.imageCount === figures.length) {
+      return null;
+    }
+    // recalculate the grid as the image count has changed
+    // this can only happen, if one of the image has been deleted.
     const grid = computeGrid(figures);
-    if (state.grid.length === grid.length) {
-      return { grid, selected: state.selected };
-    }
-    let selected = state.selected;
-    for (let i = 0; i < figures.length; i++) {
-      const figure = figures[i];
-      if (parseInt(figure.key) > parseInt(state.selected)) {
-        selected = figures[i + 1].key;
-        break;
-      }
-    }
+    let { selected } = state;
 
-    return { grid, selected };
+    // if none of the image has been selected, return the grid
+    if (selected === -1) {
+      return { grid, imageCount: figures.length };
+    }
+    // If we we have reached here, its becuase one of the image has been deleted
+
+    // if the last image was deleted then move the cursor to the previous index
+    if (selected >= figures.length) {
+      selected -= 1;
+    }
+    return { grid, selected, imageCount: figures.length };
   }
+
   componentDidUpdate() {
-    if (this.props.editor && this.state.selected !== "") {
-      const element = document.querySelector(
-        `[data-key="${this.state.selected}"]`
-      );
-      if (element) {
-        setTimeout(() => {
-          console.log(element);
-          element.scrollIntoView();
-        }, 10);
-      }
+    const { selected } = this.state;
+    const { current } = this.wrapperRef;
+    if (selected === -1 || !current) {
+      return;
     }
+    // if any image is selected, then bring the focus there.
+    const element = (current as Element).querySelectorAll("figure")[selected];
+    if (!element) return;
+
+    setTimeout(() => {
+      try {
+        element.scrollIntoView({ block: "center" });
+      } catch (e) {
+        element.scrollIntoView();
+      }
+    }, 30);
   }
 
-  getNextKey = () => {};
-
-  selectImage = (key: string) => {
-    this.setState({ selected: key });
+  selectImage = (index: number) => {
+    this.setState({ selected: index });
   };
 
   render() {
     const { attributes } = this.props;
 
-    const images = this.state.grid.map((figures: Block[], idx: number) => {
-      const ratios = getImageRatiosFromFigures(figures);
+    // the grid contains figures, imgs and spans
+    // grid > figures > [span, img, span]
+    const images = this.state.grid.map(
+      (figures: Block[], gridIndex: number) => {
+        const ratios = getImageRatiosFromFigures(figures);
 
-      const { newWidths, height } = calculateImageDimensions(
-        ratios,
-        figures.length
-      );
-
-      return (
-        <Row {...attributes} key={idx}>
-          {figures.map((node: any, i: number) => {
-            const imgNode = node.nodes
-              .filter((node: any) => {
-                return node.type === "img";
-              })
-              .first();
-            const data = imgNode.data;
-            const isSelected = this.state.selected === node.key;
-            return (
-              <Figure
-                key={i}
-                height={height}
-                width={newWidths[i]}
-                src={data.get("src")}
-                selected={isSelected}
-                className={
-                  isSelected ? "letterpad-image-active-for-delete" : ""
+        const { newWidths, height } = calculateImageDimensions(
+          ratios,
+          figures.length
+        );
+        return (
+          <Row {...attributes} key={gridIndex}>
+            {figures.map((figureNode: any, figureIdx: number) => {
+              return figureNode.nodes.map((imgNode: any) => {
+                // if the figure contains anything apart from img, return the node.
+                if (imgNode.type !== "img") {
+                  return (
+                    <>
+                      <span data-key={parseInt(imgNode.key) - 1} />
+                      <span data-key={imgNode.key} />
+                    </>
+                  );
                 }
-                data-key={node.key}
-                onClick={(e: any) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  return this.selectImage(e.currentTarget.dataset.key);
-                }}
-              >
-                <Image
-                  height={height}
-                  data-key={imgNode.key}
-                  width={newWidths[i]}
-                  src={data.get("src")}
-                />
-              </Figure>
-            );
-          })}
-        </Row>
-      );
-    });
-    if (images.length > 0) return images;
+                const imgNumber = figureIdx + gridIndex * 3;
+                const isSelected = this.state.selected === imgNumber;
+                return (
+                  <Figure
+                    contentEditable={false}
+                    key={figureIdx}
+                    height={height}
+                    width={newWidths[figureIdx]}
+                    src={imgNode.data.get("src")}
+                    selected={isSelected}
+                    className={
+                      isSelected ? "letterpad-image-active-for-delete" : ""
+                    }
+                    data-key={figureNode.key}
+                    onClick={(e: any) => {
+                      e.preventDefault();
+                      return this.selectImage(imgNumber);
+                    }}
+                  >
+                    <Image
+                      contentEditable={false}
+                      height={height}
+                      data-key={imgNode.key}
+                      width={newWidths[figureIdx]}
+                      src={imgNode.data.get("src")}
+                    />
+                  </Figure>
+                );
+              });
+            })}
+          </Row>
+        );
+      }
+    );
+    if (images.length > 0) return <div ref={this.wrapperRef}> {images} </div>;
 
     return <section {...this.props.attributes}>{this.props.children}</section>;
   }
