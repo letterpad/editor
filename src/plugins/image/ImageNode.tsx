@@ -116,12 +116,7 @@ const ImageNode: SFC<{
   return (
     <Wrapper {...attributes} onClick={showOptions} type={alignOption}>
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
-      <img
-        className="imagenode"
-        width="100%"
-        src={(node as any).data.get("src")}
-        {...attributes}
-      />
+      <img width="100%" src={(node as any).data.get("src")} {...attributes} />
       {!captionActive && renderCaption()}
       {captionActive && renderCaptionInput()}
     </Wrapper>

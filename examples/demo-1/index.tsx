@@ -36,7 +36,10 @@ class Demo extends Component {
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
         getCharCount={count => {
-          console.log(count);
+          // count is available.
+          if (count) {
+            // typescript - this is only to allow the unused variable
+          }
         }}
       />
     );
