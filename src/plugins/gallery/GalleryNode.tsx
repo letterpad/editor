@@ -95,10 +95,7 @@ class GalleryNode extends Component<{
       (figures: Block[], gridIndex: number) => {
         const ratios = getImageRatiosFromFigures(figures);
 
-        const { newWidths, height } = calculateImageDimensions(
-          ratios,
-          figures.length
-        );
+        const { newWidths, height } = calculateImageDimensions(ratios);
         return (
           <Row {...attributes} key={gridIndex}>
             {figures.map((figureNode: any, figureIdx: number) => {

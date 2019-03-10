@@ -25,10 +25,12 @@ export const insertImage = (
     .focus();
 };
 
+// compute the gallery grid. Each row will contain a max of 3 images.
 export const computeGrid = (images: any[]) => {
+  const maxRowSize = 3;
   const grid = [];
   for (let i = 0; i < images.length; i++) {
-    if (i % 3 === 0) {
+    if (i % maxRowSize === 0) {
       grid.push([images[i]]);
     } else {
       grid[grid.length - 1].push(images[i]);
@@ -45,6 +47,10 @@ export const computeGrid = (images: any[]) => {
   return grid;
 };
 
+/**
+ * Get all the nodes which contain `figure` tag from children
+ * @param children
+ */
 export const getFigureNodesFromChildren = (children: ReactNode) => {
   let figures: Block[] = [];
   React.Children.forEach(children, (element: any) => {
@@ -55,8 +61,13 @@ export const getFigureNodesFromChildren = (children: ReactNode) => {
   return figures;
 };
 
+/**
+ * Calculate the aspect ratio of images w/h contained in figure tag
+ * @param figures
+ */
 export const getImageRatiosFromFigures = (figures: Block[]) => {
   return figures.map((data: Block) => {
+    // get the image node from the `figure` node.
     const imgNode = data.nodes
       .filter((node: any) => {
         return node.type === "img";
@@ -74,12 +85,18 @@ export function isTextNode(node: Node): node is Text {
   return false;
 }
 
-export const calculateImageDimensions = (ratios: number[], count: number) => {
+/**
+ * Calculate the approprite width and height of an image in a way that
+ * it can fill the grid without leaving any space
+ * @param ratios An array containing the aspect ratio of all images
+ * @returns {newWidths[], height[]}
+ */
+export const calculateImageDimensions = (ratios: number[]) => {
   const diffs = [];
 
   for (let i = 10; i < 500; i++) {
     let sum = 0;
-    for (let j = 0; j < count; j++) {
+    for (let j = 0; j < ratios.length; j++) {
       sum += ratios[j] * i;
     }
     if (sum < 1000) diffs.push(1000 - sum);
