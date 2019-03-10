@@ -68,7 +68,7 @@ export const getImageRatiosFromFigures = (figures: Block[]) => {
 };
 
 export function isTextNode(node: Node): node is Text {
-  if (Object.prototype.hasOwnProperty.call(node, "nodes")) {
+  if (!node && Object.prototype.hasOwnProperty.call(node, "nodes")) {
     return true;
   }
   return false;

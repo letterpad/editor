@@ -18,6 +18,7 @@ class GalleryNode extends Component<{
   wrapperRef = React.createRef<HTMLDivElement>();
 
   componentDidMount() {
+    document.addEventListener("keyup", this.validateSelection);
     // We wil extract all the <figure> nodes from children.
     // Each figure node is suppose to contain an <img> tag.
     let figures = getFigureNodesFromChildren(this.props.children);
@@ -26,6 +27,10 @@ class GalleryNode extends Component<{
     const grid = computeGrid(figures);
     // set it in the state
     this.setState({ grid, imageCount: figures.length });
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keyup", this.validateSelection);
   }
 
   static getDerivedStateFromProps(props: any, state: any) {
@@ -69,6 +74,13 @@ class GalleryNode extends Component<{
       }
     }, 30);
   }
+
+  validateSelection = (e: KeyboardEvent) => {
+    if (e.keyCode === 8 && this.state.selected >= 0) {
+      return;
+    }
+    this.setState({ selected: -1 });
+  };
 
   selectImage = (index: number) => {
     this.setState({ selected: index });
