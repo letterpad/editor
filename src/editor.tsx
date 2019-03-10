@@ -33,6 +33,7 @@ export interface LetterpadEditorProps {
     callbacks: { [key: string]: Function }
   ): void;
   onBeforeRender(props: { type: string }): void;
+  getCharCount?(count: number): void;
   width?: number;
 }
 
@@ -246,13 +247,27 @@ export class LetterpadEditor extends Component<
     }
   };
 
+  triggerWordCountHook = (value: Value) => {
+    const totalBlocks = value.document.getBlocks();
+    if (totalBlocks.size > 0) {
+      let charCount = 0;
+      charCount = totalBlocks.reduce((memo: number, b: any) => {
+        return memo + b.text.trim().split(/\s+/).length;
+      }, 0);
+      if (this.props.getCharCount) {
+        this.props.getCharCount(charCount);
+      }
+    }
+  };
+
   renderEditor: SlateReactPlugin["renderEditor"] = (props, editor, next) => {
     const children = next();
     this.editor = editor;
 
     const callbacks = {
       onBeforeRender: this.props.onBeforeRender,
-      onButtonClick: this.props.onButtonClick
+      onButtonClick: this.props.onButtonClick,
+      getCharCount: this.props.getCharCount
     };
     const data = {
       props,
@@ -261,6 +276,10 @@ export class LetterpadEditor extends Component<
       callbacks,
       onClick: this.toggleToolbarClass
     };
+
+    // trigger the word count hook
+    this.triggerWordCountHook(props.value);
+
     return (
       <>
         <StyledContent>{children}</StyledContent>

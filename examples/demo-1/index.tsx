@@ -35,6 +35,9 @@ class Demo extends Component {
       <LetterpadEditor
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
+        getCharCount={count => {
+          console.log(count);
+        }}
       />
     );
   }
