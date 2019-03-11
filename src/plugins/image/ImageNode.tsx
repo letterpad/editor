@@ -9,8 +9,9 @@ import { isTextNode } from "../codeblock/CodeblockUtils";
 import Alignment from "./Alignment";
 import {
   StyledCaption,
-  NodeWrapper,
-  StyledCaptionInput
+  Figure,
+  StyledCaptionInput,
+  Wrapper
 } from "./ImageNode.css";
 
 const ImageNode: SFC<{
@@ -21,7 +22,7 @@ const ImageNode: SFC<{
   node: Node;
   editor?: Editor;
   isFocused?: boolean;
-}> = ({ attributes, node }) => {
+}> = ({ attributes, node, children }) => {
   if (isTextNode(node)) return null;
   const align = node.data.get("align");
   const title = node.data.get("title");
@@ -31,7 +32,7 @@ const ImageNode: SFC<{
   const [captionActive, setCaptionActive] = useState(false);
 
   const [menu, setMenu] = useState(false);
-  const alignmentRef = React.useRef<HTMLDivElement>();
+  const alignmentRef = React.useRef<any>();
   const captionInputRef = React.useRef<any>();
 
   const showOptions = (e: any) => {
@@ -99,13 +100,26 @@ const ImageNode: SFC<{
       </StyledCaption>
     );
   };
+  if (node.type === "figure") {
+    return (
+      <Figure
+        contentEditable={false}
+        type={alignOption}
+        ref={alignmentRef}
+        {...attributes}
+      >
+        {children}
+      </Figure>
+    );
+  }
+
   return (
-    <NodeWrapper type={alignOption} ref={alignmentRef} onClick={showOptions}>
+    <Wrapper {...attributes} onClick={showOptions} type={alignOption}>
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
-      <img width="100%" src={node.data.get("src")} {...attributes} />
+      <img width="100%" src={(node as any).data.get("src")} {...attributes} />
       {!captionActive && renderCaption()}
       {captionActive && renderCaptionInput()}
-    </NodeWrapper>
+    </Wrapper>
   );
 };
 

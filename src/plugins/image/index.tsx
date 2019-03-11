@@ -15,11 +15,12 @@ const imageConfig: PluginConfig[] = [
       }
     ],
     render: ImageNode,
-    identifier: ["img"],
+    identifier: ["img", "figure"],
     slatePlugin: ImagePlugin,
     rules: {
       deserialize: (el, next) => {
         if (el.tagName !== "IMG") return;
+
         return {
           object: "inline",
           type: "img",

@@ -60,19 +60,19 @@ describe("features", () => {
       expect(expected1).toBe(expected2);
     });
 
-    test.only("image", async () => {
+    test("separator", async () => {
+      await clickXPath("//span[contains(text(), 'more_horiz')]");
+      const actual = await getHtmlContents(editorHandle);
+      expect(actual).toMatchSnapshot();
+    });
+
+    test("image", async () => {
       await clickXPath("//span[contains(text(), 'image')]");
       await page.waitFor(200);
       await page.keyboard.type("image.jpg");
       await page.keyboard.press("Enter");
       const expected = await getHtmlContents(editorHandle);
       expect(expected).toMatchSnapshot();
-    });
-
-    test("separator", async () => {
-      await clickXPath("//span[contains(text(), 'more_horiz')]");
-      const actual = await getHtmlContents(editorHandle);
-      expect(actual).toMatchSnapshot();
     });
   });
 });

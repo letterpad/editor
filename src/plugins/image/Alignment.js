@@ -4,6 +4,7 @@ const StyledAlignment = styled.div`
   position: absolute;
   margin-left: -70px !important;
   left: 50%;
+  z-index: 1;
 
   .letterpad-image-options-inner {
     display: flex;
@@ -32,8 +33,10 @@ const Option = ({ option, onClick, selected }) => {
     active = "active";
   }
   return (
-    <span onClick={onClick}>
-      <span className={"material-icons " + active}>{option.icon}</span>
+    <span onClick={onClick} contentEditable={false}>
+      <span contentEditable={false} className={"material-icons " + active}>
+        {option.icon}
+      </span>
     </span>
   );
 };

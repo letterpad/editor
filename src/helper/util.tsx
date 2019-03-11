@@ -39,6 +39,7 @@ export const getAttributesFromNode = (node: Block) => {
 
 export const getCodeBlockParent = (value: Value, tagName: string) => {
   let parentNode = value.anchorBlock;
+  if (!parentNode) return null;
   do {
     if (parentNode.type === tagName) {
       return parentNode;
