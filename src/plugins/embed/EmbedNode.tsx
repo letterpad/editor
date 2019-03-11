@@ -13,6 +13,7 @@ const EmbedNode: SFC<{
       {...attributes}
       type="text/html"
       width="100%"
+      height="400px"
       frameBorder="0"
       {...attrs}
     >

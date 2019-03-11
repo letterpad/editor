@@ -18,8 +18,14 @@ export const insertImage = (
       type: "img",
       data: { src, align, title }
     })
-    .moveAnchorToStartOfNextBlock()
-    .focus();
+    .wrapBlock({ type: "figure", data: { src } });
+
+  if (editor.value.fragment.nodes.size > 1) {
+    editor
+      .moveAnchorToStartOfNextBlock()
+      .moveFocusToStartOfNextBlock()
+      .focus();
+  }
 };
 
 export const updateInlineImage = ({

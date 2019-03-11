@@ -35,6 +35,12 @@ class Demo extends Component {
       <LetterpadEditor
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
+        getCharCount={count => {
+          // count is available.
+          if (count) {
+            // typescript - this is only to allow the unused variable
+          }
+        }}
       />
     );
   }

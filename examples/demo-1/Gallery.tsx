@@ -34,7 +34,7 @@ const ImageInput: FunctionComponent<ImageInputProps> = React.forwardRef(
             }
           }}
           type="text"
-          placeholder="Paste an Image link and press Enter"
+          placeholder="Enter a keyword and search for images"
         />
       </Container>
     );
