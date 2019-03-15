@@ -8,18 +8,6 @@ export const EditorWrapper = styled.div`
   --spacingBottom: 1rem;
   --editorWidth: ${({ width }: { width?: number }) => (width ? width : 740)}px;
 
-  /* reset native styles */
-  box-sizing: border-box;
-  margin: 0;
-  & * {
-    box-sizing: border-box;
-
-    /* remove defaults */
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
   max-width: var(--editorWidth);
   min-width: 360px;
   margin: auto;
@@ -29,8 +17,6 @@ export const EditorWrapper = styled.div`
   font-style: normal;
   font-family: "Libre Baskerville", serif;
   text-rendering: optimizeLegibility;
-  color: #000000;
-
   padding: var(--editorPadding);
   line-height: 2;
 
@@ -49,12 +35,6 @@ export const EditorWrapper = styled.div`
     font-size: 4rem;
     color: #171717;
     border-bottom: solid 1px #171717;
-  }
-
-  h2,
-  h3,
-  h4 {
-    color: #000000;
   }
 
   h2 {

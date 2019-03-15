@@ -23,7 +23,7 @@ const ButtonWrapper = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  background: #fff;
+  /* background: #fff; */
 `;
 
 const ToolbarMenu = styled.div`
@@ -53,7 +53,7 @@ const ToolbarMenu = styled.div`
     font-size: 18px;
     vertical-align: text-bottom;
     padding: 6px 6px;
-    border: 1px solid #111;
+    border: 1px solid var(--color-base);
     border-radius: 50%;
     margin-right: 5px;
     vertical-align: text-bottom;
@@ -92,7 +92,7 @@ const StyledToolBar = styled.div`
   }
 
   .button {
-    color: #111;
+    color: var(--color-base);
     cursor: pointer;
     .material-icons {
       vertical-align: text-bottom;

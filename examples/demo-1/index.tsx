@@ -33,6 +33,7 @@ class Demo extends Component {
   render() {
     return (
       <LetterpadEditor
+        theme="dark"
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
         getCharCount={count => {
