@@ -98,6 +98,10 @@ const StyledToolBar = styled.div`
       vertical-align: text-bottom;
     }
   }
+  input {
+    background: transparent;
+    color: var(--color-base);
+  }
 `;
 
 interface ToolbarProps {
