@@ -37,6 +37,7 @@ export interface LetterpadEditorProps {
   getCharCount?(count: number): void;
   width?: number;
   theme?: string;
+  spellCheck?: boolean;
 }
 
 interface LetterpadEditorState {
@@ -310,6 +311,8 @@ export class LetterpadEditor extends Component<
       <Theme theme={this.props.theme}>
         <EditorWrapper width={this.props.width}>
           <SlateReactEditor
+            autoFocus={true}
+            spellCheck={this.props.spellCheck}
             schema={schemaProps}
             plugins={this.state.slateReactPlugins}
             value={this.state.value}

@@ -5,12 +5,13 @@ import { Node, Editor } from "slate";
 const CodeblockContainer = styled.div`
   position: relative;
   .prism-dark {
-    background: #eee;
+    background: var(--bg-sections);
+    color: var(--color-text-3);
     color: inherit;
     padding: 16px;
     line-height: 23px;
     font-size: 16px;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 `;
 

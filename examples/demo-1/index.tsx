@@ -36,6 +36,7 @@ class Demo extends Component {
         theme="dark"
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
+        spellCheck={false}
         getCharCount={count => {
           // count is available.
           if (count) {

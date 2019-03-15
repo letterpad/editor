@@ -33,8 +33,7 @@ export const EditorWrapper = styled.div`
 
   h1 {
     font-size: 4rem;
-    color: #171717;
-    border-bottom: solid 1px #171717;
+    border-bottom: solid 1px var(--color-border);
   }
 
   h2 {
