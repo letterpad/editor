@@ -15,7 +15,7 @@ const LinkPlugin: PluginConfig["slatePlugin"] = () => ({
 const linkConfig: PluginConfig[] = [
   {
     type: "inline",
-    tag: "node",
+    renderType: "node",
     menuButtons: [{ button: LinkButton }],
     toolbarButtons: [],
     render: LinkNode,

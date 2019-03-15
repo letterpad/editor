@@ -24,7 +24,7 @@ const GalleryPlugin: PluginConfig["slatePlugin"] = () => {
 const GalleryConfig: PluginConfig[] = [
   {
     type: "block",
-    tag: "node",
+    renderType: "node",
     toolbarButtons: [
       {
         button: GalleryButton

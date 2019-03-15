@@ -6,7 +6,7 @@ const identifier = ["p"];
 const paragraphConfig: PluginConfig[] = [
   {
     type: "block",
-    tag: "node",
+    renderType: "node",
     identifier,
     render: ({ children, attributes }: any) => (
       <section {...attributes}>{children}</section>
