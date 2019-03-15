@@ -27,7 +27,6 @@ export const EmbedPlugin: PluginConfig["slatePlugin"] = () => {
 
 const EmbedConfig: PluginConfig[] = [
   {
-    type: "block",
     renderType: "node",
     menuButtons: [],
     toolbarButtons: [{ button: EmbedButton }],

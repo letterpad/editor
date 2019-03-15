@@ -16,7 +16,6 @@ const identifier = ["li", "ol", "ul"];
 
 const listConfig: PluginConfig[] = [
   {
-    type: "block",
     renderType: "node",
     menuButtons: [{ button: ListButtonBar }],
     toolbarButtons: [],

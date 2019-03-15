@@ -5,7 +5,6 @@ const identifier = ["p"];
 
 const paragraphConfig: PluginConfig[] = [
   {
-    type: "block",
     renderType: "node",
     identifier,
     render: ({ children, attributes }: any) => (

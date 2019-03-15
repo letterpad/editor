@@ -11,7 +11,6 @@ const LinebreakPlugin = () => {
 
 const linebreakConfig: PluginConfig[] = [
   {
-    type: "block",
     renderType: "node",
     menuButtons: [],
     toolbarButtons: [{ button: LinebreakButton }],

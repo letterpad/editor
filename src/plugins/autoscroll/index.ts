@@ -3,7 +3,6 @@ import { PluginConfig } from "..";
 
 const autoscrollConfig: PluginConfig[] = [
   {
-    type: "node",
     slatePlugin: AutoScrollPlugin
   }
 ];

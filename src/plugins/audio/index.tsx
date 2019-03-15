@@ -32,7 +32,6 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
 
 const audioConfig: PluginConfig[] = [
   {
-    type: "block",
     renderType: "node",
     menuButtons: [],
     toolbarButtons: [{ button: AudioButton }],

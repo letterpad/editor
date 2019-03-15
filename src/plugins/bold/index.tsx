@@ -35,7 +35,6 @@ const BoldPlugin: PluginConfig["slatePlugin"] = () => {
 
 const boldConfig: PluginConfig[] = [
   {
-    type: "mark",
     renderType: "mark",
     menuButtons: [{ button: BoldButton }],
     toolbarButtons: [],
