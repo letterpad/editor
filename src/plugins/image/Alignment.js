@@ -45,7 +45,8 @@ const options = [
   { align: "left", icon: "format_indent_increase" },
   { align: "center", icon: "format_align_justify" },
   { align: "wide", icon: "panorama_wide_angle" },
-  { align: "full", icon: "menu" }
+  { align: "full", icon: "menu" },
+  { align: "parallax", icon: "unfold_less" }
 ];
 
 const Alignment = ({ selected, onClick }) => {
