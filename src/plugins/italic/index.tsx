@@ -35,8 +35,7 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
 
 const italicConfig: PluginConfig[] = [
   {
-    type: "mark",
-    tag: "mark",
+    renderType: "mark",
     menuButtons: [{ button: ItalicButton }],
     toolbarButtons: [],
     render: ItalicMark,

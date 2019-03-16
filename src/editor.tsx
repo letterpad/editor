@@ -89,10 +89,10 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
       slateReactPlugins.push(AutoReplace(pluginConfig.markdown));
     }
 
-    let { identifier, tag } = pluginConfig;
-    if (identifier != null && tag != null) {
+    let { identifier, renderType } = pluginConfig;
+    if (identifier != null && renderType != null) {
       identifier.forEach(id => {
-        pluginsMap[tag as keyof PluginsMap][id] = {
+        pluginsMap[renderType as keyof PluginsMap][id] = {
           plugin: pluginConfig,
           is: id
         };

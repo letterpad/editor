@@ -7,8 +7,7 @@ const ImagePlugin: PluginConfig["slatePlugin"] = () => ({});
 
 const imageConfig: PluginConfig[] = [
   {
-    type: "inline",
-    tag: "node",
+    renderType: "node",
     toolbarButtons: [
       {
         button: ImageButton

@@ -22,8 +22,7 @@ const UnderlinePlugin: PluginConfig["slatePlugin"] = () => {
 
 const underlineConfig: PluginConfig[] = [
   {
-    type: "mark",
-    tag: "mark",
+    renderType: "mark",
     menuButtons: [{ button: UnderlineButton }],
     toolbarButtons: [],
     render: UnderlineMark,
