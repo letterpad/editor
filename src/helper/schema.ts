@@ -20,6 +20,11 @@ const schemaProps: SchemaProperties = {
     img: {
       isVoid: true
     }
+  },
+  blocks: {
+    hr: {
+      isVoid: true
+    }
   }
 };
 

@@ -25,6 +25,7 @@ import Html from "slate-html-serializer";
 import { showMenu } from "./helper/showMenu";
 import { getRules } from "./helper/rules";
 import Toolbar from "./components/Toolbar";
+import { Theme } from "./theme.css";
 
 export interface LetterpadEditorProps {
   onButtonClick(
@@ -35,6 +36,8 @@ export interface LetterpadEditorProps {
   onBeforeRender(props: { type: string }): void;
   getCharCount?(count: number): void;
   width?: number;
+  theme?: string;
+  spellCheck?: boolean;
 }
 
 interface LetterpadEditorState {
@@ -305,33 +308,37 @@ export class LetterpadEditor extends Component<
       onButtonClick: this.props.onButtonClick
     };
     return (
-      <EditorWrapper width={this.props.width}>
-        <SlateReactEditor
-          schema={schemaProps}
-          plugins={this.state.slateReactPlugins}
-          value={this.state.value}
-          onChange={this.onChange}
-          onPaste={this.onPaste}
-          renderNode={(props, _, next) =>
-            renderNode({
-              props,
-              next,
-              callbacks: eventHandlers,
-              pluginsMap: this.state.pluginsMap
-            })
-          }
-          renderMark={(props, _, next) =>
-            renderMark({
-              props,
-              next,
-              callbacks: eventHandlers,
-              pluginsMap: this.state.pluginsMap
-            })
-          }
-          renderEditor={this.renderEditor}
-          placeholder="Compose a story.."
-        />
-      </EditorWrapper>
+      <Theme theme={this.props.theme}>
+        <EditorWrapper width={this.props.width}>
+          <SlateReactEditor
+            autoFocus={true}
+            spellCheck={this.props.spellCheck}
+            schema={schemaProps}
+            plugins={this.state.slateReactPlugins}
+            value={this.state.value}
+            onChange={this.onChange}
+            onPaste={this.onPaste}
+            renderNode={(props, _, next) =>
+              renderNode({
+                props,
+                next,
+                callbacks: eventHandlers,
+                pluginsMap: this.state.pluginsMap
+              })
+            }
+            renderMark={(props, _, next) =>
+              renderMark({
+                props,
+                next,
+                callbacks: eventHandlers,
+                pluginsMap: this.state.pluginsMap
+              })
+            }
+            renderEditor={this.renderEditor}
+            placeholder="Compose a story.."
+          />
+        </EditorWrapper>
+      </Theme>
     );
   }
 }

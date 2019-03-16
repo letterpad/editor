@@ -8,18 +8,6 @@ export const EditorWrapper = styled.div`
   --spacingBottom: 1rem;
   --editorWidth: ${({ width }: { width?: number }) => (width ? width : 740)}px;
 
-  /* reset native styles */
-  box-sizing: border-box;
-  margin: 0;
-  & * {
-    box-sizing: border-box;
-
-    /* remove defaults */
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
   max-width: var(--editorWidth);
   min-width: 360px;
   margin: auto;
@@ -29,8 +17,6 @@ export const EditorWrapper = styled.div`
   font-style: normal;
   font-family: "Libre Baskerville", serif;
   text-rendering: optimizeLegibility;
-  color: #000000;
-
   padding: var(--editorPadding);
   line-height: 2;
 
@@ -47,14 +33,7 @@ export const EditorWrapper = styled.div`
 
   h1 {
     font-size: 4rem;
-    color: #171717;
-    border-bottom: solid 1px #171717;
-  }
-
-  h2,
-  h3,
-  h4 {
-    color: #000000;
+    border-bottom: solid 1px var(--color-border);
   }
 
   h2 {
@@ -97,43 +76,6 @@ export const EditorWrapper = styled.div`
     padding: 2rem;
     padding-top: var(--spacingTop);
     padding-bottom: var(--spacingBottom);
-  }
-
-  hr {
-    border: none !important;
-    margin-top: 52px;
-    margin-bottom: 42px;
-    display: block;
-    border: 0;
-    text-align: center;
-    overflow: visible;
-    &:before {
-      font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 30px;
-      letter-spacing: 0.6em;
-      content: "...";
-      display: inline-block;
-      margin-left: 0.6em;
-      color: var(--color-base);
-      position: relative;
-      top: -30px;
-    }
-  }
-  blockquote {
-    font-family: inherit;
-    font-style: normal;
-    text-align: left;
-    border-left: 4px solid #333;
-    padding: 2px 8px;
-  }
-
-  blockquote cite {
-    display: block;
-    font-size: 17px;
-    color: #bbb;
-    margin: 30px 0;
   }
 `;
 

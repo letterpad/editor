@@ -1,6 +1,12 @@
 import React, { SFC, DetailedHTMLProps, HTMLAttributes } from "react";
 import { Node } from "slate";
 import { isTextNode } from "../codeblock/CodeblockUtils";
+import styled from "styled-components";
+
+const Wrapper = styled.a`
+  color: inherit;
+  text-decoration: underline;
+`;
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 const LinkNode: SFC<{
@@ -10,13 +16,13 @@ const LinkNode: SFC<{
   >;
   node: Node;
 }> = ({ attributes, node, children }) => (
-  <a
+  <Wrapper
     {...attributes}
     className="link-node"
     href={isTextNode(node) ? node.text : node.data.get("href")}
   >
     {children}
-  </a>
+  </Wrapper>
 );
 
 export default LinkNode;

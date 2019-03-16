@@ -1,7 +1,19 @@
 import React, { SFC, DetailedHTMLProps, BlockquoteHTMLAttributes } from "react";
 import { Block } from "slate";
 import { getAttributesFromNode } from "../../helper/util";
+import styled from "styled-components";
 
+const Wrapper = styled.blockquote`
+  text-align: left;
+  border-left: 4px solid var(--bg-success);
+  padding: 2px 8px;
+  cite {
+    display: block;
+    font-size: 17px;
+    color: #bbb;
+    margin: 30px 0;
+  }
+`;
 const BlockquoteNode: SFC<{
   attributes: DetailedHTMLProps<
     BlockquoteHTMLAttributes<HTMLElement>,
@@ -11,9 +23,9 @@ const BlockquoteNode: SFC<{
 }> = ({ attributes, children, node }) => {
   const attrs = getAttributesFromNode(node);
   return (
-    <blockquote {...attributes} {...attrs}>
+    <Wrapper {...attributes} {...attrs}>
       {children}
-    </blockquote>
+    </Wrapper>
   );
 };
 
