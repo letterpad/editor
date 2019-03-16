@@ -990,6 +990,60 @@ const initialValue: ValueJSON = {
             leaves: [
               {
                 object: "leaf",
+                text: "However, you can add gists like so.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "iframe",
+        data: {
+          src:
+            "https://gist.github.com/ajaxtown/f6b234dc10c42b32a503b574e3fc6b58"
+        },
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "paragraph",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
                 text: " Heading look like this:",
                 marks: []
               }
