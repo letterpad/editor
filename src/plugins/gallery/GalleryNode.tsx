@@ -143,7 +143,8 @@ class GalleryNode extends Component<{
         );
       }
     );
-    if (images.length > 0) return <div ref={this.wrapperRef}> {images} </div>;
+    if (images.length > 0)
+      return <section ref={this.wrapperRef}>{images}</section>;
 
     return <section {...this.props.attributes}>{this.props.children}</section>;
   }
