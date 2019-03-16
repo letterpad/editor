@@ -92,7 +92,215 @@ const initialValue: ValueJSON = {
               {
                 object: "leaf",
                 text:
-                  " editor with robust plugin architecture. It comes with set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has a markdown capabilites which generates inline previews as you start writing in markdown.",
+                  " editor with a robust plugin architecture. It comes with a set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has markdown capabilites which generates inline previews as you start writing in markdown. Below are some mixed content composed with this editor. ",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "hr",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "Letterpad editor uses the below technologies.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "ul",
+        data: {},
+        nodes: [
+          {
+            object: "block",
+            type: "li",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "React",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "li",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "Slatejs",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "li",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "Typescript",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "li",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "Styled Components",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "li",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "Webpack",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "li",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "Puppeteer",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  "We have good documentation, if you would like to contribute with some plugins. Visit our ",
+                marks: []
+              }
+            ]
+          },
+          {
+            object: "inline",
+            type: "a",
+            data: {
+              href: "https://github.com/letterpad/editor"
+            },
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "github page",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: " for more information.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "blockquote",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  "It has 100% end-to-end test coverage. So its easy to figure out if something broke due to your change.",
                 marks: []
               }
             ]
@@ -110,7 +318,7 @@ const initialValue: ValueJSON = {
               {
                 object: "leaf",
                 text:
-                  "Below are some mixed content written with this editor. Lets start with a gallery.",
+                  "You can develop plugins like the one below. This is a gallery plugin.",
                 marks: []
               }
             ]
@@ -526,7 +734,7 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "p",
+        type: "hr",
         data: {},
         nodes: [
           {
@@ -534,101 +742,7 @@ const initialValue: ValueJSON = {
             leaves: [
               {
                 object: "leaf",
-                text: "Letterpad editor uses the below libraries.",
-                marks: []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        object: "block",
-        type: "ul",
-        data: {},
-        nodes: [
-          {
-            object: "block",
-            type: "li",
-            data: {},
-            nodes: [
-              {
-                object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "React",
-                    marks: []
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            object: "block",
-            type: "li",
-            data: {},
-            nodes: [
-              {
-                object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "Typescript",
-                    marks: []
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            object: "block",
-            type: "li",
-            data: {},
-            nodes: [
-              {
-                object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "Styled Components",
-                    marks: []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        object: "block",
-        type: "p",
-        data: {},
-        nodes: [
-          {
-            object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "We have good documentation, if you would like to contribute. Visit our github page for more information.",
-                marks: []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        object: "block",
-        type: "blockquote",
-        data: {},
-        nodes: [
-          {
-            object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "It has 100% end-to-end test coverage. So its easy to figure out if something broke due to your change.",
+                text: "",
                 marks: []
               }
             ]
@@ -645,7 +759,7 @@ const initialValue: ValueJSON = {
             leaves: [
               {
                 object: "leaf",
-                text: "Oh, we can embed media. Lets embed a youtube video.",
+                text: "You can embed media. Lets embed a youtube video.",
                 marks: []
               }
             ]
@@ -746,6 +860,23 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
+        type: "hr",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
         type: "p",
         data: {},
         nodes: [
@@ -755,7 +886,7 @@ const initialValue: ValueJSON = {
               {
                 object: "leaf",
                 text:
-                  "You can also have an image with different size to complement the content around it.",
+                  "You can also have an image with different sizes to complement the content around it.",
                 marks: []
               }
             ]
@@ -764,16 +895,28 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "figure",
-        data: {
-          src:
-            "https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-        },
+        type: "p",
+        data: {},
         nodes: [
           {
-            object: "block",
-            type: "p",
-            data: {},
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          },
+          {
+            object: "inline",
+            type: "img",
+            data: {
+              src:
+                "https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80",
+              align: "full",
+              title: ""
+            },
             nodes: [
               {
                 object: "text",
@@ -784,38 +927,16 @@ const initialValue: ValueJSON = {
                     marks: []
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            object: "text",
+            leaves: [
               {
-                object: "inline",
-                type: "img",
-                data: {
-                  src:
-                    "https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80",
-                  align: "full",
-                  title: ""
-                },
-                nodes: [
-                  {
-                    object: "text",
-                    leaves: [
-                      {
-                        object: "leaf",
-                        text: "",
-                        marks: []
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                object: "leaf",
+                text: "",
+                marks: []
               }
             ]
           }
@@ -869,7 +990,7 @@ const initialValue: ValueJSON = {
             leaves: [
               {
                 object: "leaf",
-                text: "We have  heading which look like this:",
+                text: " Heading look like this:",
                 marks: []
               }
             ]
@@ -1104,7 +1225,235 @@ const initialValue: ValueJSON = {
           }
         ]
       },
-
+      {
+        object: "block",
+        type: "paragraph",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "paragraph",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  "You can also embed plain audio like mp3. Its not very clean but you can enhance this feature.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "paragraph",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "audio",
+        data: {
+          src: "https://ccrma.stanford.edu/~jos/mp3/gtr-jaz-2.mp3"
+        },
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "hr",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "Oh you can also have a parallax image. ",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "figure",
+        data: {
+          src: "https://wallpaperaccess.com/full/124600.jpg"
+        },
+        nodes: [
+          {
+            object: "block",
+            type: "figure",
+            data: {
+              src: "http://pavbca.com/walldb/original/2/2/3/814054.jpg"
+            },
+            nodes: [
+              {
+                object: "block",
+                type: "figure",
+                data: {
+                  src:
+                    "https://wallpapertag.com/wallpaper/full/4/d/9/653898-beautiful-star-wars-background-wallpaper-1920x1080-hd-for-mobile.jpg"
+                },
+                nodes: [
+                  {
+                    object: "block",
+                    type: "p",
+                    data: {},
+                    nodes: [
+                      {
+                        object: "text",
+                        leaves: [
+                          {
+                            object: "leaf",
+                            text: "",
+                            marks: []
+                          }
+                        ]
+                      },
+                      {
+                        object: "inline",
+                        type: "img",
+                        data: {
+                          src:
+                            "https://wallpapertag.com/wallpaper/full/4/d/9/653898-beautiful-star-wars-background-wallpaper-1920x1080-hd-for-mobile.jpg",
+                          align: "parallax",
+                          title: ""
+                        },
+                        nodes: [
+                          {
+                            object: "text",
+                            leaves: [
+                              {
+                                object: "leaf",
+                                text: "",
+                                marks: []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        object: "text",
+                        leaves: [
+                          {
+                            object: "leaf",
+                            text: "",
+                            marks: []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  "If you have any ideas on some interesting plugin, you can ",
+                marks: []
+              }
+            ]
+          },
+          {
+            object: "inline",
+            type: "a",
+            data: {
+              href: "https://github.com/letterpad/editor/issues/new"
+            },
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "post them here",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: ".",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
       {
         object: "block",
         type: "p",

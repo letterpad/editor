@@ -35,15 +35,31 @@ const applyStyles = (type: string) => {
   }
 };
 
+const applyParallax = (props: any) => {
+  return `
+    ${applyStyles("full")}
+    background: url(${props.src});
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    img {
+      opacity: 0;
+    }
+  `;
+};
+
 export const Figure = styled.figure`
   ${(props: any) => applyStyles(props.type)}
   position: relative;
   z-index: 1;
 `;
+
 export const Wrapper = styled.div`
   ${(props: any) => applyStyles(props.type)}
   position: relative;
   z-index: 1;
+  ${(props: any) => props.type === "parallax" && applyParallax(props)}
 `;
 
 export const StyledCaptionInput = styled.input`
