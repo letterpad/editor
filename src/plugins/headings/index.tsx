@@ -8,8 +8,7 @@ const identifier = ["h1", "h2", "h3", "h4", "h5", "h6"];
 
 const headingsConfig: PluginConfig[] = [
   {
-    type: "block",
-    tag: "node",
+    renderType: "node",
     menuButtons: [
       { button: HeadingsButton, props: { type: "h2" } },
       { button: HeadingsButton, props: { type: "h3" } }

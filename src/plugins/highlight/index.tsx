@@ -19,8 +19,7 @@ const HighlightPlugin: PluginConfig["slatePlugin"] = () => ({
 
 const highlightConfig: PluginConfig[] = [
   {
-    type: "mark",
-    tag: "mark",
+    renderType: "mark",
     menuButtons: [
       {
         button: HighlightButton

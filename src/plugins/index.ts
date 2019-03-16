@@ -71,9 +71,7 @@ export interface EditorButton<P = any> {
 }
 
 export interface PluginConfig {
-  type: string;
-
-  tag?: string;
+  renderType?: string;
   identifier?: string[];
   menuButtons?: EditorButton[];
   toolbarButtons?: EditorButton[];

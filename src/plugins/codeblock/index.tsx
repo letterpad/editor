@@ -31,8 +31,7 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
 
 const plugins: PluginConfig[] = [
   {
-    type: "block",
-    tag: "node",
+    renderType: "node",
     menuButtons: [
       {
         button: CodeblockButton
