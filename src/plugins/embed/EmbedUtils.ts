@@ -78,3 +78,13 @@ export const parseUrl = (embedString: string) => {
   }
   return { src: embedString };
 };
+
+export const parseGistUrl = (url: string) => {
+  var parser = document.createElement("a");
+  parser.href = url;
+
+  const id = parser.pathname.split("/")[2];
+  let params = new URLSearchParams(parser.search);
+  const file = params.get("file");
+  return { id, file };
+};
