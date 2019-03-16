@@ -1,40 +1,36 @@
-import { ValueJSON, BlockJSON } from "slate";
+import { ValueJSON } from "slate";
 
-const introParas = [
-  `
-  Lorem Ipsum is simply dummy text of the printing and typesetting
-  industry. Lorem Ipsum has been the industry's standard dummy text
-  ever since the 1500s, when an unknown printer took a galley of
-  type and scrambled it to make a type specimen book. It has survived
-  not only five centuries, but also the leap into electronic
-  typesetting, remaining essentially unchanged. It was popularised
-  in the 1960s with the release of Letraset sheets containing Lorem
-  Ipsum passages, and more recently with desktop publishing software
-  like Aldus PageMaker including versions of Lorem Ipsum.
-  `,
-  `
-  Letterpad is an open-source and a high
-  performant publishing engine for blogs with a state-of-the-art
-  technology. It uses React, GraphQL, Express and Sequelize ORM.
-  Few of the core features are listed below:
-  `
-];
+// const introParas = [
+//   `
+//   This editor gives a high level api of the [slate editor](https://slatejs.org) along with a flexible plugin architecture. It comes with a bunch of rich plugins for most of your use cases. You can extend any of the plugins or create your own plugins. The letterpad editor has a dynamic markdown editor which renders the preview inline as you type.
+//   It was popularised
+//   in the 1960s with the release of Letraset sheets containing Lorem
+//   Ipsum passages, and more recently with desktop publishing software
+//   like Aldus PageMaker including versions of Lorem Ipsum.
+//   `,
+//   `
+//   Letterpad is an open-source and a high
+//   performant publishing engine for blogs with a state-of-the-art
+//   technology. It uses React, GraphQL, Express and Sequelize ORM.
+//   Few of the core features are listed below:
+//   `
+// ];
 
-const features = [
-  "Server side rendering",
-  "Multi author support",
-  "Comments (Disqus integration)",
-  "Google Analytics",
-  "Theme support",
-  "Multi-level navigation",
-  "Image optimizer",
-  "React with styled-components for styling",
-  "GraphQL for JSON API",
-  "Roles - Admin, Reviewer, Author, Reader",
-  "Markdown and RichText editor",
-  "Search Engine Optimised",
-  "Multi-language support with react-i18next (currently en, fr and pl)"
-];
+// const features = [
+//   "Server side rendering",
+//   "Multi author support",
+//   "Comments (Disqus integration)",
+//   "Google Analytics",
+//   "Theme support",
+//   "Multi-level navigation",
+//   "Image optimizer",
+//   "React with styled-components for styling",
+//   "GraphQL for JSON API",
+//   "Roles - Admin, Reviewer, Author, Reader",
+//   "Markdown and RichText editor",
+//   "Search Engine Optimised",
+//   "Multi-language support with react-i18next (currently en, fr and pl)"
+// ];
 
 const initialValue: ValueJSON = {
   document: {
@@ -42,231 +38,71 @@ const initialValue: ValueJSON = {
       {
         object: "block",
         type: "h3",
+        data: {},
         nodes: [
           {
             object: "text",
             leaves: [
               {
                 object: "leaf",
-                text: "Letterpad"
+                text: "Letterpad Editor",
+                marks: []
               }
             ]
           }
         ]
       },
       {
-        object: "block",
-        type: "section",
-        nodes: [
-          {
-            object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Demo of letterpad editor."
-              }
-            ]
-          }
-        ]
-      },
-      {
-        object: "block",
-        type: "section",
-        nodes: [
-          {
-            object: "block",
-            type: "figure",
-            data: {
-              src:
-                "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=500&q=60"
-            },
-            nodes: [
-              {
-                object: "inline",
-                type: "img",
-                data: {
-                  width: 1600,
-                  height: 500,
-                  align: "wide",
-                  title: "https://unsplash.com/photos/5bYxXawHOQg",
-                  src:
-                    "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=500&q=60"
-                }
-              }
-            ]
-          },
-          {
-            object: "block",
-            type: "figure",
-            data: {
-              src:
-                "https://images.unsplash.com/photo-1500058504985-a3bbdb0a7781?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=525&q=60"
-            },
-            nodes: [
-              {
-                object: "inline",
-                type: "img",
-                data: {
-                  width: 525,
-                  height: 350,
-                  align: "full",
-                  title: "https://unsplash.com/photos/5bYxXawHOQg",
-                  src:
-                    "https://images.unsplash.com/photo-1500058504985-a3bbdb0a7781?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=525&q=60"
-                }
-              }
-            ]
-          },
-          {
-            object: "block",
-            type: "figure",
-            data: {
-              src:
-                "https://images.unsplash.com/photo-1551300263-00574a9d9b89?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-            },
-            nodes: [
-              {
-                object: "inline",
-                type: "img",
-                data: {
-                  width: 243,
-                  height: 365,
-                  align: "full",
-                  title: "https://unsplash.com/photos/5bYxXawHOQg",
-                  src:
-                    "https://images.unsplash.com/photo-1551300263-00574a9d9b89?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                }
-              }
-            ]
-          },
-          {
-            object: "block",
-            type: "figure",
-            data: {
-              src:
-                "https://images.unsplash.com/photo-1551634979-2b11f8c946fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-            },
-            nodes: [
-              {
-                object: "inline",
-                type: "img",
-                data: {
-                  width: 413,
-                  height: 620,
-                  align: "full",
-                  title: "https://unsplash.com/photos/5bYxXawHOQg",
-                  src:
-                    "https://images.unsplash.com/photo-1551634979-2b11f8c946fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                }
-              }
-            ]
-          },
-          {
-            object: "block",
-            type: "figure",
-            data: {
-              src:
-                "https://images.unsplash.com/photo-1551334787-21e6bd3ab135?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2551&q=80"
-            },
-            nodes: [
-              {
-                object: "inline",
-                type: "img",
-                data: {
-                  width: 894,
-                  height: 596,
-                  align: "full",
-                  title: "https://unsplash.com/photos/5bYxXawHOQg",
-                  src:
-                    "https://images.unsplash.com/photo-1551334787-21e6bd3ab135?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2551&q=80"
-                }
-              }
-            ]
-          },
-          {
-            object: "block",
-            type: "figure",
-            data: {
-              src:
-                "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=500&q=60"
-            },
-            nodes: [
-              {
-                object: "inline",
-                type: "img",
-                data: {
-                  width: 1600,
-                  height: 500,
-                  align: "wide",
-                  title: "https://unsplash.com/photos/5bYxXawHOQg",
-                  src:
-                    "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=500&q=60"
-                }
-              }
-            ]
-          },
-          {
-            object: "block",
-            type: "figure",
-            data: {
-              src:
-                "https://images.unsplash.com/photo-1500058504985-a3bbdb0a7781?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=525&q=60"
-            },
-            nodes: [
-              {
-                object: "inline",
-                type: "img",
-                data: {
-                  width: 525,
-                  height: 350,
-                  align: "full",
-                  title: "https://unsplash.com/photos/5bYxXawHOQg",
-                  src:
-                    "https://images.unsplash.com/photo-1500058504985-a3bbdb0a7781?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=525&q=60"
-                }
-              }
-            ]
-          }
-        ]
-      },
-
-      ...(introParas.map(para => ({
         object: "block",
         type: "p",
+        data: {},
         nodes: [
           {
             object: "text",
             leaves: [
               {
                 object: "leaf",
-                text: para
-                  .trim()
-                  .split("\n")
-                  .join(" ")
+                text: "The letterpad editor is a high level API of the ",
+                marks: []
               }
             ]
-          }
-        ]
-      })) as any),
-      {
-        object: "block",
-        type: "section",
-        nodes: [
+          },
           {
             object: "inline",
-            type: "img",
+            type: "a",
             data: {
-              align: "wide",
-              title: "https://unsplash.com/photos/2LJ4rqK2qfU",
-              src:
-                "https://images.unsplash.com/photo-1501349800519-48093d60bde0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            }
+              href: "https://slatejs.org"
+            },
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "slatejs",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  " editor with robust plugin architecture. It comes with set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has a markdown capabilites which generates inline previews as you start writing in markdown.",
+                marks: []
+              }
+            ]
           }
         ]
       },
       {
         object: "block",
-        type: "section",
+        type: "p",
+        data: {},
         nodes: [
           {
             object: "text",
@@ -274,7 +110,995 @@ const initialValue: ValueJSON = {
               {
                 object: "leaf",
                 text:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting   industry. Lorem Ipsum has been the industry's standard dummy text   ever since the 1500s, when an unknown printer took a galley of   type and scrambled it to make a type specimen book. It has survived   not only five centuries, but also the leap into electronic   typesetting, remaining essentially unchanged. It was popularised   in the 1960s with the release of Letraset sheets containing Lorem   Ipsum passages, and more recently with desktop publishing software   like Aldus PageMaker including versions of Lorem Ipsum."
+                  "Below are some mixed content written with this editor. Lets start with a gallery.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "section",
+        data: {},
+        nodes: [
+          {
+            object: "block",
+            type: "figure",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              },
+              {
+                object: "inline",
+                type: "img",
+                data: {
+                  width: 2551,
+                  height: 1701,
+                  align: "wide",
+                  title: "",
+                  src: "https://i.ibb.co/BrKGd4m/2.jpg"
+                },
+                nodes: [
+                  {
+                    object: "text",
+                    leaves: [
+                      {
+                        object: "leaf",
+                        text: "",
+                        marks: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "figure",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              },
+              {
+                object: "inline",
+                type: "img",
+                data: {
+                  width: 1350,
+                  height: 900,
+                  align: "wide",
+                  title: "",
+                  src: "https://i.ibb.co/vHftK2F/8.jpg"
+                },
+                nodes: [
+                  {
+                    object: "text",
+                    leaves: [
+                      {
+                        object: "leaf",
+                        text: "",
+                        marks: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "figure",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              },
+              {
+                object: "inline",
+                type: "img",
+                data: {
+                  width: 1350,
+                  height: 900,
+                  align: "wide",
+                  title: "",
+                  src: "https://i.ibb.co/G024j31/7.jpg"
+                },
+                nodes: [
+                  {
+                    object: "text",
+                    leaves: [
+                      {
+                        object: "leaf",
+                        text: "",
+                        marks: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "figure",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              },
+              {
+                object: "inline",
+                type: "img",
+                data: {
+                  width: 800,
+                  height: 1000,
+                  align: "wide",
+                  title: "",
+                  src: "https://i.ibb.co/DWvD3zm/3.jpg"
+                },
+                nodes: [
+                  {
+                    object: "text",
+                    leaves: [
+                      {
+                        object: "leaf",
+                        text: "",
+                        marks: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "figure",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              },
+              {
+                object: "inline",
+                type: "img",
+                data: {
+                  width: 622,
+                  height: 1003,
+                  align: "wide",
+                  title: "",
+                  src: "https://i.ibb.co/jghS0d7/1.jpg"
+                },
+                nodes: [
+                  {
+                    object: "text",
+                    leaves: [
+                      {
+                        object: "leaf",
+                        text: "",
+                        marks: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "figure",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              },
+              {
+                object: "inline",
+                type: "img",
+                data: {
+                  width: 1351,
+                  height: 901,
+                  align: "wide",
+                  title: "",
+                  src: "https://i.ibb.co/WPWL05f/6.jpg"
+                },
+                nodes: [
+                  {
+                    object: "text",
+                    leaves: [
+                      {
+                        object: "leaf",
+                        text: "",
+                        marks: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "figure",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              },
+              {
+                object: "inline",
+                type: "img",
+                data: {
+                  width: 1189,
+                  height: 500,
+                  align: "wide",
+                  title: "",
+                  src: "https://i.ibb.co/7bdT8Pn/4.jpg"
+                },
+                nodes: [
+                  {
+                    object: "text",
+                    leaves: [
+                      {
+                        object: "leaf",
+                        text: "",
+                        marks: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "figure",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              },
+              {
+                object: "inline",
+                type: "img",
+                data: {
+                  width: 968,
+                  height: 500,
+                  align: "wide",
+                  title: "",
+                  src: "https://i.ibb.co/YyYh91g/5.jpg"
+                },
+                nodes: [
+                  {
+                    object: "text",
+                    leaves: [
+                      {
+                        object: "leaf",
+                        text: "",
+                        marks: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "Letterpad editor uses the below libraries.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "ul",
+        data: {},
+        nodes: [
+          {
+            object: "block",
+            type: "li",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "React",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "li",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "Typescript",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            object: "block",
+            type: "li",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "Styled Components",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  "We have good documentation, if you would like to contribute. Visit our github page for more information.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "blockquote",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  "It has 100% end-to-end test coverage. So its easy to figure out if something broke due to your change.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "Oh, we can embed media. Lets embed a youtube video.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "iframe",
+        data: {
+          width: "100%",
+          height: "415",
+          src: "https://www.youtube.com/embed/FvMuPtuvP5w",
+          frameborder: "0",
+          allow:
+            "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+          allowfullscreen: true,
+          allowFullScreen: true
+        },
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "You can also embed a ",
+                marks: []
+              },
+              {
+                object: "leaf",
+                text: "souncloud track",
+                marks: [
+                  {
+                    object: "mark",
+                    type: "code",
+                    data: {}
+                  }
+                ]
+              },
+              {
+                object: "leaf",
+                text: " and or a ",
+                marks: []
+              },
+              {
+                object: "leaf",
+                text: "website",
+                marks: [
+                  {
+                    object: "mark",
+                    type: "code",
+                    data: {}
+                  }
+                ]
+              },
+              {
+                object: "leaf",
+                text: " or a ",
+                marks: []
+              },
+              {
+                object: "leaf",
+                text: "gist",
+                marks: [
+                  {
+                    object: "mark",
+                    type: "code",
+                    data: {}
+                  }
+                ]
+              },
+              {
+                object: "leaf",
+                text:
+                  ". You can nicely highlight the words that need attention.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  "You can also have an image with different size to complement the content around it.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "figure",
+        data: {
+          src:
+            "https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+        },
+        nodes: [
+          {
+            object: "block",
+            type: "p",
+            data: {},
+            nodes: [
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              },
+              {
+                object: "inline",
+                type: "img",
+                data: {
+                  src:
+                    "https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80",
+                  align: "full",
+                  title: ""
+                },
+                nodes: [
+                  {
+                    object: "text",
+                    leaves: [
+                      {
+                        object: "leaf",
+                        text: "",
+                        marks: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  "Do you write code ? We have something for you. Its not pretty, but it works.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "pre",
+        data: {
+          language: ""
+        },
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  '\nimport React from "react";\nimport { render } from "react-dom";\nimport LetterpadEditor from "letterpad-editor";\n\nrender(<LetterpadEditor />, document.getElementById("app"));\n',
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "We have  heading which look like this:",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "h1",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "Heading 1",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "h2",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "Heading 2",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "h3",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "Heading 3",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "h4",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "Heading 4",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "h5",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "Heading 5",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "Texts can be ",
+                marks: []
+              },
+              {
+                object: "leaf",
+                text: "bold and strong",
+                marks: [
+                  {
+                    object: "mark",
+                    type: "strong",
+                    data: {}
+                  }
+                ]
+              },
+              {
+                object: "leaf",
+                text: " or they can be ",
+                marks: []
+              },
+              {
+                object: "leaf",
+                text: "italic ",
+                marks: [
+                  {
+                    object: "mark",
+                    type: "em",
+                    data: {}
+                  }
+                ]
+              },
+              {
+                object: "leaf",
+                text: "and ",
+                marks: []
+              },
+              {
+                object: "leaf",
+                text: "underline",
+                marks: [
+                  {
+                    object: "mark",
+                    type: "u",
+                    data: {}
+                  }
+                ]
+              },
+              {
+                object: "leaf",
+                text: ". ",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  "Lets try to embed a soundcloud track. You can customize the height of embeds. Its just a iframe property.",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "iframe",
+        data: {
+          width: "100%",
+          height: "450",
+          scrolling: "no",
+          frameborder: "no",
+          allow: "autoplay",
+          src:
+            "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/84654763&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+        },
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "p",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        object: "block",
+        type: "paragraph",
+        data: {},
+        nodes: [
+          {
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text:
+                  "We have a custom unpublished plugin which a features to insert an image from giphy by searching with some keywords. Cool right ?",
+                marks: []
               }
             ]
           }
@@ -283,43 +1107,18 @@ const initialValue: ValueJSON = {
 
       {
         object: "block",
-        type: "ul",
-        nodes: features.map(
-          feature =>
-            ({
-              object: "block",
-              type: "li",
-              nodes: [
-                {
-                  object: "text",
-                  leaves: [
-                    {
-                      object: "leaf",
-                      text: feature
-                    }
-                  ]
-                }
-              ]
-            } as BlockJSON)
-        )
-      },
-      {
-        object: "block",
-        type: "figure",
-        data: {
-          src:
-            "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=500&q=60"
-        },
+        type: "p",
+        data: {},
         nodes: [
           {
-            object: "inline",
-            type: "img",
-            data: {
-              align: "full",
-              title: "https://unsplash.com/photos/5bYxXawHOQg",
-              src:
-                "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=500&q=60"
-            }
+            object: "text",
+            leaves: [
+              {
+                object: "leaf",
+                text: "",
+                marks: []
+              }
+            ]
           }
         ]
       }
