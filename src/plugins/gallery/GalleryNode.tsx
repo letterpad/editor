@@ -6,7 +6,8 @@ import {
   getImageRatiosFromFigures,
   calculateImageDimensions
 } from "./GalleryUtils";
-import { Row, Figure, Image } from "./GalleryNode.css";
+import { Row, Figure, Image, StyledButton } from "./GalleryNode.css";
+import { handleFiles } from "./GalleryButton";
 
 class GalleryNode extends Component<{
   node: Node;
@@ -16,6 +17,7 @@ class GalleryNode extends Component<{
   state = { grid: [], selected: -1, imageCount: 0 };
 
   wrapperRef = React.createRef<HTMLDivElement>();
+  inputRef = React.createRef<HTMLInputElement>();
 
   componentDidMount() {
     document.addEventListener("keyup", this.validateSelection);
@@ -86,6 +88,23 @@ class GalleryNode extends Component<{
     this.setState({ selected: index });
   };
 
+  openFileExplorer = (e: any) => {
+    e.preventDefault();
+    if (this.inputRef.current) {
+      this.inputRef.current.click();
+    }
+    return false;
+  };
+
+  mergeImageBlocks = (blocks: Block[]) => {
+    if (this.props.editor) {
+      const { editor } = this.props;
+      blocks.forEach((block: Block) => {
+        editor.insertNodeByKey(this.props.attributes["data-key"], 0, block);
+      });
+    }
+  };
+
   render() {
     const { attributes } = this.props;
 
@@ -97,7 +116,7 @@ class GalleryNode extends Component<{
 
         const { newWidths, height } = calculateImageDimensions(ratios);
         return (
-          <Row {...attributes} key={gridIndex}>
+          <Row key={gridIndex}>
             {figures.map((figureNode: any, figureIdx: number) => {
               return figureNode.nodes.map((imgNode: any) => {
                 // if the figure contains anything apart from img, return the node.
@@ -144,9 +163,25 @@ class GalleryNode extends Component<{
       }
     );
     if (images.length > 0)
-      return <section ref={this.wrapperRef}>{images}</section>;
+      return (
+        <section ref={this.wrapperRef} {...attributes}>
+          <input
+            onChange={e =>
+              handleFiles(e, this.props.editor, this.mergeImageBlocks)
+            }
+            multiple={true}
+            ref={this.inputRef}
+            type="file"
+            style={{ display: "none" }}
+          />
+          <StyledButton onClick={this.openFileExplorer}>
+            <span className="material-icons">add_photo_alt</span>
+          </StyledButton>
+          {images}
+        </section>
+      );
 
-    return <section {...this.props.attributes}>{this.props.children}</section>;
+    return <section {...attributes}>{this.props.children}</section>;
   }
 }
 
