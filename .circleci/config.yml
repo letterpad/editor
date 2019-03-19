@@ -37,6 +37,10 @@ jobs:
           command: yarn build
 
       - run:
+          name: Bundle
+          command: yarn bundle
+
+      - run:
           name: Test
           command: yarn test --ci --no-cache
 
