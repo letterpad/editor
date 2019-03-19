@@ -92,7 +92,7 @@ const initialValue: ValueJSON = {
               {
                 object: "leaf",
                 text:
-                  " editor with a robust plugin architecture. It comes with a set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has markdown capabilites which generates inline previews as you start writing in markdown. Below are some mixed content composed with this editor. ",
+                  " editoor with a robust plugin architecture. It comes with a set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has markdown capabilites which generates inline previews as you start writing in markdown. Below are some mixed content composed with this editor. ",
                 marks: []
               }
             ]
