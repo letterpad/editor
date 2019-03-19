@@ -52,3 +52,12 @@ export const Figure = styled.figure`
 export const Row = styled.div`
   display: flex;
 `;
+
+export const StyledButton = styled.button`
+  position: absolute;
+  margin-left: -24px;
+  cursor: pointer;
+  border: none;
+  background: var(--bg-base);
+  color: var(--base-shade-6);
+`;

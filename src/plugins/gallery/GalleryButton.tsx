@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../components/Button";
 import { EditorButtonComponent } from "..";
-import { Block } from "slate";
+import { Block, Editor } from "slate";
 
 const getBlock = (props: any) => {
   return {
@@ -22,43 +22,53 @@ const getBlock = (props: any) => {
     ]
   };
 };
+
+export const handleFiles = (
+  e: any,
+  editor: Editor | undefined,
+  callback?: Function
+) => {
+  if (!editor) return;
+  const files = e.target.files;
+  let attributes = [];
+  for (let i = 0; i < files.length; ++i) {
+    let file = files[i];
+    attributes.push(
+      new Promise((resolve, _) => {
+        let src = URL.createObjectURL(file);
+        let img = new Image();
+        img.onload = () => {
+          resolve({
+            w: img.width,
+            h: img.height,
+            src: URL.createObjectURL(file)
+          });
+          URL.revokeObjectURL(src);
+        };
+        img.src = src;
+      })
+    );
+  }
+  Promise.all(attributes)
+    .then(attrs => {
+      const blocks: any = [];
+      attrs.forEach(attrObj => {
+        blocks.push(getBlock(attrObj));
+      });
+      if (typeof callback === "function") {
+        return callback(blocks);
+      }
+      const gallery = Block.create({ type: "section", nodes: blocks });
+      editor.insertBlock(gallery);
+    })
+    .catch(function(errdims) {
+      console.log(errdims);
+    });
+};
+
 const ImageButton: EditorButtonComponent = ({ editor, callbacks }) => {
   if (!editor) return <span />;
 
-  const handleFiles = (e: any) => {
-    const files = e.target.files;
-    let attributes = [];
-    for (let i = 0; i < files.length; ++i) {
-      let file = files[i];
-      attributes.push(
-        new Promise((resolve, _) => {
-          let src = URL.createObjectURL(file);
-          let img = new Image();
-          img.onload = () => {
-            resolve({
-              w: img.width,
-              h: img.height,
-              src: URL.createObjectURL(file)
-            });
-            URL.revokeObjectURL(src);
-          };
-          img.src = src;
-        })
-      );
-    }
-    Promise.all(attributes)
-      .then(attrs => {
-        const blocks: any = [];
-        attrs.forEach(attrObj => {
-          blocks.push(getBlock(attrObj));
-        });
-        const gallery = Block.create({ type: "section", nodes: blocks });
-        editor.insertBlock(gallery);
-      })
-      .catch(function(errdims) {
-        console.log(errdims);
-      });
-  };
   return (
     <>
       <input
@@ -66,7 +76,7 @@ const ImageButton: EditorButtonComponent = ({ editor, callbacks }) => {
         id="input"
         multiple
         style={{ display: "none" }}
-        onChange={handleFiles}
+        onChange={e => handleFiles(e, editor)}
       />
       <Button
         isActive={false}
