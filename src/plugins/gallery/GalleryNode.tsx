@@ -100,7 +100,11 @@ class GalleryNode extends Component<{
     if (this.props.editor) {
       const { editor } = this.props;
       blocks.forEach((block: Block) => {
-        editor.insertNodeByKey(this.props.attributes["data-key"], 0, block);
+        editor.insertNodeByKey(
+          this.props.attributes["data-key"],
+          this.state.imageCount,
+          block
+        );
       });
     }
   };
