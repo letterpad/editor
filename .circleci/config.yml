@@ -13,6 +13,10 @@ jobs:
             - yarn-packages-{{ checksum "yarn.lock" }}
 
       - run:
+          name: Workaround for GoogleChrome/puppeteer#290
+          command: "sh .circleci/setup_puppeteer.sh"
+
+      - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile
 
@@ -29,3 +33,7 @@ jobs:
       - run:
           name: Test
           command: yarn test --ci --no-cache
+
+      - run:
+          name: Test end to end
+          command: yarn e2e --ci --no-cache
