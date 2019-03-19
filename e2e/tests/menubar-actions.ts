@@ -11,8 +11,12 @@ describe("features", () => {
 
   beforeAll(async () => {
     await page.goto(params.testServer);
+
     await page.waitForXPath("//div[@contenteditable='true']");
     const handle = await page.$('div[contenteditable="true"]');
+    if (!handle) {
+      throw new Error("Editor handle not found");
+    }
     editorHandle = handle!;
     await editorHandle.focus();
   });
