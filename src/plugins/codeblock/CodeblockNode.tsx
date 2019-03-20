@@ -2,9 +2,9 @@ import React, { Component, DetailedHTMLProps, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { Node, Editor } from "slate";
 
-const CodeblockContainer = styled.div`
+const CodeblockContainer = styled.section`
   position: relative;
-  .prism-dark {
+  pre {
     background: var(--bg-sections);
     color: var(--color-text-3);
     color: inherit;
@@ -16,17 +16,18 @@ const CodeblockContainer = styled.div`
 `;
 
 class CodeblockNode extends Component<{
-  node: Node;
-  editor: Editor;
-  attributes: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>;
+  node?: Node;
+  editor?: Editor;
+  attributes?: DetailedHTMLProps<
+    HTMLAttributes<HTMLPreElement>,
+    HTMLPreElement
+  >;
 }> {
   render() {
     const { attributes, children } = this.props;
     return (
       <CodeblockContainer>
-        <pre className="prism-dark" {...attributes}>
-          {children}
-        </pre>
+        <pre {...attributes}>{children}</pre>
       </CodeblockContainer>
     );
   }

@@ -23,7 +23,8 @@ export const Figure = styled.figure`
   background-size: cover;
   background-repeat: no-repeat;
   border: 2px solid var(--color-border);
-  ${(p: any) => p.selected && "border: 2px solid #000 !important"}
+  ${(p: any) =>
+    p.selected && "border: 2px solid var(--color-success) !important"}
   -webkit-animation: fadeInImage 2s;
   animation: fadeInImage 1s;
   /* Chrome, Safari, Opera */
