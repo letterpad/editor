@@ -79,7 +79,7 @@ class GalleryNode extends PureComponent<{
     if ("keyCode" in e && e.keyCode === 8 && this.state.selected >= 0) {
       return;
     }
-    if ("target" in e && (e.target as any).parentElement.tagName === "FIGURE") {
+    if ("target" in e && (e.target as any).tagName === "IMG") {
       return;
     }
     this.setState({ selected: -1 });
