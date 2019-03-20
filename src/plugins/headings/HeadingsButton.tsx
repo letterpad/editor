@@ -35,6 +35,6 @@ const getType = (type: any) => {
     case "h6":
       return "looks_6";
   }
-  return;
+  return "looks_3";
 };
 export default HeadingsButton;

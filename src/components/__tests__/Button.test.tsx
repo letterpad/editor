@@ -6,7 +6,9 @@ describe("components", () => {
   describe("Button", () => {
     test("snapshot", () => {
       const onMouseDown = jest.fn();
-      const component = renderer.create(<Button onMouseDown={onMouseDown} />);
+      const component = renderer.create(
+        <Button icon="test" onMouseDown={onMouseDown} />
+      );
 
       const tree: any = component.toJSON();
       expect(tree).toMatchSnapshot();
