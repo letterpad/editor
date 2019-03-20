@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Node, Editor, Block } from "slate";
 import {
   getFigureNodesFromChildren,
@@ -9,7 +9,7 @@ import {
 import { Row, Figure, Image, StyledButton } from "./GalleryNode.css";
 import { handleFiles } from "./GalleryButton";
 
-class GalleryNode extends Component<{
+class GalleryNode extends PureComponent<{
   node: Node;
   editor?: Editor;
   attributes: any;
@@ -21,6 +21,7 @@ class GalleryNode extends Component<{
 
   componentDidMount() {
     document.addEventListener("keyup", this.validateSelection);
+    document.addEventListener("click", this.validateSelection);
     // We wil extract all the <figure> nodes from children.
     // Each figure node is suppose to contain an <img> tag.
     let figures = getFigureNodesFromChildren(this.props.children);
@@ -33,6 +34,7 @@ class GalleryNode extends Component<{
 
   componentWillUnmount() {
     document.removeEventListener("keyup", this.validateSelection);
+    document.removeEventListener("click", this.validateSelection);
   }
 
   static getDerivedStateFromProps(props: any, state: any) {
@@ -58,27 +60,26 @@ class GalleryNode extends Component<{
     return { grid, selected, imageCount: figures.length };
   }
 
-  componentDidUpdate() {
+  getSnapshotBeforeUpdate() {
+    return window.scrollY;
+  }
+
+  componentDidUpdate(_prevProps: any, _prevState: any, snapshot: number) {
     const { selected } = this.state;
     const { current } = this.wrapperRef;
     if (selected === -1 || !current) {
       return;
     }
-    // if any image is selected, then bring the focus there.
-    const element = (current as Element).querySelectorAll("figure")[selected];
-    if (!element) return;
-
     setTimeout(() => {
-      try {
-        element.scrollIntoView({ block: "center" });
-      } catch (e) {
-        element.scrollIntoView();
-      }
+      window.scroll(0, snapshot);
     }, 30);
   }
 
-  validateSelection = (e: KeyboardEvent) => {
-    if (e.keyCode === 8 && this.state.selected >= 0) {
+  validateSelection = (e: KeyboardEvent | Event) => {
+    if ("keyCode" in e && e.keyCode === 8 && this.state.selected >= 0) {
+      return;
+    }
+    if ("target" in e && (e.target as any).parentElement.tagName === "FIGURE") {
       return;
     }
     this.setState({ selected: -1 });

@@ -1,3 +1,4 @@
+import React from "react";
 import CodeblockButton from "./CodeblockButton";
 import CodeblockNode from "./CodeblockNode";
 import { CodeblockPlugin } from "./slatePlugin";
@@ -46,6 +47,23 @@ const plugins: PluginConfig[] = [
       trigger: "Enter",
       before: /^```/m,
       change: onChange
+    },
+    rules: {
+      deserialize(el, next) {
+        const type = el.tagName.toLowerCase();
+        if (type === "pre") {
+          return {
+            object: "block",
+            type: type,
+            nodes: next(el.childNodes)
+          };
+        }
+      },
+      serialize(obj, children) {
+        if (obj.object === "node") {
+          return <CodeblockNode children={children} />;
+        }
+      }
     }
   }
 ];
