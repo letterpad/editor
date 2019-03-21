@@ -42,8 +42,8 @@ const pluginConfigs: PluginConfig[] = [
   // others
   ...audioConfig,
   ...autoscrollConfig,
-  ...imageConfig,
   ...giphyConfig,
+  ...imageConfig,
   ...linebreakConfig,
   ...embedConfig,
   ...galleryConfig

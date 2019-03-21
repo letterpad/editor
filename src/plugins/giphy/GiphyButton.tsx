@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../components/Button";
 import { EditorButtonComponent } from "..";
-import ImageInput from "./ImageInput";
+import ImageInput from "./GiphyInput";
 
 const styleString = `
 width: 37px;
