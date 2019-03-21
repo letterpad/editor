@@ -18,6 +18,7 @@
     "prismjs": "^1.15.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "showdown": "^1.9.0",
     "slate": "^0.44.10",
     "slate-auto-replace": "^0.12.1",
     "slate-edit-code": "^0.15.5",

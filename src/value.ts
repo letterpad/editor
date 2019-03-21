@@ -92,7 +92,7 @@ const initialValue: ValueJSON = {
               {
                 object: "leaf",
                 text:
-                  " editor with a robust plugin architecture. It comes with a set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has markdown capabilites which generates inline previews as you start writing in markdown. Below are some mixed content composed with this editor. ",
+                  " editor with a robust plugin architecture. It comes with a set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has markdown capabilites which generates inline previews as you start writing in markdown. This page is editable and is the playground of this error. The toolbars are visible when you select some text or in a new line.",
                 marks: []
               }
             ]
@@ -895,7 +895,7 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "p",
+        type: "figure",
         data: {},
         nodes: [
           {
@@ -1044,7 +1044,7 @@ const initialValue: ValueJSON = {
             leaves: [
               {
                 object: "leaf",
-                text: " Heading look like this:",
+                text: " Headings look like this:",
                 marks: []
               }
             ]
@@ -1388,72 +1388,54 @@ const initialValue: ValueJSON = {
         object: "block",
         type: "figure",
         data: {
-          src: "https://wallpaperaccess.com/full/124600.jpg"
+          src:
+            "https://wallpapertag.com/wallpaper/full/4/d/9/653898-beautiful-star-wars-background-wallpaper-1920x1080-hd-for-mobile.jpg"
         },
         nodes: [
           {
             object: "block",
-            type: "figure",
-            data: {
-              src: "http://pavbca.com/walldb/original/2/2/3/814054.jpg"
-            },
+            type: "p",
+            data: {},
             nodes: [
               {
-                object: "block",
-                type: "figure",
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
+                  }
+                ]
+              },
+              {
+                object: "inline",
+                type: "img",
                 data: {
                   src:
-                    "https://wallpapertag.com/wallpaper/full/4/d/9/653898-beautiful-star-wars-background-wallpaper-1920x1080-hd-for-mobile.jpg"
+                    "https://wallpapertag.com/wallpaper/full/4/d/9/653898-beautiful-star-wars-background-wallpaper-1920x1080-hd-for-mobile.jpg",
+                  align: "parallax",
+                  title: ""
                 },
                 nodes: [
                   {
-                    object: "block",
-                    type: "p",
-                    data: {},
-                    nodes: [
+                    object: "text",
+                    leaves: [
                       {
-                        object: "text",
-                        leaves: [
-                          {
-                            object: "leaf",
-                            text: "",
-                            marks: []
-                          }
-                        ]
-                      },
-                      {
-                        object: "inline",
-                        type: "img",
-                        data: {
-                          src:
-                            "https://wallpapertag.com/wallpaper/full/4/d/9/653898-beautiful-star-wars-background-wallpaper-1920x1080-hd-for-mobile.jpg",
-                          align: "parallax",
-                          title: ""
-                        },
-                        nodes: [
-                          {
-                            object: "text",
-                            leaves: [
-                              {
-                                object: "leaf",
-                                text: "",
-                                marks: []
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        object: "text",
-                        leaves: [
-                          {
-                            object: "leaf",
-                            text: "",
-                            marks: []
-                          }
-                        ]
+                        object: "leaf",
+                        text: "",
+                        marks: []
                       }
                     ]
+                  }
+                ]
+              },
+              {
+                object: "text",
+                leaves: [
+                  {
+                    object: "leaf",
+                    text: "",
+                    marks: []
                   }
                 ]
               }

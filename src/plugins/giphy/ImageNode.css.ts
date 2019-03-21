@@ -55,11 +55,12 @@ export const Figure = styled.figure`
   z-index: 1;
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.span`
   ${(props: any) => applyStyles(props.type)}
   position: relative;
   z-index: 1;
   ${(props: any) => props.type === "parallax" && applyParallax(props)}
+  display: ${(props: any) => (props.isBlock ? "block" : "initial")}
 `;
 
 export const StyledCaptionInput = styled.input`

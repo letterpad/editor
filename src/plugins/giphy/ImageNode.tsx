@@ -13,6 +13,7 @@ import {
   StyledCaptionInput,
   Wrapper
 } from "./ImageNode.css";
+import { hasFigureWrapper } from "./ImageUtils";
 
 const ImageNode: SFC<{
   attributes: DetailedHTMLProps<
@@ -112,18 +113,22 @@ const ImageNode: SFC<{
       </Figure>
     );
   }
-
+  const width = (node as any).data.get("width") || "100%";
+  const hasFigure = hasFigureWrapper(node.key);
   return (
     <Wrapper
       {...attributes}
       onClick={showOptions}
       type={alignOption}
       src={(node as any).data.get("src")}
+      isBlock={hasFigure}
     >
-      {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
-      <img width="100%" src={(node as any).data.get("src")} {...attributes} />
-      {!captionActive && renderCaption()}
-      {captionActive && renderCaptionInput()}
+      {hasFigure && menu && (
+        <Alignment selected={alignOption} onClick={onOptionClick} />
+      )}
+      <img width={width} src={(node as any).data.get("src")} {...attributes} />
+      {hasFigure && !captionActive && renderCaption()}
+      {hasFigure && captionActive && renderCaptionInput()}
     </Wrapper>
   );
 };

@@ -26,6 +26,9 @@ import { showMenu } from "./helper/showMenu";
 import { getRules } from "./helper/rules";
 import Toolbar from "./components/Toolbar";
 import { Theme } from "./theme.css";
+import showdown from "showdown";
+
+const converter = new showdown.Converter();
 
 export interface LetterpadEditorProps {
   onButtonClick(
@@ -188,10 +191,15 @@ export class LetterpadEditor extends Component<
     }
   };
 
-  onPaste: EventHook = (event, editor, next) => {
+  onPaste: EventHook = (event, editor) => {
     scrollToCursor();
     const transfer = getEventTransfer(event);
-    if (transfer.type != "html") return next();
+    if (transfer.type != "html") {
+      // convert markdown to html
+      let html = converter.makeHtml((transfer as any).text);
+      const { document } = this.html.deserialize(html);
+      return editor.insertFragment(document);
+    }
 
     const parentTag = editor.value.blocks.first().type; // p, pre, etc
     for (let i = 0; i < pluginConfigs.length; i++) {
@@ -204,7 +212,7 @@ export class LetterpadEditor extends Component<
     }
     // remove style attr
     const REMOVE_STYLE_ATTR = /style="[^\"]*"/gi;
-    const html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
+    let html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
 
     // TODO: fix the transfer as any
     const { document } = this.html.deserialize(html);

@@ -58,3 +58,16 @@ export const forceClickUploadButton = (editor: Editor) => {
     el.click();
   }
 };
+
+export const hasFigureWrapper = (path: string) => {
+  let node: Element | null = document.querySelector(`[data-key='${path}']`);
+  if (!node) return false;
+  let found = false;
+  while (node && !found) {
+    if (node!.tagName === "FIGURE") {
+      found = true;
+    }
+    node = node!.parentElement;
+  }
+  return found;
+};
