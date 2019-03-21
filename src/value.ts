@@ -1388,8 +1388,7 @@ const initialValue: ValueJSON = {
         object: "block",
         type: "figure",
         data: {
-          src:
-            "https://wallpapertag.com/wallpaper/full/4/d/9/653898-beautiful-star-wars-background-wallpaper-1920x1080-hd-for-mobile.jpg"
+          src: "http://localhost/images/1.jpg"
         },
         nodes: [
           {
@@ -1411,8 +1410,7 @@ const initialValue: ValueJSON = {
                 object: "inline",
                 type: "img",
                 data: {
-                  src:
-                    "https://wallpapertag.com/wallpaper/full/4/d/9/653898-beautiful-star-wars-background-wallpaper-1920x1080-hd-for-mobile.jpg",
+                  src: "http://localhost/images/1.jpg",
                   align: "parallax",
                   title: ""
                 },

@@ -1,8 +1,7 @@
-// import { keyboardEvent } from "@slate-editor/utils";
-import { forceClickUploadButton } from "./ImageUtils";
 import { isMod } from "../../helper/keyboard-event";
 import { EditorEventHandler } from "..";
 import { isKeyboardEvent } from "../../helper/events";
+import { forceClickUploadButton } from "../image/ImageUtils";
 
 const ImageKeyboardShortcut: EditorEventHandler = (event, editor) => {
   if (

@@ -1,7 +1,7 @@
 import React from "react";
-import ImageButton from "./ImageButton";
+import ImageButton from "./GiphyButton";
 import { PluginConfig } from "..";
-import ImageNode from "./ImageNode";
+import ImageNode from "../image/ImageNode";
 
 const ImagePlugin: PluginConfig["slatePlugin"] = () => ({});
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledGallery } from "./Gallery.css";
-import { insertImage } from "./ImageUtils";
+import { insertImage } from "../image/ImageUtils";
 import { Editor } from "slate";
 
 interface GalleryProps {
