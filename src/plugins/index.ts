@@ -12,7 +12,7 @@ import { default as boldConfig } from "./bold";
 import { default as headingsConfig } from "./headings";
 import { default as highlightConfig } from "./highlight";
 import { default as imageConfig } from "./image";
-import { default as giphyConfig } from "./giphy";
+// import { default as giphyConfig } from "./giphy";
 import { default as italicConfig } from "./italic";
 import { default as linebreakConfig } from "./linebreak";
 import { default as linkConfig } from "./link";
@@ -42,7 +42,7 @@ const pluginConfigs: PluginConfig[] = [
   // others
   ...audioConfig,
   ...autoscrollConfig,
-  ...giphyConfig,
+  // ...giphyConfig,
   ...imageConfig,
   ...linebreakConfig,
   ...embedConfig,

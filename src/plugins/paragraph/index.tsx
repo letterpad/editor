@@ -12,13 +12,17 @@ const paragraphConfig: PluginConfig[] = [
     ),
     rules: {
       serialize(obj: any, children: any) {
-        if (obj.object === "block" && obj.type === "p") {
+        if (
+          obj.type === "section" ||
+          obj.type === "paragraph" ||
+          obj.type === "p"
+        ) {
           return <section>{children}</section>;
         }
       },
       deserialize(el, next) {
         const type = el.tagName.toLowerCase();
-        if (type === "p") {
+        if (type === "paragraph" || type === "section" || type === "div") {
           return {
             object: "block",
             type: type,

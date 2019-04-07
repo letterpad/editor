@@ -7,6 +7,7 @@ const ImagePlugin: PluginConfig["slatePlugin"] = () => ({});
 
 const imageConfig: PluginConfig[] = [
   {
+    name: "plugin-image",
     renderType: "node",
     toolbarButtons: [
       {
@@ -18,25 +19,38 @@ const imageConfig: PluginConfig[] = [
     slatePlugin: ImagePlugin,
     rules: {
       deserialize: (el, next) => {
-        if (el.tagName !== "IMG") return;
-
-        return {
-          object: "inline",
-          type: "img",
-          nodes: next(el.childNodes),
-          data: {
-            align: el.getAttribute("align"),
-            title: el.getAttribute("title"),
-            src: el.getAttribute("src")
-          }
-        };
+        if (el.tagName === "IMG") {
+          return {
+            object: "inline",
+            type: "img",
+            nodes: next(el.childNodes),
+            data: {
+              align: el.getAttribute("align"),
+              title: el.getAttribute("title"),
+              src: el.getAttribute("src")
+            }
+          };
+        } else if (el.tagName === "FIGURE") {
+          return {
+            object: "block",
+            type: "figure",
+            nodes: next(el.childNodes),
+            data: {
+              align: el.getAttribute("align"),
+              title: el.getAttribute("title"),
+              src: el.getAttribute("src")
+            }
+          };
+        }
       },
       serialize: (obj, children) => {
+        const props = { children, node: obj, attributes: {} };
+        if (obj.type === "figure") {
+          return <figure {...props} />;
+        }
         if (obj.object != "inline") {
           return;
         }
-        const props = { children, node: obj, attributes: {} };
-
         return <ImageNode {...props} />;
       }
     }

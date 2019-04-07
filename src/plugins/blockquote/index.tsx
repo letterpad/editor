@@ -31,6 +31,7 @@ const BlockquotePlugin: PluginConfig["slatePlugin"] = () => ({
 
 const blockquotePluginConfig: PluginConfig[] = [
   {
+    name: "plugin-blockquote",
     renderType: "node",
     menuButtons: [
       {

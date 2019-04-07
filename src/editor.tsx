@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Value, Editor } from "slate";
 import {
   Editor as SlateReactEditor,
@@ -6,7 +6,6 @@ import {
   getEventTransfer,
   findDOMNode
 } from "slate-react";
-import { Component } from "react";
 import AutoReplace from "slate-auto-replace";
 import { Plugin as SlateReactPlugin } from "slate-react";
 import {
@@ -133,6 +132,8 @@ export class LetterpadEditor extends Component<
   onChange = ({ value }: { value: Value }) => {
     this.setState({ value });
 
+    // Everytime there is a change in the editor, we have to check if the cursor is
+    // inside an empty block. If so, then we display an additional toolbar
     if (
       !value.focusBlock ||
       value.focusBlock.text ||
@@ -148,12 +149,15 @@ export class LetterpadEditor extends Component<
         }
       });
     } else {
+      // else check if any text has been selected. If so, get the node of the cursor
       let cursorNode;
       try {
         cursorNode = findDOMNode(this.editor!.value.focusBlock);
       } catch (e) {}
       if (cursorNode) {
+        // ge the position of the cursor
         const { top, left, width } = cursorNode.getBoundingClientRect();
+        // display the menubar
         this.setState({
           toolbarActive: true,
           toolbarPosition: {
@@ -189,6 +193,10 @@ export class LetterpadEditor extends Component<
         }
       }
     }
+    // if (value.document != this.state.value.document) {
+    const html = this.html.serialize(value);
+    console.log(html);
+    // }
   };
 
   onPaste: EventHook = (event, editor) => {
@@ -213,7 +221,7 @@ export class LetterpadEditor extends Component<
     // remove style attr
     const REMOVE_STYLE_ATTR = /style="[^\"]*"/gi;
     let html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
-
+    console.log(html);
     // TODO: fix the transfer as any
     const { document } = this.html.deserialize(html);
     editor.insertFragment(document);
