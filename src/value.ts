@@ -1019,7 +1019,7 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "paragraph",
+        type: "p",
         data: {},
         nodes: [
           {
@@ -1263,7 +1263,7 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "paragraph",
+        type: "p",
         data: {},
         nodes: [
           {
@@ -1281,7 +1281,7 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "paragraph",
+        type: "p",
         data: {},
         nodes: [
           {
@@ -1298,7 +1298,7 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "paragraph",
+        type: "p",
         data: {},
         nodes: [
           {
@@ -1316,7 +1316,7 @@ const initialValue: ValueJSON = {
       },
       {
         object: "block",
-        type: "paragraph",
+        type: "p",
         data: {},
         nodes: [
           {

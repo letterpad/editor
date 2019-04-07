@@ -1,7 +1,7 @@
 import { Editor } from "slate";
 
 export const insertEmbed = (editor: Editor, type: string, embedObj: {}) =>
-  editor.setBlocks({ type, data: { ...embedObj } }).insertBlock("paragraph");
+  editor.setBlocks({ type, data: { ...embedObj } }).insertBlock("p");
 
 const parseVideo = (url: string) => {
   // - Supported YouTube URL formats:
