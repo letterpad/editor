@@ -5,10 +5,10 @@ import ListItemNode from "./ListItemNode";
 
 export const RenderNode = (type: string, props: any) => {
   if (type === "ul") {
-    return <UnorderedListNode {...props} />;
+    return <UnorderedListNode {...props} data-id="plugin-list" />;
   } else if (props.node.type === "ol") {
-    return <OrderedListNode {...props} />;
+    return <OrderedListNode {...props} data-id="plugin-list" />;
   } else if (props.node.type === "li") {
-    return <ListItemNode {...props} />;
+    return <ListItemNode {...props} data-id="plugin-list" />;
   }
 };

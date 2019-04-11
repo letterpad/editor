@@ -8,7 +8,9 @@ const paragraphConfig: PluginConfig[] = [
     renderType: "node",
     identifier,
     render: ({ children, attributes }: any) => (
-      <section {...attributes}>{children}</section>
+      <section {...attributes} data-id="plugin-paragraph">
+        {children}
+      </section>
     ),
     rules: {
       serialize(obj: any, children: any) {

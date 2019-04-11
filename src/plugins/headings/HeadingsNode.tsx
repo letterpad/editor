@@ -17,37 +17,37 @@ const HeadingsNode: SFC<{
   switch (node.type) {
     case "h1":
       return (
-        <h1 {...attributes} {...attrs}>
+        <h1 {...attributes} {...attrs} data-id="plugin-heading">
           {children}
         </h1>
       );
     case "h2":
       return (
-        <h2 {...attributes} {...attrs}>
+        <h2 {...attributes} {...attrs} data-id="plugin-heading">
           {children}
         </h2>
       );
     case "h3":
       return (
-        <h3 {...attributes} {...attrs}>
+        <h3 {...attributes} {...attrs} data-id="plugin-heading">
           {children}
         </h3>
       );
     case "h4":
       return (
-        <h4 {...attributes} {...attrs}>
+        <h4 {...attributes} {...attrs} data-id="plugin-heading">
           {children}
         </h4>
       );
     case "h5":
       return (
-        <h5 {...attributes} {...attrs}>
+        <h5 {...attributes} {...attrs} data-id="plugin-heading">
           {children}
         </h5>
       );
     case "h6":
       return (
-        <h6 {...attributes} {...attrs}>
+        <h6 {...attributes} {...attrs} data-id="plugin-heading">
           {children}
         </h6>
       );

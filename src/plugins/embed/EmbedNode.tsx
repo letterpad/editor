@@ -24,6 +24,7 @@ const EmbedNode: SFC<{
       height="400px"
       frameBorder="0"
       {...getCamelCaseObj(attrs)}
+      data-id="plugin-embed"
     >
       {children}
     </iframe>

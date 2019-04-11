@@ -22,7 +22,11 @@ class CodeblockNode extends Component<{
 }> {
   render() {
     const { attributes, children } = this.props;
-    return <CodeblockContainer {...attributes}>{children}</CodeblockContainer>;
+    return (
+      <CodeblockContainer {...attributes} data-id="plugin-codeblock">
+        {children}
+      </CodeblockContainer>
+    );
   }
 }
 

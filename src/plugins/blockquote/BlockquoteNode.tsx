@@ -23,7 +23,7 @@ const BlockquoteNode: SFC<{
 }> = ({ attributes, children, node }) => {
   const attrs = getAttributesFromNode(node);
   return (
-    <Wrapper {...attributes} {...attrs} data-name="blockquote">
+    <Wrapper {...attributes} {...attrs} data-id="plugin-blockquote">
       {children}
     </Wrapper>
   );
