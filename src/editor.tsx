@@ -221,7 +221,6 @@ export class LetterpadEditor extends Component<
     // remove style attr
     const REMOVE_STYLE_ATTR = /style="[^\"]*"/gi;
     let html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
-    console.log(html);
     // TODO: fix the transfer as any
     const { document } = this.html.deserialize(html);
     editor.insertFragment(document);

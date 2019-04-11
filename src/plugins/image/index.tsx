@@ -46,7 +46,8 @@ const imageConfig: PluginConfig[] = [
       serialize: (obj, children) => {
         const props = { children, node: obj, attributes: {} };
         if (obj.type === "figure") {
-          return <figure {...props} />;
+          const { node, ...rest } = props;
+          return <figure {...rest} />;
         }
         if (obj.object != "inline") {
           return;

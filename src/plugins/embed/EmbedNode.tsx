@@ -15,6 +15,7 @@ const EmbedNode: SFC<{
       <Gist id={id} file={file} attributes={attributes} children={children} />
     );
   }
+
   return (
     <iframe
       {...attributes}
@@ -22,7 +23,7 @@ const EmbedNode: SFC<{
       width="100%"
       height="400px"
       frameBorder="0"
-      {...attrs}
+      {...getCamelCaseObj(attrs)}
     >
       {children}
     </iframe>
@@ -30,3 +31,22 @@ const EmbedNode: SFC<{
 };
 
 export default EmbedNode;
+
+// get camecase attributes object
+
+const getCamelCaseObj = (props: any) => {
+  const obj: { [key: string]: string } = {};
+  Object.keys(props).forEach(attr => {
+    obj[convertToCamelCase(attr)] = props[attr];
+  });
+  return obj;
+};
+const convertToCamelCase = (str: string) => {
+  const cc = str.replace(/-([a-z])/g, g => g[1].toUpperCase());
+  return mapper[cc] ? mapper[cc] : cc;
+};
+
+const mapper: { [key: string]: string } = {
+  frameborder: "frameBorder",
+  allowfullscreen: "allowFullScreen"
+};
