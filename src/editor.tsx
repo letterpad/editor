@@ -37,6 +37,7 @@ export interface LetterpadEditorProps {
   ): void;
   onBeforeRender(props: { type: string }): void;
   getCharCount?(count: number): void;
+  onChange?(html: string, value?: Value): void;
   width?: number;
   theme?: string;
   spellCheck?: boolean;
@@ -54,6 +55,7 @@ interface LetterpadEditorState {
   slateReactPlugins: SlateReactPlugin[];
   pluginsMap: PluginsMap;
   value: Value;
+  html: string;
 }
 
 /**
@@ -108,6 +110,7 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
     slateReactPlugins,
     pluginsMap,
     value: Value.fromJSON(initialValue),
+    html: "",
     toolbarActive: false,
     toolbarPosition: {
       top: 0,
@@ -130,7 +133,8 @@ export class LetterpadEditor extends Component<
   state = getInitialState(pluginConfigs);
 
   onChange = ({ value }: { value: Value }) => {
-    this.setState({ value });
+    const html = this.html.serialize(value);
+    this.setState({ value, html });
 
     // Everytime there is a change in the editor, we have to check if the cursor is
     // inside an empty block. If so, then we display an additional toolbar
@@ -173,7 +177,7 @@ export class LetterpadEditor extends Component<
       const node = value.fragment.nodes.first();
       const plugin = this.state.pluginsMap.node[node.type];
       if (plugin) {
-        if (plugin.plugin.allowChildTransform === false) {
+        if (plugin.plugin.allowChildTransforms === false) {
           if (this.menuRef && this.menuRef.current) {
             this.menuRef.current.removeAttribute("style");
             return;
@@ -185,7 +189,7 @@ export class LetterpadEditor extends Component<
       const mark = value.activeMarks.first();
       const plugin = this.state.pluginsMap.mark[mark.type];
       if (plugin) {
-        if (plugin.plugin.allowChildTransform === false) {
+        if (plugin.plugin.allowChildTransforms === false) {
           if (this.menuRef && this.menuRef.current) {
             this.menuRef.current.removeAttribute("style");
             return;
@@ -193,10 +197,6 @@ export class LetterpadEditor extends Component<
         }
       }
     }
-    // if (value.document != this.state.value.document) {
-    const html = this.html.serialize(value);
-    console.log(html);
-    // }
   };
 
   onPaste: EventHook = (event, editor) => {
@@ -250,8 +250,12 @@ export class LetterpadEditor extends Component<
     document.removeEventListener("keyup", this.hideMenu);
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (_: any, prevState: any) => {
     this.updateMenu();
+    const { html } = this.state;
+    if (typeof this.props.onChange === "function" && prevState.html !== html) {
+      this.props.onChange(html);
+    }
   };
 
   toggleToolbarClass = () => {
