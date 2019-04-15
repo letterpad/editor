@@ -30,5 +30,9 @@ jobs:
           command: yarn build
 
       - run:
+          name: Build
+          command: yarn bundle
+
+      - run:
           name: Test
-          command: yarn cp --record --key <record_key>
+          command: yarn cp
