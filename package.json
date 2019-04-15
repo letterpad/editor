@@ -5,7 +5,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "testServer": "node test-utils/server.js",
-    "cp": "yarn start-server-and-test testServer http://localhost:4343 cy:open",
+    "cp": "yarn start-server-and-test testServer http://localhost:4343 cy:run",
     "build": "tsc --build tsconfig.build.json",
     "bundle": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server --config=webpack.config.js",
