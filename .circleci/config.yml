@@ -2,8 +2,11 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10
-
+      - image: cypress/base:8
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    parallelism: 4
     steps:
       - checkout
 
@@ -27,5 +30,9 @@ jobs:
           command: yarn build
 
       - run:
+          name: Bundle
+          command: yarn bundle
+
+      - run:
           name: Test
-          command: yarn test --ci --no-cache
+          command: yarn e2e
