@@ -1,6 +1,5 @@
 import { getHtmlContents } from "../helpers/serialize";
-// require("../helpers/util");
-import { clearEditor, repeatKey, clickXPath } from "../helpers/simple-actions";
+import { clearEditor } from "../helpers/simple-actions";
 import {
   applyEditorFeatureToSampleText,
   applyEditorFeatureToLine
@@ -9,53 +8,89 @@ import params from "../../e2e/params";
 
 require("@cypress/snapshot").register();
 
-context("Actions", () => {
+context("Menu", () => {
   beforeEach(() => {
     cy.visit(params.testServer);
     cy.get('div[contenteditable="true"]');
   });
 
-  // it("clearing editor", async () => {
-  //   await clearEditor();
-  //   cy.wrap(await getHtmlContents()).snapshot();
-  // });
-
-  it("bold", async () => {
-    await clearEditor();
-    await applyEditorFeatureToSampleText(
-      "//span[contains(text(), 'format_bold')]"
-    );
-    cy.wrap(await getHtmlContents()).snapshot();
+  it("clearing editor", () => {
+    clearEditor().then(() => {
+      getHtmlContents().then(res => {
+        cy.wrap(res).snapshot();
+      });
+    });
   });
 
-  it("italics", async () => {
-    await clearEditor();
-    await applyEditorFeatureToSampleText(
-      "//span[contains(text(), 'format_italic')]"
-    );
-    cy.wrap(await getHtmlContents()).snapshot();
+  it("bold", () => {
+    clearEditor().then(() => {
+      applyEditorFeatureToSampleText(
+        "//span[contains(text(), 'format_bold')]"
+      ).then(() => {
+        getHtmlContents().then(res => {
+          cy.wrap(res).snapshot();
+        });
+      });
+    });
   });
 
-  it("underline", async () => {
-    await clearEditor();
-    await applyEditorFeatureToSampleText(
-      "//span[contains(text(), 'format_underline')]"
-    );
-    cy.wrap(await getHtmlContents()).snapshot();
+  it("italics", () => {
+    clearEditor().then(() => {
+      applyEditorFeatureToSampleText(
+        "//span[contains(text(), 'format_italic')]"
+      ).then(() => {
+        getHtmlContents().then(res => {
+          cy.wrap(res).snapshot();
+        });
+      });
+    });
   });
 
-  it("headings", async () => {
-    await clearEditor();
-    await applyEditorFeatureToLine("//span[contains(text(), 'looks_two')]");
-    cy.wrap(await getHtmlContents()).snapshot();
-    await clearEditor();
-    await applyEditorFeatureToLine("//span[contains(text(), 'looks_3')]");
-    cy.wrap(await getHtmlContents()).snapshot();
+  it("underline", () => {
+    clearEditor().then(() => {
+      applyEditorFeatureToSampleText(
+        "//span[contains(text(), 'format_underline')]"
+      ).then(() => {
+        getHtmlContents().then(res => {
+          cy.wrap(res).snapshot();
+        });
+      });
+    });
   });
 
-  it("blockquote", async () => {
-    await clearEditor();
-    await applyEditorFeatureToLine("//span[contains(text(), 'format_quote')]");
-    cy.wrap(await getHtmlContents()).snapshot();
+  it("headings 2", () => {
+    clearEditor().then(() => {
+      applyEditorFeatureToLine("//span[contains(text(), 'looks_two')]").then(
+        () => {
+          getHtmlContents().then(res => {
+            cy.wrap(res).snapshot();
+          });
+        }
+      );
+    });
+  });
+
+  it("headings 3", () => {
+    clearEditor().then(() => {
+      applyEditorFeatureToLine("//span[contains(text(), 'looks_3')]").then(
+        () => {
+          getHtmlContents().then(res => {
+            cy.wrap(res).snapshot();
+          });
+        }
+      );
+    });
+  });
+
+  it("blockquote", () => {
+    clearEditor().then(() => {
+      applyEditorFeatureToLine("//span[contains(text(), 'format_quote')]").then(
+        () => {
+          getHtmlContents().then(res => {
+            cy.wrap(res).snapshot();
+          });
+        }
+      );
+    });
   });
 });
