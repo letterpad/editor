@@ -6,7 +6,7 @@ jobs:
         environment:
           ## this enables colors in the output
           TERM: xterm
-
+    parallelism: 4
     steps:
       - checkout
 
@@ -35,4 +35,4 @@ jobs:
 
       - run:
           name: Test
-          command: yarn cp
+          command: yarn cp --record --group 4x-electron --parallel
