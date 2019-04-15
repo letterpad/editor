@@ -35,4 +35,4 @@ jobs:
 
       - run:
           name: Test
-          command: yarn cp
+          command: yarn int
