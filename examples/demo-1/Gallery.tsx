@@ -14,7 +14,7 @@ interface ImageInputProps {
 }
 
 const ImageInput: FunctionComponent<ImageInputProps> = React.forwardRef(
-  ({ editor, onSearch }, ref: React.Ref<HTMLInputElement>) => {
+  ({ editor, onSearch }: ImageInputProps, ref: React.Ref<HTMLInputElement>) => {
     const [url, setUrl] = useState("");
 
     return (
@@ -133,96 +133,14 @@ class Gallery extends React.Component<GalleryProps, GalleryState> {
         />
       );
     }
-    const { imgUrls } = this.state;
     return (
       <StyledGallery className="x">
         <div className="gallery-container">
           <div className="gallery-grid">
             {this.state.imgUrls.map(this.renderImageContent)}
           </div>
-          <GalleryModal
-            closeModal={this.closeModal}
-            findPrev={this.findPrev}
-            findNext={this.findNext}
-            hasPrev={this.state.currentIndex > 0}
-            hasNext={this.state.currentIndex + 1 < imgUrls.length}
-            src={imgUrls[this.state.currentIndex]}
-          />
         </div>
       </StyledGallery>
-    );
-  }
-}
-
-class GalleryModal extends Component<{
-  closeModal: (...args: any[]) => any;
-  hasPrev: boolean;
-  hasNext: boolean;
-  findPrev: (...args: any[]) => any;
-  findNext: (...args: any[]) => any;
-  src: string;
-}> {
-  componentDidMount() {
-    document.body.addEventListener("keydown", this.handleKeyDown as any);
-  }
-  componentWillUnMount() {
-    document.body.removeEventListener("keydown", this.handleKeyDown as any);
-  }
-  handleKeyDown: KeyboardEventHandler = e => {
-    if (e.keyCode === 27) this.props.closeModal();
-    if (e.keyCode === 37 && this.props.hasPrev) this.props.findPrev();
-    if (e.keyCode === 39 && this.props.hasNext) this.props.findNext();
-  };
-  render() {
-    const {
-      closeModal,
-      hasNext,
-      hasPrev,
-      findNext,
-      findPrev,
-      src
-    } = this.props;
-
-    if (!src) {
-      return null;
-    }
-    return (
-      <div>
-        <div className="modal-overlay" onClick={closeModal} />
-        <div className="modal">
-          <div className="modal-body">
-            <a
-              href="#"
-              className="modal-close"
-              onClick={closeModal}
-              onKeyDown={this.handleKeyDown}
-            >
-              &times;
-            </a>
-            {hasPrev && (
-              <a
-                href="#"
-                className="modal-prev"
-                onClick={findPrev}
-                onKeyDown={this.handleKeyDown}
-              >
-                &lsaquo;
-              </a>
-            )}
-            {hasNext && (
-              <a
-                href="#"
-                className="modal-next"
-                onClick={findNext}
-                onKeyDown={this.handleKeyDown}
-              >
-                &rsaquo;
-              </a>
-            )}
-            <img src={src} />
-          </div>
-        </div>
-      </div>
     );
   }
 }
