@@ -13,6 +13,7 @@ export const showMenu = (menu: HTMLElement, value: Value) => {
   }
 
   const native = window.getSelection();
+  if (!native) return false;
   const range = native.getRangeAt(0);
   const rect = range.getBoundingClientRect();
 

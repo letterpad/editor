@@ -4,7 +4,7 @@ import React, {
   useRef,
   ComponentType
 } from "react";
-import { Editor } from "slate";
+import { Editor, Block } from "slate";
 import styled from "styled-components";
 import { mapPropsToComponents } from "../helper/util";
 import { EditorButton } from "../plugins";
@@ -118,6 +118,12 @@ interface ToolbarProps {
 
 interface PlaceholderState {
   component: ComponentType<any>;
+}
+
+export interface InputProps {
+  onComplete: Function;
+  editor: Editor;
+  node?: Block;
 }
 
 const Toolbar: FunctionComponent<ToolbarProps> = ({

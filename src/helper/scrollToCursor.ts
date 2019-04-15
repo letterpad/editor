@@ -3,6 +3,7 @@ const scrollToCursor = () => {
   // so give a timeout of 100ms before scrolling
   setTimeout(() => {
     const selection = window.getSelection();
+    if (!selection) return;
     const range = selection.getRangeAt(0);
     const rect = range.getBoundingClientRect();
 

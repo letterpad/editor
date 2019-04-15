@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { hasBlock } from "../../helper/strategy";
 import { insertEmbed } from "./EmbedUtils";
 import { parseUrl } from "./EmbedUtils";
+import { InputProps } from "../../components/Toolbar";
 
 const Container = styled.div`
   width: 100%;
@@ -27,7 +28,7 @@ const StyledInput = styled.input`
 const type = "iframe";
 
 const VideoInput: FunctionComponent<any> = React.forwardRef(
-  ({ onComplete, editor }, ref) => {
+  ({ onComplete, editor }: InputProps, ref) => {
     const [url, setUrl] = useState("");
 
     return (
