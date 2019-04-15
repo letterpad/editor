@@ -1,6 +1,6 @@
-import params from "../../e2e/params";
 import { getHtmlContents } from "../helpers/serialize";
 import { clearEditor } from "../helpers/simple-actions";
+import params from "../helpers/params";
 require("@cypress/snapshot").register();
 
 context("Markdown", () => {

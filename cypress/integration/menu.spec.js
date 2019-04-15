@@ -4,7 +4,7 @@ import {
   applyEditorFeatureToSampleText,
   applyEditorFeatureToLine
 } from "../helpers/compound-actions";
-import params from "../../e2e/params";
+import params from "../helpers/params";
 
 require("@cypress/snapshot").register();
 
