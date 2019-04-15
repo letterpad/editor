@@ -15,10 +15,10 @@ context("Actions", () => {
     cy.get('div[contenteditable="true"]');
   });
 
-  it("clearing editor", async () => {
-    await clearEditor();
-    cy.wrap(await getHtmlContents()).snapshot();
-  });
+  // it("clearing editor", async () => {
+  //   await clearEditor();
+  //   cy.wrap(await getHtmlContents()).snapshot();
+  // });
 
   it("bold", async () => {
     await clearEditor();
