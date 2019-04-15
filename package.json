@@ -3,7 +3,7 @@
   "main": "./index.js",
   "scripts": {
     "cy:open": "cypress open",
-    "cy:run": "cypress run",
+    "cy:run": "cypress run --record --key 12300a0c-24c0-4943-bc01-55598094f392 --parallel",
     "testServer": "node test-utils/server.js",
     "cp": "yarn start-server-and-test testServer http://localhost:4343 cy:run",
     "build": "tsc --build tsconfig.build.json",
