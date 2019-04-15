@@ -35,4 +35,4 @@ jobs:
 
       - run:
           name: Test
-          command: yarn cp
+          command: yarn cp --record --key 12300a0c-24c0-4943-bc01-55598094f392 --parallel
