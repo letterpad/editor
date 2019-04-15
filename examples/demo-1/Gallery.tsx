@@ -1,9 +1,4 @@
-import React, {
-  Component,
-  useState,
-  FunctionComponent,
-  KeyboardEventHandler
-} from "react";
+import React, { useState, FunctionComponent } from "react";
 import { StyledGallery, Container, StyledInput } from "./Gallery.css";
 import { insertImage } from "../../src/plugins/image/ImageUtils";
 import { Editor } from "slate";
