@@ -73,7 +73,9 @@ export const getTextAtCurrentLine = (value: Value) => {
   const textArr = value.anchorText.text.split(/\n/);
   // if the line is `abc` and if you press enter after `c`,
   // we are going to move back 1 space to get the offset
-  const offset = window.getSelection().anchorOffset - 1;
+  const selection = window.getSelection();
+  if (!selection) return "";
+  const offset = selection.anchorOffset - 1;
   let startOffset = 1;
   let textAtCurrentLine = "";
 
@@ -90,7 +92,9 @@ export const getTextAtCurrentLine = (value: Value) => {
 
 export const getAnchorOffsetAtCurrentLine = (value: Value) => {
   const textArr = value.anchorText.text.split(/\n/);
-  let offset = window.getSelection().anchorOffset;
+  const selection = window.getSelection();
+  if (!selection) return 0;
+  let offset = selection.anchorOffset;
   let startOffset = 0;
 
   for (let i = 0; i < textArr.length; i++) {

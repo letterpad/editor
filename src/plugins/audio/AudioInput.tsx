@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 import { hasBlock } from "../../helper/strategy";
 import { applyAudio } from "./AudioUtils";
+import { InputProps } from "../../components/Toolbar";
 
 const Container = styled.div`
   width: 100%;
@@ -26,7 +27,7 @@ const StyledInput = styled.input`
 const type = "audio";
 
 const AudioInput: FunctionComponent<any> = React.forwardRef(
-  ({ onComplete, editor }, ref) => {
+  ({ onComplete, editor }: InputProps, ref) => {
     const [url, setUrl] = useState("");
 
     return (
