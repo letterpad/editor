@@ -1,7 +1,7 @@
 import { ElementHandle } from "puppeteer";
 import { parseFragment, serialize } from "parse5";
 
-export type EditorHandle = ElementHandle<Element>;
+export type EditorHandle = ElementHandle<Element> | any;
 
 function removeData(root: any) {
   if (root.tagName === "iframe") {
