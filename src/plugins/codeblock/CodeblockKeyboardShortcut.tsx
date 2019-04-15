@@ -54,7 +54,9 @@ const codeblockKeyboardShortcut = (
         let nSpaces = textAtCurrentLine.search(/\S|$/);
         let indentSpace = 2;
         if (nSpaces >= indentSpace) {
-          const offset = window.getSelection().anchorOffset;
+          const selection = window.getSelection();
+          if (!selection) return editor;
+          const offset = selection.anchorOffset;
           return editor
             .moveTo(offset - anchorOffsetAtCurrentLine + indentSpace)
             .deleteBackward(indentSpace)
