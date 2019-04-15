@@ -30,7 +30,7 @@ jobs:
           command: yarn build
 
       - run:
-          name: Build
+          name: Bundle
           command: yarn bundle
 
       - run:

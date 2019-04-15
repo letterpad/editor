@@ -21,7 +21,7 @@ function removeData(root: any) {
 
 export async function getHtmlContents(handle: EditorHandle): Promise<string> {
   const context = await handle.executionContext();
-  const html = await context.evaluate(node => node.innerHTML, handle);
+  const html = await context.evaluate((node: any) => node.innerHTML, handle);
   const fragment = parseFragment(html);
   removeData(fragment);
   return serialize(fragment);
