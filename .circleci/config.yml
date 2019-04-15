@@ -35,4 +35,4 @@ jobs:
 
       - run:
           name: Test
-          command: yarn cp --record --group 4x-electron --parallel
+          command: yarn cp
