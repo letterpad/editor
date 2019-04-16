@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Value, Editor } from "slate";
 import {
   Editor as SlateReactEditor,
@@ -6,7 +6,6 @@ import {
   getEventTransfer,
   findDOMNode
 } from "slate-react";
-import { Component } from "react";
 import AutoReplace from "slate-auto-replace";
 import { Plugin as SlateReactPlugin } from "slate-react";
 import {
@@ -26,6 +25,9 @@ import { showMenu } from "./helper/showMenu";
 import { getRules } from "./helper/rules";
 import Toolbar from "./components/Toolbar";
 import { Theme } from "./theme.css";
+import showdown from "showdown";
+
+const converter = new showdown.Converter();
 
 export interface LetterpadEditorProps {
   onButtonClick(
@@ -35,6 +37,7 @@ export interface LetterpadEditorProps {
   ): void;
   onBeforeRender(props: { type: string }): void;
   getCharCount?(count: number): void;
+  onChange?(html: string, value?: Value): void;
   width?: number;
   theme?: string;
   spellCheck?: boolean;
@@ -52,6 +55,7 @@ interface LetterpadEditorState {
   slateReactPlugins: SlateReactPlugin[];
   pluginsMap: PluginsMap;
   value: Value;
+  html: string;
 }
 
 /**
@@ -106,6 +110,7 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
     slateReactPlugins,
     pluginsMap,
     value: Value.fromJSON(initialValue),
+    html: "",
     toolbarActive: false,
     toolbarPosition: {
       top: 0,
@@ -128,8 +133,11 @@ export class LetterpadEditor extends Component<
   state = getInitialState(pluginConfigs);
 
   onChange = ({ value }: { value: Value }) => {
-    this.setState({ value });
+    const html = this.html.serialize(value);
+    this.setState({ value, html });
 
+    // Everytime there is a change in the editor, we have to check if the cursor is
+    // inside an empty block. If so, then we display an additional toolbar
     if (
       !value.focusBlock ||
       value.focusBlock.text ||
@@ -145,12 +153,15 @@ export class LetterpadEditor extends Component<
         }
       });
     } else {
+      // else check if any text has been selected. If so, get the node of the cursor
       let cursorNode;
       try {
         cursorNode = findDOMNode(this.editor!.value.focusBlock);
       } catch (e) {}
       if (cursorNode) {
+        // ge the position of the cursor
         const { top, left, width } = cursorNode.getBoundingClientRect();
+        // display the menubar
         this.setState({
           toolbarActive: true,
           toolbarPosition: {
@@ -166,7 +177,7 @@ export class LetterpadEditor extends Component<
       const node = value.fragment.nodes.first();
       const plugin = this.state.pluginsMap.node[node.type];
       if (plugin) {
-        if (plugin.plugin.allowChildTransform === false) {
+        if (plugin.plugin.allowChildTransforms === false) {
           if (this.menuRef && this.menuRef.current) {
             this.menuRef.current.removeAttribute("style");
             return;
@@ -178,7 +189,7 @@ export class LetterpadEditor extends Component<
       const mark = value.activeMarks.first();
       const plugin = this.state.pluginsMap.mark[mark.type];
       if (plugin) {
-        if (plugin.plugin.allowChildTransform === false) {
+        if (plugin.plugin.allowChildTransforms === false) {
           if (this.menuRef && this.menuRef.current) {
             this.menuRef.current.removeAttribute("style");
             return;
@@ -188,10 +199,15 @@ export class LetterpadEditor extends Component<
     }
   };
 
-  onPaste: EventHook = (event, editor, next) => {
+  onPaste: EventHook = (event, editor) => {
     scrollToCursor();
     const transfer = getEventTransfer(event);
-    if (transfer.type != "html") return next();
+    if (transfer.type != "html") {
+      // convert markdown to html
+      let html = converter.makeHtml((transfer as any).text);
+      const { document } = this.html.deserialize(html);
+      return editor.insertFragment(document);
+    }
 
     const parentTag = editor.value.blocks.first().type; // p, pre, etc
     for (let i = 0; i < pluginConfigs.length; i++) {
@@ -204,8 +220,7 @@ export class LetterpadEditor extends Component<
     }
     // remove style attr
     const REMOVE_STYLE_ATTR = /style="[^\"]*"/gi;
-    const html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
-
+    let html = (transfer as any).html.replace(REMOVE_STYLE_ATTR, "");
     // TODO: fix the transfer as any
     const { document } = this.html.deserialize(html);
     editor.insertFragment(document);
@@ -235,8 +250,12 @@ export class LetterpadEditor extends Component<
     document.removeEventListener("keyup", this.hideMenu);
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (_: any, prevState: any) => {
     this.updateMenu();
+    const { html } = this.state;
+    if (typeof this.props.onChange === "function" && prevState.html !== html) {
+      this.props.onChange(html);
+    }
   };
 
   toggleToolbarClass = () => {

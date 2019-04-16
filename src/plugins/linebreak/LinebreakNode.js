@@ -22,7 +22,7 @@ const Wrapper = styled.hr`
 
 const LinebreakNode = ({ attributes, children, node }) => {
   const props = getAttributesFromNode(node);
-  return <Wrapper {...attributes} {...props} />;
+  return <Wrapper data-id="plugin-linebreak" {...attributes} {...props} />;
 };
 
 export default LinebreakNode;

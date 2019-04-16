@@ -16,10 +16,10 @@ const BlockquotePlugin: PluginConfig["slatePlugin"] = () => ({
     const type = "blockquote";
     if (!isKeyboardEvent(event)) return;
     if (isMod(event) && event.key === "/") {
-      const isActive = hasBlock(editor.value, type);
+      const isActive = hasBlock((editor as any).value, type);
       return applyBlockquote(editor, isActive ? "p" : type);
     } else if (event.key === "Enter") {
-      const isActive = hasBlock(editor.value, type);
+      const isActive = hasBlock((editor as any).value, type);
       if (isActive) {
         event.preventDefault();
         return editor.splitBlock(1).setBlocks("p");
@@ -31,6 +31,7 @@ const BlockquotePlugin: PluginConfig["slatePlugin"] = () => ({
 
 const blockquotePluginConfig: PluginConfig[] = [
   {
+    name: "plugin-blockquote",
     renderType: "node",
     menuButtons: [
       {

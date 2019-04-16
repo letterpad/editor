@@ -169,7 +169,7 @@ class GalleryNode extends PureComponent<{
     );
     if (images.length > 0)
       return (
-        <section ref={this.wrapperRef} {...attributes}>
+        <section ref={this.wrapperRef} {...attributes} data-id="plugin-gallery">
           <input
             onChange={e =>
               handleFiles(e, this.props.editor, this.mergeImageBlocks)

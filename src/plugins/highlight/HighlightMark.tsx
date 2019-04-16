@@ -11,7 +11,7 @@ const StyledCode = styled.code`
 `;
 /* eslint-disable react/prop-types */
 const highlightMark: SFC = ({ children }) => {
-  return <StyledCode>{children}</StyledCode>;
+  return <StyledCode data-id="plugin-highlight">{children}</StyledCode>;
 };
 
 export default highlightMark;

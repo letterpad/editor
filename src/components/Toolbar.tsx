@@ -147,11 +147,13 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
     }
   });
   if (menu.current) {
-    menu.current.querySelectorAll(".material-icons").forEach(node => {
-      node.addEventListener("mousedown", () => {
-        menuActive && setMenuActive(false);
+    menu.current
+      .querySelectorAll(".material-icons, .custom-icons")
+      .forEach(node => {
+        node.addEventListener("mousedown", () => {
+          menuActive && setMenuActive(false);
+        });
       });
-    });
   }
 
   function showPlaceholder(component: ComponentType) {

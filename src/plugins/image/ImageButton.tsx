@@ -11,16 +11,13 @@ const ImageButton: EditorButtonComponent = ({ editor, callbacks }) => {
       isActive={false}
       icon="image"
       onMouseDown={e => {
-        e.preventDefault();
         // check if the user wants to handle this
         const hookCalled = callbacks.onButtonClick(e, "img", callbacks);
         if (hookCalled) {
           return;
         }
-
-        if (callbacks.showPlaceholder) {
-          callbacks.showPlaceholder(ImageInput);
-        }
+        e.preventDefault();
+        callbacks.showPlaceholder(ImageInput);
       }}
     />
   );

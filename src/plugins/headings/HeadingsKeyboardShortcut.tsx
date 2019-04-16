@@ -35,7 +35,7 @@ const HeadingsKeyboardShortcut: EditorEventHandler = (event, editor, next) => {
     return next();
   }
 
-  const isActive = hasBlock(editor.value, type);
+  const isActive = hasBlock((editor as any).value, type);
   const blockToApply = isActive ? "p" : type;
   return applyHeadings(editor, blockToApply);
 };
