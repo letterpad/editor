@@ -4,7 +4,7 @@ import { insertImage } from "../image/ImageUtils";
 import { Editor } from "slate";
 
 interface GalleryProps {
-  onComplete: () => any;
+  onComplete: Function;
   editor: Editor;
   query: string;
 }

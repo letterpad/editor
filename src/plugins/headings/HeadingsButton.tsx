@@ -9,11 +9,11 @@ const HeadingsButton: EditorButtonComponent = ({ editor, type }) => {
 
   return (
     <Button
-      isActive={hasBlock(editor.value, type)}
+      isActive={hasBlock((editor as any).value, type)}
       icon={getType(type)}
       onMouseDown={e => {
         e.preventDefault();
-        const isActive = hasBlock(editor.value, type);
+        const isActive = hasBlock((editor as any).value, type);
         return applyHeadings(editor, isActive ? "p" : type);
       }}
     />

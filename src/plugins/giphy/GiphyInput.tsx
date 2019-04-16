@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 
 import Gallery from "./Gallery";
+import { InputProps } from "../../components/Toolbar";
 
 const Container = styled.div`
   width: 100%;
@@ -24,7 +25,7 @@ const StyledInput = styled.input`
 `;
 
 const ImageInput: FunctionComponent<any> = React.forwardRef(
-  ({ onComplete, editor }, ref) => {
+  ({ onComplete, editor }: InputProps, ref) => {
     const [query, setQuery] = useState("");
 
     if (query !== "" && editor) {

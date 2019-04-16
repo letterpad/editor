@@ -41,7 +41,7 @@ const AudioInput: FunctionComponent<any> = React.forwardRef(
               onComplete();
               // if the url is not empty
               if (url) {
-                const isActive = hasBlock(editor.value, type);
+                const isActive = hasBlock((editor as any).value, type);
                 applyAudio(editor, isActive ? "p" : type, url);
               } else {
                 editor.focus();
