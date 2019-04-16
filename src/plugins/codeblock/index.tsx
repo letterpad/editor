@@ -60,7 +60,7 @@ const plugins: PluginConfig[] = [
         }
       },
       serialize(obj, children) {
-        if (obj.object === "node") {
+        if (obj.type === "pre") {
           return <CodeblockNode children={children} />;
         }
       }

@@ -8,19 +8,21 @@ const applyStyles = (type: string) => {
         max-width: 400px;
         display: inline-block;
         float: left;
-
+        display: block;
       `;
     }
     case "center": {
       return `
         margin-left: initial;
         max-width: 100%;
+        display: block;
       `;
     }
     case "wide": {
       return `
         left: -100px;
         width: calc(100% + 200px);
+        display: block;
       `;
     }
     case "full": {
@@ -30,6 +32,7 @@ const applyStyles = (type: string) => {
         @media screen and (min-width: 740px) {
           left: calc((-100vw + 100%) / 2);
         }
+        display: block;
     `;
     }
   }
@@ -55,11 +58,14 @@ export const Figure = styled.figure`
   z-index: 1;
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.span`
   ${(props: any) => applyStyles(props.type)}
   position: relative;
   z-index: 1;
   ${(props: any) => props.type === "parallax" && applyParallax(props)}
+  img {
+    max-width: 100%;
+  }
 `;
 
 export const StyledCaptionInput = styled.input`

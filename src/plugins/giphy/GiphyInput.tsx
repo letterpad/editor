@@ -1,14 +1,14 @@
 import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
-import { hasBlock } from "../../helper/strategy";
-import { applyAudio } from "./AudioUtils";
+
+import Gallery from "./Gallery";
 import { InputProps } from "../../components/Toolbar";
 
 const Container = styled.div`
   width: 100%;
   display: flex;
   &:before {
-    content: "🎧";
+    content: "";
     font-size: x-large;
     display: flex;
     align-items: center;
@@ -24,36 +24,29 @@ const StyledInput = styled.input`
   outline: none;
 `;
 
-const type = "audio";
-
-const AudioInput: FunctionComponent<any> = React.forwardRef(
+const ImageInput: FunctionComponent<any> = React.forwardRef(
   ({ onComplete, editor }: InputProps, ref) => {
-    const [url, setUrl] = useState("");
+    const [query, setQuery] = useState("");
+
+    if (query !== "" && editor) {
+      return <Gallery onComplete={onComplete} query={query} editor={editor} />;
+    }
 
     return (
       <Container>
         <StyledInput
           ref={ref}
-          value={url}
-          onChange={(e: any) => setUrl(e.target.value)}
           onKeyUp={(e: any) => {
             if (e.keyCode == 13) {
-              onComplete();
-              // if the url is not empty
-              if (url) {
-                const isActive = hasBlock((editor as any).value, type);
-                applyAudio(editor, isActive ? "p" : type, url);
-              } else {
-                editor.focus();
-              }
+              setQuery(e.target.value);
             }
           }}
           type="text"
-          placeholder="Paste an Audio link and press Enter"
+          placeholder="Enter a keyword for gifs"
         />
       </Container>
     );
   }
 );
 
-export default AudioInput;
+export default ImageInput;

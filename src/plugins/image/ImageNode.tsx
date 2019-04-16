@@ -107,6 +107,7 @@ const ImageNode: SFC<{
         type={alignOption}
         ref={alignmentRef}
         {...attributes}
+        data-id="plugin-image-figure"
       >
         {children}
       </Figure>
@@ -121,7 +122,12 @@ const ImageNode: SFC<{
       src={(node as any).data.get("src")}
     >
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
-      <img width="100%" src={(node as any).data.get("src")} {...attributes} />
+      <img
+        width="100%"
+        src={(node as any).data.get("src")}
+        {...attributes}
+        data-id="plugin-image"
+      />
       {!captionActive && renderCaption()}
       {captionActive && renderCaptionInput()}
     </Wrapper>

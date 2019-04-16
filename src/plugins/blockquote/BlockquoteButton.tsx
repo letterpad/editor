@@ -11,10 +11,10 @@ const BlockquoteButton: EditorButtonComponent = ({ editor }) => {
 
   return (
     <Button
-      isActive={hasBlock(editor.value, type)}
+      isActive={hasBlock((editor as any).value, type)}
       icon="format_quote"
       onMouseDown={() => {
-        const isActive = hasBlock(editor.value, type);
+        const isActive = hasBlock((editor as any).value, type);
         return applyBlockquote(editor, isActive ? "p" : type);
       }}
     />

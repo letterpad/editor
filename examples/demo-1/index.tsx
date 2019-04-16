@@ -37,6 +37,9 @@ class Demo extends Component {
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
         spellCheck={false}
+        onChange={html => {
+          console.log(html);
+        }}
         getCharCount={count => {
           // count is available.
           if (count) {

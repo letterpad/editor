@@ -17,7 +17,7 @@ const VideoButton = ({
 
   return (
     <Button
-      isActive={hasBlock(editor.value, type)}
+      isActive={hasBlock((editor as any).value, type)}
       icon="code"
       onMouseDown={_ => {
         if (callbacks.showPlaceholder) {

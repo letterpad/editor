@@ -10,7 +10,7 @@ const AudioButton: EditorButtonComponent = ({ editor, callbacks }) => {
 
   return (
     <Button
-      isActive={hasBlock(editor.value, type)}
+      isActive={hasBlock((editor as any).value, type)}
       icon="queue_music"
       onMouseDown={() => {
         if (callbacks.showPlaceholder) {

@@ -13,7 +13,7 @@ const HeadingsPlugin: PluginConfig["slatePlugin"] = () => ({
       if (!a) return next();
       const { type } = a.toJS();
       if (types.indexOf(type) >= 0) {
-        let isActive = hasBlock(editor.value, type);
+        let isActive = hasBlock((editor as any).value, type);
         if (isActive) {
           event.preventDefault();
           return editor.splitBlock(1).setBlocks("p");

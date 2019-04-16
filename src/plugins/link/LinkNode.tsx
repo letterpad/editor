@@ -20,6 +20,7 @@ const LinkNode: SFC<{
     {...attributes}
     className="link-node"
     href={isTextNode(node) ? node.text : node.data.get("href")}
+    data-id="plugin-link"
   >
     {children}
   </Wrapper>

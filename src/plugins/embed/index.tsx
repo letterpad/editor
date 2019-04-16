@@ -13,7 +13,7 @@ export const EmbedPlugin: PluginConfig["slatePlugin"] = () => {
     onKeyDown(event, editor, next) {
       if (isKeyboardEvent(event)) {
         if (event.key === "Enter") {
-          const isActive = hasBlock(editor.value, TAGNAME);
+          const isActive = hasBlock((editor as any).value, TAGNAME);
           if (isActive) {
             event.preventDefault();
             return editor.splitBlock(1).setBlocks("p");
@@ -27,6 +27,7 @@ export const EmbedPlugin: PluginConfig["slatePlugin"] = () => {
 
 const EmbedConfig: PluginConfig[] = [
   {
+    name: "plugin-embed",
     renderType: "node",
     menuButtons: [],
     toolbarButtons: [{ button: EmbedButton }],

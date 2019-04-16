@@ -11,7 +11,7 @@ const AudioNode: SFC<{
 }> = ({ attributes, node, children }) => {
   const attrs = getAttributesFromNode(node);
   return (
-    <audio {...attributes} controls {...attrs}>
+    <audio {...attributes} controls {...attrs} id="plugin-audio">
       {children}
     </audio>
   );

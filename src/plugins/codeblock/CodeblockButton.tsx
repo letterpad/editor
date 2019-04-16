@@ -8,7 +8,7 @@ import { EditorButtonComponent } from "..";
 /* eslint-disable no-unused-vars */
 const codeblockButton: EditorButtonComponent = ({ editor }) => (
   <Button
-    isActive={hasBlock(editor.value, "u")}
+    isActive={hasBlock((editor as any).value, "u")}
     icon="code"
     onMouseDown={() => {
       return applyCodeblock(editor);
