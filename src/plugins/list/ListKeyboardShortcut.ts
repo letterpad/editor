@@ -1,5 +1,5 @@
-import { onTab, onBackspace, onEnter } from "./ListUtils";
-import { Editor } from "slate";
+import { onEnter } from "./ListUtils";
+import { Editor, Path, Text, Node, Block, Inline, Document } from "slate";
 
 const ListKeyboardShortcut = (
   event: KeyboardEvent,
@@ -7,8 +7,6 @@ const ListKeyboardShortcut = (
   next: () => any
 ) => {
   switch (event.key) {
-    case "Tab":
-      return onTab(event, editor);
     case "Backspace":
       return onBackspace(event, editor, next);
     case "Enter": {
@@ -18,5 +16,73 @@ const ListKeyboardShortcut = (
 
   next();
 };
+
+function onBackspace(_: KeyboardEvent, editor: Editor, next: () => any) {
+  const { value } = editor;
+  if (value.anchorBlock.type !== "li") return next();
+
+  const li = value.anchorBlock;
+
+  if (value.selection.start.offset === 0) {
+    const list = value.document.getParent(getPath(editor, li.key));
+    if (list == null || isTextNode(list) || !isList(list)) {
+      return next();
+    }
+
+    // first node
+    if (li.key === list.nodes.first().key) {
+      // try merging if previous ul exists
+      const prevBlock = value.document.getPreviousSibling(list.key);
+      if (prevBlock == null || isTextNode(prevBlock)) {
+        return next();
+      }
+
+      if (prevBlock.type === list.type) {
+        editor.mergeNodeByKey(list.key);
+        // nothing more to do
+        return;
+      }
+
+      if (!prevBlock.text) {
+        editor.removeNodeByKey(prevBlock.key);
+        return;
+      }
+
+      if (!li.text) {
+        editor
+          .removeNodeByKey(li.key)
+          .moveAnchorToStartOfNextBlock()
+          .moveFocusToStartOfNextBlock();
+        return;
+      }
+
+      return next();
+    }
+
+    const prevLi = value.document.getPreviousBlock(li.key);
+    if (prevLi == null || prevLi.type !== "li") {
+      return next();
+    }
+
+    if (prevLi.nodes.isEmpty()) {
+      editor.mergeNodeByKey(prevLi.key);
+      return;
+    }
+  }
+
+  return next();
+}
+
+function getPath(editor: Editor, key: string): Path {
+  return editor.value.document.getPath(key);
+}
+
+function isTextNode(node: Node): node is Text {
+  return node.object === "text";
+}
+
+function isList(node: Document | Block | Inline) {
+  return ["ul", "ol"].includes(node.type);
+}
 
 export default ListKeyboardShortcut;
