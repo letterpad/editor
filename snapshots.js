@@ -81,5 +81,19 @@ module.exports = {
     "tests horizontal line": {
       "1": "<div><div style=\"height: 0px; color: transparent; outline: none; position: absolute;\"><span><span><span>﻿</span></span></span></div><div contenteditable=\"false\"><hr></div></div><section><span><span><span>﻿<br></span></span></span></section>"
     }
+  },
+  "List": {
+    "test list": {
+      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "test backspace": {
+      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "test merging list": {
+      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li><li><span><span><span>list 3</span></span></span></li><li><span><span><span>﻿<br></span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "test numbered list": {
+      "1": "<ol><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ol><section><span><span><span>This is a normal line</span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
+    }
   }
 }
