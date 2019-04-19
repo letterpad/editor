@@ -1,16 +1,24 @@
 {
-  "name": "slate-plugins",
-  "main": "./index.js",
+  "name": "@letterpad/editor",
+  "main": "bundles/bundle.js",
+  "version": "0.0.1",
+  "description": "The letterpad editor - A high level abstraction of the slate editor with plugin architecture",
+  "files": [
+    "bundles/**/*",
+    "dist/**/*"
+  ],
   "scripts": {
     "cy:open": "cypress open",
-    "cy:run": "cypress run --record --key 12300a0c-24c0-4943-bc01-55598094f392 --parallel",
-    "testServer": "node test-utils/server.js",
-    "e2e": "yarn start-server-and-test testServer http://localhost:4343 cy:run",
-    "e2e:open": "yarn start-server-and-test testServer http://localhost:4343 cy:open",
+    "cy:run": "cypress run",
+    "cy:ci_run": "cypress run --record --key 12300a0c-24c0-4943-bc01-55598094f392 --parallel",
+    "e2e:headless": "yarn start-server-and-test testServer http://localhost:4343 cy:ci_run",
+    "e2e": "yarn start-server-and-test testServer http://localhost:4343 cy:open",
     "build": "tsc --build tsconfig.build.json",
-    "bundle": "webpack --config webpack.config.js",
+    "bundle": "webpack -p --config webpack.config.js --mode production",
     "dev": "webpack-dev-server --config=webpack.config.js",
-    "test": "jest -c test-utils/unit.config.js"
+    "test": "jest -c test-utils/unit.config.js",
+    "prepublishOnly": "yarn bundle && yarn build && yarn e2e:headless",
+    "testServer": "node test-utils/server.js"
   },
   "dependencies": {
     "classnames": "^2.2.6",
@@ -19,7 +27,6 @@
     "prismjs": "^1.15.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "showdown": "^1.9.0",
     "slate": "^0.44.10",
     "slate-auto-replace": "^0.12.1",
     "slate-edit-code": "^0.15.5",
@@ -27,6 +34,7 @@
     "slate-prism": "^0.5.0",
     "slate-react": "^0.21.16",
     "slate-schema-violations": "^0.1.39",
+    "snarkdown": "^1.2.2",
     "styled-components": "^4.1.3"
   },
   "devDependencies": {
