@@ -10,7 +10,8 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "e2e:headless": "yarn start-server-and-test testServer http://localhost:4343 cy:run",
+    "cy:ci_run": "cypress run --record --key 12300a0c-24c0-4943-bc01-55598094f392 --parallel",
+    "e2e:headless": "yarn start-server-and-test testServer http://localhost:4343 cy:ci_run",
     "e2e": "yarn start-server-and-test testServer http://localhost:4343 cy:open",
     "build": "tsc --build tsconfig.build.json",
     "bundle": "webpack -p --progress --config webpack.config.js --mode production",
