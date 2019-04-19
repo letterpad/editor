@@ -26,13 +26,13 @@ jobs:
             - ~/.cache/yarn
 
       - run:
-          name: Build
+          name: Build Check
           command: yarn build
 
       - run:
-          name: Bundle
+          name: Create Bundles
           command: yarn bundle
 
       - run:
-          name: Test
+          name: Integration Test
           command: yarn e2e:headless
