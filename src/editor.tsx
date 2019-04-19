@@ -25,9 +25,7 @@ import { showMenu } from "./helper/showMenu";
 import { getRules } from "./helper/rules";
 import Toolbar from "./components/Toolbar";
 import { Theme } from "./theme.css";
-import showdown from "showdown";
-
-const converter = new showdown.Converter();
+import snarkdown from "snarkdown";
 
 export interface LetterpadEditorProps {
   onButtonClick(
@@ -204,7 +202,7 @@ export class LetterpadEditor extends Component<
     const transfer = getEventTransfer(event);
     if (transfer.type != "html") {
       // convert markdown to html
-      let html = converter.makeHtml((transfer as any).text);
+      let html = snarkdown((transfer as any).text);
       const { document } = this.html.deserialize(html);
       return editor.insertFragment(document);
     }
