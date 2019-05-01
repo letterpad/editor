@@ -6,7 +6,7 @@ require("@cypress/snapshot").register();
 context("List", () => {
   beforeEach(() => {
     cy.visit(params.testServer);
-    // cy.get('div[contenteditable="true"]');
+    cy.get('div[contenteditable="true"]');
   });
 
   it("test list", () => {
@@ -45,7 +45,7 @@ context("List", () => {
     });
   });
 
-  it.only("test numbered list", () => {
+  it("test numbered list", () => {
     clearEditor().then(() => {
       cy.focused().type(
         "1. list 1{enter}list 2{enter}{enter}This is a normal line"

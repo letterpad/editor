@@ -94,6 +94,32 @@ module.exports = {
     },
     "test numbered list": {
       "1": "<ol><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ol><section><span><span><span>This is a normal line</span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "test exiting list with double enter": {
+      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
+    }
+  },
+  "Menu": {
+    "clearing editor": {
+      "1": "<section><span><span><span><span contenteditable=\"false\" style=\"pointer-events: none; display: inline-block; width: 0px; max-width: 100%; white-space: nowrap; opacity: 0.333;\">Compose a story..</span><span>﻿<br></span></span></span></span></section>"
+    },
+    "bold": {
+      "1": "<section><span><span><strong><span>This is a sample text</span></strong></span></span></section>"
+    },
+    "italics": {
+      "1": "<section><span><span><em><span>This is a sample text</span></em></span></span></section>"
+    },
+    "underline": {
+      "1": "<section><span><span><u><span>This is a sample text</span></u></span></span></section>"
+    },
+    "headings 2": {
+      "1": "<h2><span><span><span>These is a sample line of text</span></span></span></h2><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "headings 3": {
+      "1": "<h3><span><span><span>These is a sample line of text</span></span></span></h3><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "blockquote": {
+      "1": "<blockquote><span><span><span>These is a sample line of text</span></span></span></blockquote><section><span><span><span>﻿<br></span></span></span></section>"
     }
   }
 }
