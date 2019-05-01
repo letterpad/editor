@@ -6,9 +6,9 @@ module.exports = {
   entry: "./src/editor.tsx",
   target: "web",
   output: {
-    path: __dirname + "/bundles",
-    publicPath: "/bundles/",
-    filename: "bundle.js",
+    path: __dirname + "/dist/bundles",
+    publicPath: "/dist/bundles/",
+    filename: "editor.js",
     libraryTarget: "umd"
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],

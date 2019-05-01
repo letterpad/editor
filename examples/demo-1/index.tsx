@@ -3,7 +3,6 @@
  */
 import React, { Component } from "react";
 import { LetterpadEditor } from "../../src/editor";
-// import LetterpadEditor from "../../bundles/bundle";
 import { Editor } from "slate";
 const sampleHtml = require("../../src/htmlValue.html");
 
@@ -40,6 +39,7 @@ class Demo extends Component {
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
         spellCheck={false}
+        defaultFont={true}
         onChange={(html: string) => {
           console.log(html);
         }}

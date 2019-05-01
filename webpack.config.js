@@ -5,9 +5,9 @@ module.exports = {
   devtool: "source-map",
   entry: "./index.js",
   output: {
-    path: __dirname + "/bundles",
-    publicPath: "/bundles/",
-    filename: "bundle.js"
+    path: __dirname + "/dist/bundles",
+    publicPath: "/dist/bundles/",
+    filename: "editor.js"
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   resolve: {

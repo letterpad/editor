@@ -40,6 +40,7 @@ export interface LetterpadEditorProps {
   theme?: string;
   html?: string;
   spellCheck?: boolean;
+  defaultFont?: boolean;
 }
 
 interface LetterpadEditorState {
@@ -333,7 +334,10 @@ export class LetterpadEditor extends Component<
     };
     return (
       <Theme theme={this.props.theme}>
-        <EditorWrapper width={this.props.width}>
+        <EditorWrapper
+          width={this.props.width}
+          defaultFont={this.props.defaultFont}
+        >
           <SlateReactEditor
             autoFocus={true}
             spellCheck={this.props.spellCheck}
