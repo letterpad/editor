@@ -17,7 +17,7 @@
     "bundle": "webpack -p --config webpack.config.prod.js",
     "dev": "webpack-dev-server --config=webpack.config.js",
     "test": "jest -c test-utils/unit.config.js",
-    "prepublishOnly": "yarn bundle && yarn build && yarn e2e:headless",
+    "prepublishOnly": "yarn bundle && yarn build && yarn e2e:run",
     "testServer": "node test-utils/server.js"
   },
   "dependencies": {
