@@ -38,6 +38,7 @@ export interface LetterpadEditorProps {
   onChange?(html: string, value?: Value): void;
   width?: number;
   theme?: string;
+  html?: string;
   spellCheck?: boolean;
 }
 
@@ -241,6 +242,12 @@ export class LetterpadEditor extends Component<
 
   componentDidMount() {
     this.updateMenu();
+    if (this.props.html) {
+      const value = this.html.deserialize(
+        this.props.html.replace(new RegExp(">[ ]+<", "g"), "><")
+      );
+      this.setState({ value });
+    }
     document.addEventListener("keyup", this.hideMenu);
   }
 
@@ -359,3 +366,4 @@ export class LetterpadEditor extends Component<
     );
   }
 }
+export default LetterpadEditor;

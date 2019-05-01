@@ -64,7 +64,8 @@ const EmbedConfig: PluginConfig[] = [
             type: type,
             data: {
               className: el.getAttribute("class"),
-              src: el.getAttribute("src") || null
+              src: el.getAttribute("src") || null,
+              id: el.getAttribute("id") || null
             },
             nodes: next(el.childNodes)
           };

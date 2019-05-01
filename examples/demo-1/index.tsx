@@ -3,7 +3,10 @@
  */
 import React, { Component } from "react";
 import { LetterpadEditor } from "../../src/editor";
+// import LetterpadEditor from "../../bundles/bundle";
 import { Editor } from "slate";
+const sampleHtml = require("../../src/htmlValue.html");
+
 import Gallery from "./Gallery";
 
 class Demo extends Component {
@@ -37,15 +40,16 @@ class Demo extends Component {
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
         spellCheck={false}
-        onChange={html => {
+        onChange={(html: string) => {
           console.log(html);
         }}
-        getCharCount={count => {
+        getCharCount={(count: number) => {
           // count is available.
           if (count) {
             // typescript - this is only to allow the unused variable
           }
         }}
+        html={sampleHtml}
       />
     );
   }

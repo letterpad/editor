@@ -113,6 +113,7 @@ const ImageNode: SFC<{
       </Figure>
     );
   }
+  console.log(node.data);
 
   return (
     <Wrapper
@@ -123,7 +124,8 @@ const ImageNode: SFC<{
     >
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
       <img
-        width="100%"
+        width={(node as any).data.get("width") || "100%"}
+        height={(node as any).data.get("height") || "auto"}
         src={(node as any).data.get("src")}
         {...attributes}
         data-id="plugin-image"

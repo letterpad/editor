@@ -1,13 +1,15 @@
 const webpack = require("webpack");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   devtool: "source-map",
-  entry: "./index.js",
+  entry: "./src/editor.tsx",
+  target: "web",
   output: {
     path: __dirname + "/bundles",
     publicPath: "/bundles/",
-    filename: "bundle.js"
+    filename: "bundle.js",
+    libraryTarget: "umd"
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   resolve: {
@@ -35,21 +37,15 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-        test: /\.(html)$/,
-        use: {
-          loader: "html-loader",
-          options: {
-            minimize: true,
-            collapseWhitespace: true
-          }
-        }
       }
     ]
   },
   devServer: {
     contentBase: "./",
     hot: true
+  },
+  externals: {
+    "react-dom": "react-dom",
+    react: "react"
   }
 };

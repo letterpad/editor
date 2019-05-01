@@ -54,9 +54,9 @@ export default class Gist extends React.PureComponent<{
         ref={this.iframeRef}
         width="100%"
         frameBorder={0}
+        src={file}
         id={file ? `gist-${id}-${file}` : `gist-${id}`}
       >
-        {" "}
         {children}
       </iframe>
     );

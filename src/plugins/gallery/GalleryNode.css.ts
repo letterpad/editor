@@ -11,14 +11,21 @@ export const Image = styled.img`
   opacity: 0;
 `;
 
+const addUnit = (value: any) => {
+  if (typeof value === "number") {
+    return value + "px";
+  }
+  return value;
+};
+
 export const Figure = styled.figure`
   position: relative;
   z-index: 1;
   cursor: pointer;
   padding: 2px !important;
   display: inline-block;
-  height: ${(p: any) => p.height}px;
-  width: ${(p: any) => p.width}px;
+  height: ${(p: any) => addUnit(p.height)};
+  width: ${(p: any) => addUnit(p.width)};
   background: url(${(p: any) => p.src});
   background-size: cover;
   background-repeat: no-repeat;
