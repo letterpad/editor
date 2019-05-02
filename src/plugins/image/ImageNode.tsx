@@ -22,9 +22,10 @@ const ImageNode: SFC<{
   node: Node;
   editor?: Editor;
   isFocused?: boolean;
-}> = ({ attributes, node, children }) => {
+  align?: string;
+}> = ({ attributes, node, children, align }) => {
   if (isTextNode(node)) return null;
-  const align = node.data.get("align");
+  align = node.data.get("align") || align;
   const title = node.data.get("title");
 
   const [alignOption, setAlignOption] = useState(align || "center");
@@ -121,6 +122,7 @@ const ImageNode: SFC<{
       onClick={showOptions}
       type={alignOption}
       src={(node as any).data.get("src")}
+      className="lp_img_wrapper"
     >
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
       <img
@@ -128,6 +130,7 @@ const ImageNode: SFC<{
         height={(node as any).data.get("height") || "auto"}
         src={(node as any).data.get("src")}
         {...attributes}
+        data-align={(node as any).data.get("align")}
         data-id="plugin-image"
       />
       {!captionActive && renderCaption()}

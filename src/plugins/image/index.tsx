@@ -4,7 +4,21 @@ import { PluginConfig } from "..";
 import ImageNode from "./ImageNode";
 import { Figure } from "./ImageNode.css";
 
-const ImagePlugin: PluginConfig["slatePlugin"] = () => ({});
+const ImagePlugin: PluginConfig["slatePlugin"] = () => ({
+  onClick(_event, _editor) {
+    const { dataset, src } = (_event!.target! as any)
+      .closest(".lp_img_wrapper")
+      .querySelector("img");
+    const key = dataset.key;
+    return _editor.setNodeByKey(key, {
+      type: "img",
+      data: {
+        src: src,
+        align: (_event!.target! as any).dataset!.align
+      }
+    });
+  }
+});
 
 const imageConfig: PluginConfig[] = [
   {
@@ -26,7 +40,7 @@ const imageConfig: PluginConfig[] = [
             type: "img",
             nodes: next(el.childNodes),
             data: {
-              align: el.getAttribute("align"),
+              align: (el as any).dataset.align,
               title: el.getAttribute("title"),
               src: el.getAttribute("src"),
               height: el.getAttribute("height"),
@@ -47,16 +61,12 @@ const imageConfig: PluginConfig[] = [
       },
       serialize: (obj, children) => {
         const props = { children, node: obj, attributes: {} };
+        const { node, ...rest } = props;
         if (obj.type === "figure") {
-          const { node, ...rest } = props;
           // also pass the image attributes
           const imgAttrs =
             node.nodes.size > 1 ? node.nodes.get(1).data.toObject() : {};
 
-          // if(imgAttrs.width && imgAttrs.width.indexOf("%") > 0) {
-          // imgAttrs.width = 300;
-          // }
-          console.log(imgAttrs);
           return (
             <Figure {...rest} data-id="plugin-image-figure" {...imgAttrs} />
           );
@@ -64,8 +74,7 @@ const imageConfig: PluginConfig[] = [
         if (obj.object != "inline") {
           return;
         }
-        console.log("props :", props);
-        return <ImageNode {...props} />;
+        return <ImageNode {...props} data-align={node.data.get("align")} />;
       }
     }
   }
