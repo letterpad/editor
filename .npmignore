@@ -4,4 +4,4 @@
 # override above and include ts files
 !dist/**/*
 
-dist/bundles/editor.demo.*
+dist/bundles/*

@@ -54,6 +54,15 @@ module.exports = {
     },
     "test backspace": {
       "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "tests embed youtube": {
+      "1": "<iframe type=\"text/html\" width=\"100%\" height=\"400px\" frameborder=\"0\" src=\"//www.youtube.com/embed/link\"></iframe><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "tests embed audio": {
+      "1": "<audio controls=\"\" src=\"http://youtube.com/a.mp3\" id=\"plugin-audio\"><span><span><span>﻿<br></span></span></span></audio><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "tests embed gist": {
+      "1": "<iframe width=\"100%\" frameborder=\"0\" src=\"For.js\" id=\"gist-c5d3ddcc0e634bdc8bfe9a4fbb7b063d-For.js\"></iframe><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
     }
   },
   "Toolbar": {
@@ -76,6 +85,15 @@ module.exports = {
     },
     "test backspace": {
       "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "test exiting list with double enter": {
+      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "test merging list": {
+      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li><li><span><span><span>list 3</span></span></span></li><li><span><span><span>﻿<br></span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
+    },
+    "test numbered list": {
+      "1": "<ol><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ol><section><span><span><span>This is a normal line</span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
     }
   },
   "Menu": {
