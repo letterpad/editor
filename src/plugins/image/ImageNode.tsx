@@ -14,6 +14,8 @@ import {
   Wrapper
 } from "./ImageNode.css";
 
+const defaultCaption = "Enter a caption";
+
 const ImageNode: SFC<{
   attributes: DetailedHTMLProps<
     ImgHTMLAttributes<HTMLImageElement>,
@@ -22,15 +24,17 @@ const ImageNode: SFC<{
   node: Node;
   editor?: Editor;
   isFocused?: boolean;
+  hideToolbar?: boolean;
   align?: string;
-}> = ({ attributes, node, children, align }) => {
+}> = ({ editor, attributes, node, children, align, hideToolbar }) => {
+  if (!hideToolbar) hideToolbar = false;
   if (isTextNode(node)) return null;
   align = node.data.get("align") || align;
   const title = node.data.get("title");
 
   const [alignOption, setAlignOption] = useState(align || "center");
-  const [caption, setCaption] = useState(title || "Image caption");
-  const [captionActive, setCaptionActive] = useState(false);
+  const [caption, setCaption] = useState(title || defaultCaption);
+  const [editCaptionMode, setEditCaptionMode] = useState(false);
 
   const [menu, setMenu] = useState(false);
   const alignmentRef = React.useRef<any>();
@@ -59,6 +63,18 @@ const ImageNode: SFC<{
 
   const setImageCaption = (e: any) => {
     setCaption(e.target.value);
+
+    const $imgWrapper = (e!.target! as any).parentElement.firstElementChild;
+    if (!$imgWrapper || !editor) return;
+    const { dataset, src } = $imgWrapper;
+    const key = dataset.key;
+    return editor.setNodeByKey(key, {
+      type: "img",
+      data: {
+        src: src,
+        title: e.target.value
+      }
+    });
   };
 
   const renderCaptionInput = () => {
@@ -72,7 +88,7 @@ const ImageNode: SFC<{
         onBlur={(e: any) => {
           e.stopPropagation();
           e.preventDefault();
-          setCaptionActive(false);
+          setEditCaptionMode(false);
         }}
         placeholder="Enter a caption of the image"
         onChange={setImageCaption}
@@ -87,7 +103,7 @@ const ImageNode: SFC<{
         onMouseDown={(e: any) => {
           e.preventDefault();
           e.stopPropagation();
-          setCaptionActive(true);
+          setEditCaptionMode(true);
           setTimeout(() => {
             // on clicking the caption, we display the input box.
             // due to the render the focus is lost. This will try to fix that.
@@ -114,7 +130,6 @@ const ImageNode: SFC<{
       </Figure>
     );
   }
-  console.log(node.data);
 
   return (
     <Wrapper
@@ -130,13 +145,42 @@ const ImageNode: SFC<{
         height={(node as any).data.get("height") || "auto"}
         src={(node as any).data.get("src")}
         {...attributes}
+        title={caption === defaultCaption ? "" : caption}
         data-align={(node as any).data.get("align")}
         data-id="plugin-image"
       />
-      {!captionActive && renderCaption()}
-      {captionActive && renderCaptionInput()}
+      {applyCaption({
+        caption,
+        editCaptionMode,
+        renderCaption,
+        renderCaptionInput,
+        hideToolbar
+      })}
     </Wrapper>
   );
 };
 
 export default ImageNode;
+
+interface CaptionProps {
+  caption?: string;
+  editCaptionMode: boolean;
+  renderCaption: Function;
+  renderCaptionInput: Function;
+  hideToolbar: boolean;
+}
+const applyCaption = ({
+  editCaptionMode,
+  renderCaption,
+  renderCaptionInput,
+  hideToolbar
+}: CaptionProps) => {
+  if (hideToolbar) {
+    return null;
+  }
+  if (editCaptionMode) {
+    return renderCaptionInput();
+  } else {
+    return renderCaption();
+  }
+};

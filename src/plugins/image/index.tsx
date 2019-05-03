@@ -5,15 +5,16 @@ import ImageNode from "./ImageNode";
 import { Figure } from "./ImageNode.css";
 
 const ImagePlugin: PluginConfig["slatePlugin"] = () => ({
-  onClick(_event, _editor) {
-    const { dataset, src } = (_event!.target! as any)
-      .closest(".lp_img_wrapper")
-      .querySelector("img");
+  onClick(_event, _editor, next) {
+    const $imgWrapper = (_event!.target! as any).closest(".lp_img_wrapper");
+    if (!$imgWrapper) return next();
+    const { dataset, src, title } = $imgWrapper.querySelector("img");
     const key = dataset.key;
     return _editor.setNodeByKey(key, {
       type: "img",
       data: {
         src: src,
+        title,
         align: (_event!.target! as any).dataset!.align
       }
     });
@@ -64,17 +65,21 @@ const imageConfig: PluginConfig[] = [
         const { node, ...rest } = props;
         if (obj.type === "figure") {
           // also pass the image attributes
-          const imgAttrs =
-            node.nodes.size > 1 ? node.nodes.get(1).data.toObject() : {};
+          // const imgAttrs =
+          // node.nodes.size > 1 ? node.nodes.get(1).data.toObject() : {};
 
-          return (
-            <Figure {...rest} data-id="plugin-image-figure" {...imgAttrs} />
-          );
+          return <Figure {...rest} data-id="plugin-image-figure" />;
         }
         if (obj.object != "inline") {
           return;
         }
-        return <ImageNode {...props} data-align={node.data.get("align")} />;
+        return (
+          <ImageNode
+            {...props}
+            data-align={node.data.get("align")}
+            hideToolbar={true}
+          />
+        );
       }
     }
   }

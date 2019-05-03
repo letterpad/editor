@@ -1,7 +1,7 @@
 {
   "name": "@letterpad/editor",
   "main": "dist/editor.js",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "The letterpad editor - A high level abstraction of the slate editor with plugin architecture",
   "files": [
     "dist/**/*"

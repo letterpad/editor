@@ -17,7 +17,7 @@ import {
 import { StyledMenu, EditorWrapper, StyledContent } from "./editor.css";
 import { mapPropsToComponents } from "./helper/util";
 import schemaProps from "./helper/schema";
-import initialValue from "./value";
+import initialValue, { initialEmptyValue } from "./value";
 import { renderNode, renderMark } from "./helper/renderer";
 import scrollToCursor from "./helper/scrollToCursor";
 import Html from "slate-html-serializer";
@@ -109,7 +109,7 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
     toolbarButtons,
     slateReactPlugins,
     pluginsMap,
-    value: Value.fromJSON(initialValue),
+    value: Value.fromJSON(initialEmptyValue),
     html: "",
     toolbarActive: false,
     toolbarPosition: {
@@ -248,6 +248,8 @@ export class LetterpadEditor extends Component<
         this.props.html.replace(new RegExp(">[ ]+<", "g"), "><")
       );
       this.setState({ value });
+    } else {
+      this.setState({ value: Value.fromJSON(initialValue) });
     }
     document.addEventListener("keyup", this.hideMenu);
   }
