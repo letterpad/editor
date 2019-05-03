@@ -1,11 +1,9 @@
 {
   "name": "@letterpad/editor",
   "main": "dist/editor.js",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "The letterpad editor - A high level abstraction of the slate editor with plugin architecture",
-  "files": [
-    "dist/**/*"
-  ],
+  "private": true,
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
@@ -16,7 +14,7 @@
     "bundle": "webpack --config webpack.config.prod.js",
     "dev": "webpack-dev-server --config=webpack.config.js",
     "test": "jest -c test-utils/unit.config.js",
-    "prepublishOnly": "yarn bundle && yarn build && yarn e2e:headless",
+    "_prepublishOnly": "yarn bundle && yarn build && yarn e2e:headless",
     "testServer": "node test-utils/server.js"
   },
   "dependencies": {
