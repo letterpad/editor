@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: __dirname + "/dist/bundles",
     publicPath: "/dist/bundles/",
-    filename: "editor.js"
+    filename: "editor.react.js"
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   resolve: {
