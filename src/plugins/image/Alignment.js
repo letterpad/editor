@@ -34,7 +34,11 @@ const Option = ({ option, onClick, selected }) => {
   }
   return (
     <span onClick={onClick} contentEditable={false}>
-      <span contentEditable={false} className={"material-icons " + active}>
+      <span
+        contentEditable={false}
+        className={"material-icons " + active}
+        data-align={option.align}
+      >
         {option.icon}
       </span>
     </span>

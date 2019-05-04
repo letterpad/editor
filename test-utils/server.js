@@ -11,9 +11,9 @@ const app = http.createServer(async (req, res) => {
       fs.createReadStream(path.join(__dirname, "../index.html")).pipe(res);
       break;
 
-    case "/bundles/bundle.js":
+    case "/dist/bundles/editor.demo.js":
       res.setHeader("Content-Type", "application/javascript");
-    case "/bundles/bundle.js.map":
+    case "/dist/bundles/editor.demo.js.map":
       fs.createReadStream(path.join(__dirname, "../", req.url)).pipe(res);
       break;
   }

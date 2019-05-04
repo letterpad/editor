@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
+const applyFontFamily = (fontFamily: string) => `font-family: ${fontFamily};`;
+
 export const EditorWrapper = styled.div`
+  ${({ defaultFont }: { defaultFont: boolean }) =>
+    defaultFont &&
+    `@import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700|Libre+Franklin:200,200i,400,400i,700,700i");`}
+
+  @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
   --editorPadding: 1rem;
   --fontSize: 1.1rem;
   --spacingTop: 2rem;
@@ -15,7 +22,8 @@ export const EditorWrapper = styled.div`
   font-size: var(--fontSize);
   font-weight: 200;
   font-style: normal;
-  font-family: "Libre Baskerville", serif;
+  ${({ defaultFont }: { defaultFont: boolean }) =>
+    defaultFont && applyFontFamily(`"Libre Baskerville", serif`)}
   text-rendering: optimizeLegibility;
   padding: var(--editorPadding);
   line-height: 2;
@@ -24,7 +32,8 @@ export const EditorWrapper = styled.div`
   h2,
   h3,
   h4 {
-    font-family: "Libre Franklin", sans-serif;
+    ${({ defaultFont }: { defaultFont: boolean }) =>
+      defaultFont && applyFontFamily(`"Libre Franklin", serif`)}
     text-rendering: optimizeLegibility;
     line-height: 1;
     padding-top: var(--spacingTop);
@@ -76,6 +85,28 @@ export const EditorWrapper = styled.div`
     padding: 2rem;
     padding-top: var(--spacingTop);
     padding-bottom: var(--spacingBottom);
+  }
+  @font-face {
+    font-family: "Material Icons";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Material Icons"), local("MaterialIcons-Regular"),
+      format("woff2");
+  }
+  .material-icons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -moz-font-feature-settings: "liga";
+    -moz-osx-font-smoothing: grayscale;
   }
 `;
 

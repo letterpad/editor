@@ -127,10 +127,10 @@ class GalleryNode extends PureComponent<{
                 // if the figure contains anything apart from img, return the node.
                 if (imgNode.type !== "img") {
                   return (
-                    <>
+                    <span key={imgNode.key}>
                       <span data-key={parseInt(imgNode.key) - 1} />
                       <span data-key={imgNode.key} />
-                    </>
+                    </span>
                   );
                 }
                 const imgNumber = figureIdx + gridIndex * 3;
