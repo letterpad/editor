@@ -2,8 +2,24 @@ import React from "react";
 import ImageButton from "./ImageButton";
 import { PluginConfig } from "..";
 import ImageNode from "./ImageNode";
+import { Figure } from "./ImageNode.css";
 
-const ImagePlugin: PluginConfig["slatePlugin"] = () => ({});
+const ImagePlugin: PluginConfig["slatePlugin"] = () => ({
+  onClick(_event, _editor, next) {
+    const $imgWrapper = (_event!.target! as any).closest(".lp_img_wrapper");
+    if (!$imgWrapper) return next();
+    const { dataset, src, title } = $imgWrapper.querySelector("img");
+    const key = dataset.key;
+    return _editor.setNodeByKey(key, {
+      type: "img",
+      data: {
+        src: src,
+        title,
+        align: (_event!.target! as any).dataset!.align
+      }
+    });
+  }
+});
 
 const imageConfig: PluginConfig[] = [
   {
@@ -25,9 +41,12 @@ const imageConfig: PluginConfig[] = [
             type: "img",
             nodes: next(el.childNodes),
             data: {
-              align: el.getAttribute("align"),
+              align: (el as any).dataset.align,
               title: el.getAttribute("title"),
-              src: el.getAttribute("src")
+              src: el.getAttribute("src"),
+              height: el.getAttribute("height"),
+              width: el.getAttribute("width"),
+              type: el.getAttribute("type")
             }
           };
         } else if (el.tagName === "FIGURE") {
@@ -36,8 +55,6 @@ const imageConfig: PluginConfig[] = [
             type: "figure",
             nodes: next(el.childNodes),
             data: {
-              align: el.getAttribute("align"),
-              title: el.getAttribute("title"),
               src: el.getAttribute("src")
             }
           };
@@ -45,14 +62,24 @@ const imageConfig: PluginConfig[] = [
       },
       serialize: (obj, children) => {
         const props = { children, node: obj, attributes: {} };
+        const { node, ...rest } = props;
         if (obj.type === "figure") {
-          const { node, ...rest } = props;
-          return <figure {...rest} />;
+          // also pass the image attributes
+          // const imgAttrs =
+          // node.nodes.size > 1 ? node.nodes.get(1).data.toObject() : {};
+
+          return <Figure {...rest} data-id="plugin-image-figure" />;
         }
         if (obj.object != "inline") {
           return;
         }
-        return <ImageNode {...props} />;
+        return (
+          <ImageNode
+            {...props}
+            data-align={node.data.get("align")}
+            hideToolbar={true}
+          />
+        );
       }
     }
   }

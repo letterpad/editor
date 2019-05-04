@@ -1,15 +1,16 @@
 const webpack = require("webpack");
 
-module.exports = {
-  mode: "development",
+const config = {
+  mode: "production",
   devtool: "source-map",
-  entry: "./index.js",
+  entry: "./src/editor.tsx",
+  target: "web",
   output: {
     path: __dirname + "/dist/bundles",
     publicPath: "/dist/bundles/",
-    filename: "editor.react.js"
+    filename: "editor.react.js",
+    libraryTarget: "umd"
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
   },
@@ -48,8 +49,20 @@ module.exports = {
       }
     ]
   },
-  devServer: {
-    contentBase: "./",
-    hot: true
+  externals: {
+    "react-dom": "react-dom",
+    react: "react"
   }
 };
+
+const { externals, ...withReact } = config;
+const configWithDemo = {
+  ...withReact,
+  entry: "./index.js",
+  output: {
+    ...withReact.output,
+    filename: "editor.demo.js"
+  }
+};
+
+module.exports = [config, configWithDemo];

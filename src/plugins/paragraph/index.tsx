@@ -14,7 +14,11 @@ const paragraphConfig: PluginConfig[] = [
     ),
     rules: {
       serialize(obj: any, children: any) {
-        if (obj.type === "section" || obj.type === "p") {
+        if (
+          obj.type === "section" ||
+          obj.type === "p" ||
+          obj.type === "paragraph"
+        ) {
           return <section>{children}</section>;
         }
       },

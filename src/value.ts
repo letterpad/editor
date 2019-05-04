@@ -1515,4 +1515,11 @@ export const blocks = {
   }
 };
 
+export const initialEmptyValue: ValueJSON = {
+  object: "value",
+  document: {
+    object: "document",
+    nodes: []
+  }
+};
 export default initialValue;

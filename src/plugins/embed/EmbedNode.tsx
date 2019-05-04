@@ -9,10 +9,18 @@ const EmbedNode: SFC<{
   node: Block;
 }> = ({ node, attributes, children }) => {
   const attrs = getAttributesFromNode(node);
-  if (attrs.src.indexOf("gist.github") >= 0) {
+  if (attrs.src && attrs.src.indexOf("gist.github") >= 0) {
     const { file, id } = parseGistUrl(attrs.src);
     return (
       <Gist id={id} file={file} attributes={attributes} children={children} />
+    );
+  } else if (attrs.id && attrs.id.indexOf("gist") >= 0) {
+    return (
+      <Gist
+        id={attrs.id.replace("gist-", "")}
+        attributes={attributes}
+        children={children}
+      />
     );
   }
 

@@ -17,7 +17,7 @@ import {
 import { StyledMenu, EditorWrapper, StyledContent } from "./editor.css";
 import { mapPropsToComponents } from "./helper/util";
 import schemaProps from "./helper/schema";
-import initialValue from "./value";
+import initialValue, { initialEmptyValue } from "./value";
 import { renderNode, renderMark } from "./helper/renderer";
 import scrollToCursor from "./helper/scrollToCursor";
 import Html from "slate-html-serializer";
@@ -38,7 +38,9 @@ export interface LetterpadEditorProps {
   onChange?(html: string, value?: Value): void;
   width?: number;
   theme?: string;
+  html?: string;
   spellCheck?: boolean;
+  defaultFont?: boolean;
 }
 
 interface LetterpadEditorState {
@@ -107,7 +109,7 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
     toolbarButtons,
     slateReactPlugins,
     pluginsMap,
-    value: Value.fromJSON(initialValue),
+    value: Value.fromJSON(initialEmptyValue),
     html: "",
     toolbarActive: false,
     toolbarPosition: {
@@ -241,6 +243,14 @@ export class LetterpadEditor extends Component<
 
   componentDidMount() {
     this.updateMenu();
+    if (this.props.html) {
+      const value = this.html.deserialize(
+        this.props.html.replace(new RegExp(">[ ]+<", "g"), "><")
+      );
+      this.setState({ value });
+    } else {
+      this.setState({ value: Value.fromJSON(initialValue) });
+    }
     document.addEventListener("keyup", this.hideMenu);
   }
 
@@ -326,7 +336,10 @@ export class LetterpadEditor extends Component<
     };
     return (
       <Theme theme={this.props.theme}>
-        <EditorWrapper width={this.props.width}>
+        <EditorWrapper
+          width={this.props.width}
+          defaultFont={this.props.defaultFont}
+        >
           <SlateReactEditor
             autoFocus={true}
             spellCheck={this.props.spellCheck}
@@ -359,3 +372,4 @@ export class LetterpadEditor extends Component<
     );
   }
 }
+export default LetterpadEditor;

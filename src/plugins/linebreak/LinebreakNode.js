@@ -4,9 +4,10 @@ import { getAttributesFromNode } from "../../helper/util";
 
 const Wrapper = styled.hr`
   margin: 40px auto;
-  border: 0;
+  border: 0px !important;
   text-align: center;
   overflow: visible;
+  line-height: 0px;
   :before {
     font-weight: 400;
     font-style: italic;
