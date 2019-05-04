@@ -34,9 +34,5 @@ jobs:
           command: yarn bundle
 
       - run:
-          name: Run Test Server
-          command: yarn start-server-and-test testServer http://localhost:4343
-
-      - run:
           name: Integration Test
-          command: yarn cy:ci_run
+          command: yarn e2e:headless
