@@ -8,7 +8,6 @@ function usage() {
   fi
   echo "Usage: $0 [-d debug] [-r remote]"
   echo "  -d, --debug  Open browser and run"
-  echo "  -r, --remote Run in Circle CI"
   echo ""
   echo "Example: $0 --dubug --remote"
   exit 1
@@ -17,7 +16,6 @@ function usage() {
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -d|--debug) DEBUG=1; shift;;
-  -r|--remote) REMOTE=1;shift;;
   -v|--verbose) VERBOSE=1;shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
@@ -29,9 +27,6 @@ RUN="cy:run"
 
 if [[ $DEBUG == 1 ]]; then
     RUN="cy:open"
-    yarn start-server-and-test testServer http://localhost:4343 "$RUN"
-elif [[ $REMOTE == 1 ]]; then
-    RUN="cypress run --record --key 12300a0c-24c0-4943-bc01-55598094f392 --parallel"
     yarn start-server-and-test testServer http://localhost:4343 "$RUN"
 else
     yarn start-server-and-test testServer http://localhost:4343 "$RUN"

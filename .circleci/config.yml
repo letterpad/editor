@@ -35,4 +35,4 @@ jobs:
 
       - run:
           name: Integration Test
-          command: yarn test:ci
+          command: yarn start-server-and-test testServer http://localhost:4343 test:ci
