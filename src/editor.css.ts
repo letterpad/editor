@@ -13,7 +13,7 @@ export const EditorWrapper = styled.div`
   --spacingTop: 2rem;
   --spacingTopSmall: 0.5rem;
   --spacingBottom: 1rem;
-  --editorWidth: ${({ width }: { width?: number }) => (width ? width : 740)}px;
+  --editorWidth: ${({ width }: { width?: number }) => width}px;
 
   max-width: var(--editorWidth);
   min-width: 360px;
