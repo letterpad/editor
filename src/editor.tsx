@@ -44,6 +44,18 @@ export interface LetterpadEditorProps {
   width: number;
 }
 
+const defaultProps = {
+  onButtonClick: () => {},
+  defaultFont: true,
+  getCharCount: () => {},
+  html: null,
+  onBeforeRender: () => {},
+  onChange: () => {},
+  spellCheck: true,
+  theme: "dark",
+  width: 740
+};
+
 // Editor state
 interface LetterpadEditorState {
   menuButtons: EditorButton[];
@@ -94,16 +106,7 @@ export class LetterpadEditor extends Component<
   private html = new Html({ rules: this.rules });
 
   // default props
-  static defaultProps = {
-    onButtonClick: () => {},
-    defaultFont: true,
-    getCharCount: () => {},
-    html: null,
-    onBeforeRender: () => {},
-    onChange: () => {},
-    spellCheck: true,
-    theme: "dark"
-  };
+  static defaultProps = defaultProps;
 
   state = getInitialState(pluginConfigs);
 
