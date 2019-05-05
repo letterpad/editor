@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cypress/base:8
+      - image: cypress/base:11
         environment:
           ## this enables colors in the output
           TERM: xterm
@@ -35,4 +35,4 @@ jobs:
 
       - run:
           name: Integration Test
-          command: sudo yarn test:ci
+          command: yarn test:ci
