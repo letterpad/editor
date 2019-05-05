@@ -40,11 +40,71 @@ const MyEditor = () => {
 export default MyEditor;
 ```
 
-### Options
+### Parameters
 
-| Option              |    Value     | Default |
-| ------------------- | :----------: | ------: |
-| theme(string)       | dark , light |   light |
-| spellCheck(boolean) | true, false  |    true |
-| onChange (function) |              |         |
-| html                |              |         |
+- `theme`: **string**
+
+  `default`: **dark**
+
+  Set the theme. Options - light | dark
+
+- `spellCheck`: **boolean**
+
+  `default`: **true**
+
+  Activate Spell check. Options - true | false
+
+- `onChange(html: string)`: **Function**
+
+  Receive html whenever there is a change in the editor.
+
+- `onButtonClick(event, type: string, callbacks)`: **Function**
+
+  Whenever a plugin is applied by clicking the button in the floating menu or the toolbar, you can capture that event with this hook.
+
+  ```js
+  event: MouseEvent;
+  type: TagName; // img, strong, link, etc
+  callbacks: Object;
+  ```
+
+- `onBeforeRender(renderType, type, props)`: **Function**
+
+  This hook is triggered before applying a transformation. You will be able to change the markup dynamically using this.
+
+  ```js
+  onBeforeRender = (renderType, props) => {
+    if (type == "strong") {
+      return <b>{props.children}</b>;
+    }
+  };
+  ```
+
+- `html` - string | null
+
+  `default`: null
+
+  Load the initial html. If you want empty page, the enter empty string. If its null, it will load sample data.
+
+## Development
+
+If you would like to contribute then setup your dev environment this way.
+
+You will find some documentation over here - https://app.gitbook.com/@letterpad/s/editor/
+
+```sh
+git clone git@github.com:letterpad/editor.git
+cd editor
+yarn install
+yarn dev
+```
+
+### Tests
+
+Most part is covered with integration tests using Cypress.
+
+```sh
+# Run all tests locally
+yarn bundle # build the bundle
+yarn e2e # validate the bundle
+```
