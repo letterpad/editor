@@ -35,4 +35,4 @@ jobs:
 
       - run:
           name: Integration Test
-          command: yarn test:ci
+          command: sudo yarn test:ci
