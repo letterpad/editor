@@ -33,7 +33,7 @@ elif [[ $REMOTE == 1 ]]; then
     RUN="cy:run --record --key 12300a0c-24c0-4943-bc01-55598094f392 --parallel"
 fi
 
-yarn start-server-and-test testServer http://localhost:4343 "${RUN}"
+yarn start-server-and-test testServer http://localhost:4343 "$RUN"
 
 
 
