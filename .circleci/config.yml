@@ -35,4 +35,4 @@ jobs:
 
       - run:
           name: Integration Test
-          command: yarn e2e:headless
+          command: yarn test:ci
