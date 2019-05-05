@@ -9,7 +9,7 @@
     "dev": "webpack-dev-server --config=webpack.config.js",
     "bundle": "webpack --config webpack.config.prod.js",
     "build": "tsc --build tsconfig.build.json",
-    "prepublishOnly": "yarn bundle && yarn build && yarn e2eLocalHeadless",
+    "prepublishOnly": "yarn bundle && yarn build && yarn test:dev",
     "test:dev": "./scripts/e2e.sh",
     "test:ci": "./scripts/e2e.sh -r",
     "test": "jest -c test-utils/unit.config.js",
