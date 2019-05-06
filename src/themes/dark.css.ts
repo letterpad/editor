@@ -35,7 +35,7 @@ const dark = `
      */
     }
     --base-shade-1: #212121
-    --base-shade-2: #424242
+    --base-shade-2: #393838
     --base-shade-3: #616161
     --base-shade-4: #757575
     --base-shade-5: #9e9e9e

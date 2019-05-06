@@ -85,6 +85,13 @@ const ImageNode: SFC<{
         onClick={(e: any) => {
           e.stopPropagation();
         }}
+        onKeyUp={(e: any) => {
+          if (e.keyCode === 27 || e.keyCode === 13) {
+            e.stopPropagation();
+            e.preventDefault();
+            setEditCaptionMode(false);
+          }
+        }}
         onBlur={(e: any) => {
           e.stopPropagation();
           e.preventDefault();
