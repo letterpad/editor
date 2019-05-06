@@ -21,6 +21,16 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="dist/bundles/editor.react.js"></script>
+    <script type="text/javascript">
+      var script = document.createElement("script");
+      var isLocal = document.location.href.indexOf("8080") >= 0;
+      if (isLocal) {
+        script.setAttribute("src", "dist/bundles/editor.react.js");
+      } else {
+        // testing, netlify, etc.
+        script.setAttribute("src", "dist/bundles/editor.demo.js");
+      }
+      document.body.appendChild(script);
+    </script>
   </body>
 </html>

@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { Node, Editor } from "slate";
 
 const CodeblockContainer = styled.pre`
-  background: var(--bg-sections);
-  color: var(--color-text-3);
+  background: var(--base-shade-2);
+  color: var(--color-text-2) !important;
   color: inherit;
   padding: 16px;
   line-height: 23px;
