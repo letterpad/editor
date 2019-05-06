@@ -2,6 +2,8 @@
 
 source $(dirname $0)/log.sh
 
+git branch -d release-branch
+
 branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 versionLabel=v$1
 
@@ -13,13 +15,13 @@ OUTPUT_FILE=CHANGELOG.md
 
 masterBranch=master
 
-if [ $branch != "master" ]; then
+if [ $branch == "master" ]; then
     log "ERROR" "Releases can be made only from master."
     exit 1;
 fi
 
 # get last two tags
-firstTag=$versionLabel # suppose to be $versionLabel
+firstTag=master #$versionLabel # suppose to be $versionLabel
 secondTag=$(git tag | sort -r | head -2 | awk '{split($0, tags, "\n")} END {print tags[1]}')
 
 if [ $firstTag == $secondTag ]; then
