@@ -1,4 +1,5 @@
 #! /bin/bash
+
 source $(dirname $0)/log.sh
 
 # Current version in package.json
@@ -56,14 +57,11 @@ if [ "$CONT" == "y" ] || [ -z "$CONT"]; then
     releaseDate=$(date +%F)
     TITLE="### Release: $secondTag ($releaseDate)"$'\r'
     echo "$TITLE $LOG" | cat - CHANGELOG.md > /tmp/out && mv /tmp/out CHANGELOG.md
-    
-    npm version $NEW_VERSION
+    npm version $NEW_VERSION --force
     log "INFO" "Updated version in package.json to $NEW_VERSION"
-
     ## Publishing npm
     log "INFO" "Publishing to npm..."
     npm publish
-    
     git checkout -b release-branch
 
     ## commit this in a new release-branch and merge back to master
