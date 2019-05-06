@@ -3,5 +3,6 @@
 
 # override above and include ts files
 !dist/**/*
+!CHANGELOG.md
 
 dist/bundles/*
