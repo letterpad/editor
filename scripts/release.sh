@@ -2,7 +2,7 @@
 
 source $(dirname $0)/log.sh
 
-git branch -d release-branch
+git branch -D release-branch
 
 branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 versionLabel=v$1
@@ -57,6 +57,7 @@ if [ "$CONT" == "y" ] || [ -z "$CONT"]; then
     log "INFO" "Commiting the files in release-branch"
     git add CHANGELOG.md package.json
     git commit -m "Update CHANGELOG.md"
+    git stash
     git checkout master
     # git merge release-branch
     # git branch -d release-branch
@@ -66,6 +67,6 @@ else
     exit 0;
 fi
 
-git tag $versionLabel
+# git tag $versionLabel
 log "INFO" "Added git tag $versionLabel"
-git push tag $versionLabel 
+# git push tag $versionLabel 
