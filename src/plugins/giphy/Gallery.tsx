@@ -25,9 +25,9 @@ class Gallery extends React.Component<GalleryProps, GalleryState> {
     }
     // the api key is not mine.
     fetch(
-      "http://api.giphy.com/v1/gifs/search?q=" +
+      "//api.giphy.com/v1/gifs/search?q=" +
         this.props.query +
-        "&api_key=dc6zaTOxFJmzC&limit=52"
+        "&api_key=D7xdKszGFPKK4Wll1RhWD1gUIWhH62Qw&limit=52"
     )
       .then(data => data.json())
       .then(({ data }) => {

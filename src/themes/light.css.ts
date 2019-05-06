@@ -5,7 +5,7 @@ const light = `
 
     --color-base: #3d3d3d;
     --color-text-1: #595959;
-    --color-text-2: #5a5a5a;
+    --color-text-2: #434141;
     --color-text-3: #7b7b7b;
     --color-muted: #a8a8a8;
 
