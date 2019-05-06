@@ -1,5 +1,4 @@
 #! /bin/bash
-
 source $(dirname $0)/log.sh
 
 # Current version in package.json
@@ -54,7 +53,7 @@ git tag -d $NEW_VERSION
 read -p "Should we add this to ChangeLog and commit (y/n)?" CONT
 if [ "$CONT" == "y" ] || [ -z "$CONT"]; then
     # create tag for new version from -master
-    releaseDate=date +"%m-%d-%y"
+    releaseDate=$(date +%F)
     TITLE="### Release: $secondTag ($releaseDate)"$'\r'
     echo "$TITLE $LOG" | cat - CHANGELOG.md > /tmp/out && mv /tmp/out CHANGELOG.md
     
