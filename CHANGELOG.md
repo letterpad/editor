@@ -1,3 +1,12 @@
+### Release: v0.0.1 (2019-05-06)
+
+- 0.0.3 - <a href="https://github.com/letterpad/editor/commit/2769ec17f2acf8d5a06d85a581fe4f137707b409">2769ec1</a>
+- changed release script - <a href="https://github.com/letterpad/editor/commit/72a8bd96e3f2a3f61f2be8788717885ed61488a0">72a8bd9</a>
+- Release module, Codeblock colors, gallery caption and themes (#75) - <a href="https://github.com/letterpad/editor/commit/4bf7acd0e9b6891a6bb4206f48ce50b2a1039cec">4bf7acd</a>
+- fix static file path - <a href="https://github.com/letterpad/editor/commit/6edc4c303ffa0150658869dbee9e3d868fff0b6b">6edc4c3</a>
+- Chor Update - Comments, Default props and cosmetics (#74) - <a href="https://github.com/letterpad/editor/commit/85a93a55980244261821526760d59c4e12ef1b0b">85a93a5</a>
+- Prepare for npm package (#73) - <a href="https://github.com/letterpad/editor/commit/0403add8c54d71968da71a5c2ddb40c9310475f8">0403add</a>
+
 ## [v0.0.1](https://github.com/letterpad/editor/tree/v0.0.1) (2019-04-19)
 
 **Closed issues:**
