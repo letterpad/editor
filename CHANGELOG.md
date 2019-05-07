@@ -1,4 +1,4 @@
-### Release: v0.0.1 (2019-05-06)
+### Release: v0.0.3 (2019-05-06)
 
 - 0.0.3 - <a href="https://github.com/letterpad/editor/commit/2769ec17f2acf8d5a06d85a581fe4f137707b409">2769ec1</a>
 - changed release script - <a href="https://github.com/letterpad/editor/commit/72a8bd96e3f2a3f61f2be8788717885ed61488a0">72a8bd9</a>

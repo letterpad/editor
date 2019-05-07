@@ -1,12 +1,12 @@
 #! /bin/bash
 RED='\033[0;31m'
 GREY='\033[0m'
-WHITE='\033[1;37'
+WHITE='\033[97m'
 YELLOW='\033[33'
 
 function log() {
     function logline() {
-        colorprint $1 "*$script_name $2: $3"
+        colorprint $1 "* $script_name $2: $3"
     }
 
     case $1 in
@@ -30,5 +30,5 @@ function colorprint() {
     # $2 = message to be echoed
     
     # printf "I ${RED}lo"
-    echo -e "$1$2\033[0m" 
+    echo -e " $1$2\033[0m" 
 }
