@@ -13,7 +13,8 @@
     "test:dev": "./scripts/e2e.sh",
     "test:ci": "yarn cy:run --record --key 12300a0c-24c0-4943-bc01-55598094f392 --parallel",
     "test": "jest -c test-utils/unit.config.js",
-    "testServer": "node test-utils/server.js"
+    "testServer": "node test-utils/server.js",
+    "release": "./scripts/release.sh $1"
   },
   "dependencies": {
     "classnames": "^2.2.6",
