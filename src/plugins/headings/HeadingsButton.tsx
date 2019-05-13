@@ -10,7 +10,7 @@ const HeadingsButton: EditorButtonComponent = ({ editor, type }) => {
   return (
     <Button
       isActive={hasBlock((editor as any).value, type)}
-      icon={getType(type)}
+      iconText={getType(type)}
       onMouseDown={e => {
         e.preventDefault();
         const isActive = hasBlock((editor as any).value, type);
@@ -23,18 +23,18 @@ const HeadingsButton: EditorButtonComponent = ({ editor, type }) => {
 const getType = (type: any) => {
   switch (type) {
     case "h1":
-      return "looks_one";
+      return "h1";
     case "h2":
-      return "looks_two";
+      return "h2";
     case "h3":
-      return "looks_3";
+      return "h3";
     case "h4":
-      return "looks_4";
+      return "h4";
     case "h5":
-      return "looks_5";
+      return "h5";
     case "h6":
-      return "looks_6";
+      return "h6";
   }
-  return "looks_3";
+  return "h3";
 };
 export default HeadingsButton;

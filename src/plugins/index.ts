@@ -27,12 +27,11 @@ import { default as galleryConfig } from "./gallery";
  */
 const pluginConfigs: PluginConfig[] = [
   ...codeblockConfig,
+  ...headingsConfig,
   ...paragraphConfig,
   ...boldConfig,
   ...italicConfig,
   ...underlineConfig,
-
-  ...headingsConfig,
 
   ...linkConfig,
   ...highlightConfig,
@@ -44,9 +43,9 @@ const pluginConfigs: PluginConfig[] = [
   ...autoscrollConfig,
   ...giphyConfig,
   ...imageConfig,
+  ...galleryConfig,
   ...linebreakConfig,
-  ...embedConfig,
-  ...galleryConfig
+  ...embedConfig
 ];
 
 export interface EditorEventHandler {
