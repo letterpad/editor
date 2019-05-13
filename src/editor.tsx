@@ -175,7 +175,7 @@ export class LetterpadEditor extends Component<
         this.setState({
           toolbarActive: true,
           toolbarPosition: {
-            top: top + window.scrollY + 28,
+            top: top + window.scrollY + 24,
             left: left - 60,
             width: width + 60
           }

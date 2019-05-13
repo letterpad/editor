@@ -64,7 +64,7 @@ export default MyEditor;
 
   ```js
   event: MouseEvent;
-  type: TagName; // img, strong, link, etc
+  plugin: PluginName; // plugin-image, plugin-gallery, etc.
   callbacks: Object;
   ```
 
