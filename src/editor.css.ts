@@ -135,6 +135,18 @@ export const StyledMenu = styled.div`
       font-size: 15px;
       padding: 2px;
     }
+    .lp-text-icon {
+      border: none;
+      margin-right: 0px;
+      text-transform: uppercase;
+      line-height: 20px;
+      font-size: 11px;
+      vertical-align: text-bottom;
+      padding: 0px;
+      width: 22px;
+      height: 22px;
+      text-align: center;
+    }
   }
 `;
 
