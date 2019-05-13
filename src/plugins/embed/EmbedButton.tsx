@@ -19,7 +19,13 @@ const VideoButton = ({
     <Button
       isActive={hasBlock((editor as any).value, type)}
       icon="code"
-      onMouseDown={_ => {
+      onMouseDown={e => {
+        const hookCalled = callbacks.onButtonClick(
+          e,
+          "plugin-embed",
+          callbacks
+        );
+        if (hookCalled) return;
         if (callbacks.showPlaceholder) {
           callbacks.showPlaceholder(VideoInput);
         }

@@ -30,10 +30,10 @@ export const handleFiles = (
 ) => {
   if (!editor) return;
   const files = e.target.files;
-  let attributes = [];
+  let imgElements = [];
   for (let i = 0; i < files.length; ++i) {
     let file = files[i];
-    attributes.push(
+    imgElements.push(
       new Promise((resolve, _) => {
         let src = URL.createObjectURL(file);
         let img = new Image();
@@ -49,7 +49,16 @@ export const handleFiles = (
       })
     );
   }
-  Promise.all(attributes)
+  createImageBlocks(imgElements, editor, callback);
+};
+
+export const createImageBlocks = (
+  imgElements: Promise<{}>[],
+  editor: Editor | undefined,
+  callback?: Function
+) => {
+  if (!editor) return;
+  Promise.all(imgElements)
     .then(attrs => {
       const blocks: any = [];
       attrs.forEach(attrObj => {
@@ -83,7 +92,11 @@ const ImageButton: EditorButtonComponent = ({ editor, callbacks }) => {
         icon="photo_library"
         onMouseDown={e => {
           e.preventDefault();
-          const hookCalled = callbacks.onButtonClick(e, "img", callbacks);
+          const hookCalled = callbacks.onButtonClick(
+            e,
+            "plugin-gallery",
+            callbacks
+          );
           if (hookCalled) {
             return;
           }

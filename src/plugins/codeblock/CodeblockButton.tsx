@@ -6,11 +6,17 @@ import { EditorButtonComponent } from "..";
 
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-const codeblockButton: EditorButtonComponent = ({ editor }) => (
+const codeblockButton: EditorButtonComponent = ({ editor, callbacks }) => (
   <Button
     isActive={hasBlock((editor as any).value, "u")}
     icon="code"
-    onMouseDown={() => {
+    onMouseDown={e => {
+      const hookCalled = callbacks.onButtonClick(
+        e,
+        "plugin-codeblock",
+        callbacks
+      );
+      if (hookCalled) return;
       return applyCodeblock(editor);
     }}
   />

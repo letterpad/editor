@@ -21,7 +21,7 @@
     "exenv": "^1.2.2",
     "immutable": "^4.0.0-rc.12",
     "prismjs": "^1.15.0",
-    "slate": "^0.44.10",
+    "slate": "0.44.10",
     "slate-auto-replace": "^0.12.1",
     "slate-edit-code": "^0.15.5",
     "slate-html-serializer": "^0.7.34",

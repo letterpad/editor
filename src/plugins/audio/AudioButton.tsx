@@ -12,7 +12,13 @@ const AudioButton: EditorButtonComponent = ({ editor, callbacks }) => {
     <Button
       isActive={hasBlock((editor as any).value, type)}
       icon="queue_music"
-      onMouseDown={() => {
+      onMouseDown={e => {
+        const hookCalled = callbacks.onButtonClick(
+          e,
+          "plugin-audio",
+          callbacks
+        );
+        if (hookCalled) return;
         if (callbacks.showPlaceholder) {
           callbacks.showPlaceholder(AudioInput);
         }
