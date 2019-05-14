@@ -3,7 +3,7 @@ import { isMarkActive, applyMarkStrategy } from "../../helper/strategy";
 import Button from "../../components/Button";
 import { EditorButtonComponent } from "..";
 
-const highlightButton: EditorButtonComponent = ({ editor }) => {
+const highlightButton: EditorButtonComponent = ({ editor, callbacks }) => {
   if (!editor) return <span />;
   const active = isMarkActive(editor.value, "code");
 
@@ -12,6 +12,12 @@ const highlightButton: EditorButtonComponent = ({ editor }) => {
       isActive={active}
       icon="highlight"
       onMouseDown={e => {
+        const hookCalled = callbacks.onButtonClick(
+          e,
+          "plugin-highlight",
+          callbacks
+        );
+        if (hookCalled) return;
         e.preventDefault();
         return applyMarkStrategy(editor, "code");
       }}

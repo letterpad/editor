@@ -11,13 +11,13 @@ import Gallery from "./Gallery";
 class Demo extends Component {
   onButtonClick = (
     _: MouseEvent,
-    type: string,
+    pluginName: string,
     callbacks: { [key: string]: any }
   ) => {
     return false;
     // the below is a demo to fetch images from giphy based on a search term.
     // remove the above return to check it
-    if (type == "img") {
+    if (pluginName == "plugin-image") {
       if (callbacks.showPlaceholder) {
         callbacks.showPlaceholder(Gallery);
         return true;
@@ -50,6 +50,9 @@ class Demo extends Component {
           }
         }}
         html={sampleHtml}
+        hooks={(editor, hooks) => {
+          console.log(editor, hooks);
+        }}
       />
     );
   }

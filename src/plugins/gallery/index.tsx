@@ -1,5 +1,5 @@
 import React from "react";
-import GalleryButton from "./GalleryButton";
+import GalleryButton, { createImageBlocks } from "./GalleryButton";
 import { PluginConfig } from "..";
 import GalleryNode from "./GalleryNode";
 import { isKeyboardEvent } from "../../helper/events";
@@ -32,6 +32,7 @@ const GalleryConfig: PluginConfig[] = [
     ],
     render: GalleryNode,
     identifier: ["section"],
+    hooks: { createImageBlocks },
     slatePlugin: GalleryPlugin,
     rules: {
       deserialize: (el, next) => {

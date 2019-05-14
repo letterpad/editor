@@ -16,7 +16,12 @@ const BoldButton = ({
       isActive={isMarkActive(editor.value, "em")}
       icon="format_italic"
       onMouseDown={e => {
-        callbacks.onButtonClick(e, "em");
+        const hookCalled = callbacks.onButtonClick(
+          e,
+          "plugin-italic",
+          callbacks
+        );
+        if (hookCalled) return;
         e.preventDefault();
         return applyMarkStrategy(editor, "em");
       }}

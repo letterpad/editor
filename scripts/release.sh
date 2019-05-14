@@ -1,4 +1,5 @@
 #! /bin/bash
+
 source $(dirname $0)/log.sh
 
 # Current version in package.json
@@ -43,10 +44,10 @@ log "INFO" "Review Changes between ${secondTag} and ${firstTag}"
 # Add temp tag 
 git tag $NEW_VERSION  &>/dev/null 
 
-CHANGELOG=`git log --pretty=format:' - %s - <a href="https://github.com/letterpad/editor/commit/%H">%h</a>' ${secondTag}...${firstTag} 2>&1`
+CHANGELOG=`git log --pretty=format:' - %B (<a href="https://github.com/letterpad/editor/commit/%H">%h</a>)' ${secondTag}...${firstTag} 2>&1`
 
 # preview the log
-git log --pretty=format:' * %s' ${secondTag}...${firstTag}
+git log --pretty=format:' * %s %b %B' ${secondTag}...${firstTag}
 
 # delete temp tag
 git tag -d $NEW_VERSION  &>/dev/null 
@@ -57,7 +58,7 @@ if [ "$CONT" == "y" ] || [ -z "$CONT"]; then
     releaseDate=$(date +%F)
     # Create release title
     TITLE="### Release: $firstTag ($releaseDate)"$'\r'
-    echo "$TITLE $CHANGELOG" | cat - CHANGELOG.md > /tmp/out && mv /tmp/out CHANGELOG.md
+    printf "$TITLE\n\n $CHANGELOG \n\n" | cat - CHANGELOG.md > /tmp/out && mv /tmp/out CHANGELOG.md
     npm version $NEW_VERSION --force
     log "INFO" "Updated version in package.json to $NEW_VERSION"
     ## Publishing npm
@@ -70,11 +71,11 @@ if [ "$CONT" == "y" ] || [ -z "$CONT"]; then
     git add CHANGELOG.md package.json &>/dev/null
     git commit -m "Update CHANGELOG.md" &>/dev/null
     git checkout master &>/dev/null
-    git merge release-branch -am "Merging Release branch" &>/dev/null
+    git merge release-branch &>/dev/null
     git branch -d release-branch &>/dev/null
     log "INFO" "Merged release-branch to master"
 else
-    git stash &>/dev/null
+    # git stash &>/dev/null
     exit 0
 fi
 

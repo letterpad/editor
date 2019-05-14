@@ -3,6 +3,7 @@ import ImageButton from "./ImageButton";
 import { PluginConfig } from "..";
 import ImageNode from "./ImageNode";
 import { Figure } from "./ImageNode.css";
+import { insertImage } from "./ImageUtils";
 
 const ImagePlugin: PluginConfig["slatePlugin"] = () => ({
   onClick(_event, _editor, next) {
@@ -30,6 +31,7 @@ const imageConfig: PluginConfig[] = [
         button: ImageButton
       }
     ],
+    hooks: { insertImage },
     render: ImageNode,
     identifier: ["img", "figure"],
     slatePlugin: ImagePlugin,

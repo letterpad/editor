@@ -42,6 +42,7 @@ export interface LetterpadEditorProps {
   spellCheck: boolean;
   theme: string;
   width: number;
+  hooks(editor: Editor, plugins: object): void;
 }
 
 // Editor state
@@ -58,6 +59,7 @@ interface LetterpadEditorState {
   pluginsMap: PluginsMap;
   value: Value;
   html: string;
+  hooks: object;
 }
 
 /**
@@ -103,14 +105,15 @@ export class LetterpadEditor extends Component<
     onChange: () => {},
     spellCheck: true,
     theme: "dark",
-    width: 740
+    width: 740,
+    hooks: {}
   };
 
   state = getInitialState(pluginConfigs);
 
   componentDidMount() {
     this.updateMenu();
-    console.log(this.props);
+
     // if there is no html, then lets load some demo data
     if (this.props.html === null) {
       this.setState({ value: Value.fromJSON(initialValue) });
@@ -172,7 +175,7 @@ export class LetterpadEditor extends Component<
         this.setState({
           toolbarActive: true,
           toolbarPosition: {
-            top: top + window.scrollY + 28,
+            top: top + window.scrollY + 24,
             left: left - 60,
             width: width + 60
           }
@@ -275,6 +278,10 @@ export class LetterpadEditor extends Component<
 
   renderEditor: SlateReactPlugin["renderEditor"] = (props, editor, next) => {
     const children = next();
+    // call hooks
+    if (typeof this.props.hooks === "function" && this.editor) {
+      this.props.hooks(this.editor, this.state.hooks);
+    }
     this.editor = editor;
 
     const callbacks = {
@@ -368,6 +375,7 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
     mark: {},
     inline: {}
   };
+  const hooks = {};
 
   // Collect all necessary things
   for (const pluginConfig of pluginConfigs) {
@@ -391,6 +399,11 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
       slateReactPlugins.push(AutoReplace(pluginConfig.markdown));
     }
 
+    // collect all the plugin utility functions
+    if (pluginConfig.hooks != null) {
+      (hooks as any)[pluginConfig.name] = { ...pluginConfig.hooks };
+    }
+
     let { identifier, renderType } = pluginConfig;
     if (identifier != null && renderType != null) {
       identifier.forEach(id => {
@@ -410,6 +423,7 @@ function getInitialState(pluginConfigs: PluginConfig[]): LetterpadEditorState {
     value: Value.fromJSON(initialEmptyValue),
     html: "",
     toolbarActive: false,
+    hooks,
     toolbarPosition: {
       top: 0,
       left: 0,

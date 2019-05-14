@@ -62,6 +62,7 @@ export const EditorWrapper = styled.div`
     padding-top: var(--spacingTop);
     padding-bottom: var(--spacingBottom);
     text-align: justify;
+    line-height: 25px;
   }
 
   h1 + section {
