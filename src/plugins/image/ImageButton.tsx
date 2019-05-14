@@ -12,7 +12,11 @@ const ImageButton: EditorButtonComponent = ({ editor, callbacks }) => {
       icon="image"
       onMouseDown={e => {
         // check if the user wants to handle this
-        const hookCalled = callbacks.onButtonClick(e, "img", callbacks);
+        const hookCalled = callbacks.onButtonClick(
+          e,
+          "plugin-image",
+          callbacks
+        );
         if (hookCalled) {
           return;
         }

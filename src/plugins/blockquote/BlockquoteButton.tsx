@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 
 import { EditorButtonComponent } from "..";
 
-const BlockquoteButton: EditorButtonComponent = ({ editor }) => {
+const BlockquoteButton: EditorButtonComponent = ({ editor, callbacks }) => {
   if (!editor) return <span />;
   const type = "blockquote";
 
@@ -13,7 +13,13 @@ const BlockquoteButton: EditorButtonComponent = ({ editor }) => {
     <Button
       isActive={hasBlock((editor as any).value, type)}
       icon="format_quote"
-      onMouseDown={() => {
+      onMouseDown={e => {
+        const hookCalled = callbacks.onButtonClick(
+          e,
+          "plugin-blockquote",
+          callbacks
+        );
+        if (hookCalled) return;
         const isActive = hasBlock((editor as any).value, type);
         return applyBlockquote(editor, isActive ? "p" : type);
       }}

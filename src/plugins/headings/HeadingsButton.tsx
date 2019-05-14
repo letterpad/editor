@@ -4,7 +4,7 @@ import { hasBlock } from "../../helper/strategy";
 import Button from "../../components/Button";
 import { EditorButtonComponent } from "..";
 
-const HeadingsButton: EditorButtonComponent = ({ editor, type }) => {
+const HeadingsButton: EditorButtonComponent = ({ editor, type, callbacks }) => {
   if (!editor) return <span />;
 
   return (
@@ -12,6 +12,12 @@ const HeadingsButton: EditorButtonComponent = ({ editor, type }) => {
       isActive={hasBlock((editor as any).value, type)}
       iconText={getType(type)}
       onMouseDown={e => {
+        const hookCalled = callbacks.onButtonClick(
+          e,
+          "plugin-headings",
+          callbacks
+        );
+        if (hookCalled) return;
         e.preventDefault();
         const isActive = hasBlock((editor as any).value, type);
         return applyHeadings(editor, isActive ? "p" : type);

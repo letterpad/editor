@@ -16,7 +16,8 @@ const BoldButton = ({
       isActive={isMarkActive(editor.value, "strong")}
       icon="format_bold"
       onMouseDown={e => {
-        callbacks.onButtonClick(e, "strong");
+        const hookCalled = callbacks.onButtonClick(e, "plugin-bold", callbacks);
+        if (hookCalled) return;
         e.preventDefault();
         return applyMarkStrategy(editor, "strong");
       }}

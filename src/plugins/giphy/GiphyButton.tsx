@@ -13,7 +13,11 @@ const ImageButton: EditorButtonComponent = ({ editor, callbacks }) => {
       onMouseDown={e => {
         e.preventDefault();
         // check if the user wants to handle this
-        const hookCalled = callbacks.onButtonClick(e, "img", callbacks);
+        const hookCalled = callbacks.onButtonClick(
+          e,
+          "plugin-giphy",
+          callbacks
+        );
         if (hookCalled) {
           return;
         }
