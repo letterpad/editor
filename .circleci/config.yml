@@ -1,38 +1,148 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+references:
+  js_deps_cache_key: &js_deps_cache_key v6-dependency-js-deps-{{ checksum "yarn.lock" }}
+  js_deps_backup_cache_key: &js_deps_backup_cache_key v6-dependency-js-deps
+  workspace_root: &workspace_root /root/project
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+  restore_cache: &restore_cache
+    restore_cache:
+      keys:
+        - *js_deps_cache_key
+        - *js_deps_backup_cache_key
+
+executors:
+  default:
     docker:
       - image: cypress/base:10
         environment:
           ## this enables colors in the output
           TERM: xterm
-    parallelism: 4
+jobs:
+  setup:
+    executor: default
     steps:
+      - *attach_workspace
       - checkout
-
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+      - *restore_cache
 
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile
-
       - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: *js_deps_cache_key
           paths:
-            - ~/.cache/yarn
-
-      - run:
-          name: Build Check
-          command: yarn build
-
+            - ~/.cache
+            - node_modules
+  bundle:
+    executor: default
+    steps:
+      - checkout
+      - *attach_workspace
+      - *restore_cache
       - run:
           name: Create Bundles
           command: yarn bundle
+      - run:
+          name: "List files"
+          command: ls
+      - save_cache:
+          key: *js_deps_cache_key
+          paths:
+            - ~/.cache
+            - node_modules
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist/*
 
+  # This job builds the project for npm usage.
+  # It also checks the integrity
+  build:
+    executor: default
+    steps:
+      - checkout
+      - *attach_workspace
+      - *restore_cache
+      - run:
+          name: Create Build (For npm package)
+          command: yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist/*
+
+  # This job is to run the e2e tests
+  test:
+    executor: default
+    parallelism: 4
+    steps:
+      - checkout
+      - *attach_workspace
+      - *restore_cache
       - run:
           name: Integration Test
           command: yarn start-server-and-test testServer http://localhost:4343 test:ci
+
+  # This job is to create a release
+  release:
+    executor: default
+    steps:
+      - checkout
+      - *attach_workspace
+      - add_ssh_keys
+      - run:
+          name: Create ChangeLog
+          command: ./scripts/createChangeLog.sh $CIRCLE_TAG
+      - run:
+          name: Verion Package Bump and Publish
+          command: |
+            npm version $CIRCLE_TAG
+            git checkout master
+            git config user.name "circleci"
+            git config user.email "circleci@letterpad.app"
+            git add .
+            git commit -m "[ci skip] Generated Build"
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run:
+          name: Publish package to NPM
+          command: npm publish
+
+# Workflows
+workflows:
+  build-test-deploy:
+    jobs:
+      - setup:
+          filters:
+            tags:
+              only: /.*/
+      - bundle:
+          requires:
+            - setup
+          filters:
+            tags:
+              only: /.*/
+      - build:
+          requires:
+            - setup
+          filters:
+            tags:
+              only: /.*/
+      - test:
+          requires:
+            - bundle
+          filters:
+            tags:
+              only: /.*/
+      - release:
+          requires:
+            - test
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
