@@ -11,7 +11,7 @@
     "build": "tsc --build tsconfig.build.json",
     "prepublishOnly": "yarn bundle && yarn build && yarn test:dev",
     "test:dev": "./scripts/e2e.sh",
-    "test:ci": "yarn cy:run --record --key 12300a0c-24c0-4943-bc01-55598094f392 --parallel",
+    "test:ci": "yarn cy:run",
     "test": "jest -c test-utils/unit.config.js",
     "testServer": "node test-utils/server.js",
     "release": "./scripts/release.sh $1"
