@@ -91,19 +91,24 @@ jobs:
     steps:
       - checkout
       - *attach_workspace
-      - add_ssh_keys
+      - add_ssh_keys:
+          fingerprints:
+            - "b5:ca:56:50:fa:9c:b5:77:26:f5:c2:d2:32:08:bc:62"
       - run:
           name: Create ChangeLog
           command: ./scripts/createChangeLog.sh $CIRCLE_TAG
       - run:
           name: Verion Package Bump and Publish
           command: |
-            npm version $CIRCLE_TAG
-            git checkout master
             git config user.name "circleci"
             git config user.email "circleci@letterpad.app"
+            git stash
+            git checkout master
+            npm version $CIRCLE_TAG
+            git stash apply
             git add .
             git commit -m "[ci skip] Generated Build"
+            git push
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
