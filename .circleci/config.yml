@@ -25,6 +25,9 @@ jobs:
     steps:
       - *attach_workspace
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "1c:7a:77:14:30:c6:6a:dc:48:d3:9b:94:50:04:bd:0c"
       - *restore_cache
 
       - run:
