@@ -107,7 +107,7 @@ jobs:
             git config user.email "circleci@letterpad.app"
             git stash
             git checkout master
-            npm version $CIRCLE_TAG
+            npm --no-git-tag-version version $CIRCLE_TAG
             git stash apply
             git add .
             git commit -m "[ci skip] Generated Build"
