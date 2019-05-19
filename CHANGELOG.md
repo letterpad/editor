@@ -1,3 +1,14 @@
+### Release: v0.0.4 (2019-05-19)
+
+- 0.0.4 [e1737d1](https://github.com/letterpad/editor/commit/e1737d1d0ffcb42890e01d76138156c926debf14")
+- Added ssh fingerprint in circle.yml for git push [d3f887e](https://github.com/letterpad/editor/commit/d3f887e87dcc95d96776ac2c62fc859c1cc13d73")
+- Fixed release [904ed4a](https://github.com/letterpad/editor/commit/904ed4a58af21b35ddb7a12e55c98766fc2fc359")
+- Automated releases through circle ci (#79) [268c53e](https://github.com/letterpad/editor/commit/268c53e407c59d4b30cf8d9218e2771bd30a5969")
+- Enhanced hooks - onButtonClick now receives the plugin name instead of tag name. Integrates nicely with image and gallery(#78) [df6c9da](https://github.com/letterpad/editor/commit/df6c9dad306ce1ab2b8f7bbc2313910650d55275")
+- Toolbar buttons can have icons as text (#76) [02d236f](https://github.com/letterpad/editor/commit/02d236f197362fb6ec5a42ffaed761cae05126f1")
+- Added release script to package.json [f573194](https://github.com/letterpad/editor/commit/f57319462f1865b979d5246b770e5aff5694d9db")
+- Update CHANGELOG.md [cc8a0f0](https://github.com/letterpad/editor/commit/cc8a0f062ae45c39badd26bcee480f3f92a4fb7f")
+
 ### Release: v0.0.3 (2019-05-06)
 
 - changed release script - <a href="https://github.com/letterpad/editor/commit/72a8bd96e3f2a3f61f2be8788717885ed61488a0">72a8bd9</a>

@@ -9,7 +9,7 @@ firstTag=$1
 secondTag=$(git tag | sort -r | head -2 | awk '{split($0, tags, "\n")} END {print tags[1]}')
 
 # This is the new change log
-CHANGELOG=`git log --pretty=format:' - %s [%h](https://github.com/letterpad/editor/commit/%H")' ${secondTag}...${firstTag} 2>&1`
+CHANGELOG=`git log --pretty=format:' - %s [%h](https://github.com/letterpad/editor/commit/%H)' ${secondTag}...${firstTag} 2>&1`
 
 releaseDate=$(date +%F)
 # Create release title
