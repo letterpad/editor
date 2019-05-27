@@ -139,12 +139,9 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
   const menu = useRef<HTMLDivElement>();
   const placeholder = useRef<HTMLInputElement>();
 
-  document.addEventListener("mousedown", e => {
+  document.addEventListener("mousedown", () => {
     if (!root.current) return;
-    if (!root.current.contains(e.target as Node)) {
-      setMenuActive(false);
-      setPlaceholder(null);
-    }
+    setMenuActive(false);
   });
   if (menu.current) {
     menu.current
@@ -194,9 +191,13 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
           id="letterpad-editor-toolbar-toggle-button"
           className="material-icons toggle-button"
           onClick={() => {
-            setMenuActive(!menuActive);
-            if (menuActive) {
+            const newMenuActiveState = !menuActive;
+            setMenuActive(newMenuActiveState);
+            if (newMenuActiveState) {
               editor.focus();
+              setPlaceholder(null);
+            } else {
+              setMenuActive(false);
             }
           }}
         >
