@@ -29,6 +29,8 @@
     "snarkdown": "^1.2.2",
     "styled-components": "^4.1.3"
   },
+  "author": "Abhishek Saha",
+  "license": "MIT",
   "peerDependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
