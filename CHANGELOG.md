@@ -1,3 +1,8 @@
+### Release: v0.0.5 (2019-05-27)
+
+  - Fixed Toolbar state, dependencies and removed package-lock.json [941e436](https://github.com/letterpad/editor/commit/941e436a5f4fb4340f53bec5fd1cf2293af5d785)
+ - [ci skip] Generated Build [6c8dcad](https://github.com/letterpad/editor/commit/6c8dcad954b7887b6ff4609c52fc1384a9a72ba8) 
+
 ### Release: v0.0.4 (2019-05-19)
 
 - 0.0.4 [e1737d1](https://github.com/letterpad/editor/commit/e1737d1d0ffcb42890e01d76138156c926debf14")
