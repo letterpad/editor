@@ -8,11 +8,11 @@
     "alwaysStrict": true,
     "esModuleInterop": true,
     "pretty": true,
-    "allowJs": true,
     "outDir": "dist",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "jsx": "react",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "declaration": true
   }
 }
