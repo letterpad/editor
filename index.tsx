@@ -4,4 +4,4 @@ import Demo from "./examples/demo-1";
 
 render(<Demo />, document.getElementById("root"));
 
-if (module.hot) module.hot.accept();
+if ((module as any).hot) (module as any).hot.accept();

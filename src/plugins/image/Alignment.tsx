@@ -27,7 +27,18 @@ const StyledAlignment = styled.div`
   }
 `;
 
-const Option = ({ option, onClick, selected }) => {
+const Option = ({
+  option,
+  onClick,
+  selected
+}: {
+  option: {
+    align: string;
+    icon: string;
+  };
+  onClick: any;
+  selected: string;
+}) => {
   let active = "";
   if (selected === option.align) {
     active = "active";
@@ -53,7 +64,13 @@ const options = [
   { align: "parallax", icon: "unfold_less" }
 ];
 
-const Alignment = ({ selected, onClick }) => {
+const Alignment = ({
+  selected,
+  onClick
+}: {
+  selected: string;
+  onClick: Function;
+}) => {
   return (
     <StyledAlignment>
       <div className="letterpad-image-options-inner">
@@ -63,7 +80,7 @@ const Alignment = ({ selected, onClick }) => {
               key={i}
               selected={selected}
               option={option}
-              onClick={e => onClick(e, option.align)}
+              onClick={(e: any) => onClick(e, option.align)}
             />
           );
         })}

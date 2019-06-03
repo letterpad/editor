@@ -21,7 +21,13 @@ const Wrapper = styled.hr`
   }
 `;
 
-const LinebreakNode = ({ attributes, children, node }) => {
+const LinebreakNode = ({
+  attributes,
+  node
+}: {
+  attributes: any;
+  node: any;
+}) => {
   const props = getAttributesFromNode(node);
   return <Wrapper data-id="plugin-linebreak" {...attributes} {...props} />;
 };

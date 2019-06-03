@@ -58,7 +58,7 @@ const config = {
 const { externals, ...withReact } = config;
 const configWithDemo = {
   ...withReact,
-  entry: "./index.js",
+  entry: "./index.tsx",
   output: {
     ...withReact.output,
     filename: "editor.demo.js"

@@ -3,7 +3,7 @@ import { applyLinebreak } from "./LinebreakUtils";
 import Button from "../../components/Button";
 import { EditorButtonComponent } from "..";
 
-const LinebreakButton: EditorButtonComponent = ({ editor, onClick }) => {
+const LinebreakButton: EditorButtonComponent = ({ editor, callbacks }) => {
   if (!editor) return <span />;
 
   return (
@@ -11,10 +11,13 @@ const LinebreakButton: EditorButtonComponent = ({ editor, onClick }) => {
       isActive={false}
       icon="more_horiz"
       onMouseDown={e => {
+        const hookCalled = callbacks.onButtonClick(
+          e,
+          "plugin-linebreak",
+          callbacks
+        );
+        if (hookCalled) return;
         e.preventDefault();
-        if (onClick) {
-          onClick(e);
-        }
         return applyLinebreak(editor, "hr");
       }}
     />
