@@ -3,7 +3,7 @@ const webpack = require("webpack");
 module.exports = {
   mode: "development",
   devtool: "source-map",
-  entry: "./index.js",
+  entry: "./index.tsx",
   output: {
     path: __dirname + "/dist/bundles",
     publicPath: "/dist/bundles/",
