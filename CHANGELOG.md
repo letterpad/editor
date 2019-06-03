@@ -1,3 +1,8 @@
+### Release: v0.0.6 (2019-06-03)
+
+  - Added .ts files to dist for npm [c3ad9f0](https://github.com/letterpad/editor/commit/c3ad9f0ea69340aa376b64b790f5fa1a89e09439)
+ - [ci skip] Generated Build [7e08320](https://github.com/letterpad/editor/commit/7e083208f5cadad8c1307e291409f8c4d19ca43a) 
+
 ### Release: v0.0.5 (2019-05-27)
 
   - Fixed Toolbar state, dependencies and removed package-lock.json [941e436](https://github.com/letterpad/editor/commit/941e436a5f4fb4340f53bec5fd1cf2293af5d785)
