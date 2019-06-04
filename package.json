@@ -1,6 +1,8 @@
 {
   "name": "letterpad-editor",
   "main": "dist/editor.js",
+  "browser": "umd/letterpad-editor.js",
+  "unpkg": "umd/letterpad-editor.js",
   "version": "0.0.6",
   "description": "The letterpad editor - A high level abstraction of the slate editor with plugin architecture",
   "scripts": {
@@ -16,6 +18,14 @@
     "testServer": "node test-utils/server.js",
     "release": "./scripts/release.sh $1"
   },
+  "files": [
+    "dist",
+    "umd",
+    "README.md",
+    "LICENSE",
+    "package.json",
+    "yarn.lock"
+  ],
   "dependencies": {
     "classnames": "^2.2.6",
     "exenv": "^1.2.2",
@@ -54,10 +64,10 @@
     "html-loader": "^0.5.5",
     "jest": "^24.1.0",
     "parse5": "^5.1.0",
-    "postcss-preset-env": "^6.5.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-nested": "^4.1.1",
+    "postcss-preset-env": "^6.5.0",
     "prettier": "^1.16.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

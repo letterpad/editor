@@ -1,14 +1,13 @@
 const webpack = require("webpack");
 
-const config = {
+module.exports = {
   mode: "production",
   devtool: "source-map",
   entry: "./src/editor.tsx",
   target: "web",
   output: {
-    path: __dirname + "/dist/bundles",
-    publicPath: "/dist/bundles/",
-    filename: "editor.react.js",
+    path: __dirname + "/umd",
+    filename: "letterpad-editor.js",
     libraryTarget: "umd"
   },
   resolve: {
@@ -54,15 +53,3 @@ const config = {
     react: "react"
   }
 };
-
-const { externals, ...withReact } = config;
-const configWithDemo = {
-  ...withReact,
-  entry: "./index.tsx",
-  output: {
-    ...withReact.output,
-    filename: "editor.demo.js"
-  }
-};
-
-module.exports = [config, configWithDemo];
