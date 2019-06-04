@@ -3,6 +3,7 @@ const { externals, ...withReact } = prodWebpackConfig;
 
 module.exports = {
   ...withReact,
+
   entry: "./index.tsx",
   output: {
     ...withReact.output,
