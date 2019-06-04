@@ -1,3 +1,8 @@
+### Release: v0.0.8 (2019-06-04)
+
+  - add umd to workspace for publish (#84) [f07e9f5](https://github.com/letterpad/editor/commit/f07e9f57809377f0a1ea68515b5d3081d0d316f9)
+ - [ci skip] Generated Build [f8dd1a2](https://github.com/letterpad/editor/commit/f8dd1a2c0102cc39eaf0c479bf250648dcbb69c3) 
+
 ### Release: v0.0.7 (2019-06-04)
 
   - Add umd bundles to publish (#83) [af0a3ba](https://github.com/letterpad/editor/commit/af0a3baf6729f0a8a203515c762e97903308ee3c)
