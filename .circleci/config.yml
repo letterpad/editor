@@ -46,7 +46,7 @@ jobs:
       - *restore_cache
       - run:
           name: Create Bundles
-          command: yarn bundle
+          command: "yarn bundle && yarn bundle:demo"
       - run:
           name: "List files"
           command: ls
