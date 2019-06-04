@@ -10,6 +10,7 @@
     "cy:run": "cypress run",
     "dev": "webpack-dev-server --config=webpack.config.js",
     "bundle": "webpack --config webpack.config.prod.js",
+    "bundle:demo": "webpack --config webpack.config.demo.js",
     "build": "tsc --build tsconfig.build.json",
     "prepublishOnly": "yarn bundle && yarn build && yarn test:dev",
     "test:dev": "./scripts/e2e.sh",
