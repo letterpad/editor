@@ -3,7 +3,7 @@
   "main": "dist/editor.js",
   "browser": "umd/letterpad-editor.js",
   "unpkg": "umd/letterpad-editor.js",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "The letterpad editor - A high level abstraction of the slate editor with plugin architecture",
   "scripts": {
     "cy:open": "cypress open",

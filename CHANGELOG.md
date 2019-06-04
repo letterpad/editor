@@ -1,3 +1,8 @@
+### Release: v0.0.7 (2019-06-04)
+
+  - Add umd bundles to publish (#83) [af0a3ba](https://github.com/letterpad/editor/commit/af0a3baf6729f0a8a203515c762e97903308ee3c)
+ - [ci skip] Generated Build [c388fad](https://github.com/letterpad/editor/commit/c388fadd8c009163c7479c64c826acf156d53718) 
+
 ### Release: v0.0.6 (2019-06-03)
 
   - Added .ts files to dist for npm [c3ad9f0](https://github.com/letterpad/editor/commit/c3ad9f0ea69340aa376b64b790f5fa1a89e09439)
