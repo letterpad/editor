@@ -38,6 +38,7 @@ jobs:
           paths:
             - ~/.cache
             - node_modules
+
   bundle:
     executor: default
     steps:
@@ -59,6 +60,7 @@ jobs:
           root: .
           paths:
             - dist/*
+            - umd/*
 
   # This job builds the project for npm usage.
   # It also checks the integrity
@@ -75,6 +77,7 @@ jobs:
           root: .
           paths:
             - dist/*
+            - umd/*
 
   # This job is to run the e2e tests
   test:
