@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Value, Editor } from "slate";
+import { Value, Editor, Block } from "slate";
 import {
   Editor as SlateReactEditor,
   EventHook,
@@ -18,7 +18,7 @@ import { StyledMenu, EditorWrapper, StyledContent } from "./editor.css";
 import { mapPropsToComponents } from "./helper/util";
 import schemaProps from "./helper/schema";
 import initialValue, { initialEmptyValue } from "./value";
-import { renderNode, renderMark } from "./helper/renderer";
+import { renderNode, renderMark, renderInline } from "./helper/renderer";
 import scrollToCursor from "./helper/scrollToCursor";
 import Html from "slate-html-serializer";
 import { showMenu } from "./helper/showMenu";
@@ -90,8 +90,6 @@ export class LetterpadEditor extends Component<
   private editor: Editor | undefined;
   // the hover menu
   private menuRef = React.createRef<HTMLDivElement>();
-  // Toolbar at the begining of empty line
-  private toolbarRef = React.createRef<HTMLDivElement>();
   // handler to serialize/deserialize html
   private html = new Html({ rules: this.rules });
 
@@ -134,6 +132,12 @@ export class LetterpadEditor extends Component<
     if (prevState.html !== html) {
       this.props.onChange(html);
     }
+
+    setTimeout(() => {
+      if (this.editor) {
+        this.editor.focus();
+      }
+    }, 0);
   };
 
   componentWillUnmount() {
@@ -146,14 +150,28 @@ export class LetterpadEditor extends Component<
     const html = this.html.serialize(value);
     this.setState({ value, html });
 
-    // Everytime there is a change in the editor, we have to check if the cursor is
-    // inside an empty block. If so, then we display an additional toolbar
-    if (
-      !value.focusBlock ||
-      value.focusBlock.text ||
-      ["section", "p"].indexOf(value.focusBlock.type) === -1 ||
-      value.inlines.size > 0
-    ) {
+    const { selection, texts, blocks } = value;
+
+    if (!value) return;
+    if (!selection) return;
+
+    const isCollapsed = selection.isCollapsed;
+    const topBlock = blocks.get(0);
+    const isAParagraph =
+      topBlock && ["paragraph", "p", "section"].includes(topBlock.type);
+    const isEmptyText = texts && texts.get(0) && texts.get(0).text.length === 0;
+
+    if (isCollapsed && isAParagraph && isEmptyText) {
+      const position = findDOMNode(topBlock).getBoundingClientRect();
+      this.setState({
+        toolbarActive: true,
+        toolbarPosition: {
+          top: position.top + window.scrollY + 24,
+          left: position.left - 60,
+          width: position.width + 60
+        }
+      });
+    } else {
       this.setState({
         toolbarActive: false,
         toolbarPosition: {
@@ -162,27 +180,7 @@ export class LetterpadEditor extends Component<
           width: 0
         }
       });
-    } else {
-      // else check if any text has been selected. If so, get the node of the cursor
-      let cursorNode;
-      try {
-        cursorNode = findDOMNode(this.editor!.value.focusBlock);
-      } catch (e) {}
-      if (cursorNode) {
-        // ge the position of the cursor
-        const { top, left, width } = cursorNode.getBoundingClientRect();
-        // display the menubar
-        this.setState({
-          toolbarActive: true,
-          toolbarPosition: {
-            top: top + window.scrollY + 24,
-            left: left - 60,
-            width: width + 60
-          }
-        });
-      }
     }
-
     /**
      * Few plugins of `block` type might not allow further transformations from other plugins.
      * eg. Codeblocks will not allow any other transformation (like bold, italic)
@@ -192,7 +190,7 @@ export class LetterpadEditor extends Component<
     // for blocks (h1, blockquote,codeblock, etc)
     if (value.fragment.nodes.size > 0) {
       const node = value.fragment.nodes.first();
-      parentPlugin = this.state.pluginsMap.node[node.type];
+      parentPlugin = this.state.pluginsMap.node[(node as Block).type];
     }
     // for marks (bold, italic, etc)
     if (value.activeMarks.size > 0) {
@@ -210,8 +208,9 @@ export class LetterpadEditor extends Component<
     }
   };
 
-  onPaste: EventHook = (event, editor) => {
+  onPaste: EventHook<React.ClipboardEvent> = (event, editor) => {
     scrollToCursor();
+
     const transfer = getEventTransfer(event);
     if (transfer.type != "html") {
       // convert markdown to html
@@ -252,22 +251,11 @@ export class LetterpadEditor extends Component<
     showMenu(menu, value);
   };
 
-  toggleToolbarClass = () => {
-    if (this.toolbarRef.current) {
-      const classes = this.toolbarRef.current.classList;
-      if (classes.contains("active")) {
-        classes.remove("active");
-      } else {
-        classes.add("active");
-      }
-    }
-  };
-
   triggerWordCountHook = (value: Value) => {
     const totalBlocks = value.document.getBlocks();
     if (totalBlocks.size > 0) {
       let charCount = 0;
-      charCount = totalBlocks.reduce((memo: number, b: any) => {
+      charCount = totalBlocks.reduce((memo: number | undefined, b: any) => {
         return memo + b.text.trim().split(/\s+/).length;
       }, 0);
       if (this.props.getCharCount) {
@@ -293,13 +281,12 @@ export class LetterpadEditor extends Component<
       props,
       editor,
       next,
-      callbacks,
-      onClick: this.toggleToolbarClass
+      callbacks
     };
 
     // trigger the word count hook
     this.triggerWordCountHook(props.value);
-
+    if (!this.editor) return null;
     return (
       <>
         <StyledContent>{children}</StyledContent>
@@ -338,7 +325,7 @@ export class LetterpadEditor extends Component<
             value={this.state.value}
             onChange={this.onChange}
             onPaste={this.onPaste}
-            renderNode={(props, _, next) =>
+            renderBlock={(props, _editor, next) =>
               renderNode({
                 props,
                 next,
@@ -348,6 +335,14 @@ export class LetterpadEditor extends Component<
             }
             renderMark={(props, _, next) =>
               renderMark({
+                props,
+                next,
+                callbacks: eventHandlers,
+                pluginsMap: this.state.pluginsMap
+              })
+            }
+            renderInline={(props, _, next) =>
+              renderInline({
                 props,
                 next,
                 callbacks: eventHandlers,

@@ -143,17 +143,17 @@ const ImageNode: SFC<{
       {...attributes}
       onClick={showOptions}
       type={alignOption}
-      src={(node as any).data.get("src")}
+      src={node.data.get("src")}
       className="lp_img_wrapper"
     >
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
       <img
-        width={(node as any).data.get("width") || "100%"}
-        height={(node as any).data.get("height") || "auto"}
-        src={(node as any).data.get("src")}
+        width={node.data.get("width") || "100%"}
+        height={node.data.get("height") || "auto"}
+        src={node.data.get("src")}
         {...attributes}
         title={caption === defaultCaption ? "" : caption}
-        data-align={(node as any).data.get("align")}
+        data-align={node.data.get("align")}
         data-id="plugin-image"
       />
       {applyCaption({

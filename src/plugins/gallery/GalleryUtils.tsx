@@ -55,7 +55,8 @@ export const getFigureNodesFromChildren = (children: ReactNode) => {
   let figures: Block[] = [];
   React.Children.forEach(children, (element: any) => {
     figures = element.props.block
-      .getBlocksAsArray()
+      .getBlocks()
+      .toArray()
       .filter((block: Block) => block.type === "figure" && block.data);
   });
   return figures;

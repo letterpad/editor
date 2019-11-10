@@ -2,7 +2,7 @@ import { onEnter } from "./ListUtils";
 import { Editor, Path, Text, Node, Block, Inline, Document } from "slate";
 
 const ListKeyboardShortcut = (
-  event: KeyboardEvent,
+  event: React.KeyboardEvent<Element>,
   editor: Editor,
   next: () => any
 ) => {
@@ -17,14 +17,18 @@ const ListKeyboardShortcut = (
   next();
 };
 
-function onBackspace(_: KeyboardEvent, editor: Editor, next: () => any) {
+function onBackspace(
+  _: React.KeyboardEvent<Element>,
+  editor: Editor,
+  next: () => any
+) {
   const { value } = editor;
   if (value.anchorBlock.type !== "li") return next();
 
   const li = value.anchorBlock;
-
-  if (value.selection.start.offset === 0) {
-    const list = value.document.getParent(getPath(editor, li.key));
+  const path = getPath(editor, li.key);
+  if (value.selection.start.offset === 0 && path) {
+    const list = value.document.getParent(path);
     if (list == null || isTextNode(list) || !isList(list)) {
       return next();
     }
@@ -73,7 +77,7 @@ function onBackspace(_: KeyboardEvent, editor: Editor, next: () => any) {
   return next();
 }
 
-function getPath(editor: Editor, key: string): Path {
+function getPath(editor: Editor, key: string): Path | null {
   return editor.value.document.getPath(key);
 }
 

@@ -19,12 +19,12 @@ export const applyCodeblock = (editor: Editor) => {
       Range.create({
         anchor: Point.create({
           key: startNode.key,
-          path: 1,
+          path: [1],
           offset: 0
         }),
         focus: Point.create({
           key: endNode.key,
-          path: 2,
+          path: [2],
           offset: codeBlock.text.length
         })
       })
@@ -58,7 +58,10 @@ export const unindentClosingBlocks = (change: Editor) => {
   }
 };
 
-export const handleSelectAll = (event: Event, change: Editor) => {
+export const handleSelectAll = (
+  event: React.KeyboardEvent<Element>,
+  change: Editor
+) => {
   if (!isMod(event)) return;
 
   if (change.value.blocks.first().type !== "pre") {

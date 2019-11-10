@@ -16,6 +16,7 @@ const paragraphConfig: PluginConfig[] = [
       serialize(obj: any, children: any) {
         if (
           obj.type === "section" ||
+          obj.type === "div" ||
           obj.type === "p" ||
           obj.type === "paragraph"
         ) {

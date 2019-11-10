@@ -28,7 +28,7 @@ export const onBackspace = (_: any, editor: Editor, next: () => {}) => {
 };
 
 export const onEnter = (
-  event: KeyboardEvent,
+  event: React.KeyboardEvent<Element>,
   editor: Editor,
   next: () => {}
 ) => {
@@ -123,13 +123,13 @@ const deepRemoveList = (editor: Editor) => {
   const { document } = value;
   const node = getNodeOfType(value, itemType);
   const depth = document.getDepth(node.key);
-
-  for (let i = 0; i < depth; i++) {
-    const parent: any = document.getParent(node.key);
-    if (parent.type === "ul") removeUnorderedList(editor);
-    else removeOrderedList(editor);
+  if (depth) {
+    for (let i = 0; i < depth; i++) {
+      const parent: any = document.getParent(node.key);
+      if (parent.type === "ul") removeUnorderedList(editor);
+      else removeOrderedList(editor);
+    }
   }
-
   return editor;
 };
 
@@ -170,8 +170,10 @@ export const decreaseListDepthStrategy = (editor: Editor) => {
 
   const node = getNodeOfType(value, itemType);
   const depth = value.document.getDepth(node.key);
-  if (isUnorderedList(value) && depth > 2)
-    return onlyRemoveUnorderedList(editor);
-  if (isOrderedList(value) && depth > 2) return onlyRemoveOrderedList(editor);
+  if (depth) {
+    if (isUnorderedList(value) && depth > 2)
+      return onlyRemoveUnorderedList(editor);
+    if (isOrderedList(value) && depth > 2) return onlyRemoveOrderedList(editor);
+  }
   return editor;
 };

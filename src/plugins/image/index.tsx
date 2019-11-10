@@ -7,7 +7,7 @@ import { insertImage } from "./ImageUtils";
 
 const ImagePlugin: PluginConfig["slatePlugin"] = () => ({
   onClick(_event, _editor, next) {
-    const $imgWrapper = (_event!.target! as any).closest(".lp_img_wrapper");
+    const $imgWrapper = (_event.target! as any).closest(".lp_img_wrapper");
     if (!$imgWrapper) return next();
     const { dataset, src, title } = $imgWrapper.querySelector("img");
     const key = dataset.key;
@@ -25,7 +25,7 @@ const ImagePlugin: PluginConfig["slatePlugin"] = () => ({
 const imageConfig: PluginConfig[] = [
   {
     name: "plugin-image",
-    renderType: "node",
+    renderType: "inline",
     toolbarButtons: [
       {
         button: ImageButton

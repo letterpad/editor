@@ -3,7 +3,7 @@ import { PluginsMap } from "../plugins";
 import { Plugin } from "slate-react";
 
 export type OriginalRenderNodeProps = Parameters<
-  Required<Plugin>["renderNode"]
+  Required<Plugin>["renderBlock"]
 >;
 
 export interface RenderNodeHandler {
@@ -35,6 +35,43 @@ export const renderNode: RenderNodeHandler = ({
     }
     const noop = () => {};
     return <RenderNode {...props} next={next || noop} />;
+  }
+  return next && next();
+};
+
+export type OriginalRenderInlineProps = Parameters<
+  Required<Plugin>["renderInline"]
+>;
+
+export interface RenderInlineHandler {
+  (params: {
+    props: OriginalRenderInlineProps[0];
+    next?: OriginalRenderInlineProps[2];
+    callbacks?: {
+      [key: string]: any;
+    };
+    pluginsMap: PluginsMap;
+  }): ReactNode;
+}
+
+// Search from the pluginsMap and give back the inline to render
+export const renderInline: RenderInlineHandler = ({
+  props,
+  next,
+  callbacks,
+  pluginsMap
+}) => {
+  if (pluginsMap.inline[props.node.type]) {
+    const RenderInline = pluginsMap.inline[props.node.type].plugin.render;
+    if (callbacks && callbacks.onBeforeRender) {
+      callbacks.onBeforeRender({
+        renderType: "inline",
+        type: props.node.type,
+        props
+      });
+    }
+    const noop = () => {};
+    return <RenderInline {...props} next={next || noop} />;
   }
   return next && next();
 };

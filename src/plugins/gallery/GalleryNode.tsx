@@ -171,9 +171,7 @@ class GalleryNode extends PureComponent<{
       return (
         <section ref={this.wrapperRef} {...attributes} data-id="plugin-gallery">
           <input
-            onChange={e =>
-              handleFiles(e, this.props.editor, this.mergeImageBlocks)
-            }
+            onChange={e => handleFiles(e, this.props.editor)}
             multiple={true}
             ref={this.inputRef}
             type="file"

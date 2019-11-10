@@ -40,9 +40,7 @@ class Demo extends Component {
         onBeforeRender={this.onBeforeRender}
         spellCheck={false}
         defaultFont={true}
-        onChange={(html: string) => {
-          console.log(html);
-        }}
+        onChange={(_html: string) => {}}
         getCharCount={(count: number) => {
           // count is available.
           if (count) {
