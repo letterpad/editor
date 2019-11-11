@@ -2,6 +2,9 @@ import React from "react";
 import { EditorButton } from "../plugins";
 import { Block, Value } from "slate";
 
+export const keyMap = {
+  ESCAPE: 27
+};
 export const mapPropsToComponents = (
   componentList: EditorButton[],
   props?: any
@@ -79,6 +82,21 @@ function getContent(token: string | Prism.Token): string {
     return getContent(token);
   }
 }
+
+export const isEmptyLine = (value: Value) => {
+  const { selection, texts, blocks } = value;
+
+  if (!value) return;
+  if (!selection) return;
+
+  const isCollapsed = selection.isCollapsed;
+  const topBlock = blocks.get(0);
+  const isAParagraph =
+    topBlock && ["paragraph", "p", "section"].includes(topBlock.type);
+  const isEmptyText = texts && texts.get(0) && texts.get(0).text.length === 0;
+
+  return isCollapsed && isAParagraph && isEmptyText;
+};
 
 export const getAllDecorations = (tokens: any, texts: any): [] => {
   const decorations: any = [];

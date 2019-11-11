@@ -148,7 +148,7 @@ const ImageNode: SFC<{
     >
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
       <img
-        width={node.data.get("width") || "100%"}
+        width={node.data.get("width") || "inherit"}
         height={node.data.get("height") || "auto"}
         src={node.data.get("src")}
         {...attributes}

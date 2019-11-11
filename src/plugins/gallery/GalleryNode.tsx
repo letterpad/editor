@@ -9,11 +9,20 @@ import {
 import { Row, Figure, Image, StyledButton } from "./GalleryNode.css";
 import { handleFiles } from "./GalleryButton";
 
-class GalleryNode extends PureComponent<{
+interface GalleryNodeProps {
   node: Node;
   editor?: Editor;
   attributes: any;
-}> {
+  children: React.ReactNode;
+}
+
+interface GalleryNodeState {
+  grid: Array<Array<Block>>;
+  selected: number;
+  imageCount: number;
+}
+
+class GalleryNode extends PureComponent<GalleryNodeProps, GalleryNodeState> {
   state = { grid: [], selected: -1, imageCount: 0 };
 
   wrapperRef = React.createRef<HTMLDivElement>();
@@ -37,7 +46,7 @@ class GalleryNode extends PureComponent<{
     document.removeEventListener("click", this.validateSelection);
   }
 
-  static getDerivedStateFromProps(props: any, state: any) {
+  static getDerivedStateFromProps(props: GalleryNodeProps, state: any) {
     const figures = getFigureNodesFromChildren(props.children);
     if (state.imageCount === figures.length) {
       return null;
@@ -64,7 +73,11 @@ class GalleryNode extends PureComponent<{
     return window.scrollY;
   }
 
-  componentDidUpdate(_prevProps: any, _prevState: any, snapshot: number) {
+  componentDidUpdate(
+    _prevProps: any,
+    _prevState: GalleryNodeState,
+    snapshot: number
+  ) {
     const { selected } = this.state;
     const { current } = this.wrapperRef;
     if (selected === -1 || !current) {
@@ -89,7 +102,7 @@ class GalleryNode extends PureComponent<{
     this.setState({ selected: index });
   };
 
-  openFileExplorer = (e: any) => {
+  openFileExplorer = (e: React.MouseEvent) => {
     e.preventDefault();
     if (this.inputRef.current) {
       this.inputRef.current.click();
@@ -122,8 +135,8 @@ class GalleryNode extends PureComponent<{
         const { newWidths, height } = calculateImageDimensions(ratios);
         return (
           <Row key={gridIndex}>
-            {figures.map((figureNode: any, figureIdx: number) => {
-              return figureNode.nodes.map((imgNode: any) => {
+            {figures.map((figureBlock: Block, figureIdx: number) => {
+              return figureBlock.nodes.map((imgNode: any) => {
                 // if the figure contains anything apart from img, return the node.
                 if (imgNode.type !== "img") {
                   return (
@@ -146,8 +159,8 @@ class GalleryNode extends PureComponent<{
                     className={
                       isSelected ? "letterpad-image-active-for-delete" : ""
                     }
-                    data-key={figureNode.key}
-                    onClick={(e: any) => {
+                    data-key={figureBlock.key}
+                    onClick={(e: React.MouseEvent) => {
                       e.preventDefault();
                       return this.selectImage(imgNumber);
                     }}
@@ -171,7 +184,9 @@ class GalleryNode extends PureComponent<{
       return (
         <section ref={this.wrapperRef} {...attributes} data-id="plugin-gallery">
           <input
-            onChange={e => handleFiles(e, this.props.editor)}
+            onChange={e =>
+              handleFiles(e, this.props.editor, this.mergeImageBlocks)
+            }
             multiple={true}
             ref={this.inputRef}
             type="file"
