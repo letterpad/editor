@@ -3,7 +3,8 @@ import { EditorButton } from "../plugins";
 import { Block, Value } from "slate";
 
 export const keyMap = {
-  ESCAPE: 27
+  ESCAPE: 27,
+  ENTER: 13
 };
 export const mapPropsToComponents = (
   componentList: EditorButton[],

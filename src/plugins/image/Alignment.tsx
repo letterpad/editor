@@ -64,13 +64,10 @@ const options = [
   { align: "parallax", icon: "unfold_less" }
 ];
 
-const Alignment = ({
-  selected,
-  onClick
-}: {
+const Alignment: React.FC<{
   selected: string;
   onClick: Function;
-}) => {
+}> = ({ selected, onClick }) => {
   return (
     <StyledAlignment>
       <div className="letterpad-image-options-inner">
