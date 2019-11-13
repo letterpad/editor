@@ -10,7 +10,7 @@ import { isKeyboardEvent } from "../../helper/events";
 import { isPrintableKeycode, getCodeBlockParent } from "../../helper/util";
 
 const codeblockKeyboardShortcut = (
-  event: Event,
+  event: React.KeyboardEvent<Element>,
   editor: Editor,
   next: () => any
 ) => {

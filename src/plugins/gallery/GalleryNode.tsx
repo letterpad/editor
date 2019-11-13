@@ -1,19 +1,25 @@
 import React, { PureComponent } from "react";
 import { Node, Editor, Block } from "slate";
-import {
-  getFigureNodesFromChildren,
-  computeGrid,
-  getImageRatiosFromFigures,
-  calculateImageDimensions
-} from "./GalleryUtils";
-import { Row, Figure, Image, StyledButton } from "./GalleryNode.css";
+import { getFigureNodesFromChildren, computeGrid } from "./GalleryUtils";
+import { StyledButton } from "./GalleryNode.css";
 import { handleFiles } from "./GalleryButton";
+import { Grid } from "./Grid";
 
-class GalleryNode extends PureComponent<{
+interface IGalleryNodeProps {
   node: Node;
   editor?: Editor;
   attributes: any;
-}> {
+  children: React.ReactNode;
+}
+
+interface IGalleryNodeState {
+  grid: Array<Array<Block>>;
+  selected: number;
+  imageCount: number;
+}
+
+const BACKSPACE = 8;
+class GalleryNode extends PureComponent<IGalleryNodeProps, IGalleryNodeState> {
   state = { grid: [], selected: -1, imageCount: 0 };
 
   wrapperRef = React.createRef<HTMLDivElement>();
@@ -37,7 +43,10 @@ class GalleryNode extends PureComponent<{
     document.removeEventListener("click", this.validateSelection);
   }
 
-  static getDerivedStateFromProps(props: any, state: any) {
+  static getDerivedStateFromProps(
+    props: IGalleryNodeProps,
+    state: IGalleryNodeState
+  ) {
     const figures = getFigureNodesFromChildren(props.children);
     if (state.imageCount === figures.length) {
       return null;
@@ -60,24 +69,14 @@ class GalleryNode extends PureComponent<{
     return { grid, selected, imageCount: figures.length };
   }
 
-  getSnapshotBeforeUpdate() {
-    return window.scrollY;
-  }
-
-  componentDidUpdate(_prevProps: any, _prevState: any, snapshot: number) {
-    const { selected } = this.state;
-    const { current } = this.wrapperRef;
-    if (selected === -1 || !current) {
-      return;
-    }
-    setTimeout(() => {
-      window.scroll(0, snapshot);
-    }, 30);
-  }
-
   validateSelection = (e: KeyboardEvent | Event) => {
-    if ("keyCode" in e && e.keyCode === 8 && this.state.selected >= 0) {
-      return;
+    if ("keyCode" in e && e.keyCode === BACKSPACE && this.state.selected >= 0) {
+      const domNodeToDelete = document.querySelector(
+        ".letterpad-image-active-for-delete"
+      );
+      if (!this.props.editor || !domNodeToDelete) return;
+      const id = (domNodeToDelete as any).dataset.key;
+      return this.props.editor.removeNodeByKey(id);
     }
     if ("target" in e && (e.target as any).tagName === "IMG") {
       return;
@@ -89,7 +88,7 @@ class GalleryNode extends PureComponent<{
     this.setState({ selected: index });
   };
 
-  openFileExplorer = (e: any) => {
+  openFileExplorer = (e: React.MouseEvent) => {
     e.preventDefault();
     if (this.inputRef.current) {
       this.inputRef.current.click();
@@ -115,58 +114,13 @@ class GalleryNode extends PureComponent<{
 
     // the grid contains figures, imgs and spans
     // grid > figures > [span, img, span]
-    const images = this.state.grid.map(
-      (figures: Block[], gridIndex: number) => {
-        const ratios = getImageRatiosFromFigures(figures);
+    const images = Grid({
+      data: this.state.grid,
+      selected: this.state.selected,
+      onSelect: this.selectImage
+    });
 
-        const { newWidths, height } = calculateImageDimensions(ratios);
-        return (
-          <Row key={gridIndex}>
-            {figures.map((figureNode: any, figureIdx: number) => {
-              return figureNode.nodes.map((imgNode: any) => {
-                // if the figure contains anything apart from img, return the node.
-                if (imgNode.type !== "img") {
-                  return (
-                    <span key={imgNode.key}>
-                      <span data-key={parseInt(imgNode.key) - 1} />
-                      <span data-key={imgNode.key} />
-                    </span>
-                  );
-                }
-                const imgNumber = figureIdx + gridIndex * 3;
-                const isSelected = this.state.selected === imgNumber;
-                return (
-                  <Figure
-                    contentEditable={false}
-                    key={figureIdx}
-                    height={height}
-                    width={newWidths[figureIdx]}
-                    src={imgNode.data.get("src")}
-                    selected={isSelected}
-                    className={
-                      isSelected ? "letterpad-image-active-for-delete" : ""
-                    }
-                    data-key={figureNode.key}
-                    onClick={(e: any) => {
-                      e.preventDefault();
-                      return this.selectImage(imgNumber);
-                    }}
-                  >
-                    <Image
-                      contentEditable={false}
-                      height={height}
-                      data-key={imgNode.key}
-                      width={newWidths[figureIdx]}
-                      src={imgNode.data.get("src")}
-                    />
-                  </Figure>
-                );
-              });
-            })}
-          </Row>
-        );
-      }
-    );
+    // wrap the images with section tag
     if (images.length > 0)
       return (
         <section ref={this.wrapperRef} {...attributes} data-id="plugin-gallery">

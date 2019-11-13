@@ -33,7 +33,9 @@ import { ValueJSON } from "slate";
 // ];
 
 const initialValue: ValueJSON = {
+  object: "value",
   document: {
+    object: "document",
     nodes: [
       {
         object: "block",
@@ -42,13 +44,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Letterpad Editor",
-                marks: []
-              }
-            ]
+            text: "Letterpad Editor"
           }
         ]
       },
@@ -59,13 +55,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "The letterpad editor is a high level API of the ",
-                marks: []
-              }
-            ]
+            text: "The letterpad editor is a high level API of the "
           },
           {
             object: "inline",
@@ -76,26 +66,14 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "slatejs",
-                    marks: []
-                  }
-                ]
+                text: "slatejs"
               }
             ]
           },
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  " editor with a robust plugin architecture. It comes with a set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has markdown capabilites which generates inline previews as you start writing in markdown. This page is editable and is the playground of this error. The toolbars are visible when you select some text or in a new line.",
-                marks: []
-              }
-            ]
+            text:
+              " editor with a robust plugin architecture. It comes with a set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has markdown capabilites which generates inline previews as you start writing in markdown. This page is editable and is the playground of this error. The toolbars are visible when you select some text or in a new line."
           }
         ]
       },
@@ -106,13 +84,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -123,13 +95,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Letterpad editor uses the below technologies.",
-                marks: []
-              }
-            ]
+            text: "Letterpad editor uses the below technologies."
           }
         ]
       },
@@ -145,13 +111,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "React",
-                    marks: []
-                  }
-                ]
+                text: "React"
               }
             ]
           },
@@ -162,13 +122,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "Slatejs",
-                    marks: []
-                  }
-                ]
+                text: "Slatejs"
               }
             ]
           },
@@ -179,13 +133,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "Typescript",
-                    marks: []
-                  }
-                ]
+                text: "Typescript"
               }
             ]
           },
@@ -196,13 +144,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "Styled Components",
-                    marks: []
-                  }
-                ]
+                text: "Styled Components"
               }
             ]
           },
@@ -213,13 +155,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "Webpack",
-                    marks: []
-                  }
-                ]
+                text: "Webpack"
               }
             ]
           },
@@ -230,13 +166,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "Puppeteer",
-                    marks: []
-                  }
-                ]
+                text: "Puppeteer"
               }
             ]
           }
@@ -249,14 +179,8 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "We have good documentation, if you would like to contribute with some plugins. Visit our ",
-                marks: []
-              }
-            ]
+            text:
+              "We have good documentation, if you would like to contribute with some plugins. Visit our "
           },
           {
             object: "inline",
@@ -267,25 +191,13 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "github page",
-                    marks: []
-                  }
-                ]
+                text: "github page"
               }
             ]
           },
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: " for more information.",
-                marks: []
-              }
-            ]
+            text: " for more information."
           }
         ]
       },
@@ -296,14 +208,8 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "It has 100% end-to-end test coverage. So its easy to figure out if something broke due to your change.",
-                marks: []
-              }
-            ]
+            text:
+              "It has 100% end-to-end test coverage. So its easy to figure out if something broke due to your change."
           }
         ]
       },
@@ -314,14 +220,8 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "You can develop plugins like the one below. This is a gallery plugin.",
-                marks: []
-              }
-            ]
+            text:
+              "You can develop plugins like the one below. This is a gallery plugin."
           }
         ]
       },
@@ -337,13 +237,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               },
               {
                 object: "inline",
@@ -358,25 +252,13 @@ const initialValue: ValueJSON = {
                 nodes: [
                   {
                     object: "text",
-                    leaves: [
-                      {
-                        object: "leaf",
-                        text: "",
-                        marks: []
-                      }
-                    ]
+                    text: ""
                   }
                 ]
               },
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               }
             ]
           },
@@ -387,13 +269,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               },
               {
                 object: "inline",
@@ -408,25 +284,13 @@ const initialValue: ValueJSON = {
                 nodes: [
                   {
                     object: "text",
-                    leaves: [
-                      {
-                        object: "leaf",
-                        text: "",
-                        marks: []
-                      }
-                    ]
+                    text: ""
                   }
                 ]
               },
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               }
             ]
           },
@@ -437,13 +301,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               },
               {
                 object: "inline",
@@ -458,25 +316,13 @@ const initialValue: ValueJSON = {
                 nodes: [
                   {
                     object: "text",
-                    leaves: [
-                      {
-                        object: "leaf",
-                        text: "",
-                        marks: []
-                      }
-                    ]
+                    text: ""
                   }
                 ]
               },
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               }
             ]
           },
@@ -487,13 +333,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               },
               {
                 object: "inline",
@@ -508,25 +348,13 @@ const initialValue: ValueJSON = {
                 nodes: [
                   {
                     object: "text",
-                    leaves: [
-                      {
-                        object: "leaf",
-                        text: "",
-                        marks: []
-                      }
-                    ]
+                    text: ""
                   }
                 ]
               },
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               }
             ]
           },
@@ -537,13 +365,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               },
               {
                 object: "inline",
@@ -558,25 +380,13 @@ const initialValue: ValueJSON = {
                 nodes: [
                   {
                     object: "text",
-                    leaves: [
-                      {
-                        object: "leaf",
-                        text: "",
-                        marks: []
-                      }
-                    ]
+                    text: ""
                   }
                 ]
               },
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               }
             ]
           },
@@ -587,13 +397,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               },
               {
                 object: "inline",
@@ -608,25 +412,13 @@ const initialValue: ValueJSON = {
                 nodes: [
                   {
                     object: "text",
-                    leaves: [
-                      {
-                        object: "leaf",
-                        text: "",
-                        marks: []
-                      }
-                    ]
+                    text: ""
                   }
                 ]
               },
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               }
             ]
           },
@@ -637,13 +429,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               },
               {
                 object: "inline",
@@ -658,25 +444,13 @@ const initialValue: ValueJSON = {
                 nodes: [
                   {
                     object: "text",
-                    leaves: [
-                      {
-                        object: "leaf",
-                        text: "",
-                        marks: []
-                      }
-                    ]
+                    text: ""
                   }
                 ]
               },
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               }
             ]
           },
@@ -687,13 +461,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               },
               {
                 object: "inline",
@@ -708,25 +476,13 @@ const initialValue: ValueJSON = {
                 nodes: [
                   {
                     object: "text",
-                    leaves: [
-                      {
-                        object: "leaf",
-                        text: "",
-                        marks: []
-                      }
-                    ]
+                    text: ""
                   }
                 ]
               },
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               }
             ]
           }
@@ -739,13 +495,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -756,13 +506,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "You can embed media. Lets embed a youtube video.",
-                marks: []
-              }
-            ]
+            text: "You can embed media. Lets embed a youtube video."
           }
         ]
       },
@@ -782,13 +526,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -799,62 +537,30 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "You can also embed a ",
-                marks: []
-              },
-              {
-                object: "leaf",
-                text: "souncloud track",
-                marks: [
-                  {
-                    object: "mark",
-                    type: "code",
-                    data: {}
-                  }
-                ]
-              },
-              {
-                object: "leaf",
-                text: " and or a ",
-                marks: []
-              },
-              {
-                object: "leaf",
-                text: "website",
-                marks: [
-                  {
-                    object: "mark",
-                    type: "code",
-                    data: {}
-                  }
-                ]
-              },
-              {
-                object: "leaf",
-                text: " or a ",
-                marks: []
-              },
-              {
-                object: "leaf",
-                text: "gist",
-                marks: [
-                  {
-                    object: "mark",
-                    type: "code",
-                    data: {}
-                  }
-                ]
-              },
-              {
-                object: "leaf",
-                text:
-                  ". You can nicely highlight the words that need attention.",
-                marks: []
-              }
-            ]
+            text: "You can also embed a "
+          },
+          {
+            object: "text",
+            text: "souncloud track ",
+            marks: [{ type: "code" }]
+          },
+          {
+            object: "text",
+            text: " and or a "
+          },
+          {
+            object: "text",
+            text: "website",
+            marks: [{ type: "code" }]
+          },
+          {
+            object: "text",
+            text: "gist",
+            marks: [{ type: "code" }]
+          },
+          {
+            object: "text",
+            text: ". You can nicely highlight the words that need attention."
           }
         ]
       },
@@ -865,13 +571,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -882,14 +582,8 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "You can also have an image with different sizes to complement the content around it.",
-                marks: []
-              }
-            ]
+            text:
+              "You can also have an image with different sizes to complement the content around it."
           }
         ]
       },
@@ -900,13 +594,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           },
           {
             object: "inline",
@@ -920,25 +608,13 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               }
             ]
           },
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -949,14 +625,8 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "Do you write code ? We have something for you. Its not pretty, but it works.",
-                marks: []
-              }
-            ]
+            text:
+              "Do you write code ? We have something for you. Its not pretty, but it works."
           }
         ]
       },
@@ -969,14 +639,8 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  '\nimport React from "react";\nimport { render } from "react-dom";\nimport LetterpadEditor from "letterpad-editor";\n\nrender(<LetterpadEditor />, document.getElementById("app"));\n',
-                marks: []
-              }
-            ]
+            text:
+              '\nimport React from "react";\nimport { render } from "react-dom";\nimport LetterpadEditor from "letterpad-editor";\n\nrender(<LetterpadEditor />, document.getElementById("app"));\n'
           }
         ]
       },
@@ -987,13 +651,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "However, you can add gists like so.",
-                marks: []
-              }
-            ]
+            text: "However, you can add gists like so."
           }
         ]
       },
@@ -1007,13 +665,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -1024,13 +676,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -1041,13 +687,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: " Headings look like this:",
-                marks: []
-              }
-            ]
+            text: " Headings look like this:"
           }
         ]
       },
@@ -1058,13 +698,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Heading 1",
-                marks: []
-              }
-            ]
+            text: "Heading 1"
           }
         ]
       },
@@ -1075,13 +709,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Heading 2",
-                marks: []
-              }
-            ]
+            text: "Heading 2"
           }
         ]
       },
@@ -1092,13 +720,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Heading 3",
-                marks: []
-              }
-            ]
+            text: "Heading 3"
           }
         ]
       },
@@ -1109,13 +731,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Heading 4",
-                marks: []
-              }
-            ]
+            text: "Heading 4"
           }
         ]
       },
@@ -1126,16 +742,75 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Heading 5",
-                marks: []
-              }
-            ]
+            text: "Heading 5"
           }
         ]
       },
+      // {
+      //   object: "block",
+      //   type: "p",
+      //   data: {},
+      //   nodes: [
+      //     {
+      //       object: "text",
+      //       leaves: [
+      //         {
+      //           object: "leaf",
+      //           text: "Texts can be ",
+      //           marks: []
+      //         },
+      //         {
+      //           object: "leaf",
+      //           text: "bold and strong",
+      //           marks: [
+      //             {
+      //               object: "mark",
+      //               type: "strong",
+      //               data: {}
+      //             }
+      //           ]
+      //         },
+      //         {
+      //           object: "leaf",
+      //           text: " or they can be ",
+      //           marks: []
+      //         },
+      //         {
+      //           object: "leaf",
+      //           text: "italic ",
+      //           marks: [
+      //             {
+      //               object: "mark",
+      //               type: "em",
+      //               data: {}
+      //             }
+      //           ]
+      //         },
+      //         {
+      //           object: "leaf",
+      //           text: "and ",
+      //           marks: []
+      //         },
+      //         {
+      //           object: "leaf",
+      //           text: "underline",
+      //           marks: [
+      //             {
+      //               object: "mark",
+      //               type: "u",
+      //               data: {}
+      //             }
+      //           ]
+      //         },
+      //         {
+      //           object: "leaf",
+      //           text: ". ",
+      //           marks: []
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // },
       {
         object: "block",
         type: "p",
@@ -1143,79 +818,8 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Texts can be ",
-                marks: []
-              },
-              {
-                object: "leaf",
-                text: "bold and strong",
-                marks: [
-                  {
-                    object: "mark",
-                    type: "strong",
-                    data: {}
-                  }
-                ]
-              },
-              {
-                object: "leaf",
-                text: " or they can be ",
-                marks: []
-              },
-              {
-                object: "leaf",
-                text: "italic ",
-                marks: [
-                  {
-                    object: "mark",
-                    type: "em",
-                    data: {}
-                  }
-                ]
-              },
-              {
-                object: "leaf",
-                text: "and ",
-                marks: []
-              },
-              {
-                object: "leaf",
-                text: "underline",
-                marks: [
-                  {
-                    object: "mark",
-                    type: "u",
-                    data: {}
-                  }
-                ]
-              },
-              {
-                object: "leaf",
-                text: ". ",
-                marks: []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        object: "block",
-        type: "p",
-        data: {},
-        nodes: [
-          {
-            object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "Lets try to embed a soundcloud track. You can customize the height of embeds. Its just a iframe property.",
-                marks: []
-              }
-            ]
+            text:
+              "Lets try to embed a soundcloud track. You can customize the height of embeds. Its just a iframe property."
           }
         ]
       },
@@ -1234,13 +838,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -1251,13 +849,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -1268,14 +860,8 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "We have a custom unpublished plugin which a features to insert an image from giphy by searching with some keywords. Cool right ?",
-                marks: []
-              }
-            ]
+            text:
+              "We have a custom unpublished plugin which a features to insert an image from giphy by searching with some keywords. Cool right ?"
           }
         ]
       },
@@ -1286,13 +872,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -1303,14 +883,8 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "You can also embed plain audio like mp3. Its not very clean but you can enhance this feature.",
-                marks: []
-              }
-            ]
+            text:
+              "You can also embed plain audio like mp3. Its not very clean but you can enhance this feature."
           }
         ]
       },
@@ -1321,13 +895,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -1340,13 +908,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -1357,13 +919,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       },
@@ -1374,13 +930,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "Oh you can also have a parallax image. ",
-                marks: []
-              }
-            ]
+            text: "Oh you can also have a parallax image. "
           }
         ]
       },
@@ -1398,13 +948,7 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               },
               {
                 object: "inline",
@@ -1417,25 +961,13 @@ const initialValue: ValueJSON = {
                 nodes: [
                   {
                     object: "text",
-                    leaves: [
-                      {
-                        object: "leaf",
-                        text: "",
-                        marks: []
-                      }
-                    ]
+                    text: ""
                   }
                 ]
               },
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "",
-                    marks: []
-                  }
-                ]
+                text: ""
               }
             ]
           }
@@ -1448,14 +980,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text:
-                  "If you have any ideas on some interesting plugin, you can ",
-                marks: []
-              }
-            ]
+            text: "If you have any ideas on some interesting plugin, you can "
           },
           {
             object: "inline",
@@ -1466,25 +991,13 @@ const initialValue: ValueJSON = {
             nodes: [
               {
                 object: "text",
-                leaves: [
-                  {
-                    object: "leaf",
-                    text: "post them here",
-                    marks: []
-                  }
-                ]
+                text: "post them here"
               }
             ]
           },
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: ".",
-                marks: []
-              }
-            ]
+            text: "."
           }
         ]
       },
@@ -1495,13 +1008,7 @@ const initialValue: ValueJSON = {
         nodes: [
           {
             object: "text",
-            leaves: [
-              {
-                object: "leaf",
-                text: "",
-                marks: []
-              }
-            ]
+            text: ""
           }
         ]
       }

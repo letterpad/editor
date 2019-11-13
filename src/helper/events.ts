@@ -1,4 +1,4 @@
-export function isKeyboardEvent(event: Event): event is KeyboardEvent {
+export function isKeyboardEvent(event: React.KeyboardEvent<Element>) {
   if (Object.prototype.hasOwnProperty.call(event, "key")) {
     return true;
   }

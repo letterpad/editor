@@ -53,7 +53,7 @@ export const handleFiles = (
 };
 
 export const createImageBlocks = (
-  imgElements: Promise<{}>[],
+  imgElements: Promise<any>[],
   editor: Editor | undefined,
   callback?: Function
 ) => {

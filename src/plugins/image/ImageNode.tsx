@@ -2,7 +2,8 @@ import React, {
   SFC,
   DetailedHTMLProps,
   ImgHTMLAttributes,
-  useState
+  useState,
+  useEffect
 } from "react";
 import { Node, Editor } from "slate";
 import { isTextNode } from "../codeblock/CodeblockUtils";
@@ -13,6 +14,7 @@ import {
   StyledCaptionInput,
   Wrapper
 } from "./ImageNode.css";
+import { keyMap } from "../../helper/util";
 
 const defaultCaption = "Enter a caption";
 
@@ -53,14 +55,20 @@ const ImageNode: SFC<{
     setAlignOption(option);
   };
 
-  document.addEventListener("mousedown", e => {
+  useEffect(() => {
+    document.addEventListener("mousedown", onMouseDown);
+    return () => {
+      return document.removeEventListener("mousedown", onMouseDown);
+    };
+  }, []);
+
+  const onMouseDown = (e: any) => {
     if (!alignmentRef.current) return;
 
     if (!alignmentRef.current.contains(e.target as any)) {
       setMenu(false);
     }
-  });
-
+  };
   const setImageCaption = (e: any) => {
     setCaption(e.target.value);
 
@@ -86,7 +94,7 @@ const ImageNode: SFC<{
           e.stopPropagation();
         }}
         onKeyUp={(e: any) => {
-          if (e.keyCode === 27 || e.keyCode === 13) {
+          if (e.keyCode === keyMap.ESCAPE || e.keyCode === keyMap.ENTER) {
             e.stopPropagation();
             e.preventDefault();
             setEditCaptionMode(false);
@@ -127,9 +135,15 @@ const ImageNode: SFC<{
   if (node.type === "figure") {
     return (
       <Figure
-        contentEditable={false}
-        type={alignOption}
         ref={alignmentRef}
+        // contentEditable={false}
+        onMouseOver={() => {
+          setMenu(true);
+        }}
+        onMouseOut={() => {
+          setMenu(false);
+        }}
+        type={alignOption}
         {...attributes}
         data-id="plugin-image-figure"
       >
@@ -143,17 +157,17 @@ const ImageNode: SFC<{
       {...attributes}
       onClick={showOptions}
       type={alignOption}
-      src={(node as any).data.get("src")}
+      src={node.data.get("src")}
       className="lp_img_wrapper"
     >
       {menu && <Alignment selected={alignOption} onClick={onOptionClick} />}
       <img
-        width={(node as any).data.get("width") || "100%"}
-        height={(node as any).data.get("height") || "auto"}
-        src={(node as any).data.get("src")}
+        width={node.data.get("width") || "inherit"}
+        height={node.data.get("height") || "auto"}
+        src={node.data.get("src")}
         {...attributes}
         title={caption === defaultCaption ? "" : caption}
-        data-align={(node as any).data.get("align")}
+        data-align={node.data.get("align")}
         data-id="plugin-image"
       />
       {applyCaption({

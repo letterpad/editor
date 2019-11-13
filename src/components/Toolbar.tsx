@@ -2,107 +2,20 @@ import React, {
   FunctionComponent,
   useState,
   useRef,
-  ComponentType
+  ComponentType,
+  useEffect
 } from "react";
+import cx from "classnames";
 import { Editor, Block } from "slate";
-import styled from "styled-components";
 import { mapPropsToComponents } from "../helper/util";
 import { EditorButton } from "../plugins";
-import cx from "classnames";
-
-const ToggleButton = styled.span`
-  transition: 0.1s transform ease-in-out;
-  border: 1px solid #ddd;
-  border-radius: 100%;
-  padding: 4px;
-  font-size: 30px;
-  user-select: none;
-`;
-
-const ButtonWrapper = styled.div`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  /* background: #fff; */
-`;
-
-const ToolbarMenu = styled.div`
-  display: none;
-  padding-left: 10px;
-  background: var(--bg-base);
-  text-align: center;
-  user-select: none;
-  transform: scaleX(0);
-  margin-top: -4px;
-  transition: 0.1s transform ease-in-out;
-  transform-origin: left center;
-  margin-top: 4px;
-
-  @keyframes toolbarOpen {
-    0% {
-      transform: scaleX(0);
-    }
-    100% {
-      transform: scaleX(1);
-    }
-  }
-
-  animation: toolbarOpen 0.1s;
-
-  .material-icons {
-    font-size: 18px;
-    vertical-align: text-bottom;
-    padding: 6px 6px;
-    border: 1px solid var(--color-base);
-    border-radius: 50%;
-    margin-right: 5px;
-    vertical-align: text-bottom;
-  }
-`;
-
-const PlaceholderContainer = styled.div`
-  display: flex;
-  flex: 1;
-  width: ${(props: any) => props.width}px;
-`;
-
-const StyledToolBar = styled.div`
-  opacity: 1;
-  position: absolute;
-  z-index: 9;
-  display: flex;
-  flex-direction: row;
-
-  &.hidden {
-    opacity: 0;
-  }
-
-  &.active {
-    ${ToggleButton} {
-      transform: rotate(45deg);
-    }
-    ${ToolbarMenu} {
-      transform: scaleX(1);
-      display: inline-block;
-    }
-  }
-
-  > * + * {
-    margin-left: 8px;
-  }
-
-  .button {
-    color: var(--color-base);
-    cursor: pointer;
-    .material-icons {
-      vertical-align: text-bottom;
-    }
-  }
-  input {
-    background: transparent;
-    color: var(--color-base);
-  }
-`;
+import {
+  StyledToolBar,
+  ButtonWrapper,
+  ToggleButton,
+  ToolbarMenu,
+  PlaceholderContainer
+} from "./Toolbar.css";
 
 interface ToolbarProps {
   hidden: boolean;
@@ -114,6 +27,7 @@ interface ToolbarProps {
     left: number;
     width: number;
   };
+  setPlaceholderStatus: (display: boolean) => void;
 }
 
 interface PlaceholderState {
@@ -131,32 +45,55 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
   editor,
   buttons,
   data,
-  position
+  position,
+  setPlaceholderStatus
 }) => {
   const [menuActive, setMenuActive] = useState(false);
   const [Placeholder, setPlaceholder] = useState<PlaceholderState | null>(null);
   const root = useRef<HTMLDivElement>();
   const menu = useRef<HTMLDivElement>();
+  const placeholderRef = useRef<HTMLDivElement>();
   const placeholder = useRef<HTMLInputElement>();
 
-  document.addEventListener("mousedown", () => {
-    if (!root.current) return;
-    setMenuActive(false);
-  });
-  if (menu.current) {
-    menu.current
-      .querySelectorAll(".material-icons, .custom-icons")
-      .forEach(node => {
-        node.addEventListener("mousedown", () => {
-          menuActive && setMenuActive(false);
-        });
-      });
-  }
+  useEffect(() => {
+    document.addEventListener("mousedown", onMouseDown);
+    let icons: Array<Element> = [];
 
-  function showPlaceholder(component: ComponentType) {
+    if (menu.current) {
+      icons = [
+        ...Array.from(
+          menu.current.querySelectorAll(".material-icons, .custom-icons")
+        )
+      ];
+      icons.forEach(node => {
+        node.addEventListener("mousedown", onMouseDown);
+      });
+    }
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+      icons.forEach(node => {
+        node.removeEventListener("mousedown", onMouseDown);
+      });
+    };
+  }, []);
+
+  const onMouseDown = (e: any) => {
+    if (root.current) {
+      setMenuActive(false);
+      if (!e.target.closest(".ph") && !e.target.closest(".menu")) {
+        removePlaceholder();
+      }
+    }
+    if (menu.current) {
+      menuActive && setMenuActive(false);
+    }
+  };
+
+  const showPlaceholder = (component: ComponentType) => {
     setPlaceholder({
       component
     });
+    setPlaceholderStatus(true);
     /**
      * The set timeout is because the component is not rendered immediately
      * so the placeholder.current is null. we delay this by 1ms and then
@@ -169,11 +106,23 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
         placeholder.current.focus();
       }
     }, 1);
-  }
+  };
 
-  function completePlaceholder() {
+  const removePlaceholder = () => {
     setPlaceholder(null);
-  }
+    setPlaceholderStatus(false);
+  };
+
+  const toggleToolbar = () => {
+    const newMenuActiveState = !menuActive;
+    setMenuActive(newMenuActiveState);
+    if (newMenuActiveState) {
+      editor.focus();
+      setPlaceholder(null);
+    } else {
+      setMenuActive(false);
+    }
+  };
 
   data.callbacks.showPlaceholder = showPlaceholder;
 
@@ -190,16 +139,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
         <ToggleButton
           id="letterpad-editor-toolbar-toggle-button"
           className="material-icons toggle-button"
-          onClick={() => {
-            const newMenuActiveState = !menuActive;
-            setMenuActive(newMenuActiveState);
-            if (newMenuActiveState) {
-              editor.focus();
-              setPlaceholder(null);
-            } else {
-              setMenuActive(false);
-            }
-          }}
+          onClick={toggleToolbar}
         >
           add
         </ToggleButton>
@@ -209,12 +149,16 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
           })}
         </ToolbarMenu>
       </ButtonWrapper>
-      {Placeholder != null && (
-        <PlaceholderContainer width={position.width}>
+      {Placeholder && (
+        <PlaceholderContainer
+          width={position.width}
+          ref={placeholderRef}
+          className="ph"
+        >
           <Placeholder.component
             ref={placeholder}
             editor={editor}
-            onComplete={completePlaceholder}
+            onComplete={removePlaceholder}
           />
         </PlaceholderContainer>
       )}

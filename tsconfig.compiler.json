@@ -13,6 +13,7 @@
     "noUnusedParameters": true,
     "jsx": "react",
     "resolveJsonModule": true,
-    "declaration": true
+    "declaration": true,
+    "sourceMap": true
   }
 }

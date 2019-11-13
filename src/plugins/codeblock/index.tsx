@@ -15,12 +15,12 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const currentLineRange = {
     anchor: Point.create({
       key: currentTextNode.key,
-      path: null,
+      path: [],
       offset: matched.before.index
     }),
     focus: Point.create({
       key: currentTextNode.key,
-      path: null,
+      path: [],
       offset: matched.before.index + currentLineText.length
     })
   };

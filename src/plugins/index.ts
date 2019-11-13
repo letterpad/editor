@@ -49,7 +49,7 @@ const pluginConfigs: PluginConfig[] = [
 ];
 
 export interface EditorEventHandler {
-  (event: Event, editor: Editor, next: () => any): any;
+  (event: React.KeyboardEvent<Element>, editor: Editor, next: () => any): any;
 }
 
 export type EditorButtonComponent = ComponentType<{

@@ -15,15 +15,17 @@ const LinkNode: SFC<{
     HTMLAnchorElement
   >;
   node: Node;
-}> = ({ attributes, node, children }) => (
-  <Wrapper
-    {...attributes}
-    className="link-node"
-    href={isTextNode(node) ? node.text : node.data.get("href")}
-    data-id="plugin-link"
-  >
-    {children}
-  </Wrapper>
-);
+}> = ({ attributes, node, children }) => {
+  return (
+    <Wrapper
+      {...attributes}
+      className="link-node"
+      href={isTextNode(node) ? node.text : node.data.get("href")}
+      data-id="plugin-link"
+    >
+      {children}
+    </Wrapper>
+  );
+};
 
 export default LinkNode;

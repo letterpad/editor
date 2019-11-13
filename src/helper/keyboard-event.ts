@@ -1,6 +1,6 @@
 import { isKeyboardEvent } from "./events";
 
-export const isMod = (event: Event): event is KeyboardEvent => {
+export const isMod = (event: React.KeyboardEvent<Element>) => {
   if (!isKeyboardEvent(event)) {
     return false;
   }

@@ -66,6 +66,7 @@ export const Wrapper = styled.span`
   img {
     max-width: 100%;
   }
+  box-shadow: ${(p: any) => (p.isFocused ? "0 0 0 2px blue;" : "none")};
 `;
 
 export const StyledCaptionInput = styled.input`
