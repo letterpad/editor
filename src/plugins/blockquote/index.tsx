@@ -8,6 +8,7 @@ import { isKeyboardEvent } from "../../helper/events";
 import { isMod } from "../../helper/keyboard-event";
 import { hasBlock } from "../../helper/strategy";
 import { applyBlockquote } from "./BlockquoteUtils";
+import { nodeTypes } from "../../helper/util";
 
 const TAGNAME = "blockquote";
 
@@ -49,7 +50,7 @@ const blockquotePluginConfig: PluginConfig[] = [
     },
     rules: {
       serialize: (obj, children) => {
-        if (obj.object === "block" && obj.type === TAGNAME) {
+        if (obj.object === nodeTypes.BLOCK && obj.type === TAGNAME) {
           const props = { children, node: obj, attributes: {} };
           return <BlockquoteNode {...props} />;
         }
@@ -58,7 +59,7 @@ const blockquotePluginConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === TAGNAME) {
           return {
-            object: "block",
+            object: nodeTypes.BLOCK,
             type: type,
             data: {
               style: el.getAttribute("style")

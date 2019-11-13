@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Value, Editor, Block } from "slate";
 import {
   Editor as SlateReactEditor,
@@ -57,7 +57,7 @@ export interface LetterpadEditorProps {
  * @class LetterpadEditor
  * @extends {Component<LetterpadEditorProps, LetterpadEditorState>}
  */
-export class LetterpadEditor extends Component<
+export class LetterpadEditor extends PureComponent<
   LetterpadEditorProps,
   LetterpadEditorState
 > {
@@ -130,6 +130,7 @@ export class LetterpadEditor extends Component<
    * Display the + toolbar when its a new line.
    */
   displayLeftToolbarOnNewLine = (value: Value) => {
+    if (!this.editor) return;
     if (isEmptyLine(value) || this.toolbarPlaceholderStatus) {
       const topBlock = value.blocks.get(0);
       const position = findDOMNode(topBlock).getBoundingClientRect();

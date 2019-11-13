@@ -1,42 +1,46 @@
 ### Release: v0.0.9 (2019-11-13)
 
-  - Upgrade slate (#88)
+- Upgrade slate (#88)
 
- (<a href="https://github.com/letterpad/editor/commit/64aa6730be39808ab2897b6725ce95fcd23ded86">64aa673</a>)
- - Bump lodash.template from 4.4.0 to 4.5.0 (#85)
+(<a href="https://github.com/letterpad/editor/commit/64aa6730be39808ab2897b6725ce95fcd23ded86">64aa673</a>)
+
+- Bump lodash.template from 4.4.0 to 4.5.0 (#85)
 
 Bumps [lodash.template](https://github.com/lodash/lodash) from 4.4.0 to 4.5.0.
+
 - [Release notes](https://github.com/lodash/lodash/releases)
 - [Commits](https://github.com/lodash/lodash/compare/4.4.0...4.5.0)
 
 Signed-off-by: dependabot[bot] <support@github.com> (<a href="https://github.com/letterpad/editor/commit/b99496f0a7c919c578ce67d79ecfb4cd281abf4d">b99496f</a>)
- - [ci skip] Generated Build
- (<a href="https://github.com/letterpad/editor/commit/4ff70afa4c617401844503b87e124fd02c9d73d1">4ff70af</a>)
- - add umd to workspace for publish (#84)
 
- (<a href="https://github.com/letterpad/editor/commit/f07e9f57809377f0a1ea68515b5d3081d0d316f9">f07e9f5</a>)
- - [ci skip] Generated Build
- (<a href="https://github.com/letterpad/editor/commit/f8dd1a2c0102cc39eaf0c479bf250648dcbb69c3">f8dd1a2</a>) 
+- [ci skip] Generated Build
+  (<a href="https://github.com/letterpad/editor/commit/4ff70afa4c617401844503b87e124fd02c9d73d1">4ff70af</a>)
+- add umd to workspace for publish (#84)
+
+(<a href="https://github.com/letterpad/editor/commit/f07e9f57809377f0a1ea68515b5d3081d0d316f9">f07e9f5</a>)
+
+- [ci skip] Generated Build
+  (<a href="https://github.com/letterpad/editor/commit/f8dd1a2c0102cc39eaf0c479bf250648dcbb69c3">f8dd1a2</a>)
 
 ### Release: v0.0.8 (2019-06-04)
 
-  - add umd to workspace for publish (#84) [f07e9f5](https://github.com/letterpad/editor/commit/f07e9f57809377f0a1ea68515b5d3081d0d316f9)
- - [ci skip] Generated Build [f8dd1a2](https://github.com/letterpad/editor/commit/f8dd1a2c0102cc39eaf0c479bf250648dcbb69c3) 
+- add umd to workspace for publish (#84) [f07e9f5](https://github.com/letterpad/editor/commit/f07e9f57809377f0a1ea68515b5d3081d0d316f9)
+- [ci skip] Generated Build [f8dd1a2](https://github.com/letterpad/editor/commit/f8dd1a2c0102cc39eaf0c479bf250648dcbb69c3)
 
 ### Release: v0.0.7 (2019-06-04)
 
-  - Add umd bundles to publish (#83) [af0a3ba](https://github.com/letterpad/editor/commit/af0a3baf6729f0a8a203515c762e97903308ee3c)
- - [ci skip] Generated Build [c388fad](https://github.com/letterpad/editor/commit/c388fadd8c009163c7479c64c826acf156d53718) 
+- Bundle demo file (#83) [af0a3ba](https://github.com/letterpad/editor/commit/af0a3baf6729f0a8a203515c762e97903308ee3c)
+- [ci skip] Generated Build [c388fad](https://github.com/letterpad/editor/commit/c388fadd8c009163c7479c64c826acf156d53718)
 
 ### Release: v0.0.6 (2019-06-03)
 
-  - Added .ts files to dist for npm [c3ad9f0](https://github.com/letterpad/editor/commit/c3ad9f0ea69340aa376b64b790f5fa1a89e09439)
- - [ci skip] Generated Build [7e08320](https://github.com/letterpad/editor/commit/7e083208f5cadad8c1307e291409f8c4d19ca43a) 
+- Added .ts files to dist for npm [c3ad9f0](https://github.com/letterpad/editor/commit/c3ad9f0ea69340aa376b64b790f5fa1a89e09439)
+- [ci skip] Generated Build [7e08320](https://github.com/letterpad/editor/commit/7e083208f5cadad8c1307e291409f8c4d19ca43a)
 
 ### Release: v0.0.5 (2019-05-27)
 
-  - Fixed Toolbar state, dependencies and removed package-lock.json [941e436](https://github.com/letterpad/editor/commit/941e436a5f4fb4340f53bec5fd1cf2293af5d785)
- - [ci skip] Generated Build [6c8dcad](https://github.com/letterpad/editor/commit/6c8dcad954b7887b6ff4609c52fc1384a9a72ba8) 
+- Fixed Toolbar state, dependencies and removed package-lock.json [941e436](https://github.com/letterpad/editor/commit/941e436a5f4fb4340f53bec5fd1cf2293af5d785)
+- [ci skip] Generated Build [6c8dcad](https://github.com/letterpad/editor/commit/6c8dcad954b7887b6ff4609c52fc1384a9a72ba8)
 
 ### Release: v0.0.4 (2019-05-19)
 

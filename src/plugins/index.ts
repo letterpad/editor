@@ -6,7 +6,6 @@ import { Editor } from "slate";
 import { Rule } from "slate-html-serializer";
 import { default as codeblockConfig } from "./codeblock";
 import { default as audioConfig } from "./audio";
-import { default as autoscrollConfig } from "./autoscroll";
 import { default as blockquoteConfig } from "./blockquote";
 import { default as boldConfig } from "./bold";
 import { default as headingsConfig } from "./headings";
@@ -40,7 +39,6 @@ const pluginConfigs: PluginConfig[] = [
 
   // others
   ...audioConfig,
-  ...autoscrollConfig,
   ...giphyConfig,
   ...imageConfig,
   ...galleryConfig,

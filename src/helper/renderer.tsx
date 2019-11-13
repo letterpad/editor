@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { PluginsMap } from "../plugins";
 import { Plugin } from "slate-react";
+import { nodeTypes, MARK } from "./util";
 
 export type OriginalRenderNodeProps = Parameters<
   Required<Plugin>["renderBlock"]
@@ -65,7 +66,7 @@ export const renderInline: RenderInlineHandler = ({
     const RenderInline = pluginsMap.inline[props.node.type].plugin.render;
     if (callbacks && callbacks.onBeforeRender) {
       callbacks.onBeforeRender({
-        renderType: "inline",
+        renderType: nodeTypes.INLINE,
         type: props.node.type,
         props
       });
@@ -102,7 +103,7 @@ export const renderMark: RenderMarkHandler = ({
     const RenderMark = pluginsMap.mark[props.mark.type].plugin.render;
     if (callbacks && callbacks.onBeforeRender) {
       const onBeforeRender = callbacks.onBeforeRender({
-        renderType: "mark",
+        renderType: MARK,
         type: props.mark.type,
         props
       });

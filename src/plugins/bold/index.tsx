@@ -6,6 +6,7 @@ import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 import { isMod } from "../../helper/keyboard-event";
 import { applyMarkStrategy } from "../../helper/strategy";
+import { MARK } from "../../helper/util";
 
 const TAGNAME = "strong";
 
@@ -35,7 +36,7 @@ const BoldPlugin: PluginConfig["slatePlugin"] = () => {
 
 const boldConfig: PluginConfig[] = [
   {
-    renderType: "mark",
+    renderType: MARK,
     menuButtons: [{ button: BoldButton }],
     toolbarButtons: [],
     render: BoldMark,
@@ -51,14 +52,14 @@ const boldConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === TAGNAME) {
           return {
-            object: "mark",
+            object: MARK,
             type: type,
             nodes: next(el.childNodes)
           };
         }
       },
       serialize(obj, children) {
-        if (obj.object === "mark") {
+        if (obj.object === MARK) {
           const props = { children };
           return <BoldMark {...props} />;
         }

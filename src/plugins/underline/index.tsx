@@ -5,6 +5,7 @@ import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 import { applyMarkStrategy } from "../../helper/strategy";
 import { isMod } from "../../helper/keyboard-event";
+import { MARK } from "../../helper/util";
 
 const TAGNAME = "u";
 
@@ -22,7 +23,7 @@ const UnderlinePlugin: PluginConfig["slatePlugin"] = () => {
 
 const underlineConfig: PluginConfig[] = [
   {
-    renderType: "mark",
+    renderType: MARK,
     menuButtons: [{ button: UnderlineButton }],
     toolbarButtons: [],
     render: UnderlineMark,
@@ -33,14 +34,14 @@ const underlineConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === TAGNAME) {
           return {
-            object: "mark",
+            object: MARK,
             type: type,
             nodes: next(el.childNodes)
           };
         }
       },
       serialize(obj, children) {
-        if (obj.object === "mark") {
+        if (obj.object === MARK) {
           const props = { children };
           return <UnderlineMark {...props} />;
         }

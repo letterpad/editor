@@ -3,6 +3,7 @@ import HeadingsButton from "./HeadingsButton";
 import HeadingsNode from "./HeadingsNode";
 import { HeadingsPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
+import { nodeTypes } from "../../helper/util";
 
 const identifier = ["h1", "h2", "h3", "h4", "h5", "h6"];
 
@@ -27,7 +28,10 @@ const headingsConfig: PluginConfig[] = [
     },
     rules: {
       serialize: (obj, children) => {
-        if (obj.object === "block" && identifier.indexOf(obj.type) >= 0) {
+        if (
+          obj.object === nodeTypes.BLOCK &&
+          identifier.indexOf(obj.type) >= 0
+        ) {
           const props = { children, node: obj, attributes: {} };
           return <HeadingsNode {...props} />;
         }
@@ -36,7 +40,7 @@ const headingsConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (identifier.indexOf(type) >= 0) {
           return {
-            object: "block",
+            object: nodeTypes.BLOCK,
             type: type,
             data: {
               style: el.getAttribute("style")

@@ -5,6 +5,7 @@ import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
 import { hasBlock } from "../../helper/strategy";
 import { parseUrl, insertEmbed } from "./EmbedUtils";
+import { nodeTypes } from "../../helper/util";
 
 const TAGNAME = "iframe";
 
@@ -48,7 +49,7 @@ const EmbedConfig: PluginConfig[] = [
     },
     rules: {
       serialize: (obj, children) => {
-        if (obj.object !== "block") {
+        if (obj.object !== nodeTypes.BLOCK) {
           return;
         }
         const props = { children, node: obj, attributes: {} };
@@ -60,7 +61,7 @@ const EmbedConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === TAGNAME) {
           return {
-            object: "block",
+            object: nodeTypes.BLOCK,
             type: type,
             data: {
               className: el.getAttribute("class"),

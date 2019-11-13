@@ -4,6 +4,7 @@ import { PluginConfig } from "..";
 import ImageNode from "./ImageNode";
 import { Figure } from "./ImageNode.css";
 import { insertImage } from "./ImageUtils";
+import { nodeTypes } from "../../helper/util";
 
 const ImagePlugin: PluginConfig["slatePlugin"] = () => ({
   onClick(_event, _editor, next) {
@@ -25,7 +26,7 @@ const ImagePlugin: PluginConfig["slatePlugin"] = () => ({
 const imageConfig: PluginConfig[] = [
   {
     name: "plugin-image",
-    renderType: "inline",
+    renderType: nodeTypes.INLINE,
     toolbarButtons: [
       {
         button: ImageButton
@@ -39,7 +40,7 @@ const imageConfig: PluginConfig[] = [
       deserialize: (el, next) => {
         if (el.tagName === "IMG") {
           return {
-            object: "inline",
+            object: nodeTypes.INLINE,
             type: "img",
             nodes: next(el.childNodes),
             data: {
@@ -53,7 +54,7 @@ const imageConfig: PluginConfig[] = [
           };
         } else if (el.tagName === "FIGURE") {
           return {
-            object: "block",
+            object: nodeTypes.BLOCK,
             type: "figure",
             nodes: next(el.childNodes),
             data: {
@@ -72,7 +73,7 @@ const imageConfig: PluginConfig[] = [
 
           return <Figure {...rest} data-id="plugin-image-figure" />;
         }
-        if (obj.object != "inline") {
+        if (obj.object != nodeTypes.INLINE) {
           return;
         }
         return (

@@ -2,6 +2,7 @@ import React from "react";
 import LinebreakNode from "./LinebreakNode";
 import { PluginConfig } from "..";
 import LinebreakButton from "./LinebreakButton";
+import { nodeTypes } from "../../helper/util";
 
 const TAGNAME = "hr";
 
@@ -26,7 +27,7 @@ const linebreakConfig: PluginConfig[] = [
     },
     rules: {
       serialize: (obj, children) => {
-        if (obj.object === "block" && obj.type === TAGNAME) {
+        if (obj.object === nodeTypes.BLOCK && obj.type === TAGNAME) {
           const props = { children, node: obj, attributes: {} };
           return <LinebreakNode {...props} />;
         }
@@ -35,7 +36,7 @@ const linebreakConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === TAGNAME) {
           return {
-            object: "block",
+            object: nodeTypes.BLOCK,
             type: type,
             data: {
               style: el.getAttribute("style")

@@ -3,6 +3,7 @@ import LinkButton from "./LinkButton";
 import LinkNode from "./LinkNode";
 import { PluginConfig } from "..";
 import LinkKeyboardShortcut from "./LinkKeyboardShortcut";
+import { nodeTypes } from "../../helper/util";
 
 const TAGNAME = "a";
 
@@ -38,7 +39,7 @@ const linkConfig: PluginConfig[] = [
     },
     rules: {
       serialize: (obj, children) => {
-        if (obj.object !== "inline") {
+        if (obj.object !== nodeTypes.INLINE) {
           return;
         }
         const props = { children, node: obj, attributes: {} };
@@ -50,7 +51,7 @@ const linkConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === TAGNAME) {
           return {
-            object: "inline",
+            object: nodeTypes.INLINE,
             type: type,
             data: {
               className: el.getAttribute("class"),

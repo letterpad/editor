@@ -1,4 +1,5 @@
 import { pluginConfigs } from "../plugins";
+import { MARK, nodeTypes } from "./util";
 
 export const BLOCK_TAGS: { [key: string]: string } = {
   p: "p"
@@ -20,13 +21,13 @@ pluginConfigs.filter(plugin => {
   }
   identifier.forEach(id => {
     // if (set[0] === "span") return;
-    if (type === "block") {
+    if (type === nodeTypes.BLOCK) {
       BLOCK_TAGS[id] = id;
     }
-    if (type === "mark") {
+    if (type === MARK) {
       MARK_TAGS[id] = id;
     }
-    if (type === "inline") {
+    if (type === nodeTypes.INLINE) {
       INLINE_TAGS[id] = id;
     }
   });

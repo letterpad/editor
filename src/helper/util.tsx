@@ -6,6 +6,15 @@ export const keyMap = {
   ESCAPE: 27,
   ENTER: 13
 };
+
+export const nodeTypes = {
+  BLOCK: "block",
+  TEXT: "text",
+  INLINE: "inline"
+};
+
+export const MARK = "mark";
+
 export const mapPropsToComponents = (
   componentList: EditorButton[],
   props?: any

@@ -5,6 +5,7 @@ import { CodeblockPlugin } from "./slatePlugin";
 import { PluginConfig } from "..";
 import { AutoReplaceParams } from "slate-auto-replace";
 import { Range, Point } from "slate";
+import { nodeTypes } from "../../helper/util";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
   const { texts } = editor.value;
@@ -53,7 +54,7 @@ const plugins: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === "pre") {
           return {
-            object: "block",
+            object: nodeTypes.BLOCK,
             type: type,
             nodes: next(el.childNodes)
           };

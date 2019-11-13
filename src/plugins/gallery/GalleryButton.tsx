@@ -2,14 +2,15 @@ import React from "react";
 import Button from "../../components/Button";
 import { EditorButtonComponent } from "..";
 import { Block, Editor } from "slate";
+import { nodeTypes } from "../../helper/util";
 
 const getBlock = (props: any) => {
   return {
-    object: "block",
+    object: nodeTypes.BLOCK,
     type: "figure",
     nodes: [
       {
-        object: "inline",
+        object: nodeTypes.INLINE,
         type: "img",
         data: {
           width: props.w,

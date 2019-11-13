@@ -5,6 +5,7 @@ import HighlightButton from "./HighlightButton";
 import HighlightMark from "./HighlightMark";
 import { PluginConfig } from "..";
 import { isKeyboardEvent } from "../../helper/events";
+import { MARK } from "../../helper/util";
 
 const TAGNAME = "code";
 
@@ -19,7 +20,7 @@ const HighlightPlugin: PluginConfig["slatePlugin"] = () => ({
 
 const highlightConfig: PluginConfig[] = [
   {
-    renderType: "mark",
+    renderType: MARK,
     menuButtons: [
       {
         button: HighlightButton
@@ -48,14 +49,14 @@ const highlightConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === TAGNAME) {
           return {
-            object: "mark",
+            object: MARK,
             type: type,
             nodes: next(el.childNodes)
           };
         }
       },
       serialize(obj, children) {
-        if (obj.object === "mark") {
+        if (obj.object === MARK) {
           const props = { children };
           return <HighlightMark {...props} />;
         }

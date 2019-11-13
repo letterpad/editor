@@ -3,6 +3,7 @@ import { ListPlugin } from "./slatePlugin";
 import ListButtonBar from "./ListButtonBar";
 import { RenderNode } from "./RenderNode";
 import { PluginConfig } from "..";
+import { nodeTypes } from "../../helper/util";
 
 const onChange: AutoReplaceParams["change"] = (editor, _, matches) => {
   if (matches.before[0] === "*") {
@@ -33,7 +34,7 @@ const listConfig: PluginConfig[] = [
     },
     rules: {
       serialize: (obj, children) => {
-        if (obj.object !== "block") {
+        if (obj.object !== nodeTypes.BLOCK) {
           return;
         }
         const props = { children, node: obj, attributes: {} };
@@ -45,7 +46,7 @@ const listConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (identifier.indexOf(type) >= 0) {
           return {
-            object: "block",
+            object: nodeTypes.BLOCK,
             type: type,
             data: {
               className: el.getAttribute("class"),

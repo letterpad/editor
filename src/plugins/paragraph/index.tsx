@@ -1,5 +1,6 @@
 import React from "react";
 import { PluginConfig } from "..";
+import { nodeTypes } from "../../helper/util";
 
 const identifier = ["p"];
 
@@ -27,7 +28,7 @@ const paragraphConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === "section" || type === "div") {
           return {
-            object: "block",
+            object: nodeTypes.BLOCK,
             type: type,
             nodes: next(el.childNodes)
           };

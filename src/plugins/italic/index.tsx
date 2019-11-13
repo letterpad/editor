@@ -6,6 +6,7 @@ import { PluginConfig } from "..";
 import { applyMarkStrategy } from "../../helper/strategy";
 import { isKeyboardEvent } from "../../helper/events";
 import { isMod } from "../../helper/keyboard-event";
+import { MARK } from "../../helper/util";
 
 const TAGNAME = "em";
 
@@ -35,7 +36,7 @@ const onChange: AutoReplaceParams["change"] = (editor, _, matched) => {
 
 const italicConfig: PluginConfig[] = [
   {
-    renderType: "mark",
+    renderType: MARK,
     menuButtons: [{ button: ItalicButton }],
     toolbarButtons: [],
     render: ItalicMark,
@@ -51,14 +52,14 @@ const italicConfig: PluginConfig[] = [
         const type = el.tagName.toLowerCase();
         if (type === TAGNAME) {
           return {
-            object: "mark",
+            object: MARK,
             type: type,
             nodes: next(el.childNodes)
           };
         }
       },
       serialize(obj, children) {
-        if (obj.object === "mark") {
+        if (obj.object === MARK) {
           const props = { children };
           return <ItalicMark {...props} />;
         }

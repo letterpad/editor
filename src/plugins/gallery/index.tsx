@@ -3,6 +3,7 @@ import GalleryButton, { createImageBlocks } from "./GalleryButton";
 import { PluginConfig } from "..";
 import GalleryNode from "./GalleryNode";
 import { isKeyboardEvent } from "../../helper/events";
+import { nodeTypes } from "../../helper/util";
 
 const GalleryPlugin: PluginConfig["slatePlugin"] = () => {
   return {
@@ -38,7 +39,7 @@ const GalleryConfig: PluginConfig[] = [
       deserialize: (el, next) => {
         if (el.tagName === "FIGURE") {
           return {
-            object: "block",
+            object: nodeTypes.BLOCK,
             type: "figure",
             nodes: next(el.childNodes),
             data: {
@@ -48,7 +49,7 @@ const GalleryConfig: PluginConfig[] = [
         }
       },
       serialize: (obj, children) => {
-        if (obj.object != "inline") {
+        if (obj.object != nodeTypes.INLINE) {
           return;
         }
         const props = { children, node: obj, attributes: {} };

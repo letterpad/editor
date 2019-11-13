@@ -16,6 +16,7 @@ import {
   ToolbarMenu,
   PlaceholderContainer
 } from "./Toolbar.css";
+// import scrollToCursor from "../helper/scrollToCursor";
 
 interface ToolbarProps {
   hidden: boolean;
@@ -66,13 +67,13 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
         )
       ];
       icons.forEach(node => {
-        node.addEventListener("mousedown", onMouseDown);
+        node.addEventListener("mousedown", onButtonClick);
       });
     }
     return () => {
       document.removeEventListener("mousedown", onMouseDown);
       icons.forEach(node => {
-        node.removeEventListener("mousedown", onMouseDown);
+        node.removeEventListener("mousedown", onButtonClick);
       });
     };
   }, []);
@@ -84,7 +85,10 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
         removePlaceholder();
       }
     }
+  };
+  const onButtonClick = (e: any) => {
     if (menu.current) {
+      e.preventDefault();
       menuActive && setMenuActive(false);
     }
   };
@@ -109,15 +113,20 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({
   };
 
   const removePlaceholder = () => {
-    setPlaceholder(null);
+    if (placeholder.current) {
+      const prevScrollY = window.scrollY;
+      setPlaceholder(null);
+      // safari hack
+      window.scrollTo(0, prevScrollY);
+    }
     setPlaceholderStatus(false);
   };
 
-  const toggleToolbar = () => {
+  const toggleToolbar = (e: React.MouseEvent) => {
+    e.preventDefault();
     const newMenuActiveState = !menuActive;
     setMenuActive(newMenuActiveState);
     if (newMenuActiveState) {
-      editor.focus();
       setPlaceholder(null);
     } else {
       setMenuActive(false);
