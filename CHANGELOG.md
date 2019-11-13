@@ -1,3 +1,23 @@
+### Release: v0.0.9 (2019-11-13)
+
+  - Upgrade slate (#88)
+
+ (<a href="https://github.com/letterpad/editor/commit/64aa6730be39808ab2897b6725ce95fcd23ded86">64aa673</a>)
+ - Bump lodash.template from 4.4.0 to 4.5.0 (#85)
+
+Bumps [lodash.template](https://github.com/lodash/lodash) from 4.4.0 to 4.5.0.
+- [Release notes](https://github.com/lodash/lodash/releases)
+- [Commits](https://github.com/lodash/lodash/compare/4.4.0...4.5.0)
+
+Signed-off-by: dependabot[bot] <support@github.com> (<a href="https://github.com/letterpad/editor/commit/b99496f0a7c919c578ce67d79ecfb4cd281abf4d">b99496f</a>)
+ - [ci skip] Generated Build
+ (<a href="https://github.com/letterpad/editor/commit/4ff70afa4c617401844503b87e124fd02c9d73d1">4ff70af</a>)
+ - add umd to workspace for publish (#84)
+
+ (<a href="https://github.com/letterpad/editor/commit/f07e9f57809377f0a1ea68515b5d3081d0d316f9">f07e9f5</a>)
+ - [ci skip] Generated Build
+ (<a href="https://github.com/letterpad/editor/commit/f8dd1a2c0102cc39eaf0c479bf250648dcbb69c3">f8dd1a2</a>) 
+
 ### Release: v0.0.8 (2019-06-04)
 
   - add umd to workspace for publish (#84) [f07e9f5](https://github.com/letterpad/editor/commit/f07e9f57809377f0a1ea68515b5d3081d0d316f9)
