@@ -20,7 +20,7 @@ module.exports = {
       "1": "<blockquote><span><span><span>These is a sample line of text</span></span></span></blockquote><section><span><span><span>﻿<br></span></span></span></section>"
     }
   },
-  "__version": "3.2.0",
+  "__version": "3.6.1",
   "Markdown": {
     "tests italic": {
       "1": "<section><span><span><em><span>foo</span></em></span></span></section>"

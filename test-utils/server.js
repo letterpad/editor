@@ -12,7 +12,7 @@ const app = http.createServer(async (req, res) => {
       break;
 
     case "/dist/bundles/editor.demo.js":
-      res.setHeader("Content-Type", "application/javascript");
+      res.setHeader("Content-Type", "application/javascript;charset=UTF-8");
     case "/dist/bundles/editor.demo.js.map":
       fs.createReadStream(path.join(__dirname, "../", req.url)).pipe(res);
       break;

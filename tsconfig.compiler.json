@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "esnext",
+    "module": "es2015",
+    "target": "es2015",
     "noEmitOnError": true,
     "strict": true,
     "moduleResolution": "node",
