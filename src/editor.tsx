@@ -260,7 +260,7 @@ export class LetterpadEditor extends PureComponent<
       onButtonClick: this.props.onButtonClick
     };
     return (
-      <Theme theme={this.props.theme}>
+      <Theme theme={this.props.theme} id="letterpad-editor-container">
         <EditorWrapper
           width={this.props.width}
           defaultFont={this.props.defaultFont}

@@ -3,7 +3,7 @@
   "main": "dist/editor.js",
   "browser": "umd/letterpad-editor.js",
   "unpkg": "umd/letterpad-editor.js",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "description": "The letterpad editor - A high level abstraction of the slate editor with plugin architecture",
   "scripts": {
     "cy:open": "cypress open",
@@ -42,9 +42,9 @@
   "author": "Abhishek Saha",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "styled-components": "^4.4.1"
+    "react": "> 16",
+    "react-dom": "> 16",
+    "styled-components": "> 4"
   },
   "devDependencies": {
     "@cypress/snapshot": "^2.0.1",
@@ -69,12 +69,12 @@
     "postcss-nested": "^4.1.1",
     "postcss-preset-env": "^6.5.0",
     "prettier": "^1.16.4",
-    "react": "^16.7.0",
-    "styled-components": "^4.4.1",
-    "react-dom": "^16.7.0",
+    "react": "^16.9.4",
+    "react-dom": "^16.9.4",
     "react-test-renderer": "^16.8.3",
     "start-server-and-test": "^1.7.13",
     "style-loader": "^0.23.1",
+    "styled-components": "^4.4.1",
     "ts-jest": "^24.0.0",
     "ts-loader": "^5.3.3",
     "typescript": "^3.7.2",
