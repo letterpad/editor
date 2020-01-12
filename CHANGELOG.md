@@ -1,3 +1,19 @@
+### Release: v0.0.13 (2020-01-12)
+
+  - Update CHANGELOG.md [2486e3c](https://github.com/letterpad/editor/commit/2486e3c0fbb1df4319cd1d99ecbef758aae1e0ff)
+ - fixed conflict [4609d7a](https://github.com/letterpad/editor/commit/4609d7a954a4b4df28a80d81c43c5c295e5e32df)
+ - Fix externals (#89) [955c4c6](https://github.com/letterpad/editor/commit/955c4c67707344157aa7d5a80bfb6a925a8b1c66)
+ - Update CHANGELOG.md [b5a3623](https://github.com/letterpad/editor/commit/b5a36239f4a8e30593c2ebdfd0d5c76bafcd701e)
+ - 0.0.11 [6e1bce2](https://github.com/letterpad/editor/commit/6e1bce2412f1936e69bcacd8a3def9b8f92e3b6d)
+ - moved styped components to peer [1fe84f0](https://github.com/letterpad/editor/commit/1fe84f0d5fdc284239ac889f56288d62a3ffc4bb)
+ - 0.0.10 [3dd4565](https://github.com/letterpad/editor/commit/3dd45657031e16b70aa185e6cd2759bb12bdb287)
+ - fix safari scroll issues [74f477a](https://github.com/letterpad/editor/commit/74f477a6db7d852d0da3ac7f140faa4f34321080)
+ - Update CHANGELOG.md [1966195](https://github.com/letterpad/editor/commit/1966195b35126773e9fe3c99f50aa8c5d5de15e5)
+ - 0.0.9 [7d2fd1d](https://github.com/letterpad/editor/commit/7d2fd1d7c40c03db82aad1470e6f108b98ebe0a0)
+ - Upgrade slate (#88) [64aa673](https://github.com/letterpad/editor/commit/64aa6730be39808ab2897b6725ce95fcd23ded86)
+ - Bump lodash.template from 4.4.0 to 4.5.0 (#85) [b99496f](https://github.com/letterpad/editor/commit/b99496f0a7c919c578ce67d79ecfb4cd281abf4d)
+ - [ci skip] Generated Build [4ff70af](https://github.com/letterpad/editor/commit/4ff70afa4c617401844503b87e124fd02c9d73d1) 
+
 ### Release: v0.0.12 (2020-01-12)
 
 - fixed conflict
