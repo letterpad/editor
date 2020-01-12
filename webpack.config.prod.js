@@ -1,5 +1,3 @@
-const webpack = require("webpack");
-
 module.exports = {
   mode: "production",
   devtool: "source-map",
@@ -50,6 +48,7 @@ module.exports = {
   },
   externals: {
     "react-dom": "react-dom",
-    react: "react"
+    react: "react",
+    "styled-components": "styled-components"
   }
 };

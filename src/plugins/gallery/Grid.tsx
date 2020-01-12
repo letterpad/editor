@@ -20,7 +20,7 @@ export const Grid = ({ data, selected, onSelect }: IGridParams) => {
 
     const { newWidths, height } = calculateImageDimensions(ratios);
     return (
-      <Row key={gridIndex}>
+      <Row key={gridIndex} className="gallery-row">
         {figures.map((figureBlock: Block, figureIdx: number) => {
           return figureBlock.nodes.map((imgNode: any) => {
             // if the figure contains anything apart from img, return the node.
@@ -43,7 +43,8 @@ export const Grid = ({ data, selected, onSelect }: IGridParams) => {
                 src={imgNode.data.get("src")}
                 selected={isSelected}
                 className={
-                  isSelected ? "letterpad-image-active-for-delete" : ""
+                  "gallery-row-item " +
+                  (isSelected ? "letterpad-image-active-for-delete" : "")
                 }
                 data-key={figureBlock.key}
                 onClick={(e: React.MouseEvent) => {
