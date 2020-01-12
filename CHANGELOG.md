@@ -1,31 +1,72 @@
-### Release: v0.0.11 (2019-11-15)
+### Release: v0.0.12 (2020-01-12)
 
-  - Update CHANGELOG.md
- (<a href="https://github.com/letterpad/editor/commit/0c390f915a1d1b9710bf8e37e1812fdc25999abb">0c390f9</a>)
- - moved styped components to peer
- (<a href="https://github.com/letterpad/editor/commit/0b38049b9ac1d0b511ece5b509ffae3966255d0f">0b38049</a>)
- - Update CHANGELOG.md
- (<a href="https://github.com/letterpad/editor/commit/b733b60084e2dc0df25c62dda4da38ffc6dcf8d6">b733b60</a>)
- - 0.0.10
- (<a href="https://github.com/letterpad/editor/commit/3dd45657031e16b70aa185e6cd2759bb12bdb287">3dd4565</a>)
- - fix safari scroll issues
- (<a href="https://github.com/letterpad/editor/commit/74f477a6db7d852d0da3ac7f140faa4f34321080">74f477a</a>)
- - Update CHANGELOG.md
- (<a href="https://github.com/letterpad/editor/commit/1966195b35126773e9fe3c99f50aa8c5d5de15e5">1966195</a>)
- - 0.0.9
- (<a href="https://github.com/letterpad/editor/commit/7d2fd1d7c40c03db82aad1470e6f108b98ebe0a0">7d2fd1d</a>)
- - Upgrade slate (#88)
+- fixed conflict
+  (<a href="https://github.com/letterpad/editor/commit/4609d7a954a4b4df28a80d81c43c5c295e5e32df">4609d7a</a>)
+- Fix externals (#89)
 
- (<a href="https://github.com/letterpad/editor/commit/64aa6730be39808ab2897b6725ce95fcd23ded86">64aa673</a>)
- - Bump lodash.template from 4.4.0 to 4.5.0 (#85)
+(<a href="https://github.com/letterpad/editor/commit/955c4c67707344157aa7d5a80bfb6a925a8b1c66">955c4c6</a>)
+
+- Update CHANGELOG.md
+  (<a href="https://github.com/letterpad/editor/commit/b5a36239f4a8e30593c2ebdfd0d5c76bafcd701e">b5a3623</a>)
+- 0.0.11
+  (<a href="https://github.com/letterpad/editor/commit/6e1bce2412f1936e69bcacd8a3def9b8f92e3b6d">6e1bce2</a>)
+- moved styped components to peer
+  (<a href="https://github.com/letterpad/editor/commit/1fe84f0d5fdc284239ac889f56288d62a3ffc4bb">1fe84f0</a>)
+- 0.0.10
+  (<a href="https://github.com/letterpad/editor/commit/3dd45657031e16b70aa185e6cd2759bb12bdb287">3dd4565</a>)
+- fix safari scroll issues
+  (<a href="https://github.com/letterpad/editor/commit/74f477a6db7d852d0da3ac7f140faa4f34321080">74f477a</a>)
+- Update CHANGELOG.md
+  (<a href="https://github.com/letterpad/editor/commit/1966195b35126773e9fe3c99f50aa8c5d5de15e5">1966195</a>)
+- 0.0.9
+  (<a href="https://github.com/letterpad/editor/commit/7d2fd1d7c40c03db82aad1470e6f108b98ebe0a0">7d2fd1d</a>)
+- Upgrade slate (#88)
+
+(<a href="https://github.com/letterpad/editor/commit/64aa6730be39808ab2897b6725ce95fcd23ded86">64aa673</a>)
+
+- Bump lodash.template from 4.4.0 to 4.5.0 (#85)
 
 Bumps [lodash.template](https://github.com/lodash/lodash) from 4.4.0 to 4.5.0.
+
 - [Release notes](https://github.com/lodash/lodash/releases)
 - [Commits](https://github.com/lodash/lodash/compare/4.4.0...4.5.0)
 
 Signed-off-by: dependabot[bot] <support@github.com> (<a href="https://github.com/letterpad/editor/commit/b99496f0a7c919c578ce67d79ecfb4cd281abf4d">b99496f</a>)
- - [ci skip] Generated Build
- (<a href="https://github.com/letterpad/editor/commit/4ff70afa4c617401844503b87e124fd02c9d73d1">4ff70af</a>) 
+
+- [ci skip] Generated Build
+  (<a href="https://github.com/letterpad/editor/commit/4ff70afa4c617401844503b87e124fd02c9d73d1">4ff70af</a>)
+
+### Release: v0.0.11 (2019-11-15)
+
+- Update CHANGELOG.md
+  (<a href="https://github.com/letterpad/editor/commit/0c390f915a1d1b9710bf8e37e1812fdc25999abb">0c390f9</a>)
+- moved styped components to peer
+  (<a href="https://github.com/letterpad/editor/commit/0b38049b9ac1d0b511ece5b509ffae3966255d0f">0b38049</a>)
+- Update CHANGELOG.md
+  (<a href="https://github.com/letterpad/editor/commit/b733b60084e2dc0df25c62dda4da38ffc6dcf8d6">b733b60</a>)
+- 0.0.10
+  (<a href="https://github.com/letterpad/editor/commit/3dd45657031e16b70aa185e6cd2759bb12bdb287">3dd4565</a>)
+- fix safari scroll issues
+  (<a href="https://github.com/letterpad/editor/commit/74f477a6db7d852d0da3ac7f140faa4f34321080">74f477a</a>)
+- Update CHANGELOG.md
+  (<a href="https://github.com/letterpad/editor/commit/1966195b35126773e9fe3c99f50aa8c5d5de15e5">1966195</a>)
+- 0.0.9
+  (<a href="https://github.com/letterpad/editor/commit/7d2fd1d7c40c03db82aad1470e6f108b98ebe0a0">7d2fd1d</a>)
+- Upgrade slate (#88)
+
+(<a href="https://github.com/letterpad/editor/commit/64aa6730be39808ab2897b6725ce95fcd23ded86">64aa673</a>)
+
+- Bump lodash.template from 4.4.0 to 4.5.0 (#85)
+
+Bumps [lodash.template](https://github.com/lodash/lodash) from 4.4.0 to 4.5.0.
+
+- [Release notes](https://github.com/lodash/lodash/releases)
+- [Commits](https://github.com/lodash/lodash/compare/4.4.0...4.5.0)
+
+Signed-off-by: dependabot[bot] <support@github.com> (<a href="https://github.com/letterpad/editor/commit/b99496f0a7c919c578ce67d79ecfb4cd281abf4d">b99496f</a>)
+
+- [ci skip] Generated Build
+  (<a href="https://github.com/letterpad/editor/commit/4ff70afa4c617401844503b87e124fd02c9d73d1">4ff70af</a>)
 
 ### Release: v0.0.9 (2019-11-13)
 
