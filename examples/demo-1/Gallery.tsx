@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from "react";
 import { StyledGallery, Container, StyledInput } from "./Gallery.css";
-import { insertImage } from "../../src/plugins/image/ImageUtils";
+// import { insertImage } from "../../src/plugins/image/ImageUtils";
 import { Editor } from "slate";
 
 interface ImageInputProps {
@@ -85,7 +85,7 @@ class Gallery extends React.Component<GalleryProps, GalleryState> {
         className="image-wrapper"
         onClick={() => {
           this.props.onComplete();
-          insertImage(this.props.editor, imageObj.image);
+          //insertImage(this.props.editor, imageObj.image);
         }}
       >
         <img src={imageObj.image} key={imageObj.image} />

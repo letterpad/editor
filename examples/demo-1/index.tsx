@@ -6,7 +6,7 @@ import { LetterpadEditor } from "../../src/editor";
 import { Editor } from "slate";
 const sampleHtml = require("../../src/htmlValue.html");
 
-import Gallery from "./Gallery";
+// import Gallery from "./Gallery";
 
 class Demo extends Component {
   onButtonClick = (
@@ -19,7 +19,7 @@ class Demo extends Component {
     // remove the above return to check it
     if (pluginName == "plugin-image") {
       if (callbacks.showPlaceholder) {
-        callbacks.showPlaceholder(Gallery);
+        // callbacks.showPlaceholder(Gallery);
         return true;
       }
     }
