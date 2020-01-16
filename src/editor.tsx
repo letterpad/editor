@@ -1,32 +1,18 @@
 import styled from "styled-components";
 import React, { PureComponent, SyntheticEvent } from "react";
 import Markdown from "./serializer";
-import { Value, Editor } from "slate";
+import { Value, Editor, SchemaProperties } from "slate";
 import { Editor as SlateReactEditor } from "slate-react";
-// import Html from "slate-html-serializer";
-// import { Plugin as SlateReactPlugin } from "slate-react";
-// import { pluginConfigs } from "./plugins";
-import { StyledMenu, EditorWrapper, StyledContent } from "./editor.css";
-// import { mapPropsToComponents, isEmptyLine, keyMap } from "./helper/util";
+import { EditorWrapper, StyledContent } from "./editor.css";
 import schema from "./helper/schema";
 // import initialValue from "./value";
-// import { renderNode, renderMark, renderInline } from "./helper/renderer";
-// import scrollToCursor from "./helper/scrollToCursor";
-// import { showMenu } from "./helper/showMenu";
-// import { getRules } from "./helper/rules";
-// import Toolbar from "./_components/Toolbar";
 import { Theme } from "./theme.css";
-// import { handlePaste } from "./helper/handlePaste";
-// import { LetterpadEditorState, getInitialState } from "./initialState";
-// import Nodes from "./nodes";
 import createPlugins from "./plugins/plugins";
 
 export type Serializer = {
   deserialize: (str: string) => Value;
   serialize: (value: Value) => string;
 };
-
-// import type { Change, Node } from "slate";
 
 // Options available
 export interface LetterpadEditorProps {
@@ -51,6 +37,35 @@ type State = {
 export type Plugin = {
   onClick?: (e: SyntheticEvent) => void;
   // onKeyDown?: (SyntheticKeyboardEvent<>, Editor, Function) => void,
+};
+
+export type EditorProps = {
+  id?: string;
+  defaultValue: string;
+  placeholder: string;
+  pretitle?: string;
+  plugins: Plugin[];
+  autoFocus?: boolean;
+  readOnly?: boolean;
+  headingsOffset?: number;
+  toc?: boolean;
+  dark?: boolean;
+  schema?: SchemaProperties;
+  serializer?: Serializer;
+  theme?: Object;
+  uploadImage?: (file: File) => Promise<string>;
+  onSave?: ({ done }: { done?: boolean }) => void;
+  onCancel?: () => void;
+  onChange: (value: () => string) => void;
+  onImageUploadStart?: () => void;
+  onImageUploadStop?: () => void;
+  // onSearchLink?: (term: string) => Promise<SearchResult[]>,
+  onClickLink?: (href: string) => void;
+  onClickHashtag?: (tag: string) => void;
+  onShowToast?: (message: string) => void;
+  // getLinkComponent?: Node => ?React.ComponentType<any>,
+  className?: string;
+  style?: Object;
 };
 
 export class LetterpadEditor extends PureComponent<
@@ -99,14 +114,13 @@ export class LetterpadEditor extends PureComponent<
   };
 
   render() {
-    console.log(this.state.editorValue.toJSON());
     return (
       <Theme theme={this.props.theme} id="letterpad-editor-container">
         <EditorWrapper
           width={this.props.width}
           defaultFont={this.props.defaultFont}
         >
-          <StyledEditor
+          <SlateReactEditor
             schema={schema}
             value={this.state.editorValue}
             plugins={this.plugins}

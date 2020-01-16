@@ -1,5 +1,3 @@
-import * as React from "react";
-// import { Node, Editor } from "slate";
 import TrailingBlock from "@wikifactory/slate-trailing-block";
 import EditCode from "@wikifactory/slate-edit-code";
 import EditBlockquote from "@wikifactory/slate-edit-blockquote";
@@ -7,7 +5,7 @@ import EditBlockquote from "@wikifactory/slate-edit-blockquote";
 // import InsertImages from "slate-drop-or-paste-images";
 // import PasteLinkify from "slate-paste-linkify";
 // import CollapseOnEscape from "slate-collapse-on-escape";
-import Prism from "golery-slate-prism";
+// import Prism from "golery-slate-prism";
 // import Placeholder from "./plugins/Placeholder";
 // import EditList from "./plugins/EditList";
 // import CollapsableHeadings from "./plugins/CollapsableHeadings";
@@ -18,14 +16,15 @@ import MarkdownShortcuts from "./MarkdownShortcuts";
 // import Hashtags from "./plugins/Hashtags";
 // import Ellipsis from "./plugins/Ellipsis";
 // import Embeds from "./plugins/Embeds";
-// import Chrome from "./plugins/Chrome";
+import ChromePlugin from "./Chrome";
 // import Table from "./plugins/Table";
-import EditList from "@tommoor/slate-edit-list";
+// import EditList from "@tommoor/slate-edit-list";
 
 import Nodes from "../nodes";
 
 import KeyboardBehavior from "./KeyboardBehavior";
 import Marks from "../marks";
+import EditList from "./EditList";
 // import Marks from "./marks.js";
 
 // additional language support based on the most popular programming languages
@@ -87,18 +86,14 @@ const createPlugins = () => {
     // CollapseOnEscape({ toEdge: "end" }),
     // CollapsableHeadings(),
     // EditList,
-    EditList({
-      types: ["ordered-list", "bulleted-list", "todo-list"],
-      typeItem: "list-item",
-      typeDefault: "paragraph"
-    }),
+    EditList,
     KeyboardBehavior(),
     // KeyboardShortcuts(),
     MarkdownShortcuts(),
     // MarkdownPaste(),
     // Ellipsis(),
-    TrailingBlock({ type: "paragraph" })
-    // Chrome(),
+    TrailingBlock({ type: "paragraph" }),
+    ChromePlugin()
     // Hashtags(),
   ];
 };

@@ -110,7 +110,6 @@ export const StyledHeading = styled(Heading)`
   display: flex;
   align-items: center;
   position: relative;
-  margin-left: -24px;
 
   &:hover {
     ${CollapseToggle} {

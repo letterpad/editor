@@ -1,15 +1,23 @@
-
 import * as React from "react";
 import { Portal } from "react-portal";
-import { Node } from "slate";
-import { Editor, findDOMNode } from "slate-react";
+import { Node, Editor } from "slate";
+import { findDOMNode } from "slate-react";
 import { isEqual } from "lodash";
-import styled, { withTheme } from "styled-components";
-import { PlusIcon } from "outline-icons";
+import styled from "styled-components";
+// import { PlusIcon } from "outline-icons";
 
+export const ToggleButton = styled.span`
+  transition: 0.1s transform ease-in-out;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  padding: 4px;
+  font-size: 30px;
+  user-select: none;
+  margin-left: -30px;
+`;
 type Props = {
-  editor: Editor,
-  theme: Object,
+  editor: Editor;
+  // theme: Object;
 };
 
 function findClosestRootNode(value, ev) {
@@ -26,21 +34,21 @@ function findClosestRootNode(value, ev) {
 }
 
 type State = {
-  closestRootNode: ?Node,
-  active: boolean,
-  top: number,
-  left: number,
+  closestRootNode?: Node;
+  active: boolean;
+  top: number;
+  left: number;
 };
 
 class BlockInsert extends React.Component<Props, State> {
-  mouseMoveTimeout: ?TimeoutID;
-  ref: ?HTMLSpanElement;
+  mouseMoveTimeout?: ReturnType<typeof setTimeout>;
+  ref?: HTMLSpanElement;
 
   state = {
     top: -1000,
     left: -1000,
     active: false,
-    closestRootNode: undefined,
+    closestRootNode: undefined
   };
 
   componentDidMount = () => {
@@ -60,7 +68,7 @@ class BlockInsert extends React.Component<Props, State> {
     this.setState({ active: false });
   };
 
-  handleMouseMove = (ev: SyntheticMouseEvent<>) => {
+  handleMouseMove = (ev: MouseEvent) => {
     const triggerPoint = this.ref
       ? this.ref.getBoundingClientRect().left + 300
       : window.innerWidth;
@@ -98,7 +106,7 @@ class BlockInsert extends React.Component<Props, State> {
     }
   };
 
-  handleClick = (ev: SyntheticMouseEvent<>) => {
+  handleClick = (ev: React.SyntheticEvent) => {
     ev.preventDefault();
     ev.stopPropagation();
 
@@ -108,10 +116,10 @@ class BlockInsert extends React.Component<Props, State> {
 
     // remove any existing toolbars in the document as a fail safe
     editor.value.document.nodes.forEach(node => {
-      if (node.type === "block-toolbar") {
+      if (!node) return;
+      if (node["type"] === "block-toolbar") {
         editor.setNodeByKey(node.key, {
-          type: "paragraph",
-          isVoid: false,
+          type: "paragraph"
         });
       }
     });
@@ -120,10 +128,12 @@ class BlockInsert extends React.Component<Props, State> {
     if (!node) return;
 
     // we're on an empty paragraph. just replace it with the block toolbar
+    //@ts-ignore
     if (!node.text.trim() && node.type === "paragraph") {
+      //@ts-ignore
       editor.setNodeByKey(node.key, {
-        type: "block-toolbar",
-        isVoid: true,
+        type: "block-toolbar"
+        // isVoid: true
       });
     }
   };
@@ -133,7 +143,7 @@ class BlockInsert extends React.Component<Props, State> {
   };
 
   render() {
-    const { theme } = this.props;
+    // const { theme } = this.props;
     const style = { top: `${this.state.top}px`, left: `${this.state.left}px` };
 
     return (
@@ -141,10 +151,17 @@ class BlockInsert extends React.Component<Props, State> {
         <span ref={this.setRef} />
         <Portal>
           <Trigger active={this.state.active} style={style}>
-            <PlusIcon
+            <ToggleButton
+              id="letterpad-editor-toolbar-toggle-button"
+              className="material-icons toggle-button"
+              onClick={this.handleClick}
+            >
+              add
+            </ToggleButton>
+            {/* <PlusIcon
               onClick={this.handleClick}
               color={theme.blockToolbarTrigger}
-            />
+            /> */}
           </Trigger>
         </Portal>
       </React.Fragment>
@@ -163,7 +180,7 @@ const Trigger = styled.div`
     transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
   line-height: 0;
   margin-left: -10px;
-  box-shadow: inset 0 0 0 2px ${props => props.theme.blockToolbarTrigger};
+  /* box-shadow: inset 0 0 0 2px ${props => props.theme.blockToolbarTrigger}; */
   border-radius: 100%;
   transform: scale(0.9);
   cursor: pointer;
@@ -184,4 +201,4 @@ const Trigger = styled.div`
   `};
 `;
 
-export default withTheme(BlockInsert);
+export default BlockInsert;
