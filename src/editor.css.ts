@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const applyFontFamily = (fontFamily: string) => `font-family: ${fontFamily};`;
 
-export const EditorWrapper = styled.div`
+export const EditorWrapper = styled.div<any>`
   ${({ defaultFont }: { defaultFont: boolean }) =>
     defaultFont &&
     `@import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700|Libre+Franklin:200,200i,400,400i,700,700i");`}

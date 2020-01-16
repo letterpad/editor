@@ -1,7 +1,7 @@
 import React, { SFC, MouseEventHandler } from "react";
 import { Editor, Block, Node } from "slate";
 // import ImageUpload from "./ImageUpload";
-import cx from "classnames";
+// import cx from "classnames";
 import EditList from "../plugins/EditList";
 import { findDOMNode } from "react-dom";
 import classnames from "classnames";
@@ -9,36 +9,9 @@ import styled from "styled-components";
 
 const { changes } = EditList;
 
-interface ButtonProps {
-  handler: (e: React.PointerEvent) => void;
-  active?: boolean;
-}
-
-class ToolbarButton extends React.Component<ButtonProps, {}> {
-  handleClick(e: React.PointerEvent): void {
-    this.props.handler(e);
-  }
-
-  render(): React.ReactNode {
-    const { children, active } = this.props;
-
-    const className = active ? "_legoEditor_Toolbar_active" : "";
-
-    return (
-      <button
-        className={cx("_legoEditor_Toolbar_button", className)}
-        onPointerDown={e => this.handleClick(e)}
-        type="button"
-      >
-        {children}
-      </button>
-    );
-  }
-}
-
 //-----------------
 
-const Wrapper = styled.span`
+const Wrapper = styled.span<any>`
   ${(p: any) => p.styleString}
   .material-icons {
     border: 1px solid;
@@ -72,7 +45,7 @@ interface ButtonProps1 {
   iconText?: string;
 }
 
-const Button: SFC<ButtonProps1> = ({
+export const Button: SFC<ButtonProps1> = ({
   onMouseDown,
   active,
   icon,
@@ -114,7 +87,7 @@ type Options = {
   wrapper?: string | Object;
 };
 
-export default class Toolbar extends React.Component<
+export default class BlockToolbar extends React.Component<
   ToolbarProps,
   ToolbarState
 > {

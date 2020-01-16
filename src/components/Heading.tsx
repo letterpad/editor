@@ -58,33 +58,7 @@ function Heading(props: Props) {
   );
 }
 
-const CollapseToggle = styled.a`
-  text-decoration: none;
-  opacity: ${props => (props.disabled ? "0" : "1")};
-  pointer-events: ${props => (props.disabled ? "none" : "all")};
-  visibility: ${props => (props.collapsed ? "visible" : "hidden")};
-  user-select: none;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-
-  svg {
-    ${props => props.collapsed && "transform: rotate(-90deg);"};
-    fill: ${props =>
-      props.collapsed ? props.theme.text : props.theme.placeholder};
-    transition: transform 100ms ease-in-out;
-  }
-
-  &:hover {
-    text-decoration: none;
-
-    svg {
-      fill: ${props => props.theme.text};
-    }
-  }
-`;
-
-const Wrapper = styled.div`
+const Wrapper = styled.div<any>`
   display: inline;
   margin-left: ${(props: Props) => (props.hasPretitle ? "-1.2em" : 0)};
 `;
@@ -106,16 +80,12 @@ const Anchor = styled.div`
 //   padding-left: 0.25em;
 // `;
 
-export const StyledHeading = styled(Heading)`
+export const StyledHeading = styled(Heading)<any>`
   display: flex;
   align-items: center;
   position: relative;
 
   &:hover {
-    ${CollapseToggle} {
-      visibility: visible;
-    }
-
     ${Anchor} {
       color: ${props => props.theme.placeholder};
       visibility: visible;

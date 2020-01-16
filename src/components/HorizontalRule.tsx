@@ -7,7 +7,7 @@ function HorizontalRule(props: SlateNodeProps) {
   return <StyledHr isSelected={isSelected} {...attributes} />;
 }
 
-const StyledHr = styled.hr`
+const StyledHr = styled.hr<any>`
   padding-top: 0.75em;
   margin: 0;
   border: 0;

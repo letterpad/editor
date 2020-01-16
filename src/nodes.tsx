@@ -23,7 +23,7 @@ import {
 } from "./components/Heading";
 
 import Paragraph from "./components/Paragraph";
-import Toolbar from "./components/Toolbar";
+import BlockToolbar from "./components/BlockToolbar";
 // import type { SlateNodeProps } from "./types";
 
 function renderBlock(props: any, _editor: Editor, next: Function) {
@@ -36,7 +36,7 @@ function renderBlock(props: any, _editor: Editor, next: Function) {
     case "paragraph":
       return <Paragraph {...props} />;
     case "block-toolbar":
-      return <Toolbar {...props} />;
+      return <BlockToolbar {...props} />;
     case "block-quote":
       return <blockquote {...attributes}>{props.children}</blockquote>;
     case "bulleted-list":

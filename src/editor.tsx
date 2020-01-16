@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import React, { PureComponent, SyntheticEvent } from "react";
 import Markdown from "./serializer";
 import { Value, Editor, SchemaProperties } from "slate";
@@ -8,6 +8,7 @@ import schema from "./helper/schema";
 // import initialValue from "./value";
 import { Theme } from "./theme.css";
 import createPlugins from "./plugins/plugins";
+import queries from "./queries";
 
 export type Serializer = {
   deserialize: (str: string) => Value;
@@ -115,8 +116,9 @@ export class LetterpadEditor extends PureComponent<
 
   render() {
     return (
-      <Theme theme={this.props.theme} id="letterpad-editor-container">
+      <ThemeProvider theme={this.props.theme}>
         <EditorWrapper
+          id="letterpad-editor-container"
           width={this.props.width}
           defaultFont={this.props.defaultFont}
         >
@@ -125,10 +127,13 @@ export class LetterpadEditor extends PureComponent<
             value={this.state.editorValue}
             plugins={this.plugins}
             onChange={this.handleChange}
+            queries={queries}
+            //@ts-ignore
+            tooltip="span"
             // onKeyDown={this.handleKeyDown}
           />
         </EditorWrapper>
-      </Theme>
+      </ThemeProvider>
     );
   }
 }

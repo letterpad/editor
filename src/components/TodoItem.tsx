@@ -4,7 +4,7 @@ import styled from "styled-components";
 // import type { SlateNodeProps as Props } from "../types";
 
 export default class TodoItem extends React.Component<any> {
-  handleChange = (ev: React.KeyboardEvent<HTMLInputElement>) => {
+  handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     const checked = ev.currentTarget.checked;
     const { editor, node } = this.props;
     editor.setNodeByKey(node.key, { data: { checked } });
@@ -31,7 +31,7 @@ export default class TodoItem extends React.Component<any> {
   }
 }
 
-const ListItem = styled.li`
+const ListItem = styled.li<any>`
   padding-left: 1.4em;
   position: relative;
 

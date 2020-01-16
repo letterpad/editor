@@ -169,7 +169,7 @@ class BlockInsert extends React.Component<Props, State> {
   }
 }
 
-const Trigger = styled.div`
+const Trigger = styled.div<any>`
   position: absolute;
   z-index: ${props => {
     return props.theme.zIndex + 99;

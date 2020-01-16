@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Editor } from "slate";
 // import Contents from "../components/Contents";
-// import Toolbar from "../components/Toolbar";
+import HoveringMenu from "../components/HoveringMenu";
 import BlockInsert from "../components/BlockInsert";
 import { EditorProps } from "../editor";
 import { StyledMenu } from "../editor.css";
@@ -19,7 +19,7 @@ function ChromePlugin() {
       <React.Fragment>
         {
           <StyledMenu>
-            {/* <Toolbar value={editor.value} editor={editor} /> */}
+            <HoveringMenu value={editor.value} editor={editor} />
           </StyledMenu>
         }
         {<BlockInsert editor={editor} />}
