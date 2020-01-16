@@ -12,18 +12,23 @@ const { changes } = EditList;
 //-----------------
 
 const Wrapper = styled.span<any>`
+  &.active {
+    color: var(--bg-success);
+  }
   ${(p: any) => p.styleString}
   .material-icons {
-    border: 1px solid;
-    border-radius: 50%;
+    /* border: 1px solid;
+    border-radius: 50%; */
     padding: 3px;
     margin-right: 6px;
+    font-size: 18px;
   }
+  z-index: 999;
   cursor: pointer;
 `;
 const TextIcon = styled.span`
-  border-radius: 50%;
-  border: 1px solid;
+  /* border-radius: 50%;
+  border: 1px solid; */
   font-size: 12px;
   font-weight: 600;
   width: 32px;
@@ -37,7 +42,7 @@ const TextIcon = styled.span`
   text-align: center;
 `;
 
-interface ButtonProps1 {
+interface ButtonProps {
   onMouseDown: MouseEventHandler;
   icon?: string;
   active?: boolean;
@@ -45,7 +50,7 @@ interface ButtonProps1 {
   iconText?: string;
 }
 
-export const Button: SFC<ButtonProps1> = ({
+export const Button: SFC<ButtonProps> = ({
   onMouseDown,
   active,
   icon,

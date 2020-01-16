@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Editor } from "slate";
+import { Editor } from "slate-react";
 // import Contents from "../components/Contents";
 import HoveringMenu from "../components/HoveringMenu";
 import BlockInsert from "../components/BlockInsert";
@@ -18,9 +18,9 @@ function ChromePlugin() {
     return (
       <React.Fragment>
         {
-          <StyledMenu>
-            <HoveringMenu value={editor.value} editor={editor} />
-          </StyledMenu>
+          // <StyledMenu>
+          <HoveringMenu value={editor.value} editor={editor} />
+          // </StyledMenu>
         }
         {<BlockInsert editor={editor} />}
         {/* {props.toc && <Contents editor={editor} />} */}

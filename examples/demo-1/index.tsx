@@ -35,7 +35,7 @@ class Demo extends Component {
   render() {
     return (
       <LetterpadEditor
-        theme="light"
+        theme="dark"
         onButtonClick={this.onButtonClick}
         onBeforeRender={this.onBeforeRender}
         spellCheck={false}

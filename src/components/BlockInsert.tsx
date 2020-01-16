@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Portal } from "react-portal";
-import { Node, Editor } from "slate";
-import { findDOMNode } from "slate-react";
+import { Node } from "slate";
+import { findDOMNode, Editor } from "slate-react";
 import { isEqual } from "lodash";
 import styled from "styled-components";
 // import { PlusIcon } from "outline-icons";

@@ -1,5 +1,5 @@
-import styled, { ThemeProvider } from "styled-components";
-import React, { PureComponent, SyntheticEvent } from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import React, { memo, PureComponent, SyntheticEvent } from "react";
 import Markdown from "./serializer";
 import { Value, Editor, SchemaProperties } from "slate";
 import { Editor as SlateReactEditor } from "slate-react";
@@ -9,6 +9,7 @@ import schema from "./helper/schema";
 import { Theme } from "./theme.css";
 import createPlugins from "./plugins/plugins";
 import queries from "./queries";
+import * as themes from "./themes";
 
 export type Serializer = {
   deserialize: (str: string) => Value;
@@ -115,10 +116,16 @@ export class LetterpadEditor extends PureComponent<
   };
 
   render() {
+    const theme = this.props.theme;
+    const GlobalStyle = memo(createGlobalStyle`
+          body {
+            ${themes.dark}
+          }
+        `);
     return (
-      <ThemeProvider theme={this.props.theme}>
+      <Theme theme={this.props.theme} id="letterpad-editor-container">
+        <GlobalStyle />
         <EditorWrapper
-          id="letterpad-editor-container"
           width={this.props.width}
           defaultFont={this.props.defaultFont}
         >
@@ -128,12 +135,10 @@ export class LetterpadEditor extends PureComponent<
             plugins={this.plugins}
             onChange={this.handleChange}
             queries={queries}
-            //@ts-ignore
-            tooltip="span"
             // onKeyDown={this.handleKeyDown}
           />
         </EditorWrapper>
-      </ThemeProvider>
+      </Theme>
     );
   }
 }

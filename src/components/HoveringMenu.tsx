@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Portal } from "react-portal";
 import { findDOMNode } from "slate-react";
-import { Editor, Node, Value } from "slate";
+import { Node, Value } from "slate";
+import { Editor } from "slate-react";
 import styled from "styled-components";
 import { isEqual, debounce } from "lodash";
 import FormattingToolbar from "./FormattingToolbar";
@@ -186,13 +187,12 @@ export default class Toolbar extends React.Component<Props, State> {
 export const Menu = styled.div<any>`
   padding: 8px 16px;
   position: absolute;
-  z-index: ${props => {
-    return props.theme.zIndex + 100;
-  }};
+  z-index: 2;
   top: -10000px;
   left: -10000px;
   opacity: 0;
-  background-color: ${props => props.theme.toolbarBackground};
+  background-color: var(--bg-sections);
+  color: var(--color-base);
   border-radius: 4px;
   transform: scale(0.95);
   transition: opacity 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
@@ -203,6 +203,9 @@ export const Menu = styled.div<any>`
   box-sizing: border-box;
   pointer-events: none;
   white-space: nowrap;
+
+  display: flex;
+  align-items: center;
 
   &::before {
     content: "";
