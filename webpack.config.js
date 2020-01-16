@@ -45,6 +45,17 @@ module.exports = {
             collapseWhitespace: true
           }
         }
+      },
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: "raw-loader",
+            options: {
+              /* your options here */
+            }
+          }
+        ]
       }
     ]
   },

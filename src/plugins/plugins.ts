@@ -12,7 +12,7 @@ import EditBlockquote from "@wikifactory/slate-edit-blockquote";
 // import KeyboardBehavior from "./plugins/KeyboardBehavior";
 // import KeyboardShortcuts from "./plugins/KeyboardShortcuts";
 import MarkdownShortcuts from "./MarkdownShortcuts";
-// import MarkdownPaste from "./plugins/MarkdownPaste";
+import MarkdownPaste from "./MarkdownPaste";
 // import Hashtags from "./plugins/Hashtags";
 // import Ellipsis from "./plugins/Ellipsis";
 // import Embeds from "./plugins/Embeds";
@@ -90,7 +90,7 @@ const createPlugins = () => {
     KeyboardBehavior(),
     // KeyboardShortcuts(),
     MarkdownShortcuts(),
-    // MarkdownPaste(),
+    MarkdownPaste(),
     // Ellipsis(),
     TrailingBlock({ type: "paragraph" }),
     ChromePlugin()

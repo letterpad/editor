@@ -10,7 +10,9 @@ import { Theme } from "./theme.css";
 import createPlugins from "./plugins/plugins";
 import queries from "./queries";
 import * as themes from "./themes";
+const md = require("./initialText.md").default;
 
+console.log("md :", md);
 export type Serializer = {
   deserialize: (str: string) => Value;
   serialize: (value: Value) => string;
@@ -100,7 +102,7 @@ export class LetterpadEditor extends PureComponent<
     this.plugins = [...props.plugins, ...builtInPlugins];
 
     this.state = {
-      editorValue: this.serializer.deserialize("## hello world")
+      editorValue: this.serializer.deserialize(md)
     };
   }
 
@@ -116,10 +118,10 @@ export class LetterpadEditor extends PureComponent<
   };
 
   render() {
-    const theme = this.props.theme;
+    const { theme } = this.props;
     const GlobalStyle = memo(createGlobalStyle`
           body {
-            ${themes.dark}
+            ${themes["theme"]}
           }
         `);
     return (
@@ -129,7 +131,7 @@ export class LetterpadEditor extends PureComponent<
           width={this.props.width}
           defaultFont={this.props.defaultFont}
         >
-          <SlateReactEditor
+          <StyledEditor
             schema={schema}
             value={this.state.editorValue}
             plugins={this.plugins}
