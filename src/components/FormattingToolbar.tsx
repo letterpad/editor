@@ -116,7 +116,7 @@ class FormattingToolbar extends React.Component<Props> {
       if (selection.length) {
         const data = { href: "" };
         this.props.editor.wrapInline({ type: "link", data });
-        // this.props.onCreateLink(ev);
+        this.props.onCreateLink(ev);
       }
     }
   };

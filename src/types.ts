@@ -1,4 +1,5 @@
-import { Value, Node, Mark as TMark } from "slate";
+import { Node, Mark as TMark, Value } from "slate";
+
 import { Editor as ReactEditor } from "slate-react";
 
 export type SlateNodeProps = {

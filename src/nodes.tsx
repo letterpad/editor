@@ -1,18 +1,5 @@
 import * as React from "react";
-import { Editor } from "slate";
-// import styled from "styled-components";
 
-// import Code from "./components/Code";
-// import BlockToolbar from "./components/Toolbar/BlockToolbar";
-import HorizontalRule from "./components/HorizontalRule";
-// import Image from "./components/Image";
-// import Link from "./components/Link";
-// import Hashtag from "./components/Hashtag";
-import Table from "./components/Table";
-import Cell from "./components/Table/Cell";
-import Row from "./components/Table/Row";
-import ListItem from "./components/ListItem";
-import TodoList from "./components/TodoList";
 import {
   Heading1,
   Heading2,
@@ -22,8 +9,24 @@ import {
   Heading6
 } from "./components/Heading";
 
-import Paragraph from "./components/Paragraph";
 import BlockToolbar from "./components/BlockToolbar";
+import Cell from "./components/Table/Cell";
+import { Editor } from "slate";
+// import Code from "./components/Code";
+// import BlockToolbar from "./components/Toolbar/BlockToolbar";
+import HorizontalRule from "./components/HorizontalRule";
+import Link from "./components/Link";
+import ListItem from "./components/ListItem";
+import Paragraph from "./components/Paragraph";
+import Row from "./components/Table/Row";
+// import Image from "./components/Image";
+// import Link from "./components/Link";
+// import Hashtag from "./components/Hashtag";
+import Table from "./components/Table";
+import TodoList from "./components/TodoList";
+// import styled from "styled-components";
+
+
 // import type { SlateNodeProps } from "./types";
 
 function renderBlock(props: any, _editor: Editor, next: Function) {
@@ -61,8 +64,8 @@ function renderBlock(props: any, _editor: Editor, next: Function) {
       return <pre {...attributes}>{props.children}</pre>;
     // case "image":
     //   return <Image {...props} />;
-    // case "link":
-    //   return <Link {...props} />;
+    case "link":
+      return <Link {...props} />;
     // case "hashtag":
     //   return <Hashtag {...props} />;
     case "heading1":

@@ -1,11 +1,14 @@
-
 import * as React from "react";
-import type { SlateNodeProps as Props } from "../types";
 
-export default function Link(props: Props) {
+import { SlateNodeProps } from "../types";
+
+export default function Link(props: SlateNodeProps) {
   const { attributes, node, children, editor, readOnly } = props;
+  //@ts-ignore
   const embed = node.data.get("embed");
+  //@ts-ignore
   const Component = node.data.get("component");
+  //@ts-ignore
   const href = node.data.get("href");
 
   if (embed && Component) {
@@ -19,8 +22,10 @@ export default function Link(props: Props) {
       onClick={
         readOnly
           ? ev => {
+              //@ts-ignore
               if (editor.props.onClickLink) {
                 ev.preventDefault();
+                //@ts-ignore
                 editor.props.onClickLink(href);
               }
             }

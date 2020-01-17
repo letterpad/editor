@@ -2,24 +2,23 @@
 // import Ellipsis from "./plugins/Ellipsis";
 // import Embeds from "./plugins/Embeds";
 import ChromePlugin from "./Chrome";
+import CollapseOnEscape from "slate-collapse-on-escape";
 import EditBlockquote from "@wikifactory/slate-edit-blockquote";
 import EditCode from "@wikifactory/slate-edit-code";
 import EditList from "./EditList";
 import EditTable from "@domoinc/slate-edit-table";
 import KeyboardBehavior from "./KeyboardBehavior";
 import MarkdownPaste from "./MarkdownPaste";
-// import InsertImages from "slate-drop-or-paste-images";
-// import PasteLinkify from "slate-paste-linkify";
-// import CollapseOnEscape from "slate-collapse-on-escape";
 // import Prism from "golery-slate-prism";
 // import Placeholder from "./plugins/Placeholder";
 // import EditList from "./plugins/EditList";
-// import CollapsableHeadings from "./plugins/CollapsableHeadings";
 // import KeyboardBehavior from "./plugins/KeyboardBehavior";
 // import KeyboardShortcuts from "./plugins/KeyboardShortcuts";
 import MarkdownShortcuts from "./MarkdownShortcuts";
 import Marks from "../marks";
 import Nodes from "../nodes";
+// import InsertImages from "slate-drop-or-paste-images";
+import PasteLinkify from "slate-paste-linkify";
 import Table from "./Table";
 import TrailingBlock from "@wikifactory/slate-trailing-block";
 // import EditList from "@tommoor/slate-edit-list";
@@ -38,10 +37,10 @@ const createPlugins = () => {
   return [
     Nodes,
     Marks,
-    // PasteLinkify({
-    //   type: "link",
-    //   collapseTo: "end",
-    // }),
+    PasteLinkify({
+      type: "link",
+      collapseTo: "end"
+    }),
     // Placeholder({
     //   placeholder,
     //   when: (editor: Editor, node: Node) => {
@@ -80,8 +79,7 @@ const createPlugins = () => {
     //   getSyntax: node => node.data.get("language") || "javascript"
     // }),
     // Embeds({ getComponent: getLinkComponent }),
-    // CollapseOnEscape({ toEdge: "end" }),
-    // CollapsableHeadings(),
+    CollapseOnEscape({ toEdge: "end" }),
     EditList,
     KeyboardBehavior(),
     MarkdownShortcuts(),

@@ -41,8 +41,10 @@
     "prismjs": "^1.15.0",
     "slate": "0.47.8",
     "slate-auto-replace": "^0.12.1",
+    "slate-collapse-on-escape": "^0.8.1",
     "slate-html-serializer": "^0.8.10",
     "slate-md-serializer": "edithq/slate-md-serializer",
+    "slate-paste-linkify": "^0.7.0",
     "slate-react": "^0.22.9",
     "slate-schema-violations": "^0.1.39",
     "snarkdown": "^1.2.2"
