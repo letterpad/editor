@@ -1,11 +1,13 @@
 import * as React from "react";
+
+import { Node, Value } from "slate";
+import { debounce, isEqual } from "lodash";
+
+import { Editor } from "slate-react";
+import FormattingToolbar from "./FormattingToolbar";
 import { Portal } from "react-portal";
 import { findDOMNode } from "slate-react";
-import { Node, Value } from "slate";
-import { Editor } from "slate-react";
 import styled from "styled-components";
-import { isEqual, debounce } from "lodash";
-import FormattingToolbar from "./FormattingToolbar";
 // import LinkToolbar from "./LinkToolbar";
 
 type Props = {
@@ -47,7 +49,7 @@ export default class Toolbar extends React.Component<Props, State> {
     }
   };
 
-  componentWillReceiveProps = debounce(() => {
+  UNSAFE_componentWillReceiveProps = debounce(() => {
     this.update();
   }, 100);
 

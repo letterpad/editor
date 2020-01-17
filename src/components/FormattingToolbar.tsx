@@ -1,6 +1,20 @@
 import * as React from "react";
+
+import {
+  BlockQuoteIcon,
+  BoldIcon,
+  Heading1Icon,
+  Heading2Icon,
+  HighlightIcon,
+  ItalicIcon,
+  LinkIcon,
+  Separator,
+  StrikeThroughIcon
+} from "../icons";
+
 import { Editor } from "slate-react";
-import { Button } from "./BlockToolbar";
+import ToolbarButton from "./ToolbarButton";
+
 // import {
 //   BoldIcon,
 //   CodeIcon,
@@ -107,7 +121,7 @@ class FormattingToolbar extends React.Component<Props> {
     }
   };
 
-  renderMarkButton = (type: string, IconClass: string, tooltip: string) => {
+  renderMarkButton = (type: string, IconClass: React.ComponentType<any>) => {
     // const { hiddenToolbarButtons } = this.props.theme;
     //@ts-ignore
     const Tooltip = this.props.editor.props.tooltip;
@@ -124,16 +138,13 @@ class FormattingToolbar extends React.Component<Props> {
     const onMouseDown = ev => this.onClickMark(ev, type);
 
     return (
-      <Button onMouseDown={onMouseDown} active={isActive} icon={IconClass}>
-        <Tooltip tooltip={tooltip} placement="top">
-          {/* <IconClass color={this.props.theme.toolbarItem} /> */}
-          {IconClass}
-        </Tooltip>
-      </Button>
+      <ToolbarButton onMouseDown={onMouseDown} active={isActive}>
+        <IconClass />
+      </ToolbarButton>
     );
   };
 
-  renderBlockButton = (type: string, IconClass: string, _tooltip: string) => {
+  renderBlockButton = (type: string, IconClass: React.ComponentType) => {
     // const { hiddenToolbarButtons } = this.props.theme;
     // @ts-ignore
     const Tooltip = this.props.editor.props.tooltip;
@@ -151,16 +162,9 @@ class FormattingToolbar extends React.Component<Props> {
       this.onClickBlock(ev, isActive ? "paragraph" : type);
 
     return (
-      <Button
-        onMouseDown={onMouseDown}
-        active={isActive || false}
-        icon={IconClass}
-      >
-        {/* <Tooltip tooltip={tooltip} placement="top">
-          {IconClass} */}
-        {/* <IconClass color={this.props.theme.toolbarItem} /> */}
-        {/* </Tooltip> */}
-      </Button>
+      <ToolbarButton onMouseDown={onMouseDown} active={isActive || false}>
+        <IconClass />
+      </ToolbarButton>
     );
   };
 
@@ -173,55 +177,46 @@ class FormattingToolbar extends React.Component<Props> {
     const { editor } = this.props;
     //@ts-ignore
     const isSelectionInHeading = editor.isSelectionInHeading();
-
-    const isSelectionInTable = false; //editor.isSelectionInTable();
     //@ts-ignore
-    const Tooltip = editor.props.tooltip;
+    const isSelectionInTable = editor.isSelectionInTable();
 
     return (
       <React.Fragment>
         {!isSelectionInHeading && (
           <React.Fragment>
-            {this.renderMarkButton("bold", "format_bold", "Bold")}
-            {this.renderMarkButton("italic", "format_italic", "Italic")}
-            {this.renderMarkButton(
-              "deleted",
-              "format_strikethrough",
-              "Strikethrough"
-            )}
-            {this.renderMarkButton("code", "highlight", "Code")}
+            {this.renderMarkButton("bold", BoldIcon)}
+            {this.renderMarkButton("italic", ItalicIcon)}
+            {this.renderMarkButton("deleted", StrikeThroughIcon)}
+            {this.renderMarkButton("code", HighlightIcon)}
           </React.Fragment>
         )}
-        {/* {!isSelectionInTable && (*/}
-        <React.Fragment>
-          {/* {!isSelectionInHeading && <Separator />}
-          {!isSelectionInHeading &&
-            this.renderBlockButton("block-quote", BlockQuoteIcon, "Quote")} */}
+        {!isSelectionInTable && (
+          <React.Fragment>
+            {!isSelectionInHeading && <Separator />}
+            {!isSelectionInHeading &&
+              this.renderBlockButton("block-quote", BlockQuoteIcon)}
 
-          <Button
-            active={this.isBlock("heading1") || false}
-            onMouseDown={e => this.onMouseDown(e, "heading1")}
-            iconText="H1"
-          >
-            H1
-          </Button>
-          <Button
-            active={this.isBlock("heading2") || false}
-            onMouseDown={e => this.onMouseDown(e, "heading2")}
-            iconText="H2"
-          >
-            H2
-          </Button>
-        </React.Fragment>
-
+            <ToolbarButton
+              active={this.isBlock("heading1") || false}
+              onMouseDown={e => this.onMouseDown(e, "heading1")}
+            >
+              <Heading1Icon />
+            </ToolbarButton>
+            <ToolbarButton
+              active={this.isBlock("heading2") || false}
+              onMouseDown={e => this.onMouseDown(e, "heading2")}
+            >
+              <Heading2Icon />
+            </ToolbarButton>
+          </React.Fragment>
+        )}
+        &nbsp;
         {!isSelectionInHeading && (
           <React.Fragment>
-            {/* <Separator /> */}
-            <Button onMouseDown={this.handleCreateLink} icon="insert_link">
-              <Tooltip tooltip="Create link" placement="top">
-                {/* <LinkIcon color={this.props.theme.toolbarItem} /> */}
-              </Tooltip>
-            </Button>
+            <Separator />
+            <ToolbarButton onMouseDown={this.handleCreateLink}>
+              <LinkIcon />
+            </ToolbarButton>
           </React.Fragment>
         )}
       </React.Fragment>

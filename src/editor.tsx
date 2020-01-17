@@ -1,18 +1,20 @@
-import styled, { createGlobalStyle } from "styled-components";
-import React, { memo, PureComponent, SyntheticEvent } from "react";
-import Markdown from "./serializer";
-import { Value, Editor, SchemaProperties } from "slate";
-import { Editor as SlateReactEditor } from "slate-react";
+import * as themes from "./themes";
+
+import { Editor, SchemaProperties, Value } from "slate";
 import { EditorWrapper, StyledContent } from "./editor.css";
-import schema from "./helper/schema";
+import React, { PureComponent, SyntheticEvent, memo } from "react";
+import styled, { createGlobalStyle } from "styled-components";
+
+import Markdown from "./serializer";
+import { Editor as SlateReactEditor } from "slate-react";
 // import initialValue from "./value";
 import { Theme } from "./theme.css";
 import createPlugins from "./plugins/plugins";
 import queries from "./queries";
-import * as themes from "./themes";
+import schema from "./helper/schema";
+
 const md = require("./initialText.md").default;
 
-console.log("md :", md);
 export type Serializer = {
   deserialize: (str: string) => Value;
   serialize: (value: Value) => string;
@@ -113,7 +115,7 @@ export class LetterpadEditor extends PureComponent<
 
   handleChange = ({ value }: { value: Value }) => {
     this.setState({ editorValue: value }, () => {
-      console.log("b :", this.value());
+      // console.log("b :", this.value());
     });
   };
 
@@ -121,7 +123,7 @@ export class LetterpadEditor extends PureComponent<
     const { theme } = this.props;
     const GlobalStyle = memo(createGlobalStyle`
           body {
-            ${themes["theme"]}
+            ${themes[theme]}
           }
         `);
     return (

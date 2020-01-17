@@ -1,82 +1,23 @@
-import React, { SFC, MouseEventHandler } from "react";
-import { Editor, Block, Node } from "slate";
+import { Block, Editor, Node } from "slate";
+// import ToolbarButton from "./_Toolbar/ToolbarButton";
+import {
+  BulletListIcon,
+  CodeblockIcon,
+  Heading1Icon,
+  Heading2Icon,
+  ImageIcon,
+  OrderedListIcon,
+  TodoListIcon
+} from "../icons";
+
 // import ImageUpload from "./ImageUpload";
 // import cx from "classnames";
 import EditList from "../plugins/EditList";
+import React from "react";
+import ToolbarButton from "./ToolbarButton";
 import { findDOMNode } from "react-dom";
-import classnames from "classnames";
-import styled from "styled-components";
 
 const { changes } = EditList;
-
-//-----------------
-
-const Wrapper = styled.span<any>`
-  &.active {
-    color: var(--bg-success);
-  }
-  ${(p: any) => p.styleString}
-  .material-icons {
-    /* border: 1px solid;
-    border-radius: 50%; */
-    padding: 3px;
-    margin-right: 6px;
-    font-size: 18px;
-  }
-  z-index: 999;
-  cursor: pointer;
-`;
-const TextIcon = styled.span`
-  /* border-radius: 50%;
-  border: 1px solid; */
-  font-size: 12px;
-  font-weight: 600;
-  width: 32px;
-  height: 32px;
-  vertical-align: text-bottom;
-  margin-right: 6px;
-  display: inline-block;
-  padding: 3px;
-  font-family: sans-serif;
-  line-height: 25px;
-  text-align: center;
-`;
-
-interface ButtonProps {
-  onMouseDown: MouseEventHandler;
-  icon?: string;
-  active?: boolean;
-  styleString?: string;
-  iconText?: string;
-}
-
-export const Button: SFC<ButtonProps> = ({
-  onMouseDown,
-  active,
-  icon,
-  iconText,
-  styleString
-}) => {
-  const classes = classnames("button", {
-    active
-  });
-  const isImageLink = icon && icon.indexOf(".") > 0;
-  const isMaterial = !isImageLink && !iconText;
-  return (
-    <Wrapper
-      styleString={styleString}
-      className={classes}
-      onMouseDown={onMouseDown}
-      icon={icon}
-    >
-      {isImageLink && <span className="custom-icons" />}
-      {iconText && <TextIcon className="lp-text-icon">{iconText}</TextIcon>}
-      {isMaterial && <span className="material-icons">{icon}</span>}
-    </Wrapper>
-  );
-};
-
-//------------------
 
 interface ToolbarProps {
   editor: Editor;
@@ -265,50 +206,49 @@ export default class BlockToolbar extends React.Component<
 
     return (
       <div ref={this.bar}>
-        <Button
+        <ToolbarButton
           active={this.checkActiveBlock("heading1")}
           onMouseDown={e => this.handleClickBlock(e, "heading1")}
-          iconText="H1"
-        />
-        <Button
+        >
+          <Heading1Icon />
+        </ToolbarButton>
+        <ToolbarButton
           active={this.checkActiveBlock("heading2")}
           onMouseDown={e => this.handleClickBlock(e, "heading2")}
-          iconText="H2"
-        />
-        <Button
+        >
+          <Heading2Icon />
+        </ToolbarButton>
+        <ToolbarButton
           active={this.checkActiveBlock("code_block")}
           onMouseDown={e => this.handleClickBlock(e, "code_block")}
-          icon="code"
         >
-          cb
-        </Button>
-        <Button
+          <CodeblockIcon />
+        </ToolbarButton>
+        <ToolbarButton
           active={this.checkActiveBlock("bulleted-list")}
           onMouseDown={e => this.handleClickBlock(e, "bulleted-list")}
-          icon="format_list_bulleted"
         >
-          li
-        </Button>
-        <Button
+          <BulletListIcon />
+        </ToolbarButton>
+        <ToolbarButton
           active={this.checkActiveBlock("ordered-list")}
           onMouseDown={e => this.handleClickBlock(e, "ordered-list")}
-          icon="format_list_numbered"
         >
-          ol
-        </Button>
-        <Button
+          <OrderedListIcon />
+        </ToolbarButton>
+        <ToolbarButton
           active={this.checkActiveBlock("todo-list")}
           onMouseDown={e => this.handleClickBlock(e, "todo-list")}
-          icon="check_box"
         >
-          tl
-        </Button>
+          <TodoListIcon />
+        </ToolbarButton>
 
-        <Button
+        <ToolbarButton
           onMouseDown={e => this.openImageUploader(e)}
           active={insertingImage}
-          icon="image"
-        ></Button>
+        >
+          <ImageIcon />
+        </ToolbarButton>
         {/* {insertingImage && (
           <ImageUpload
             uploadFunction={img => this.insertImage(img)}

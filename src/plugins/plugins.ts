@@ -1,7 +1,13 @@
-import TrailingBlock from "@wikifactory/slate-trailing-block";
-import EditCode from "@wikifactory/slate-edit-code";
+// import Hashtags from "./plugins/Hashtags";
+// import Ellipsis from "./plugins/Ellipsis";
+// import Embeds from "./plugins/Embeds";
+import ChromePlugin from "./Chrome";
 import EditBlockquote from "@wikifactory/slate-edit-blockquote";
-// import EditTable from "@domoinc/slate-edit-table";
+import EditCode from "@wikifactory/slate-edit-code";
+import EditList from "./EditList";
+import EditTable from "@domoinc/slate-edit-table";
+import KeyboardBehavior from "./KeyboardBehavior";
+import MarkdownPaste from "./MarkdownPaste";
 // import InsertImages from "slate-drop-or-paste-images";
 // import PasteLinkify from "slate-paste-linkify";
 // import CollapseOnEscape from "slate-collapse-on-escape";
@@ -12,20 +18,11 @@ import EditBlockquote from "@wikifactory/slate-edit-blockquote";
 // import KeyboardBehavior from "./plugins/KeyboardBehavior";
 // import KeyboardShortcuts from "./plugins/KeyboardShortcuts";
 import MarkdownShortcuts from "./MarkdownShortcuts";
-import MarkdownPaste from "./MarkdownPaste";
-// import Hashtags from "./plugins/Hashtags";
-// import Ellipsis from "./plugins/Ellipsis";
-// import Embeds from "./plugins/Embeds";
-import ChromePlugin from "./Chrome";
-// import Table from "./plugins/Table";
-// import EditList from "@tommoor/slate-edit-list";
-
-import Nodes from "../nodes";
-
-import KeyboardBehavior from "./KeyboardBehavior";
 import Marks from "../marks";
-import EditList from "./EditList";
-// import Marks from "./marks.js";
+import Nodes from "../nodes";
+import Table from "./Table";
+import TrailingBlock from "@wikifactory/slate-trailing-block";
+// import EditList from "@tommoor/slate-edit-list";
 
 // additional language support based on the most popular programming languages
 // import "prismjs/components/prism-ruby";
@@ -71,13 +68,13 @@ const createPlugins = () => {
       type: "block-quote",
       typeDefault: "paragraph"
     }),
-    // EditTable({
-    //   typeTable: "table",
-    //   typeRow: "table-row",
-    //   typeCell: "table-cell",
-    //   typeContent: "paragraph"
-    // }),
-    // Table(),
+    EditTable({
+      typeTable: "table",
+      typeRow: "table-row",
+      typeCell: "table-cell",
+      typeContent: "paragraph"
+    }),
+    Table(),
     // Prism({
     //   onlyIn: node => node.type === "code",
     //   getSyntax: node => node.data.get("language") || "javascript"
@@ -85,10 +82,8 @@ const createPlugins = () => {
     // Embeds({ getComponent: getLinkComponent }),
     // CollapseOnEscape({ toEdge: "end" }),
     // CollapsableHeadings(),
-    // EditList,
     EditList,
     KeyboardBehavior(),
-    // KeyboardShortcuts(),
     MarkdownShortcuts(),
     MarkdownPaste(),
     // Ellipsis(),

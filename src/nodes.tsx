@@ -8,9 +8,9 @@ import HorizontalRule from "./components/HorizontalRule";
 // import Image from "./components/Image";
 // import Link from "./components/Link";
 // import Hashtag from "./components/Hashtag";
-// import Table from "./components/Table";
-// import Cell from "./components/Table/Cell";
-// import Row from "./components/Table/Row";
+import Table from "./components/Table";
+import Cell from "./components/Table/Cell";
+import Row from "./components/Table/Row";
 import ListItem from "./components/ListItem";
 import TodoList from "./components/TodoList";
 import {
@@ -45,12 +45,12 @@ function renderBlock(props: any, _editor: Editor, next: Function) {
       return <ol {...attributes}>{props.children}</ol>;
     case "todo-list":
       return <TodoList {...attributes}>{props.children}</TodoList>;
-    // case "table":
-    //   return <Table {...props}>{props.children}</Table>;
-    // case "table-row":
-    //   return <Row {...props} />;
-    // case "table-cell":
-    //   return <Cell {...props} />;
+    case "table":
+      return <Table {...props}>{props.children}</Table>;
+    case "table-row":
+      return <Row {...props} />;
+    case "table-cell":
+      return <Cell {...props} />;
     case "list-item":
       return <ListItem {...props} />;
     case "horizontal-rule":
