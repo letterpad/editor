@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import { SlateNodeProps } from "../types";
+import styled from "styled-components";
 
 function HorizontalRule(props: SlateNodeProps) {
   const { isSelected, attributes } = props;
@@ -12,8 +12,7 @@ const StyledHr = styled.hr<any>`
   margin: 0;
   border: 0;
   border-bottom: 1px solid
-    ${props =>
-      props.isSelected ? props.theme.selected : props.theme.horizontalRule};
+    ${props => (props.isSelected ? "var(--bg-success)" : "var(--color-border)")};
 `;
 
 export default HorizontalRule;

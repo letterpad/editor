@@ -1,20 +1,20 @@
-
 import * as React from "react";
+
 import ImageZoom from "react-medium-image-zoom";
-import TextareaAutosize from "react-autosize-textarea";
+import { SlateNodeProps } from "../types";
+// import TextareaAutosize from "react-autosize-textarea";
 import styled from "styled-components";
-import type { SlateNodeProps as Props } from "../types";
 
 type State = {
-  hasError?: boolean,
+  hasError?: boolean;
 };
 
-class Image extends React.Component<Props, State> {
+class Image extends React.Component<SlateNodeProps, State> {
   state = {
-    hasError: false,
+    hasError: false
   };
 
-  handleKeyDown = (ev: SyntheticKeyboardEvent<>) => {
+  handleKeyDown = (ev: React.KeyboardEvent) => {
     if (ev.key === "Enter" || ev.key === "ArrowDown") {
       ev.preventDefault();
       const { editor, node } = this.props;
@@ -25,7 +25,7 @@ class Image extends React.Component<Props, State> {
     }
   };
 
-  handleChange = (ev: SyntheticInputEvent<>) => {
+  handleChange = (ev: React.ChangeEvent<HTMLTextAreaElement>) => {
     ev.stopPropagation();
     const alt = ev.target.value;
     const { editor, node } = this.props;
@@ -34,7 +34,7 @@ class Image extends React.Component<Props, State> {
     editor.setNodeByKey(node.key, { data: { ...data, alt } });
   };
 
-  handleClick = (ev: SyntheticInputEvent<>) => {
+  handleClick = (ev: React.SyntheticEvent) => {
     ev.stopPropagation();
   };
 
@@ -74,9 +74,9 @@ class Image extends React.Component<Props, State> {
                   src,
                   alt: caption,
                   style: {
-                    maxWidth: "100%",
+                    maxWidth: "100%"
                   },
-                  ...attributes,
+                  ...attributes
                 }}
                 shouldRespectMaxDimension
               />
@@ -136,7 +136,7 @@ const StyledImg = styled(Img)`
   opacity: ${props => (props.isLoading ? 0.5 : 1)};
 `;
 
-const ErrorImg = styled(StyledImg)`
+const ErrorImg = styled(StyledImg)<any>`
   width: 200px;
   height: 100px;
   margin: 0 auto;
@@ -148,7 +148,7 @@ const CenteredImage = styled.span`
   position: relative;
 `;
 
-const Caption = styled(TextareaAutosize)`
+const Caption = styled.textarea<any>`
   border: 0;
   display: block;
   font-size: 13px;

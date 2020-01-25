@@ -1,10 +1,12 @@
 //@ts-nocheck
 import * as React from "react";
-import { findDOMNode } from "react-dom";
-import styled from "styled-components";
-import { GripRow, GripColumn, GripTable } from "./Cell";
+
+import { GripColumn, GripRow, GripTable } from "./Cell";
+
 // import Scrollable from "./Scrollable";
 import { SlateNodeProps } from "../../types";
+import { findDOMNode } from "react-dom";
+import styled from "styled-components";
 
 // Looking for logic for the table controls and toolbars?
 // It mostly lives in the "Cell" component and the Table plugin
@@ -54,7 +56,7 @@ const StyledTable = styled.table<any>`
   width: 100%;
   border-collapse: collapse;
   border-radius: 4px;
-  border: 1px solid ${props => props.theme.tableDivider};
+  border:  1px solid var(--color-border);
   margin-top: 1em;
 
   * { 

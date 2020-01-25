@@ -14,17 +14,15 @@ const Wrapper = styled.span<any>`
   }
   z-index: 999;
   cursor: pointer;
-`;
-const TextIcon = styled.span`
-  font-size: 10px;
-  font-weight: 600;
-  width: 32px;
-  height: 32px;
-  padding: 3px;
-  font-family: sans-serif;
   display: flex;
   align-items: center;
-  justify-content: center;
+`;
+const TextIcon = styled.span`
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px;
+  font-family: sans-serif;
+  display: inline-block;
 `;
 
 interface ButtonProps {
@@ -45,7 +43,7 @@ const ToolbarButton: SFC<ButtonProps> = ({ onMouseDown, active, children }) => {
 
 export default ToolbarButton;
 
-export const IconText: React.FC<{ text: string }> = ({ text }) => {
+export const IconText: React.FC<{ text: any }> = ({ text }) => {
   return <TextIcon className="lp-text-icon">{text}</TextIcon>;
 };
 

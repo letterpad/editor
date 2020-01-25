@@ -19,6 +19,10 @@ export const TrashIcon = () => {
   return <Icon icon="delete" />;
 };
 
+export const TableIcon = () => {
+  return <Icon icon="table_chart" />;
+};
+
 export const LeftAlignIcon = () => {
   return <Icon icon="format_align_left" />;
 };
@@ -40,7 +44,7 @@ export const BulletListIcon = () => {
 };
 
 export const TodoListIcon = () => {
-  return <Icon icon="todo-list" />;
+  return <Icon icon="check_box" />;
 };
 
 export const CodeblockIcon = () => {
@@ -61,6 +65,14 @@ export const BlockQuoteIcon: React.FC = () => {
 
 export const LinkIcon: React.FC = () => {
   return <Icon icon="link" />;
+};
+
+export const CloseIcon: React.FC = () => {
+  return <Icon icon="close" />;
+};
+
+export const OpenIcon: React.FC = () => {
+  return <Icon icon="open_in_new" />;
 };
 
 export const Heading1Icon = () => {
@@ -105,8 +117,8 @@ export const InsertColumnLeftIcon = () => {
 
 export const Separator = styled.div`
   height: calc(70%);
-  width: 1px;
-  background: var(--base-shade-8);
+  width: 2px;
+  background: var(--bg-base);
   opacity: 0.3;
   display: inline-block;
   margin: 0 3px;

@@ -1,9 +1,9 @@
-
 import * as React from "react";
+
+// import CopyButton from "./CopyButton";
+import { SlateNodeProps } from "../types";
 import { map } from "lodash";
 import styled from "styled-components";
-import type { SlateNodeProps } from "../types";
-import CopyButton from "./CopyButton";
 
 function getCopyText(node) {
   return node.nodes.reduce((memo, line) => `${memo}${line.text}\n`, "");
@@ -22,7 +22,7 @@ const languages = {
   powershell: "Powershell",
   python: "Python",
   ruby: "Ruby",
-  typescript: "TypeScript",
+  typescript: "TypeScript"
 };
 
 export default function CodeBlock({
@@ -30,21 +30,24 @@ export default function CodeBlock({
   node,
   readOnly,
   attributes,
-  editor,
+  editor
 }: SlateNodeProps) {
+  //@ts-ignore
   const { data } = node;
   const language = data.get("language") || "javascript";
 
   const onSelectLanguage = ev => {
+    //@ts-ignore
     editor.setNodeByKey(node.key, {
-      data: { ...data, language: ev.target.value },
+      //@ts-ignore
+      data: { ...data, language: ev.target.value }
     });
   };
 
   return (
     <Container {...attributes} spellCheck={false}>
-      {readOnly && <CopyButton text={getCopyText(node)} />}
-      <Code>{children}</Code>
+      {/* {readOnly && <CopyButton text={getCopyText(node)} />} */}
+      <Code className="abc">{children}</Code>
       {!readOnly && (
         <Language
           onChange={onSelectLanguage}
@@ -71,10 +74,10 @@ const Code = styled.code`
   overflow-x: auto;
   padding: 0.5em 1em;
   line-height: 1.4em;
-
+  color: #c5c8c6;
   pre {
     -webkit-font-smoothing: initial;
-    font-family: ${props => props.theme.fontFamilyMono}
+    /* font-family: ${props => props.theme.fontFamilyMono} */
     font-size: 13px;
     direction: ltr;
     text-align: left;
@@ -93,101 +96,101 @@ const Code = styled.code`
   }
 
   .token.comment,
-  .token.prolog,
-  .token.doctype,
-  .token.cdata {
-    color: ${props => props.theme.codeComment};
-  }
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #7C7C7C;
+}
 
-  .token.punctuation {
-    color: ${props => props.theme.codePunctuation};
-  }
+.token.punctuation {
+	color: #c5c8c6;
+}
 
-  .token.namespace {
-    opacity: .7;
-  }
+.namespace {
+	opacity: .7;
+}
 
-  .token.operator,
-  .token.boolean,
-  .token.number {
-    color: ${props => props.theme.codeNumber};
-  }
+.token.property,
+.token.keyword,
+.token.tag {
+	color: #96CBFE;
+}
 
-  .token.property {
-    color: ${props => props.theme.codeProperty};
-  }
+.token.class-name {
+	color: #FFFFB6;
+	text-decoration: underline;
+}
 
-  .token.tag {
-    color: ${props => props.theme.codeTag};
-  }
+.token.boolean,
+.token.constant {
+	color: #99CC99;
+}
 
-  .token.string {
-    color: ${props => props.theme.codeString};
-  }
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
 
-  .token.selector {
-    color: ${props => props.theme.codeSelector};
-  }
+.token.number {
+	color: #FF73FD;
+}
 
-  .token.attr-name {
-    color: ${props => props.theme.codeAttr};
-  }
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #A8FF60;
+}
 
-  .token.entity,
-  .token.url,
-  .language-css .token.string,
-  .style .token.string {
-    color: ${props => props.theme.codeEntity};
-  }
+.token.variable {
+	color: #C6C5FE;
+}
 
-  .token.attr-value,
-  .token.keyword,
-  .token.control,
-  .token.directive,
-  .token.unit {
-    color: ${props => props.theme.codeKeyword};
-  }
+.token.operator {
+	color: #EDEDED;
+}
 
-  .token.function {
-    color: ${props => props.theme.codeFunction};
-  }
+.token.entity {
+	color: #FFFFB6;
+	cursor: help;
+}
 
-  .token.statement,
-  .token.regex,
-  .token.atrule {
-    color: ${props => props.theme.codeStatement};
-  }
+.token.url {
+	color: #96CBFE;
+}
 
-  .token.placeholder,
-  .token.variable {
-    color: ${props => props.theme.codePlaceholder};
-  }
+.language-css .token.string,
+.style .token.string {
+	color: #87C38A;
+}
 
-  .token.deleted {
-    text-decoration: line-through;
-  }
+.token.atrule,
+.token.attr-value {
+	color: #F9EE98;
+}
 
-  .token.inserted {
-    border-bottom: 1px dotted ${props => props.theme.codeInserted};
-    text-decoration: none;
-  }
+.token.function {
+	color: #DAD085;
+}
 
-  .token.italic {
-    font-style: italic;
-  }
+.token.regex {
+	color: #E9C062;
+}
 
-  .token.important,
-  .token.bold {
-    font-weight: bold;
-  }
+.token.important {
+	color: #fd971f;
+}
 
-  .token.important {
-    color: ${props => props.theme.codeImportant};
-  }
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
 
-  .token.entity {
-    cursor: help;
-  }
+.token.italic {
+	font-style: italic;
+}
 `;
 
 const Language = styled.select`
@@ -199,9 +202,9 @@ const Language = styled.select`
 
 const Container = styled.div`
   position: relative;
-  background: ${props => props.theme.codeBackground};
+  background: var(--bg-sections);
   border-radius: 4px;
-  border: 1px solid ${props => props.theme.codeBorder};
+  border: 1px solid var(--color-border);
 
   &:hover {
     > span {

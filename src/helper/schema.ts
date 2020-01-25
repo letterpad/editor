@@ -1,39 +1,48 @@
-import { SchemaProperties, Editor, SlateError } from "slate";
+import { Editor, Node } from "slate";
 
-const schema: SchemaProperties = {
+function removeInlines(
+  editor: Editor,
+  error: { code: string; node: Node; child: Node }
+) {
+  if (error.code === "child_object_invalid") {
+    editor.unwrapInlineByKey(error.child.key, error.child.type);
+  }
+}
+
+const schema = {
   blocks: {
     heading1: {
       nodes: [{ match: { object: "text" } }],
-      marks: [{ type: "" }],
+      marks: [""],
       normalize: removeInlines
     },
     heading2: {
       nodes: [{ match: { object: "text" } }],
-      marks: [{ type: "" }],
+      marks: [""],
       normalize: removeInlines
     },
     heading3: {
       nodes: [{ match: { object: "text" } }],
-      marks: [{ type: "" }],
+      marks: [""],
       normalize: removeInlines
     },
     heading4: {
       nodes: [{ match: { object: "text" } }],
-      marks: [{ type: "" }],
+      marks: [""],
       normalize: removeInlines
     },
     heading5: {
       nodes: [{ match: { object: "text" } }],
-      marks: [{ type: "" }],
+      marks: [""],
       normalize: removeInlines
     },
     heading6: {
       nodes: [{ match: { object: "text" } }],
-      marks: [{ type: "" }],
+      marks: [""],
       normalize: removeInlines
     },
     code: {
-      marks: [{ type: "" }]
+      marks: [""]
     },
     "horizontal-rule": {
       isVoid: true
@@ -94,40 +103,5 @@ const schema: SchemaProperties = {
     ]
   }
 };
-
-function removeInlines(editor: Editor, error: SlateError) {
-  if (error.code === "child_object_invalid") {
-    // console.log(error.child);
-    editor.unwrapInlineByKey(error.child.key, error.child.type);
-  }
-}
-
-// const schemaProps: SchemaProperties = {
-//   document: {
-//     last: [
-//       {
-//         type: "p"
-//       }
-//     ],
-//     normalize: (editor, { code, node }) => {
-//       switch (code) {
-//         case "last_child_type_invalid": {
-//           const paragraph = Block.create("p");
-//           return editor.insertNodeByKey(node.key, node.nodes.size, paragraph);
-//         }
-//       }
-//     }
-//   },
-//   inlines: {
-//     img: {
-//       isVoid: true
-//     }
-//   },
-//   blocks: {
-//     hr: {
-//       isVoid: true
-//     }
-//   }
-// };
 
 export default schema;

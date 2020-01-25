@@ -7,9 +7,11 @@ import {
   Heading2Icon,
   ImageIcon,
   OrderedListIcon,
+  TableIcon,
   TodoListIcon
 } from "../icons";
 
+import { Container } from "./BlockToolbar.css";
 // import ImageUpload from "./ImageUpload";
 // import cx from "classnames";
 import EditList from "../plugins/EditList";
@@ -54,7 +56,7 @@ export default class BlockToolbar extends React.Component<
     }
   }
 
-  handleOutsideMouseClick = (ev: MouseEvent) => {
+  handleOutsideMouseClick = (ev: any) => {
     const element = findDOMNode(this.bar.current);
 
     if (
@@ -73,7 +75,9 @@ export default class BlockToolbar extends React.Component<
     ev.stopPropagation();
 
     this.props.editor.setNodeByKey(this.props.node.key, {
-      type: "paragraph"
+      type: "paragraph",
+      text: "",
+      isVoid: false
     });
   }
 
@@ -121,7 +125,7 @@ export default class BlockToolbar extends React.Component<
     editor.moveToEndOfNode(this.props.node);
 
     if (options.type === "table") {
-      // editor.insertTable(3, 3).moveSelection(0, 0);
+      editor.insertTable(3, 3).moveSelection(0, 0);
     } else {
       editor.insertBlock(options.type as string);
     }
@@ -138,7 +142,9 @@ export default class BlockToolbar extends React.Component<
     const checked = type === "todo-list" ? false : undefined;
 
     this.props.editor.setNodeByKey(this.props.node.key, {
-      type: "paragraph"
+      type: "paragraph",
+      text: "",
+      isVoid: false
     });
 
     return editor
@@ -205,7 +211,7 @@ export default class BlockToolbar extends React.Component<
     const { insertingImage } = this.state;
 
     return (
-      <div ref={this.bar}>
+      <Container ref={this.bar}>
         <ToolbarButton
           active={this.checkActiveBlock("heading1")}
           onMouseDown={e => this.handleClickBlock(e, "heading1")}
@@ -219,8 +225,8 @@ export default class BlockToolbar extends React.Component<
           <Heading2Icon />
         </ToolbarButton>
         <ToolbarButton
-          active={this.checkActiveBlock("code_block")}
-          onMouseDown={e => this.handleClickBlock(e, "code_block")}
+          active={this.checkActiveBlock("code")}
+          onMouseDown={e => this.handleClickBlock(e, "code")}
         >
           <CodeblockIcon />
         </ToolbarButton>
@@ -242,7 +248,12 @@ export default class BlockToolbar extends React.Component<
         >
           <TodoListIcon />
         </ToolbarButton>
-
+        <ToolbarButton
+          onMouseDown={e => this.handleClickBlock(e, "table")}
+          active={this.checkActiveBlock("table")}
+        >
+          <TableIcon />
+        </ToolbarButton>
         <ToolbarButton
           onMouseDown={e => this.openImageUploader(e)}
           active={insertingImage}
@@ -255,7 +266,7 @@ export default class BlockToolbar extends React.Component<
             cancel={() => this.setState({ insertingImage: false })}
           />
         )} */}
-      </div>
+      </Container>
     );
   }
 }

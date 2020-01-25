@@ -121,7 +121,7 @@ export const GripTable = styled(Grip)`
   width: 13px;
   height: 13px;
   border-radius: 13px;
-  border: 2px solid ${props => props.theme.background};
+  border: 2px solid var(--color-border);
 
   position: absolute;
   top: -18px;
@@ -133,7 +133,7 @@ export const GripRow = styled(Grip)`
   top: 0px;
   height: 100%;
   width: 12px;
-  border-right: 3px solid ${props => props.theme.background};
+  border-right: 3px solid var(--color-border);
 
   ${props =>
     props.isFirstRow &&
@@ -155,7 +155,7 @@ export const GripColumn = styled(Grip)`
   left: 0px;
   width: 100%;
   height: 12px;
-  border-bottom: 3px solid ${props => props.theme.background};
+  border-bottom: 3px solid var(--color-border);
 
   ${props =>
     props.isFirstColumn &&
@@ -179,13 +179,10 @@ const RowContent = styled.div`
 
 const StyledTd = styled.td<any>`
   vertical-align: top;
-  border-right: 1px solid ${props => props.theme.tableDivider};
+  border-right: 1px solid var(--color-border);
   position: relative;
-  background: ${props =>
-    props.isSelected
-      ? props.theme.tableSelectedBackground
-      : props.theme.background};
-
+  background: ${props => (props.isSelected ? "var(--bg-hover-success)" : "")};
+  color: ${props => (props.isSelected ? "var(--bg-base)" : "inherit")};
   ${props =>
     props.isFirstRow &&
     `

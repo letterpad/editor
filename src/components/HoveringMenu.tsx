@@ -5,10 +5,10 @@ import { debounce, isEqual } from "lodash";
 
 import { Editor } from "slate-react";
 import FormattingToolbar from "./FormattingToolbar";
+import LinkToolbar from "./LinkToolbar";
 import { Portal } from "react-portal";
 import { findDOMNode } from "slate-react";
 import styled from "styled-components";
-// import LinkToolbar from "./LinkToolbar";
 
 type Props = {
   editor: Editor;
@@ -126,6 +126,7 @@ export default class Toolbar extends React.Component<Props, State> {
 
     if (link) {
       try {
+        // editor.findDOMNode(node.getPath(node.key));
         rect = findDOMNode(link).getBoundingClientRect();
       } catch (err) {
         // TODO
@@ -164,11 +165,7 @@ export default class Toolbar extends React.Component<Props, State> {
           ref={ref => (this.menu = ref)}
           style={style}
         >
-          <FormattingToolbar
-            onCreateLink={this.showLinkToolbar}
-            {...this.props}
-          />
-          {/* {this.state.link ? (
+          {this.state.link ? (
             <LinkToolbar
               {...this.props}
               link={this.state.link}
@@ -179,7 +176,7 @@ export default class Toolbar extends React.Component<Props, State> {
               onCreateLink={this.showLinkToolbar}
               {...this.props}
             />
-          )} */}
+          )}
         </Menu>
       </Portal>
     );
@@ -193,8 +190,8 @@ export const Menu = styled.div<any>`
   top: -10000px;
   left: -10000px;
   opacity: 0;
-  background-color: var(--bg-sections);
-  color: var(--color-base);
+  background-color: var(--color-base);
+  color: var(--bg-base);
   border-radius: 4px;
   transform: scale(0.95);
   transition: opacity 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275),

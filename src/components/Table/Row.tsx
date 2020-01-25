@@ -1,10 +1,11 @@
 import * as React from "react";
-import styled from "styled-components";
+
 import { SlateNodeProps } from "../../types";
+import styled from "styled-components";
 
 const StyledTr = styled.tr<any>`
   position: relative;
-  border-bottom: 1px solid ${props => props.theme.tableDivider};
+  border-bottom: 1px solid var(--color-border);
 `;
 
 const Row = ({ children, attributes }: SlateNodeProps) => {

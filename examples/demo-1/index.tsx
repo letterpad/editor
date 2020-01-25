@@ -2,8 +2,10 @@
  * Note: This is used for the e2e tests
  */
 import React, { Component } from "react";
-import { LetterpadEditor } from "../../src/editor";
+
 import { Editor } from "slate";
+import { LetterpadEditor } from "../../src/editor";
+
 const sampleHtml = require("../../src/htmlValue.html");
 
 // import Gallery from "./Gallery";
@@ -35,22 +37,24 @@ class Demo extends Component {
   render() {
     return (
       <LetterpadEditor
-        theme="dark"
-        onButtonClick={this.onButtonClick}
-        onBeforeRender={this.onBeforeRender}
-        spellCheck={false}
-        defaultFont={true}
-        onChange={(_html: string) => {}}
-        getCharCount={(count: number) => {
-          // count is available.
-          if (count) {
-            // typescript - this is only to allow the unused variable
-          }
+        // theme="dark"
+        // onButtonClick={this.onButtonClick}
+        // onBeforeRender={this.onBeforeRender}
+        // spellCheck={false}
+        // defaultFont={true}
+        onChange={(value: () => void) => {
+          console.log(value());
         }}
-        html={sampleHtml}
-        hooks={(editor, hooks) => {
-          console.log(editor, hooks);
-        }}
+        // getCharCount={(count: number) => {
+        //   // count is available.
+        //   if (count) {
+        //     // typescript - this is only to allow the unused variable
+        //   }
+        // }}
+        // html={sampleHtml}
+        // hooks={(editor, hooks) => {
+        //   console.log(editor, hooks);
+        // }}
       />
     );
   }

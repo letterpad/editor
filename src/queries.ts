@@ -32,15 +32,6 @@ const queries = {
       // It's okay.
       console.error(err);
     }
-  },
-  wrapLink(editor: Editor, href: string) {
-    if (!queries.isLinkActive(editor)) {
-      editor.wrapInline({ type: "link", data: { href } });
-    }
-  },
-
-  unwrapLink(editor: Editor) {
-    editor.unwrapInline("link");
   }
 };
 

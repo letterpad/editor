@@ -6,6 +6,7 @@ import { Node } from "slate";
 import { Portal } from "react-portal";
 import { isEqual } from "lodash";
 import styled from "styled-components";
+
 // import { PlusIcon } from "outline-icons";
 
 export const ToggleButton = styled.span`
@@ -121,7 +122,8 @@ class BlockInsert extends React.Component<Props, State> {
       if (!node) return;
       if (node["type"] === "block-toolbar") {
         editor.setNodeByKey(node.key, {
-          type: "paragraph"
+          type: "paragraph",
+          isVoid: false
         });
       }
     });
@@ -130,12 +132,10 @@ class BlockInsert extends React.Component<Props, State> {
     if (!node) return;
 
     // we're on an empty paragraph. just replace it with the block toolbar
-    //@ts-ignore
     if (!node.text.trim() && node.type === "paragraph") {
-      //@ts-ignore
       editor.setNodeByKey(node.key, {
-        type: "block-toolbar"
-        // isVoid: true
+        type: "block-toolbar",
+        isVoid: true
       });
     }
   };

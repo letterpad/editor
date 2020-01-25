@@ -13,3 +13,8 @@ export type SlateNodeProps = {
   mark: TMark;
   isSelected: boolean;
 };
+
+export type ISearchResult = {
+  title: string;
+  url: string;
+};
