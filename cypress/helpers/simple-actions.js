@@ -10,7 +10,7 @@ export async function clearEditor() {
   return new Promise((resolve, reject) => {
     cy.window().then(win => {
       win.__letterpadEditor.moveToRangeOfDocument();
-      cy.get('div[contenteditable="true"]')
+      cy.get('div[data-slate-editor="true"]')
         .focus()
         .type("{backspace}", { force: true })
         .then(resolve);

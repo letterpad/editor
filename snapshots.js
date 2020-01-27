@@ -1,122 +1,58 @@
 module.exports = {
-  "Actions": {
-    "bold": {
-      "1": "<section><span><span><strong><span>This is a sample text</span></strong></span></span></section>"
-    },
-    "clearing editor": {
-      "1": "<section><span><span><span><span contenteditable=\"false\" style=\"pointer-events: none; display: inline-block; width: 0px; max-width: 100%; white-space: nowrap; opacity: 0.333;\">Compose a story..</span><span>﻿<br></span></span></span></span></section>"
-    },
-    "italics": {
-      "1": "<section><span><span><em><span>This is a sample text</span></em></span></span></section>"
-    },
-    "underline": {
-      "1": "<section><span><span><u><span>This is a sample text</span></u></span></span></section>"
-    },
-    "headings": {
-      "1": "<h2><span><span><span>These is a sample line of text</span></span></span></h2><section><span><span><span>﻿<br></span></span></span></section>",
-      "2": "<h3><span><span><span>These is a sample line of text</span></span></span></h3><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "blockquote": {
-      "1": "<blockquote><span><span><span>These is a sample line of text</span></span></span></blockquote><section><span><span><span>﻿<br></span></span></span></section>"
-    }
-  },
-  "__version": "3.6.1",
   "Markdown": {
     "tests italic": {
-      "1": "<section><span><span><em><span>foo</span></em></span></span></section>"
+      "1": "<div><span><span><span>__foo_</span></span></span></div>"
     },
     "tests bold": {
-      "1": "<section><span><span><strong><span>foo</span></strong></span></span></section>"
+      "1": "<div><span><span><span>**foo*</span></span></span></div>"
     },
     "tests blockquote": {
-      "1": "<blockquote><span><span><span>foo</span></span></span></blockquote><section><span><span><span>﻿<br></span></span></span></section>"
+      "1": "<blockquote><div><span><span><span>foo</span></span></span></div></blockquote><div><span><span><span>﻿<br></span></span></span></div>"
     },
     "tests heading": {
-      "1": "<h1><span><span><span>foo</span></span></span></h1><section><span><span><span>﻿<br></span></span></span></section>"
+      "1": "<h1><div><span><span><span>foo</span></span></span></div></h1><div><span><span><span>﻿<br></span></span></span></div>"
     },
     "tests highlight": {
-      "1": "<section><span><span><code><span>foo</span></code></span><span><span> </span></span></span></section>"
-    },
-    "tests unordered list": {
-      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "tests ordered list": {
-      "1": "<section><span><span><span>1. list 1</span></span></span></section><section><span><span><span>list 2</span></span></span></section>"
+      "1": "<div><span><span><span>`foo`</span></span></span></div>"
     },
     "separator": {
-      "1": "<div><div style=\"height: 0px; color: transparent; outline: none; position: absolute;\"><span><span><span>﻿</span></span></span></div><div contenteditable=\"false\"><hr></div></div><section><span><span><span>﻿<br></span></span></span></section>"
+      "1": "<div><div style=\"height: 0px; color: transparent; outline: none; position: absolute;\"><span><span><span>﻿</span></span></span></div><div contenteditable=\"false\"><hr></div></div><div><span><span><span> </span></span></span></div>"
     },
-    "test list": {
-      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
+    "tests unordered list": {
+      "1": "<ul><li><div><span><span><span>list 1</span></span></span></div></li><li><div><span><span><span>list 2</span></span></span></div></li></ul><div><span><span><span>﻿<br></span></span></span></div>"
     },
-    "test exiting list with double enter": {
-      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "test backspace": {
-      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
+    "tests ordered list": {
+      "1": "<ol><li><div><span><span><span>list 1</span></span></span></div></li><li><div><span><span><span>list 2</span></span></span></div></li></ol><div><span><span><span>﻿<br></span></span></span></div>"
     },
     "tests embed youtube": {
-      "1": "<iframe type=\"text/html\" width=\"100%\" height=\"400px\" frameborder=\"0\" src=\"//www.youtube.com/embed/link\"></iframe><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "tests embed audio": {
-      "1": "<audio controls=\"\" src=\"http://youtube.com/a.mp3\" id=\"plugin-audio\"><span><span><span>﻿<br></span></span></span></audio><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
+      "1": "<div><span><span><span>https://www.youtube.com/watch?v=JjJHOYIVO98</span></span></span></div><div><span><span><span>﻿<br></span></span></span></div>"
     },
     "tests embed gist": {
-      "1": "<iframe width=\"100%\" frameborder=\"0\" src=\"For.js\" id=\"gist-c5d3ddcc0e634bdc8bfe9a4fbb7b063d-For.js\"></iframe><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
+      "1": "<div><span><span><span>https://gist.github.com/ajaxtown/c5d3ddcc0e634bdc8bfe9a4fbb7b063d?file=For.js</span></span></span></div><div><span><span><span>﻿<br></span></span></span></div>"
     }
   },
-  "Toolbar": {
-    "tests heading": {
-      "1": "<h1><span><span><span>heading</span></span></span></h1><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "tests horizontal line": {
-      "1": "<div><div style=\"height: 0px; color: transparent; outline: none; position: absolute;\"><span><span><span>﻿</span></span></span></div><div contenteditable=\"false\"><hr></div></div><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "tests audio": {
-      "1": "<audio controls=\"\" src=\"foo.mp3\" id=\"plugin-audio\"><span><span><span>﻿<br></span></span></span></audio><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "tests image": {
-      "1": "<figure contenteditable=\"false\" type=\"center\"><section><span><span><span>﻿</span></span></span><span contenteditable=\"false\"><span style=\"height: 0px; color: transparent; outline: none; position: absolute;\"><span><span><span>﻿</span></span></span></span><span contenteditable=\"false\"><span type=\"center\" src=\"foo.img\"><img width=\"100%\" height=\"auto\" src=\"foo.img\" title=\"\"><figcaption>Enter a caption</figcaption></span></span></span><span><span><span>﻿<br></span></span></span></section></figure><section><span><span><span>﻿<br></span></span></span></section>"
-    }
-  },
-  "List": {
-    "test list": {
-      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "test backspace": {
-      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "test exiting list with double enter": {
-      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "test merging list": {
-      "1": "<ul><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li><li><span><span><span>list 3</span></span></span></li><li><span><span><span>﻿<br></span></span></span></li></ul><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "test numbered list": {
-      "1": "<ol><li><span><span><span>list 1</span></span></span></li><li><span><span><span>list 2</span></span></span></li></ol><section><span><span><span>This is a normal line</span></span></span></section><section><span><span><span>﻿<br></span></span></span></section>"
-    }
-  },
+  "__version": "3.8.2",
   "Menu": {
     "clearing editor": {
-      "1": "<section><span><span><span><span contenteditable=\"false\" style=\"pointer-events: none; display: inline-block; width: 0px; max-width: 100%; white-space: nowrap; opacity: 0.333;\">Compose a story..</span><span>﻿<br></span></span></span></span></section>"
+      "1": "<div><span><span><span><span contenteditable=\"false\">Write something nice…</span><span>﻿<br></span></span></span></span></div>"
     },
     "bold": {
-      "1": "<section><span><span><strong><span>This is a sample text</span></strong></span></span></section>"
+      "1": "<div><span><span><strong><span>This is a sample text</span></strong></span></span></div>"
     },
     "italics": {
-      "1": "<section><span><span><em><span>This is a sample text</span></em></span></span></section>"
-    },
-    "underline": {
-      "1": "<section><span><span><u><span>This is a sample text</span></u></span></span></section>"
-    },
-    "headings 2": {
-      "1": "<h2><span><span><span>These is a sample line of text</span></span></span></h2><section><span><span><span>﻿<br></span></span></span></section>"
-    },
-    "headings 3": {
-      "1": "<h3><span><span><span>These is a sample line of text</span></span></span></h3><section><span><span><span>﻿<br></span></span></span></section>"
+      "1": "<div><span><span><em><span>This is a sample text</span></em></span></span></div>"
     },
     "blockquote": {
-      "1": "<blockquote><span><span><span>These is a sample line of text</span></span></span></blockquote><section><span><span><span>﻿<br></span></span></span></section>"
+      "1": "<blockquote><div><span><span><span>These is a sample line of text</span></span></span></div></blockquote><div><span><span><span>﻿<br></span></span></span></div>"
+    },
+    "headings 1": {
+      "1": "<h1><div><span><span><span>These is a sample line of text</span></span></span></div></h1><div><span><span><span>﻿<br></span></span></span></div>"
+    },
+    "headings 2": {
+      "1": "<h2><div><span><span><span>These is a sample line of text</span></span></span></div></h2><div><span><span><span>﻿<br></span></span></span></div>"
+    },
+    "underline": {
+      "1": "<div><span><span><u><span>This is a sample text</span></u></span></span></div>"
     }
   }
 }

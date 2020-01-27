@@ -2100,7 +2100,7 @@ date-fns@^1.27.2:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
-debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
+debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.6:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
@@ -2154,6 +2154,11 @@ deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
   integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
+
+deepmerge@^4.0.0:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.2.2.tgz#44d2ea3679b8f4d4ffba33f03d865fc1e7bf4955"
+  integrity sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
 
 default-gateway@^4.2.0:
   version "4.2.0"
@@ -2784,6 +2789,11 @@ extsprintf@^1.2.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
+
+fast-deep-equal@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
+  integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
 
 fast-deep-equal@^3.1.1:
   version "3.1.1"
@@ -4620,6 +4630,11 @@ load-json-file@^4.0.0:
     pify "^3.0.0"
     strip-bom "^3.0.0"
 
+load-script@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
+  integrity sha1-BJGTngvuVkPuSUp+PaPSuscMbKQ=
+
 loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
@@ -5036,6 +5051,20 @@ nan@^2.12.1:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
   integrity sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
 
+nano-css@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/nano-css/-/nano-css-3.5.0.tgz#2406956def55ead602f88ee64b5caf3e7ab1e14d"
+  integrity sha512-PygEOJFZyjlrrjb8uTAxnRSveJH8byZEQfJDPMhEhijPJGfUeBHCFK5pEIN/JsCwqOxl94y/fw0d9k0Yoc6fyg==
+  dependencies:
+    css-tree "^1.0.0-alpha.28"
+    csstype "^2.5.5"
+    fastest-stable-stringify "^1.0.1"
+    inline-style-prefixer "^4.0.0"
+    rtl-css-js "^1.9.0"
+    sourcemap-codec "^1.4.1"
+    stacktrace-js "^2.0.0"
+    stylis "3.5.0"
+
 nano-css@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/nano-css/-/nano-css-5.2.1.tgz#73b8470fa40b028a134d3393ae36bbb34b9fa332"
@@ -5244,7 +5273,7 @@ object-inspect@^1.7.0:
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.7.0.tgz#f4f6bd181ad77f006b5ece60bd0b6f398ff74a67"
   integrity sha512-a7pEHdh1xKIAgTySUGgLMx/xwDZskN1Ud6egYYN3EdRW4ZMPNEDUTF+hwy2LUC+Bl+SyLXANnwz/jyh/qutKUw==
 
-object-is@^1.0.1:
+object-is@^1.0.1, object-is@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/object-is/-/object-is-1.0.2.tgz#6b80eb84fe451498f65007982f035a5b445edec4"
   integrity sha512-Epah+btZd5wrrfjkJZq1AOB9O6OxUQto45hzFd7lXGrpHPGE0W1k+426yrZV+k6NJOzLNNW/nVsmZdIWsAqoOQ==
@@ -5457,6 +5486,13 @@ p-try@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
+
+p4-css@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/p4-css/-/p4-css-1.2.0.tgz#9e38100cf1b0cc734c927547e953c802465bee54"
+  integrity sha512-C2WqfMhOTB9FHkikHz0aVWJeKLNdddNPtc59xK//uRvKcLVXNWnWoHm7l1uxlfLY9sfSa/C4W+vCp+bmKzzMBA==
+  dependencies:
+    nano-css "^3.5.0"
 
 pako@~1.0.5:
   version "1.0.10"
@@ -6100,7 +6136,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.3"
 
-prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.3, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -6206,6 +6242,15 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
+query-string@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-5.1.1.tgz#a78c012b71c17e05f2e3fa2319dd330682efb3cb"
+  integrity sha512-gjWOsm2SoGlgLEdAGt7a6slVOk9mGiXmPFMqrEhLQ68rhQuBnpfs3+EmlvqKyxnCo9/PPlF+9MtY02S1aFg+Jw==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    object-assign "^4.1.0"
+    strict-uri-encode "^1.0.0"
+
 querystring-es3@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -6279,6 +6324,17 @@ react-dom@^16.9.4:
     prop-types "^15.6.2"
     scheduler "^0.18.0"
 
+react-embed@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/react-embed/-/react-embed-2.7.1.tgz#08045f9a3e97cb574c81d586e6a344d57afb1f12"
+  integrity sha512-WkigpRiSp/11757HgkfbfKEJ0KQLeIHqPIEWQLJrNGpQjltvNmlrGfDcrPa2vxMQVAGdmPrrjQhU645hU3ooyw==
+  dependencies:
+    p4-css "^1.1.0"
+    react-instagram-embed "^1.5.0"
+    react-player "^1.11.0"
+    react-youtube "^7.9.0"
+    scriptjs "^2.5.9"
+
 react-fast-compare@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
@@ -6288,6 +6344,13 @@ react-immutable-proptypes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-immutable-proptypes/-/react-immutable-proptypes-2.1.0.tgz#023d6f39bb15c97c071e9e60d00d136eac5fa0b4"
   integrity sha1-Aj1vObsVyXwHHp5g0A0TbqxfoLQ=
+
+react-instagram-embed@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-instagram-embed/-/react-instagram-embed-1.5.0.tgz#88b0dc6d7baa50e8d703aca01b79cd981beff5b2"
+  integrity sha512-8HGBHjK4k6xJjActGLll22TCE8G9GI6aIlb7r8UJB9MYMnJpk15SuAQOoAeujb4pkOQGlWgfU3TW7R+97dp8mg==
+  dependencies:
+    query-string "^5.1.1"
 
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   version "16.12.0"
@@ -6309,12 +6372,28 @@ react-medium-image-zoom@^4.0.1:
     prop-types "^15.7.2"
     react-use "^13.21.0"
 
+react-player@^1.11.0:
+  version "1.14.2"
+  resolved "https://registry.yarnpkg.com/react-player/-/react-player-1.14.2.tgz#666f2de883c4c251fe316ce267f2d11f2f201e31"
+  integrity sha512-t3R1szFSA1mkd66R4OSYwONjy1tETySoFYgsFzskhin9WCnypdPOuj5N5+uiuAInSg5ueznxoMGndl3JSoXYlQ==
+  dependencies:
+    deepmerge "^4.0.0"
+    load-script "^1.0.0"
+    prop-types "^15.7.2"
+
 react-portal@^4.1.4:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/react-portal/-/react-portal-4.2.0.tgz#5400831cdb0ae64dccb8128121cf076089ab1afd"
   integrity sha512-Zf+vGQ/VEAb5XAy+muKEn48yhdCNYPZaB1BWg1xc8sAZWD8pXTgPtQT4ihBdmWzsfCq8p8/kqf0GWydSBqc+Eg==
   dependencies:
     prop-types "^15.5.8"
+
+react-ssr-prepass@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-ssr-prepass/-/react-ssr-prepass-1.1.0.tgz#f765378009423181ca7b6d59ca71f7af1073a3a4"
+  integrity sha512-FKoL5+YJxkNDhcTFfBgWM82PPHS4AC+uc05ja//CR3+xHPQ6i9UfWyHx8vakIIaBzsHeaRtRhOO8uHhn1R8Dnw==
+  dependencies:
+    object-is "^1.0.2"
 
 react-test-renderer@^16.8.3:
   version "16.12.0"
@@ -6344,6 +6423,15 @@ react-use@^13.21.0:
     throttle-debounce "^2.1.0"
     ts-easing "^0.2.0"
     tslib "^1.10.0"
+
+react-youtube@^7.9.0:
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/react-youtube/-/react-youtube-7.9.0.tgz#cf513c253581e1e45aa412a77d03420dfd7f7ba7"
+  integrity sha512-2+nBF4qP8nStYEILIO1/SylKOCnnJUxuZm+qCeWA0eeZxnWZIIixfAeAqbzblwx5L1n/26ACocy3epm9Glox8w==
+  dependencies:
+    fast-deep-equal "^2.0.1"
+    prop-types "^15.5.3"
+    youtube-player "^5.5.1"
 
 react@^16.9.4:
   version "16.12.0"
@@ -6721,6 +6809,11 @@ screenfull@^5.0.0:
   resolved "https://registry.yarnpkg.com/screenfull/-/screenfull-5.0.1.tgz#873052411eb9096bc1c8e615f5badad119e6e42c"
   integrity sha512-NgQH4KKh2V3zlj2u90l7TUcSFxr9qL/64QEvhAvCN/fu1YS39YLTBKIqZqiS3STj3QD8sN6XnsK/8jk3hRq4WA==
 
+scriptjs@^2.5.9:
+  version "2.5.9"
+  resolved "https://registry.yarnpkg.com/scriptjs/-/scriptjs-2.5.9.tgz#343915cd2ec2ed9bfdde2b9875cd28f59394b35f"
+  integrity sha512-qGVDoreyYiP1pkQnbnFAUIS5AjenNwwQBdl7zeos9etl+hYKWahjRTfzAZZYBv5xNHx7vNKCmaLDQZ6Fr2AEXg==
+
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
@@ -6881,6 +6974,11 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
+
+sister@^3.0.0:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/sister/-/sister-3.0.2.tgz#bb3e39f07b1f75bbe1945f29a27ff1e5a2f26be4"
+  integrity sha512-p19rtTs+NksBRKW9qn0UhZ8/TUI9BPw9lmtHny+Y3TinWlOa9jWh9xB0AtPSdmOy49NJJJSSe0Ey4C7h0TrcYA==
 
 sisteransi@^1.0.3:
   version "1.0.4"
@@ -7339,6 +7437,11 @@ stream-to-observable@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/stream-to-observable/-/stream-to-observable-0.1.0.tgz#45bf1d9f2d7dc09bed81f1c307c430e68b84cffe"
   integrity sha1-Rb8dny19wJvtgfHDB8Qw5ouEz/4=
+
+strict-uri-encode@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
+  integrity sha1-J5siXfHVgrH1TmWt3UNS4Y+qBxM=
 
 string-length@^2.0.0:
   version "2.0.0"
@@ -8361,3 +8464,12 @@ yauzl@2.4.1:
   integrity sha1-lSj0QtqxsihOWLQ3m7GU4i4MQAU=
   dependencies:
     fd-slicer "~1.0.1"
+
+youtube-player@^5.5.1:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/youtube-player/-/youtube-player-5.5.2.tgz#052b86b1eabe21ff331095ffffeae285fa7f7cb5"
+  integrity sha512-ZGtsemSpXnDky2AUYWgxjaopgB+shFHgXVpiJFeNB5nWEugpW1KWYDaHKuLqh2b67r24GtP6HoSW5swvf0fFIQ==
+  dependencies:
+    debug "^2.6.6"
+    load-script "^1.0.0"
+    sister "^3.0.0"

@@ -1,9 +1,9 @@
+import { Editor, Node } from "slate";
 /**
  * Note: This is used for the e2e tests
  */
 import React, { Component } from "react";
 
-import { Editor } from "slate";
 import { LetterpadEditor } from "../../src/editor";
 
 const sampleHtml = require("../../src/htmlValue.html");
@@ -27,11 +27,11 @@ class Demo extends Component {
     }
   };
 
-  onBeforeRender = (props: { type: string; props: { editor: Editor } }) => {
+  onBeforeRender = (editor: Editor) => {
     // if (props.type == "strong") {
     //   console.log("foo");
     // }
-    (window as any).__letterpadEditor = props.props.editor;
+    (window as any).__letterpadEditor = editor;
   };
 
   render() {
@@ -39,12 +39,21 @@ class Demo extends Component {
       <LetterpadEditor
         // theme="dark"
         // onButtonClick={this.onButtonClick}
-        // onBeforeRender={this.onBeforeRender}
+        onBeforeRender={this.onBeforeRender}
         // spellCheck={false}
         // defaultFont={true}
-        onChange={(value: () => void) => {
-          console.log(value());
+        // onImageBrowse={() => {
+        //   console.log("on browse");
+        // }}
+        onChange={(_value: () => void) => {
+          console.log(_value());
         }}
+        // getLinkComponent={(node: Node) => {
+        //   const href = node.data.get("href");
+        //   console.log(node);
+        //   return GoogleEmbed;
+        //   // return () => <div {...node.attributes}>node</div>;
+        // }}
         // getCharCount={(count: number) => {
         //   // count is available.
         //   if (count) {
@@ -61,3 +70,10 @@ class Demo extends Component {
 }
 
 export default Demo;
+
+class GoogleEmbed extends React.Component<any> {
+  render() {
+    const { attributes, node } = this.props;
+    return <p {...attributes}>Google Embed ({node.data.get("href")})</p>;
+  }
+}
