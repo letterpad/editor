@@ -15,6 +15,10 @@ export const StrikeThroughIcon = () => {
   return <Icon icon="format_strikethrough" />;
 };
 
+export const UnderlineIcon = () => {
+  return <Icon icon="format_underline" />;
+};
+
 export const TrashIcon = () => {
   return <Icon icon="delete" />;
 };

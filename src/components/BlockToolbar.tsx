@@ -18,6 +18,7 @@ import EditList from "../plugins/EditList";
 import React from "react";
 import ToolbarButton from "./ToolbarButton";
 import { findDOMNode } from "react-dom";
+import styled from "styled-components";
 
 const { changes } = EditList;
 
@@ -44,6 +45,8 @@ export default class BlockToolbar extends React.Component<
   };
   bar = React.createRef<HTMLDivElement>();
 
+  file = React.createRef<HTMLInputElement>();
+
   componentDidMount() {
     if (typeof window !== "undefined") {
       window.addEventListener("click", this.handleOutsideMouseClick);
@@ -60,16 +63,16 @@ export default class BlockToolbar extends React.Component<
     const element = findDOMNode(this.bar.current);
 
     if (
+      this.state.insertingImage ||
       !element ||
       (ev.target instanceof Node && element.contains(ev.target)) ||
       (ev.button && ev.button !== 0)
     ) {
       return;
     }
-    this.removeSelf(ev);
+    // this.removeSelf(ev);
   };
 
-  // @keydown("esc")
   removeSelf(ev: MouseEvent) {
     ev.preventDefault();
     ev.stopPropagation();
@@ -115,6 +118,34 @@ export default class BlockToolbar extends React.Component<
 
     editor.toggleMark(type);
   }
+
+  onPickImage = ev => {
+    if (this.props.editor.props.onImageBrowse) {
+      this.removeSelf(ev);
+      return this.props.editor.props.onImageBrowse();
+    }
+    // simulate a click on the file upload input element
+    if (this.file.current) this.file.current.click();
+
+    // browser does not have a cancel event listener for the file explorer.
+    // this is a hack to close the toolbar if the cancel is clicked.
+    document.body.onfocus = () => {
+      setTimeout(() => {
+        this.removeSelf(ev);
+      }, 100);
+      document.body.onfocus = null;
+    };
+  };
+
+  onImagePicked = async (ev: any) => {
+    const files = getDataTransferFiles(ev);
+    const { editor } = this.props;
+    this.removeSelf(ev);
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      editor.insertImageFile(file);
+    }
+  };
 
   insertBlock = (
     options: Options,
@@ -181,33 +212,17 @@ export default class BlockToolbar extends React.Component<
       case "todo-list":
         return this.insertList("todo-list");
       case "image":
-      //return this.onPickImage();
+        return this.onPickImage(ev);
       default:
     }
   };
-
-  openImageUploader(e: React.MouseEvent): void {
-    e.preventDefault();
-    this.setState({ insertingImage: true });
-  }
-
-  insertImage(image: Blob): void {
-    const { editor } = this.props;
-
-    this.setState({ insertingImage: false });
-    editor.command("insertImage", image);
-  }
 
   onClose(): void {
     this.setState({ insertingImage: false });
   }
 
-  onSubmit(image: Blob): void {
-    const { editor } = this.props;
-    editor.command("insertImage", image);
-  }
-
   render(): React.ReactNode {
+    const { editor } = this.props;
     const { insertingImage } = this.state;
 
     return (
@@ -255,18 +270,46 @@ export default class BlockToolbar extends React.Component<
           <TableIcon />
         </ToolbarButton>
         <ToolbarButton
-          onMouseDown={e => this.openImageUploader(e)}
+          onMouseDown={_e => {
+            this.onPickImage(_e);
+          }}
           active={insertingImage}
         >
           <ImageIcon />
         </ToolbarButton>
-        {/* {insertingImage && (
-          <ImageUpload
-            uploadFunction={img => this.insertImage(img)}
-            cancel={() => this.setState({ insertingImage: false })}
-          />
-        )} */}
+        <HiddenInput
+          type="file"
+          ref={this.file}
+          onChange={this.onImagePicked}
+          accept="image/*"
+        />
       </Container>
     );
   }
 }
+
+function getDataTransferFiles(event: any) {
+  let dataTransferItemsList = [];
+
+  if (event.dataTransfer) {
+    const dt = event.dataTransfer;
+    if (dt.files && dt.files.length) {
+      dataTransferItemsList = dt.files;
+    } else if (dt.items && dt.items.length) {
+      // During the drag even the dataTransfer.files is null
+      // but Chrome implements some drag store, which is accesible via dataTransfer.items
+      dataTransferItemsList = dt.items;
+    }
+  } else if (event.target && event.target.files) {
+    dataTransferItemsList = event.target.files;
+  }
+  // Convert from DataTransferItemsList to the native Array
+  return Array.prototype.slice.call(dataTransferItemsList);
+}
+
+const HiddenInput = styled.input`
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  visibility: hidden;
+`;

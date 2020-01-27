@@ -160,10 +160,6 @@ class BlockInsert extends React.Component<Props, State> {
             >
               add
             </ToggleButton>
-            {/* <PlusIcon
-              onClick={this.handleClick}
-              color={theme.blockToolbarTrigger}
-            /> */}
           </Trigger>
         </Portal>
       </React.Fragment>

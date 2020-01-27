@@ -2,6 +2,9 @@ import * as React from "react";
 
 import { Editor, Node } from "slate";
 
+import Embed from "react-embed";
+import styled from "styled-components";
+
 type Options = {
   getComponent?: (node: Node) => React.ComponentType<any>;
 };
@@ -16,6 +19,9 @@ function findTopParent(document, node): Node {
 }
 
 export default function Embeds({ getComponent }: Options) {
+  if (!getComponent) {
+    getComponent = () => MediaEmbed;
+  }
   return {
     normalizeNode(node: Node, editor: Editor, next: Function) {
       if (
@@ -52,3 +58,25 @@ export default function Embeds({ getComponent }: Options) {
     }
   };
 }
+
+class MediaEmbed extends React.Component<any> {
+  render() {
+    const { attributes, node } = this.props;
+
+    return (
+      <Container {...attributes} id="embed-video">
+        <Embed
+          url={node.data.get("href")}
+          renderVoid={() => {
+            return <div>{node.data.get("href")}</div>;
+          }}
+        ></Embed>
+      </Container>
+    );
+  }
+}
+
+const Container = styled.span`
+  max-height: 400px;
+  overflow-y: scroll;
+`;

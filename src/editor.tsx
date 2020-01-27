@@ -1,5 +1,5 @@
+import { Editor, Schema, SchemaProperties, Value } from "slate";
 import React, { PureComponent, SyntheticEvent, memo } from "react";
-import { Schema, SchemaProperties, Value } from "slate";
 
 import { GlobalStyle } from "./themes/Global.css";
 import { ISearchResult } from "./types";
@@ -10,7 +10,6 @@ import createPlugins from "./plugins/plugins";
 import queries from "./queries";
 import schema from "./helper/schema";
 
-const md = require("./initialText.md").default;
 const defaultOptions = {};
 
 export type Serializer = {
@@ -50,8 +49,10 @@ export type EditorProps = {
   onClickLink?: (href: string) => void;
   onClickHashtag?: (tag: string) => void;
   onShowToast?: (message: string) => void;
+  onImageBrowse?: () => void;
   getLinkComponent?: (node: Node) => React.ComponentType<any>;
   className?: string;
+  onBeforeRender?: (editor: Editor) => void;
   style?: Object;
 };
 
@@ -72,7 +73,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
 
   plugins: Plugin[];
 
-  constructor(props) {
+  constructor(props: EditorProps) {
     super(props);
     this.serializer = Markdown;
     const builtInPlugins = createPlugins({
@@ -80,10 +81,21 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       getLinkComponent: props.getLinkComponent
     });
 
-    this.plugins = [...props.plugins, ...builtInPlugins];
+    this.plugins = [
+      ...props.plugins,
+      ...builtInPlugins,
+      {
+        renderEditor: (_, editor, next) => {
+          if (editor && props.onBeforeRender) {
+            props.onBeforeRender(editor);
+          }
+          return next();
+        }
+      }
+    ];
 
     this.state = {
-      editorValue: this.serializer.deserialize(md)
+      editorValue: this.serializer.deserialize(props.defaultValue)
     };
   }
 
@@ -130,6 +142,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       defaultValue,
       autoFocus,
       plugins,
+      onImageBrowse,
       ...rest
     } = this.props;
 
@@ -155,6 +168,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
           readOnly={readOnly}
           spellCheck={!readOnly}
           uploadImage={uploadImage}
+          onImageBrowse={onImageBrowse}
           pretitle={pretitle}
           options={defaultOptions}
           {...rest}

@@ -9,7 +9,8 @@ import {
   ItalicIcon,
   LinkIcon,
   Separator,
-  StrikeThroughIcon
+  StrikeThroughIcon,
+  UnderlineIcon
 } from "../icons";
 
 import { Editor } from "slate-react";
@@ -188,6 +189,7 @@ class FormattingToolbar extends React.Component<Props> {
             {this.renderMarkButton("italic", ItalicIcon)}
             {this.renderMarkButton("deleted", StrikeThroughIcon)}
             {this.renderMarkButton("code", HighlightIcon)}
+            {this.renderMarkButton("underlined", UnderlineIcon)}
           </React.Fragment>
         )}
         {!isSelectionInTable && (

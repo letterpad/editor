@@ -1,123 +1,90 @@
-# H1
+### Letterpad Editor
 
-## H2
+The letterpad editor is a high level API of the [slatejs](https://slatejs.org) editor with a robust plugin architecture. It comes with a set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has markdown capabilites which generates inline previews as you start writing in markdown. This page is editable and is the playground of this editor. The toolbars are visible when you select some text or in a new line.
 
-### H3
+---
 
-#### H4
+Letterpad editor uses the below technologies.
 
-##### H5
+- React
+- Slatejs
+- Typescript
+- Styled Components
+- Webpack
+- Cypress
 
-###### H6
+We have decent documentation, if you would like to contribute to its development. Visit our [github page](https://github.com/letterpad/editor) for more information.
 
-Emphasis, aka italics, with _asterisks_ or _underscores_.
+> Most part is covered with integration tests using Cypress. So its easy to figure out if something broke due to your change.
 
-Strong emphasis, aka bold, with **asterisks** or **underscores**.
+You can develop plugins like the one below. This is a gallery plugin.
 
-Combined emphasis with **asterisks and _underscores_**.
+![alt text 123](https://i.ibb.co/BrKGd4m/2.jpg "Logo Title Text 1")
+![alt text](https://i.ibb.co/vHftK2F/8.jpg "Logo Title Text 1")
 
-Strikethrough uses two tildes. ~~Scratch this.~~
+![alt text](https://i.ibb.co/G024j31/7.jpg "Logo Title Text 1")
+![alt text](https://i.ibb.co/DWvD3zm/3.jpg "Logo Title Text 1")
+![alt text](https://i.ibb.co/jghS0d7/1.jpg "Logo Title Text 1")
+![alt text](https://i.ibb.co/WPWL05f/6.jpg "Logo Title Text 1")
+![alt text](https://i.ibb.co/7bdT8Pn/4.jpg "Logo Title Text 1")
+![alt text](https://i.ibb.co/YyYh91g/5.jpg "Logo Title Text 1")
 
-1. First ordered list item
-2. Another item
-   - Unordered sub-list.
-3. Actual numbers don't matter, just that it's a number
-   ⋅⋅1. Ordered sub-list
-4. And another item.
+---
 
-⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
+You can embed media. Lets embed a youtube video.
 
-⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
-⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
-⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
+[https://www.youtube.com/watch?v=JjJHOYIVO98](https://www.youtube.com/watch?v=JjJHOYIVO98)
 
-- Unordered list can use asterisks
+You can also embed a **souncloud track** or a **website** or a **gist**. You can nicely highlight the words that need attention.
 
-* Or minuses
+---
 
-- Or pluses
+You can also have an image with different sizes to complement the content around it.
 
-[I'm an inline-style link](https://www.google.com)
+<figure data-id="plugin-image-figure" class="sc-dnqmqq ddNnLR"><span type="wide" src="https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2850&amp;q=80" class="lp_img_wrapper sc-iwsKbI cBgxay">![](https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80 "You may add a caption here. Click on it to make it editable.")</span></figure>
 
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
-
-[I'm a reference-style link][arbitrary case-insensitive reference text]
-
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links.
-http://www.example.com or <http://www.example.com> and sometimes
-example.com (but not on Github, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
-
-Inline `code` has `back-ticks around` it.
+Do you write code ? We have something for you. Its not pretty, but it works.
 
 ```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
+import React from "react";
+import { render } from "react-dom";
+import LetterpadEditor from "letterpad-editor";
+
+render(<LetterpadEditor />, document.getElementById("app"));
 ```
 
-```python
-s = "Python syntax highlighting"
-print s
-```
+However, you can add gists like so.
 
-```
-No language indicated, so no syntax highlighting.
-But let's throw in a <b>tag</b>.
-```
+[https://gist.github.com/ajaxtown/f6b234dc10c42b32a503b574e3fc6b58](https://gist.github.com/ajaxtown/f6b234dc10c42b32a503b574e3fc6b58)
 
-Colons can be used to align columns.
+Headings look like this:
 
-| Tables        |      Are      |   Cool |
-| ------------- | :-----------: | -----: |
-| col 3 is      | right-aligned | \$1600 |
-| col 2 is      |   centered    |   \$12 |
-| zebra stripes |   are neat    |    \$1 |
+# Heading 1
 
-There must be at least 3 dashes separating each header cell.
-The outer pipes (|) are optional, and you don't need to make the
-raw Markdown line up prettily. You can also use inline Markdown.
+## Heading 2
 
-| Markdown | Less      | Pretty     |
-| -------- | --------- | ---------- |
-| _Still_  | `renders` | **nicely** |
-| 1        | 2         | 3          |
+### Heading 3
 
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
+#### Heading 4
 
-Quote break.
+##### Heading 5
 
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
+Texts can be **bold and strong** or they can be **italic** and **underline**.
 
-Inline-style:
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+Lets try to embed a soundcloud track. You can customize the height of embeds. Its just a iframe property.
 
-Reference-style:
-![alt text][logo]
+[https://soundcloud.com/its-deeper-sounds/alberto-jossue-deeper-sounds-mambo-radio-recorded-live-coda-dec-2019-110120](https://soundcloud.com/its-deeper-sounds/alberto-jossue-deeper-sounds-mambo-radio-recorded-live-coda-dec-2019-110120)
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+We have giphy plugin to insert a giphy using a search. You will find the giphy icon on the toolbar (new line).
 
-Three or more...
+You can also embed plain audio like mp3\. Its not very clean but you can enhance this feature.
+
+<audio controls="" id="plugin-audio"></audio>
 
 ---
 
-Hyphens
+Oh you can also have a parallax image.
 
----
+![alt text](https://i.ibb.co/vHftK2F/8.jpg "Logo Title Text 1")
 
-Asterisks
-
----
-
-Underscores
+If you have any ideas on some interesting plugin, you can [post them here](https://github.com/letterpad/editor/issues/new).

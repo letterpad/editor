@@ -131,7 +131,7 @@ const HiddenImg = styled(Img)`
 const StyledImg = styled(Img)`
   max-width: 100%;
   box-shadow: ${props =>
-    props.isSelected ? `0 0 0 2px ${props.theme.selected}` : "none"};
+    props.isSelected ? `0 0 0 2px var(--bg-success)` : "none"};
   border-radius: ${props => (props.isSelected ? `2px` : "0")};
   opacity: ${props => (props.isLoading ? 0.5 : 1)};
 `;
@@ -153,7 +153,7 @@ const Caption = styled.textarea<any>`
   display: block;
   font-size: 13px;
   font-style: italic;
-  color: ${props => props.theme.textSecondary};
+  color: var(--color-base);
   padding: 2px 0;
   line-height: 16px;
   text-align: center;

@@ -86,8 +86,14 @@ export default function KeyboardBehavior() {
     if (!startBlock) return next();
 
     // If image or embed is selected go ahead and delete the whole block
-    if (startBlock.type === "image" || startBlock.type === "link") {
+    if (
+      startBlock.type === "image" ||
+      startBlock.type === "link" ||
+      // check embed node. embed is also a part of link, since embeds are mostly urls.
+      (value.previousBlock && value.previousBlock.toJS().type === "link")
+    ) {
       ev.preventDefault();
+      editor.removeNodeByKey(value.previousBlock.key);
       return editor.removeNodeByKey(startBlock.key).moveToStartOfNextBlock();
     }
 

@@ -39,7 +39,6 @@ const createPlugins = ({
   placeholder: string;
   getLinkComponent: (node: Node) => React.ComponentType<any>;
 }) => {
-  console.log("placeholder :", placeholder);
   return [
     Nodes,
     Marks,
