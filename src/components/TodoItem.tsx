@@ -1,7 +1,6 @@
 import * as React from "react";
-import styled from "styled-components";
 
-// import type { SlateNodeProps as Props } from "../types";
+import styled from "styled-components";
 
 export default class TodoItem extends React.Component<any> {
   handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {

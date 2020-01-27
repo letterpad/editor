@@ -16,34 +16,12 @@ import {
 import { Editor } from "slate-react";
 import ToolbarButton from "./ToolbarButton";
 
-// import {
-//   BoldIcon,
-//   CodeIcon,
-//   Heading1Icon,
-//   Heading2Icon,
-//   ItalicIcon,
-//   BlockQuoteIcon,
-//   LinkIcon,
-//   StrikethroughIcon,
-// } from "outline-icons";
-
-// import type { Theme, Mark, Block } from "../../types";
-// import ToolbarButton from "./ToolbarButton";
-// import { Mark } from "slate";
-// import Separator from "./Separator";
-
 type Props = {
   editor: Editor;
   onCreateLink: (ev: React.SyntheticEvent) => void;
 };
 
 class FormattingToolbar extends React.Component<Props> {
-  /**
-   * Check if the current selection has a mark with `type` in it.
-   *
-   * @param {String} type
-   * @return {Boolean}
-   */
   hasMark = (type: string) => {
     try {
       //@ts-ignore
@@ -123,18 +101,6 @@ class FormattingToolbar extends React.Component<Props> {
   };
 
   renderMarkButton = (type: string, IconClass: React.ComponentType<any>) => {
-    // const { hiddenToolbarButtons } = this.props.theme;
-    //@ts-ignore
-    const Tooltip = this.props.editor.props.tooltip;
-
-    // if (
-    //   hiddenToolbarButtons &&
-    //   hiddenToolbarButtons.marks &&
-    //   hiddenToolbarButtons.marks.includes(type)
-    // ) {
-    //   return null;
-    // }
-
     const isActive = this.hasMark(type);
     const onMouseDown = ev => this.onClickMark(ev, type);
 
@@ -146,17 +112,6 @@ class FormattingToolbar extends React.Component<Props> {
   };
 
   renderBlockButton = (type: string, IconClass: React.ComponentType) => {
-    // const { hiddenToolbarButtons } = this.props.theme;
-    // @ts-ignore
-    const Tooltip = this.props.editor.props.tooltip;
-
-    // if (
-    //   hiddenToolbarButtons &&
-    //   hiddenToolbarButtons.blocks &&
-    //   hiddenToolbarButtons.blocks.includes(type)
-    // )
-    //   return null;
-
     const isActive = this.isBlock(type);
 
     const onMouseDown = ev =>

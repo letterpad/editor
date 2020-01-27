@@ -1,6 +1,5 @@
 import * as React from "react";
 
-// import CopyButton from "./CopyButton";
 import { SlateNodeProps } from "../types";
 import { map } from "lodash";
 import styled from "styled-components";
@@ -46,7 +45,6 @@ export default function CodeBlock({
 
   return (
     <Container {...attributes} spellCheck={false}>
-      {/* {readOnly && <CopyButton text={getCopyText(node)} />} */}
       <Code className="abc">{children}</Code>
       {!readOnly && (
         <Language

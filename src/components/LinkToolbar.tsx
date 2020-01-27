@@ -1,36 +1,30 @@
-//@ts-nocheck
 import * as React from "react";
-import { findDOMNode } from "react-dom";
+
+import { CloseIcon, OpenIcon, TrashIcon } from "../icons";
+
+import { Editor } from "slate-react";
 import { Node } from "slate";
-import { Editor, findDOMNode as slateFindDOMNode } from "slate-react";
-import ArrowKeyNavigation from "boundless-arrow-key-navigation/build";
-import styled from "styled-components";
-import keydown from "react-keydown";
-// import { CloseIcon, OpenIcon, TrashIcon } from "outline-icons";
-// import type { SearchResult } from "../../types";
-// import Flex from "../Flex";
-// import LinkSearchResult from "./LinkSearchResult";
 import ToolbarButton from "./ToolbarButton";
-import {OpenIcon, CloseIcon,TrashIcon} from "../icons"
+import { findDOMNode } from "react-dom";
+import styled from "styled-components";
 
 type Suggestion = {
-  title: string,
-  url: string,
+  title: string;
+  url: string;
 };
 
 type Props = {
-  editor: Editor,
-  link: Node,
-  suggestions?: Suggestion[],
-  onBlur: () => void,
+  editor: Editor;
+  link: Node;
+  suggestions?: Suggestion[];
+  onBlur: () => void;
 };
 
 type State = {
-  isEditing: boolean,
-  isFetching: boolean,
-  results: string[],
+  isEditing: boolean;
+  isFetching: boolean;
+  results: string[];
 };
-
 
 class LinkToolbar extends React.Component<Props, State> {
   wrapper?: HTMLSpanElement;
@@ -40,7 +34,7 @@ class LinkToolbar extends React.Component<Props, State> {
   state = {
     isEditing: false,
     isFetching: false,
-    results: [],
+    results: []
   };
 
   componentDidMount() {
@@ -73,7 +67,9 @@ class LinkToolbar extends React.Component<Props, State> {
 
     // check if we're clicking inside the link text
     try {
-      const linkElement =this.props.editor.findDOMNode(this.props.link.getPath(this.props.link.key));
+      const linkElement = this.props.editor.findDOMNode(
+        this.props.link.getPath(this.props.link.key)
+      );
 
       if (
         !linkElement ||
@@ -204,7 +200,7 @@ class LinkToolbar extends React.Component<Props, State> {
     this.firstDocument = ref;
   };
 
-  setWrapperRef = (ref: ?HTMLSpanElement) => {
+  setWrapperRef = (ref: HTMLSpanElement) => {
     this.wrapper = ref;
   };
 
@@ -225,35 +221,13 @@ class LinkToolbar extends React.Component<Props, State> {
           />
           {this.state.isEditing && (
             <ToolbarButton onMouseDown={this.openLink}>
-              <OpenIcon/>
+              <OpenIcon />
             </ToolbarButton>
           )}
           <ToolbarButton onMouseDown={this.removeLink}>
-            {this.state.isEditing ? (
-              <TrashIcon/>
-            ) : (
-              <CloseIcon/>
-            )}
+            {this.state.isEditing ? <TrashIcon /> : <CloseIcon />}
           </ToolbarButton>
         </LinkEditor>
-        {/* {hasResults && (
-          <SearchResults>
-            <ArrowKeyNavigation
-              mode={ArrowKeyNavigation.mode.VERTICAL}
-              defaultActiveChildIndex={0}
-            >
-              {this.state.results.map((result, index) => (
-                <LinkSearchResult
-                  ref={ref => index === 0 && this.setFirstResultRef(ref)}
-                  title={result.title}
-                  key={result.url}
-                  onClick={ev => this.selectSearchResult(ev, result.url)}
-                  onKeyDown={this.onResultKeyDown}
-                />
-              ))}
-            </ArrowKeyNavigation>
-          </SearchResults>
-        )} */}
       </span>
     );
   }
@@ -291,4 +265,4 @@ const Input = styled.input`
   flex-grow: 1;
 `;
 
-export default (LinkToolbar);
+export default LinkToolbar;

@@ -1,5 +1,4 @@
 import { Block, Editor, Node } from "slate";
-// import ToolbarButton from "./_Toolbar/ToolbarButton";
 import {
   BulletListIcon,
   CodeblockIcon,
@@ -13,7 +12,6 @@ import {
 
 import { Container } from "./BlockToolbar.css";
 // import ImageUpload from "./ImageUpload";
-// import cx from "classnames";
 import EditList from "../plugins/EditList";
 import React from "react";
 import ToolbarButton from "./ToolbarButton";
@@ -70,7 +68,7 @@ export default class BlockToolbar extends React.Component<
     ) {
       return;
     }
-    // this.removeSelf(ev);
+    this.removeSelf(ev);
   };
 
   removeSelf(ev: MouseEvent) {

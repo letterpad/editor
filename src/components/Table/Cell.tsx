@@ -3,7 +3,6 @@ import * as React from "react";
 
 import Grip from "./Grip";
 import { SlateNodeProps } from "../../types";
-// import type { SlateNodeProps as Props } from "../../types";
 import Toolbar from "./Toolbar";
 import styled from "styled-components";
 

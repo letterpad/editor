@@ -19,7 +19,6 @@ import Link from "./components/Link";
 import ListItem from "./components/ListItem";
 import Paragraph from "./components/Paragraph";
 import Row from "./components/Table/Row";
-// import Hashtag from "./components/Hashtag";
 import Table from "./components/Table";
 import TodoList from "./components/TodoList";
 
@@ -59,8 +58,6 @@ function renderNode(props: any, _editor: Editor, next: Function) {
       return <Image {...props} />;
     case "link":
       return <Link {...props} />;
-    // case "hashtag":
-    //   return <Hashtag {...props} />;
     case "heading1":
       return <Heading1 {...props} />;
     case "heading2":

@@ -1,11 +1,9 @@
 import * as React from "react";
-import { Editor } from "slate-react";
-// import Contents from "../components/Contents";
-import HoveringMenu from "../components/HoveringMenu";
+
 import BlockInsert from "../components/BlockInsert";
+import { Editor } from "slate-react";
 import { EditorProps } from "../editor";
-import { StyledMenu } from "../editor.css";
-// import type { Props } from "../";
+import HoveringMenu from "../components/HoveringMenu";
 
 function ChromePlugin() {
   function renderEditor(

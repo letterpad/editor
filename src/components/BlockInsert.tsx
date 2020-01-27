@@ -7,8 +7,6 @@ import { Portal } from "react-portal";
 import { isEqual } from "lodash";
 import styled from "styled-components";
 
-// import { PlusIcon } from "outline-icons";
-
 export const ToggleButton = styled.span`
   transition: 0.1s transform ease-in-out;
   border: 1px solid #ddd;

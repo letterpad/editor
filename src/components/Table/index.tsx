@@ -1,9 +1,7 @@
-//@ts-nocheck
 import * as React from "react";
 
 import { GripColumn, GripRow, GripTable } from "./Cell";
 
-// import Scrollable from "./Scrollable";
 import { SlateNodeProps } from "../../types";
 import { findDOMNode } from "react-dom";
 import styled from "styled-components";
@@ -26,7 +24,7 @@ class Table extends React.Component<SlateNodeProps> {
     }
   }
 
-  handleOutsideMouseClick = (ev: React.SyntheticEvent) => {
+  handleOutsideMouseClick = (ev: Event) => {
     const element = findDOMNode(this.table.current);
 
     if (

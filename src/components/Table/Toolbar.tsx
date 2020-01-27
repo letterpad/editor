@@ -6,8 +6,6 @@ import { Portal } from "react-portal";
 import TableToolbar from "./TableToolbar";
 import { findDOMNode } from "react-dom";
 
-// import { Menu } from "../Toolbar";
-
 // These widths should be updated whenever the toolbar styles change
 const MENU_WIDTHS = {
   row: 148,
