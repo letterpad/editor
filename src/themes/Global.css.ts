@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
-const light = require("./light.css");
-const dark = require("./dark.css");
+import dark from "./dark";
+import light from "./light";
+
 const base = require("./base.css");
 const themes = {
   light,
@@ -11,7 +12,7 @@ enum Themes {
   dark
 }
 
-export const GlobalStyle = createGlobalStyle<{ theme: Themes }>`
+export const GlobalStyle = createGlobalStyle<{ style: string; theme: Themes }>`
     ${base}
     :root {
         ${p => themes[p.theme]}
@@ -20,4 +21,5 @@ export const GlobalStyle = createGlobalStyle<{ theme: Themes }>`
         background: var(--bg-base);
         color: var(--color-base);
     }
+    ${p => p.style}
 `;

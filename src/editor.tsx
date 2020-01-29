@@ -1,8 +1,8 @@
-import { Editor, Schema, SchemaProperties, Value } from "slate";
-import React, { PureComponent, SyntheticEvent, memo } from "react";
+import { Editor, SchemaProperties, Value } from "slate";
+import { IPlugin, ISearchResult, ISerializer } from "./types";
+import React, { PureComponent } from "react";
 
 import { GlobalStyle } from "./themes/Global.css";
-import { ISearchResult } from "./types";
 import Markdown from "./serializer";
 import { Editor as SlateReactEditor } from "slate-react";
 import commands from "./commands";
@@ -12,17 +12,8 @@ import schema from "./helper/schema";
 
 const defaultOptions = {};
 
-export type Serializer = {
-  deserialize: (str: string) => Value;
-  serialize: (value: Value) => string;
-};
-
 type State = {
   editorValue: Value;
-};
-export type Plugin = {
-  onClick?: (e: SyntheticEvent) => void;
-  // onKeyDown?: (SyntheticKeyboardEvent<>, Editor, Function) => void,
 };
 
 export type EditorProps = {
@@ -30,21 +21,14 @@ export type EditorProps = {
   defaultValue: string;
   placeholder: string;
   pretitle?: string;
-  plugins: Plugin[];
+  plugins: IPlugin[];
   autoFocus?: boolean;
   readOnly?: boolean;
-  headingsOffset?: number;
-  toc?: boolean;
   dark?: boolean;
   schema?: SchemaProperties;
-  serializer?: Serializer;
-  theme?: Object;
   uploadImage?: (file: File) => Promise<string>;
   onSave?: ({ done }: { done?: boolean }) => void;
-  onCancel?: () => void;
   onChange: (value: () => string) => void;
-  onImageUploadStart?: () => void;
-  onImageUploadStop?: () => void;
   onSearchLink?: (term: string) => Promise<ISearchResult[]>;
   onClickLink?: (href: string) => void;
   onClickHashtag?: (tag: string) => void;
@@ -52,25 +36,25 @@ export type EditorProps = {
   onImageBrowse?: () => void;
   getLinkComponent?: (node: Node) => React.ComponentType<any>;
   className?: string;
-  onBeforeRender?: (editor: Editor) => void;
-  style?: Object;
+  getEditorInstance?: (editor: Editor) => void;
+  style?: string;
 };
 
 export class LetterpadEditor extends PureComponent<EditorProps, State> {
   static defaultProps = {
     defaultValue: "",
     placeholder: "Write something nice…",
-    onImageUploadStart: () => {},
-    onImageUploadStop: () => {},
     plugins: [],
-    tooltip: "span"
+    tooltip: "span",
+    dark: false,
+    readOnly: false
   };
 
-  prevSchema: Schema = null;
-  schema?: Schema = null;
+  prevSchema: SchemaProperties = null;
+  schema?: SchemaProperties = null;
 
-  serializer: Serializer;
-
+  serializer: ISerializer;
+  editor: Editor = null;
   plugins: Plugin[];
 
   constructor(props: EditorProps) {
@@ -81,18 +65,15 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       getLinkComponent: props.getLinkComponent
     });
 
-    this.plugins = [
-      ...props.plugins,
-      ...builtInPlugins,
-      {
-        renderEditor: (_, editor, next) => {
-          if (editor && props.onBeforeRender) {
-            props.onBeforeRender(editor);
-          }
-          return next();
+    const getSlateInstance = {
+      renderEditor: (_, editor: Editor, next: Function) => {
+        if (editor && props.getEditorInstance && !this.editor) {
+          props.getEditorInstance(editor);
         }
+        return next();
       }
-    ];
+    };
+    this.plugins = [...props.plugins, ...builtInPlugins, getSlateInstance];
 
     this.state = {
       editorValue: this.serializer.deserialize(props.defaultValue)
@@ -129,12 +110,9 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       placeholder,
       onSave,
       onChange,
-      onCancel,
       uploadImage,
       onSearchLink,
       onClickLink,
-      onImageUploadStart,
-      onImageUploadStop,
       onShowToast,
       className,
       style,
@@ -146,10 +124,10 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       ...rest
     } = this.props;
 
+    const theme = dark ? "dark" : "light";
     return (
       <div id="letterpad-editor-container">
-        <GlobalStyle theme="dark" />
-
+        <GlobalStyle theme={theme} style={style} />
         <SlateReactEditor
           value={this.state.editorValue}
           plugins={this.plugins}
@@ -158,12 +136,9 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
           commands={commands}
           placeholder={placeholder}
           schema={this.getSchema()}
-          // onKeyDown={this.handleKeyDown}
           onSave={onSave}
           onSearchLink={onSearchLink}
           onClickLink={onClickLink}
-          onImageUploadStart={onImageUploadStart}
-          onImageUploadStop={onImageUploadStop}
           onShowToast={onShowToast}
           readOnly={readOnly}
           spellCheck={!readOnly}

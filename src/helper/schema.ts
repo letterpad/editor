@@ -1,4 +1,4 @@
-import { Editor, Node } from "slate";
+import { Editor, Node, SchemaProperties } from "slate";
 
 function removeInlines(
   editor: Editor,
@@ -9,7 +9,7 @@ function removeInlines(
   }
 }
 
-const schema = {
+const schema: SchemaProperties = {
   blocks: {
     heading1: {
       nodes: [{ match: { object: "text" } }],

@@ -11,21 +11,29 @@ const commands = {
     editor.unwrapInline("link");
   },
 
+  insertImageUrl(editor: Editor, src: string) {
+    let key = KeyUtils.create();
+    const node = Block.create({
+      key,
+      type: "image",
+      isVoid: true,
+      data: { src, alt: "" }
+    });
+
+    editor
+      .insertBlock(node)
+      .insertBlock("paragraph")
+      .onChange(editor);
+  },
+
   insertImageFile(editor: Editor, file: File) {
-    const {
-      uploadImage,
-      onImageUploadStart,
-      onShowToast,
-      onImageUploadStop
-    } = editor.props;
+    const { uploadImage, onShowToast } = editor.props;
 
     if (!uploadImage) {
       console.warn(
         "uploadImage callback must be defined to handle image uploads."
       );
     }
-
-    if (onImageUploadStart) onImageUploadStart();
 
     let key = KeyUtils.create();
     const alt = "";
@@ -76,7 +84,7 @@ const commands = {
           throw err;
         })
         .finally(() => {
-          if (onImageUploadStop) onImageUploadStop();
+          // nothing
         });
     });
   }

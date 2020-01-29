@@ -44,7 +44,7 @@ export default class BlockToolbar extends React.Component<
   bar = React.createRef<HTMLDivElement>();
 
   file = React.createRef<HTMLInputElement>();
-
+  insertingImage = false;
   componentDidMount() {
     if (typeof window !== "undefined") {
       window.addEventListener("click", this.handleOutsideMouseClick);
@@ -55,13 +55,14 @@ export default class BlockToolbar extends React.Component<
     if (typeof window !== "undefined") {
       window.removeEventListener("click", this.handleOutsideMouseClick);
     }
+    this.insertingImage = false;
   }
 
   handleOutsideMouseClick = (ev: any) => {
     const element = findDOMNode(this.bar.current);
 
     if (
-      this.state.insertingImage ||
+      this.insertingImage ||
       !element ||
       (ev.target instanceof Node && element.contains(ev.target)) ||
       (ev.button && ev.button !== 0)
@@ -118,6 +119,7 @@ export default class BlockToolbar extends React.Component<
   }
 
   onPickImage = ev => {
+    this.insertingImage = true;
     if (this.props.editor.props.onImageBrowse) {
       this.removeSelf(ev);
       return this.props.editor.props.onImageBrowse();
@@ -129,6 +131,7 @@ export default class BlockToolbar extends React.Component<
     // this is a hack to close the toolbar if the cancel is clicked.
     document.body.onfocus = () => {
       setTimeout(() => {
+        this.insertingImage = false;
         this.removeSelf(ev);
       }, 100);
       document.body.onfocus = null;

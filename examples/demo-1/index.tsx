@@ -1,79 +1,63 @@
-import { Editor, Node } from "slate";
 /**
  * Note: This is used for the e2e tests
  */
 import React, { Component } from "react";
 
+import { Editor } from "slate";
 import { LetterpadEditor } from "../../src/editor";
+import styled from "styled-components";
 
-const sampleHtml = require("../../src/htmlValue.html");
-
-// import Gallery from "./Gallery";
+const sampleMd = require("../../src/initialText.md").default;
 
 class Demo extends Component {
-  onButtonClick = (
-    _: MouseEvent,
-    pluginName: string,
-    callbacks: { [key: string]: any }
-  ) => {
-    return false;
-    // the below is a demo to fetch images from giphy based on a search term.
-    // remove the above return to check it
-    if (pluginName == "plugin-image") {
-      if (callbacks.showPlaceholder) {
-        // callbacks.showPlaceholder(Gallery);
-        return true;
-      }
-    }
+  state = {
+    theme: "dark"
   };
 
-  onBeforeRender = (editor: Editor) => {
-    // if (props.type == "strong") {
-    //   console.log("foo");
-    // }
+  setEditorInstance = (editor: Editor) => {
     (window as any).__letterpadEditor = editor;
+  };
+
+  onThemeChange = theme => {
+    this.setState({ theme });
   };
 
   render() {
     return (
-      <LetterpadEditor
-        // theme="dark"
-        // onButtonClick={this.onButtonClick}
-        onBeforeRender={this.onBeforeRender}
-        // spellCheck={false}
-        // defaultFont={true}
-        // onImageBrowse={() => {
-        //   console.log("on browse");
-        // }}
-        onChange={(_value: () => void) => {
-          console.log(_value());
-        }}
-        // getLinkComponent={(node: Node) => {
-        //   const href = node.data.get("href");
-        //   console.log(node);
-        //   return GoogleEmbed;
-        //   // return () => <div {...node.attributes}>node</div>;
-        // }}
-        // getCharCount={(count: number) => {
-        //   // count is available.
-        //   if (count) {
-        //     // typescript - this is only to allow the unused variable
-        //   }
-        // }}
-        // html={sampleHtml}
-        // hooks={(editor, hooks) => {
-        //   console.log(editor, hooks);
-        // }}
-      />
+      <Container>
+        <button onClick={() => this.onThemeChange("dark")}>Dark</button>
+        &nbsp;&nbsp;
+        <button onClick={() => this.onThemeChange("light")}>Light</button>
+        <LetterpadEditor
+          defaultValue={sampleMd}
+          dark={this.state.theme === "dark"}
+          getEditorInstance={this.setEditorInstance}
+          readOnly={false}
+          uploadImage={file => {
+            // you may save this in cloud and return a url
+            return Promise.resolve(URL.createObjectURL(file));
+          }}
+          // onImageBrowse={() => {
+          //   console.log("on browse");
+          // }}
+          onChange={(_value: () => void) => {
+            console.log(_value());
+          }}
+          style="body { font-size: 16px; }"
+          // getLinkComponent={(node: Node) => {
+          //   const href = node.data.get("href");
+          //   console.log(node);
+          // return () => <div {...node.attributes}>node</div>;
+          // }}
+        />
+      </Container>
     );
   }
 }
 
 export default Demo;
 
-class GoogleEmbed extends React.Component<any> {
-  render() {
-    const { attributes, node } = this.props;
-    return <p {...attributes}>Google Embed ({node.data.get("href")})</p>;
-  }
-}
+const Container = styled.div`
+  width: 700px;
+  margin: auto;
+`;

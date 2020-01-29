@@ -19,15 +19,7 @@ We have decent documentation, if you would like to contribute to its development
 
 You can develop plugins like the one below. This is a gallery plugin.
 
-![alt text 123](https://i.ibb.co/BrKGd4m/2.jpg "Logo Title Text 1")
-![alt text](https://i.ibb.co/vHftK2F/8.jpg "Logo Title Text 1")
-
-![alt text](https://i.ibb.co/G024j31/7.jpg "Logo Title Text 1")
-![alt text](https://i.ibb.co/DWvD3zm/3.jpg "Logo Title Text 1")
-![alt text](https://i.ibb.co/jghS0d7/1.jpg "Logo Title Text 1")
-![alt text](https://i.ibb.co/WPWL05f/6.jpg "Logo Title Text 1")
-![alt text](https://i.ibb.co/7bdT8Pn/4.jpg "Logo Title Text 1")
-![alt text](https://i.ibb.co/YyYh91g/5.jpg "Logo Title Text 1")
+![Street of some place](https://i.ibb.co/DWvD3zm/3.jpg "Logo Title Text 1")
 
 ---
 
@@ -39,11 +31,7 @@ You can also embed a **souncloud track** or a **website** or a **gist**. You can
 
 ---
 
-You can also have an image with different sizes to complement the content around it.
-
-<figure data-id="plugin-image-figure" class="sc-dnqmqq ddNnLR"><span type="wide" src="https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2850&amp;q=80" class="lp_img_wrapper sc-iwsKbI cBgxay">![](https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80 "You may add a caption here. Click on it to make it editable.")</span></figure>
-
-Do you write code ? We have something for you. Its not pretty, but it works.
+Do you write code ? We have something for you.
 
 ```javascript
 import React from "react";
@@ -53,7 +41,7 @@ import LetterpadEditor from "letterpad-editor";
 render(<LetterpadEditor />, document.getElementById("app"));
 ```
 
-However, you can add gists like so.
+And you can add gists like so.
 
 [https://gist.github.com/ajaxtown/f6b234dc10c42b32a503b574e3fc6b58](https://gist.github.com/ajaxtown/f6b234dc10c42b32a503b574e3fc6b58)
 
@@ -74,12 +62,6 @@ Texts can be **bold and strong** or they can be **italic** and **underline**.
 Lets try to embed a soundcloud track. You can customize the height of embeds. Its just a iframe property.
 
 [https://soundcloud.com/its-deeper-sounds/alberto-jossue-deeper-sounds-mambo-radio-recorded-live-coda-dec-2019-110120](https://soundcloud.com/its-deeper-sounds/alberto-jossue-deeper-sounds-mambo-radio-recorded-live-coda-dec-2019-110120)
-
-We have giphy plugin to insert a giphy using a search. You will find the giphy icon on the toolbar (new line).
-
-You can also embed plain audio like mp3\. Its not very clean but you can enhance this feature.
-
-<audio controls="" id="plugin-audio"></audio>
 
 ---
 
