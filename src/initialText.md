@@ -1,4 +1,4 @@
-### Letterpad Editor
+# Letterpad Editor
 
 The letterpad editor is a high level API of the [slatejs](https://slatejs.org) editor with a robust plugin architecture. It comes with a set of rich plugins (each plugin is a feature) which can be extended to build more complex features. The editor also has markdown capabilites which generates inline previews as you start writing in markdown. This page is editable and is the playground of this editor. The toolbars are visible when you select some text or in a new line.
 
