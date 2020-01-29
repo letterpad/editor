@@ -40,57 +40,29 @@ const MyEditor = () => {
 export default MyEditor;
 ```
 
-### Parameters
+| Props          | Description                                                                                                                  |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `defaultValue` | Markdown content                                                                                                             |
+| `placeholder`  | Override the default text. (default: "Write something nice")                                                                 |
+| `readOnly`     | Setting this to true will not allow the user to edit                                                                         |
+| `autoFocus`    | Focus the document automatically on load                                                                                     |
+| `spellCheck`   | Allow spellchecking. (default: true)                                                                                         |
+| `plugins`      | Allow additional plugins matching SlateJS API                                                                                |
+| `schema`       | Allow additional schema to be passed to Slate Editor                                                                         |
+| `dark`         | Set this to true to use the dark theme. (default: light)                                                                     |
+| `style`        | You can pass css string to override the defaults. eg. "body {font-size: 18px}" <br> Look for base.css to see the default css |
 
-- `theme`: **string**
+Callback options
 
-  `default`: **dark**
-
-  Set the theme. Options - light | dark
-
-- `spellCheck`: **boolean**
-
-  `default`: **true**
-
-  Activate Spell check. Options - true | false
-
-- `onChange(html: string)`: **Function**
-
-  Receive html whenever there is a change in the editor.
-
-- `onButtonClick(event, type: string, callbacks)`: **Function**
-
-  Whenever a plugin is applied by clicking the button in the floating menu or the toolbar, you can capture that event with this hook.
-
-  ```js
-  event: MouseEvent;
-  plugin: PluginName; // plugin-image, plugin-gallery, etc.
-  callbacks: Object;
-  ```
-
-- `onBeforeRender(renderType, type, props)`: **Function**
-
-  This hook is triggered before applying a transformation. You will be able to change the markup dynamically using this.
-
-  ```js
-  onBeforeRender = (renderType, props) => {
-    if (type == "strong") {
-      return <b>{props.children}</b>;
-    }
-  };
-  ```
-
-- `html` - string | null
-
-  `default`: null
-
-  Load the initial html. If you want empty page, the enter empty string. If its null, it will load sample data.
+| Props                    | Description                                                                                                                                                      |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `uploadImage`            | This function is called a user uploads an image.<pre><Editor <br> uploadImage={async file => { <br> const result = await upload(file);<br> }<br>/></pre>         |
+| `onSave(done: boolean)`  | This is called when the user uses shortcut keys (Ctrl+S or Cmd+S) to save the document. (Ctrl+Enter or Cmd+Enter) is to save and exist and sets done to true.    |
+| `onChange(() => value)`  | This is called when the content is edited. Remember that callback is a function and when its called, it serializes the JSON value to markdown                    |
+| `onClickLink(href)`      | This callback can be used to override link handling. You may want to open external link in new tab and internal link in the same tab.                            |
+| `getLinkComponent(Node)` | The editor automatically detects a wide variety of links (youtube, soundcloud, vimeo, gist, figma, etc). However, you may override this by returning a component |
 
 ## Development
-
-If you would like to contribute then setup your dev environment this way.
-
-You will find some documentation over here - https://app.gitbook.com/@letterpad/s/editor/
 
 ```sh
 git clone git@github.com:letterpad/editor.git

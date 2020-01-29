@@ -1,9 +1,10 @@
-import { getHtmlContents } from "../helpers/serialize";
-import { clearEditor } from "../helpers/simple-actions";
 import {
-  applyEditorFeatureToSampleText,
-  applyEditorFeatureToLine
+  applyEditorFeatureToLine,
+  applyEditorFeatureToSampleText
 } from "../helpers/compound-actions";
+
+import { clearEditor } from "../helpers/simple-actions";
+import { getHtmlContents } from "../helpers/serialize";
 import params from "../helpers/params";
 
 require("@cypress/snapshot").register();
@@ -58,27 +59,23 @@ context("Menu", () => {
     });
   });
 
-  it("headings 2", () => {
+  it("headings 1", () => {
     clearEditor().then(() => {
-      applyEditorFeatureToLine("//span[contains(text(), 'looks_two')]").then(
-        () => {
-          getHtmlContents().then(res => {
-            cy.wrap(res).snapshot();
-          });
-        }
-      );
+      applyEditorFeatureToLine("//span[contains(text(), 'H1')]").then(() => {
+        getHtmlContents().then(res => {
+          cy.wrap(res).snapshot();
+        });
+      });
     });
   });
 
-  it("headings 3", () => {
+  it("headings 2", () => {
     clearEditor().then(() => {
-      applyEditorFeatureToLine("//span[contains(text(), 'looks_3')]").then(
-        () => {
-          getHtmlContents().then(res => {
-            cy.wrap(res).snapshot();
-          });
-        }
-      );
+      applyEditorFeatureToLine("//span[contains(text(), 'H2')]").then(() => {
+        getHtmlContents().then(res => {
+          cy.wrap(res).snapshot();
+        });
+      });
     });
   });
 

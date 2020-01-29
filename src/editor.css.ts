@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const applyFontFamily = (fontFamily: string) => `font-family: ${fontFamily};`;
 
-export const EditorWrapper = styled.div`
+export const EditorWrapper = styled.div<any>`
   ${({ defaultFont }: { defaultFont: boolean }) =>
     defaultFont &&
     `@import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700|Libre+Franklin:200,200i,400,400i,700,700i");`}
@@ -119,7 +119,7 @@ export const StyledMenu = styled.div`
   left: -10000px;
   margin-top: -6px;
   opacity: 0;
-  background-color: #000; //var(--bg-sections);
+  background-color: var(--bg-sections);
   border-radius: 4px;
   transition: opacity 0.75s;
 

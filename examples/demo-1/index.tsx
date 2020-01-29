@@ -2,58 +2,68 @@
  * Note: This is used for the e2e tests
  */
 import React, { Component } from "react";
-import { LetterpadEditor } from "../../src/editor";
-import { Editor } from "slate";
-const sampleHtml = require("../../src/htmlValue.html");
 
-import Gallery from "./Gallery";
+import { Editor } from "slate";
+import { LetterpadEditor } from "../../src/editor";
+import styled from "styled-components";
+
+const sampleMd = require("../../src/initialText.md").default;
 
 class Demo extends Component {
-  onButtonClick = (
-    _: MouseEvent,
-    pluginName: string,
-    callbacks: { [key: string]: any }
-  ) => {
-    return false;
-    // the below is a demo to fetch images from giphy based on a search term.
-    // remove the above return to check it
-    if (pluginName == "plugin-image") {
-      if (callbacks.showPlaceholder) {
-        callbacks.showPlaceholder(Gallery);
-        return true;
-      }
-    }
+  state = {
+    theme: "dark",
+    readOnly: false
   };
 
-  onBeforeRender = (props: { type: string; props: { editor: Editor } }) => {
-    // if (props.type == "strong") {
-    //   console.log("foo");
-    // }
-    (window as any).__letterpadEditor = props.props.editor;
+  setEditorInstance = (editor: Editor) => {
+    (window as any).__letterpadEditor = editor;
+  };
+
+  onThemeChange = theme => {
+    this.setState({ theme });
+  };
+
+  handleToggleReadOnly = () => {
+    this.setState({ readOnly: !this.state.readOnly });
   };
 
   render() {
     return (
-      <LetterpadEditor
-        theme="light"
-        onButtonClick={this.onButtonClick}
-        onBeforeRender={this.onBeforeRender}
-        spellCheck={false}
-        defaultFont={true}
-        onChange={(_html: string) => {}}
-        getCharCount={(count: number) => {
-          // count is available.
-          if (count) {
-            // typescript - this is only to allow the unused variable
-          }
-        }}
-        html={sampleHtml}
-        hooks={(editor, hooks) => {
-          console.log(editor, hooks);
-        }}
-      />
+      <Container>
+        <button type="button" onClick={this.handleToggleReadOnly}>
+          {this.state.readOnly ? "Editable" : "Read Only"}
+        </button>
+        <button onClick={() => this.onThemeChange("dark")}>Dark</button>
+        &nbsp;&nbsp;
+        <button onClick={() => this.onThemeChange("light")}>Light</button>
+        <LetterpadEditor
+          defaultValue={sampleMd}
+          dark={this.state.theme === "dark"}
+          getEditorInstance={this.setEditorInstance}
+          readOnly={this.state.readOnly}
+          onClickLink={console.log}
+          uploadImage={file => {
+            // you may save this in cloud and return a url
+            return Promise.resolve(URL.createObjectURL(file));
+          }}
+          onChange={(_value: () => void) => {
+            // console.log(_value());
+          }}
+          style="body { font-size: 16px; }"
+          // getLinkComponent={(node: Node) => {
+          //   const href = node.data.get("href");
+          //   console.log(node);
+          // return () => <div {...node.attributes}>node</div>;
+          // }}
+        />
+      </Container>
     );
   }
 }
 
 export default Demo;
+
+const Container = styled.div`
+  width: 700px;
+  margin: auto;
+`;

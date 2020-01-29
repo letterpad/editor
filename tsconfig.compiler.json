@@ -9,7 +9,7 @@
     "esModuleInterop": true,
     "pretty": true,
     "outDir": "dist",
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "jsx": "react",
     "resolveJsonModule": true,
