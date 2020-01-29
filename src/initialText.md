@@ -59,7 +59,7 @@ Headings look like this:
 
 Texts can be **bold and strong** or they can be **italic** and **underline**.
 
-Lets try to embed a soundcloud track. You can customize the height of embeds. Its just a iframe property.
+Lets try to embed a soundcloud track.
 
 [https://soundcloud.com/its-deeper-sounds/alberto-jossue-deeper-sounds-mambo-radio-recorded-live-coda-dec-2019-110120](https://soundcloud.com/its-deeper-sounds/alberto-jossue-deeper-sounds-mambo-radio-recorded-live-coda-dec-2019-110120)
 
