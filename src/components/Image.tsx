@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import ImageZoom from "react-medium-image-zoom";
 import { SlateNodeProps } from "../types";
 // import TextareaAutosize from "react-autosize-textarea";
 import styled from "styled-components";
@@ -59,28 +58,15 @@ class Image extends React.Component<SlateNodeProps, State> {
         ) : (
           <React.Fragment>
             <HiddenImg src={src} onError={this.handleError} />
-            {!readOnly ? (
-              <StyledImg
-                {...attributes}
-                src={src}
-                alt={caption}
-                isSelected={isSelected}
-                isLoading={isLoading}
-                loading="lazy"
-              />
-            ) : (
-              <ImageZoom
-                image={{
-                  src,
-                  alt: caption,
-                  style: {
-                    maxWidth: "100%"
-                  },
-                  ...attributes
-                }}
-                shouldRespectMaxDimension
-              />
-            )}
+            <StyledImg
+              {...attributes}
+              src={src}
+              alt={caption}
+              isSelected={isSelected}
+              isLoading={isLoading}
+              loading="lazy"
+            />
+
             {showCaption && (
               <Caption
                 type="text"

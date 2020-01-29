@@ -171,7 +171,7 @@ export default class BlockToolbar extends React.Component<
 
   insertList = (type: string) => {
     const { editor } = this.props;
-    const checked = type === "todo-list" ? false : undefined;
+    const checked = type === "check-list" ? false : undefined;
 
     this.props.editor.setNodeByKey(this.props.node.key, {
       type: "paragraph",
@@ -210,8 +210,8 @@ export default class BlockToolbar extends React.Component<
         return this.insertList("bulleted-list");
       case "ordered-list":
         return this.insertList("ordered-list");
-      case "todo-list":
-        return this.insertList("todo-list");
+      case "check-list":
+        return this.insertList("check-list");
       case "image":
         return this.onPickImage(ev);
       default:
@@ -259,8 +259,8 @@ export default class BlockToolbar extends React.Component<
           <OrderedListIcon />
         </ToolbarButton>
         <ToolbarButton
-          active={this.checkActiveBlock("todo-list")}
-          onMouseDown={e => this.handleClickBlock(e, "todo-list")}
+          active={this.checkActiveBlock("check-list")}
+          onMouseDown={e => this.handleClickBlock(e, "check-list")}
         >
           <TodoListIcon />
         </ToolbarButton>

@@ -78,7 +78,7 @@ export default function MarkdownShortcuts() {
 
         if (type === "list-item") {
           if (checked !== undefined) {
-            return c.wrapBlock("todo-list");
+            return c.wrapBlock("check-list");
           } else if (chars === "1.") {
             return c.wrapBlock("ordered-list");
           } else {

@@ -1,7 +1,6 @@
-
 import styled from "styled-components";
 
-const TodoList = styled.ul`
+const CheckList = styled.ul`
   list-style: none;
   padding: 0 !important;
 
@@ -10,4 +9,4 @@ const TodoList = styled.ul`
   }
 `;
 
-export default TodoList;
+export default CheckList;

@@ -22,7 +22,6 @@ export type EditorProps = {
   placeholder: string;
   pretitle?: string;
   plugins: IPlugin[];
-  autoFocus?: boolean;
   readOnly?: boolean;
   dark?: boolean;
   schema?: SchemaProperties;
@@ -31,11 +30,9 @@ export type EditorProps = {
   onChange: (value: () => string) => void;
   onSearchLink?: (term: string) => Promise<ISearchResult[]>;
   onClickLink?: (href: string) => void;
-  onClickHashtag?: (tag: string) => void;
   onShowToast?: (message: string) => void;
   onImageBrowse?: () => void;
   getLinkComponent?: (node: Node) => React.ComponentType<any>;
-  className?: string;
   getEditorInstance?: (editor: Editor) => void;
   style?: string;
 };
@@ -114,11 +111,9 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       onSearchLink,
       onClickLink,
       onShowToast,
-      className,
       style,
       dark,
       defaultValue,
-      autoFocus,
       plugins,
       onImageBrowse,
       ...rest

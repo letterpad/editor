@@ -60,7 +60,7 @@ const schema: SchemaProperties = {
       parent: [
         { type: "bulleted-list" },
         { type: "ordered-list" },
-        { type: "todo-list" }
+        { type: "check-list" }
       ],
       nodes: [
         {
@@ -70,7 +70,7 @@ const schema: SchemaProperties = {
             { type: "paragraph" },
             { type: "bulleted-list" },
             { type: "ordered-list" },
-            { type: "todo-list" }
+            { type: "check-list" }
           ]
         }
       ]
@@ -93,7 +93,7 @@ const schema: SchemaProperties = {
           { type: "image" },
           { type: "bulleted-list" },
           { type: "ordered-list" },
-          { type: "todo-list" },
+          { type: "check-list" },
           { type: "block-toolbar" },
           { type: "table" },
           { type: "link" }

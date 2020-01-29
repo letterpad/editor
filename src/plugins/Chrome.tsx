@@ -7,7 +7,7 @@ import HoveringMenu from "../components/HoveringMenu";
 
 function ChromePlugin() {
   function renderEditor(
-    _props: EditorProps,
+    props: EditorProps,
     editor: Editor,
     next: () => React.ReactChild
   ) {
@@ -15,13 +15,10 @@ function ChromePlugin() {
 
     return (
       <React.Fragment>
-        {
-          // <StyledMenu>
+        {!props.readOnly && (
           <HoveringMenu value={editor.value} editor={editor} />
-          // </StyledMenu>
-        }
-        {<BlockInsert editor={editor} />}
-        {/* {props.toc && <Contents editor={editor} />} */}
+        )}
+        {!props.readOnly && <BlockInsert editor={editor} />}
         {children}
       </React.Fragment>
     );

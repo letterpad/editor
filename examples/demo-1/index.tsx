@@ -11,7 +11,8 @@ const sampleMd = require("../../src/initialText.md").default;
 
 class Demo extends Component {
   state = {
-    theme: "dark"
+    theme: "dark",
+    readOnly: false
   };
 
   setEditorInstance = (editor: Editor) => {
@@ -22,9 +23,16 @@ class Demo extends Component {
     this.setState({ theme });
   };
 
+  handleToggleReadOnly = () => {
+    this.setState({ readOnly: !this.state.readOnly });
+  };
+
   render() {
     return (
       <Container>
+        <button type="button" onClick={this.handleToggleReadOnly}>
+          {this.state.readOnly ? "Editable" : "Read Only"}
+        </button>
         <button onClick={() => this.onThemeChange("dark")}>Dark</button>
         &nbsp;&nbsp;
         <button onClick={() => this.onThemeChange("light")}>Light</button>
@@ -32,16 +40,14 @@ class Demo extends Component {
           defaultValue={sampleMd}
           dark={this.state.theme === "dark"}
           getEditorInstance={this.setEditorInstance}
-          readOnly={false}
+          readOnly={this.state.readOnly}
+          onClickLink={console.log}
           uploadImage={file => {
             // you may save this in cloud and return a url
             return Promise.resolve(URL.createObjectURL(file));
           }}
-          // onImageBrowse={() => {
-          //   console.log("on browse");
-          // }}
           onChange={(_value: () => void) => {
-            console.log(_value());
+            // console.log(_value());
           }}
           style="body { font-size: 16px; }"
           // getLinkComponent={(node: Node) => {

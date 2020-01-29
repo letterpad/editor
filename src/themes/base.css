@@ -16,7 +16,6 @@ html {
   font-family: Libre Baskerville, serif;
 
   text-rendering: optimizeLegibility;
-  padding: var(--editorPadding);
   line-height: 2;
 }
 

@@ -11,6 +11,7 @@ import {
 
 import BlockToolbar from "./components/BlockToolbar";
 import Cell from "./components/Table/Cell";
+import CheckList from "./components/CheckList";
 import Code from "./components/Code";
 import { Editor } from "slate";
 import HorizontalRule from "./components/HorizontalRule";
@@ -20,7 +21,6 @@ import ListItem from "./components/ListItem";
 import Paragraph from "./components/Paragraph";
 import Row from "./components/Table/Row";
 import Table from "./components/Table";
-import TodoList from "./components/TodoList";
 
 function renderNode(props: any, _editor: Editor, next: Function) {
   const { attributes } = props;
@@ -38,8 +38,8 @@ function renderNode(props: any, _editor: Editor, next: Function) {
       return <ul {...attributes}>{props.children}</ul>;
     case "ordered-list":
       return <ol {...attributes}>{props.children}</ol>;
-    case "todo-list":
-      return <TodoList {...attributes}>{props.children}</TodoList>;
+    case "check-list":
+      return <CheckList {...attributes}>{props.children}</CheckList>;
     case "table":
       return <Table {...props}>{props.children}</Table>;
     case "table-row":

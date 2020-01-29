@@ -2,7 +2,7 @@ import * as React from "react";
 
 import styled from "styled-components";
 
-export default class TodoItem extends React.Component<any> {
+export default class CheckListItem extends React.Component<any> {
   handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     const checked = ev.currentTarget.checked;
     const { editor, node } = this.props;

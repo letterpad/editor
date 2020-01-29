@@ -1,6 +1,5 @@
+import CheckListItem from "./CheckListItem";
 import React from "react";
-
-import TodoItem from "./TodoItem";
 import { SlateNodeProps } from "../types";
 
 export default function ListItem({
@@ -14,9 +13,9 @@ export default function ListItem({
 
   if (checked !== undefined) {
     return (
-      <TodoItem node={node} attributes={attributes} {...props}>
+      <CheckListItem node={node} attributes={attributes} {...props}>
         {children}
-      </TodoItem>
+      </CheckListItem>
     );
   }
   return <li {...attributes}>{children}</li>;
