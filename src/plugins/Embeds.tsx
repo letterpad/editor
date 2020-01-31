@@ -2,7 +2,8 @@ import * as React from "react";
 
 import { Editor, Node } from "slate";
 
-import Embed from "react-embed";
+// import Embed from "react-embed";
+import Gist from "../components/Embeds/Gist";
 import styled from "styled-components";
 
 type Options = {
@@ -61,16 +62,20 @@ export default function Embeds({ getComponent }: Options) {
 
 class MediaEmbed extends React.Component<any> {
   render() {
-    const { attributes, node } = this.props;
+    const { attributes, node, editor } = this.props;
 
     return (
       <Container {...attributes} id="embed-video">
-        <Embed
+        <Gist
+          url={node.data.get("href")}
+          getEmbedSrc={this.props.editor.props.getEmbedSrc}
+        />
+        {/* <Embed
           url={node.data.get("href")}
           renderVoid={() => {
             return <div>{node.data.get("href")}</div>;
           }}
-        ></Embed>
+        ></Embed> */}
       </Container>
     );
   }

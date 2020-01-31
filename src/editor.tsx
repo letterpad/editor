@@ -33,6 +33,7 @@ export type EditorProps = {
   onShowToast?: (message: string) => void;
   onImageBrowse?: () => void;
   getLinkComponent?: (node: Node) => React.ComponentType<any>;
+  getEmbedSrc?: (src: string) => React.ComponentType<any>;
   getEditorInstance?: (editor: Editor) => void;
   style?: string;
 };
@@ -116,6 +117,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       defaultValue,
       plugins,
       onImageBrowse,
+      getEmbedSrc,
       ...rest
     } = this.props;
 
@@ -141,6 +143,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
           onImageBrowse={onImageBrowse}
           pretitle={pretitle}
           options={defaultOptions}
+          getEmbedSrc={getEmbedSrc}
           {...rest}
         />
       </div>
