@@ -120,7 +120,34 @@ blockquote > :first-child {
 blockquote > :last-child {
   margin-bottom: 0;
 }
+code {
+  padding: 0.5em 1em;
+  white-space: nowrap;
+}
+code.code-block {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em 1em;
+  line-height: 1.4em;
+  color: #c5c8c6;
+  background: #131b1f;
+  border-radius: 4px;
+  border: 1px solid #283237;
+}
 
+code pre {
+  -webkit-font-smoothing: initial;
+  font-size: 13px;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  tab-size: 4;
+  hyphens: none;
+  padding: 0px;
+  margin: 0;
+}
 @font-face {
   font-family: "Material Icons";
   font-style: normal;
