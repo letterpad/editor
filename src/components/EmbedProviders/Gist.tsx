@@ -1,4 +1,6 @@
-import * as React from "react";
+import React, { IframeHTMLAttributes } from "react";
+
+import { IEmbedProvider } from "../../types";
 
 const URL_REGEX = new RegExp(
   "^https://gist.github.com/([a-zd](?:[a-zd]|-(?=[a-zd])){0,38})/(.*)$"
@@ -9,8 +11,13 @@ const iframeAttrs = {
   height: "200px",
   frameBorder: "0"
 };
+function getId(url: string) {
+  const gistUrl = new URL(url);
+  const id = gistUrl.pathname.split("/")[2];
+  return id;
+}
 
-class Gist extends React.Component<{ url: string; getEmbedSrc: Function }> {
+class Gist extends React.Component<IEmbedProvider> {
   iframeNode: HTMLIFrameElement;
 
   static ENABLED = [URL_REGEX];
@@ -20,26 +27,26 @@ class Gist extends React.Component<{ url: string; getEmbedSrc: Function }> {
   }
 
   get id() {
-    const gistUrl = new URL(this.props.url);
-    return gistUrl.pathname.split("/")[2];
+    if (!this.props.url) return "";
+    return getId(this.props.url);
   }
 
-  updateIframeContent() {
-    const id = this.id;
-    const iframe = this.iframeNode;
-    if (!iframe) return;
-
+  static getEmbedAttributes(url: string) {
+    const id = getId(url);
     const gistLink = `https://gist.github.com/${id}.js`;
     const gistScript = `<script type="text/javascript" src="${gistLink}"></script>`;
     const styles =
       "<style>*{ font-size:12px; } body { margin: 0; } .gist .blob-wrapper.data { max-height:150px; overflow:auto; }</style>";
     const iframeHtml = `<html><head><base target="_parent">${styles}</head><body>${gistScript}</body></html>`;
-    this.iframeNode.src = "data:text/html;base64," + btoa(iframeHtml);
 
-    if (this.props.getEmbedSrc) {
-      //@ts-ignore
-      this.props.getEmbedSrc(btoa(iframeHtml));
-    }
+    return { ...iframeAttrs, src: "data:text/html;base64," + btoa(iframeHtml) };
+  }
+
+  updateIframeContent() {
+    const iframe = this.iframeNode;
+    if (!iframe || !this.props.url) return;
+    const attrs = Gist.getEmbedAttributes(this.props.url);
+    iframe.src = attrs.src;
   }
 
   render() {

@@ -1,5 +1,11 @@
 import { Editor, SchemaProperties, Value } from "slate";
-import { IPlugin, ISearchResult, ISerializer } from "./types";
+import {
+  IEmbedProvider,
+  IPlugin,
+  ISearchResult,
+  ISerializer,
+  TypeIframeProps
+} from "./types";
 import React, { PureComponent } from "react";
 
 import { GlobalStyle } from "./themes/Global.css";
@@ -32,8 +38,10 @@ export type EditorProps = {
   onClickLink?: (href: string) => void;
   onShowToast?: (message: string) => void;
   onImageBrowse?: () => void;
-  getLinkComponent?: (node: Node) => React.ComponentType<any>;
-  getEmbedSrc?: (src: string) => React.ComponentType<any>;
+  getLinkComponent?: (
+    node: Node,
+    attrs: TypeIframeProps
+  ) => React.ComponentType<any> | void;
   getEditorInstance?: (editor: Editor) => void;
   style?: string;
 };
@@ -117,7 +125,6 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       defaultValue,
       plugins,
       onImageBrowse,
-      getEmbedSrc,
       ...rest
     } = this.props;
 
@@ -143,7 +150,6 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
           onImageBrowse={onImageBrowse}
           pretitle={pretitle}
           options={defaultOptions}
-          getEmbedSrc={getEmbedSrc}
           {...rest}
         />
       </div>

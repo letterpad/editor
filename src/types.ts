@@ -29,3 +29,13 @@ export interface ISerializer {
   deserialize: (str: string) => Value;
   serialize: (value: Value) => string;
 }
+
+export type TypeIframeProps = { [name: string]: string | boolean };
+
+export interface IEmbedProvider {
+  url: string;
+  matches: string[];
+  getEmbedAttributes?: (attrs: {
+    [name: string]: string | boolean;
+  }) => React.ComponentType<any> | void;
+}

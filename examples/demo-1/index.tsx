@@ -49,11 +49,17 @@ class Demo extends Component {
           onChange={(_value: () => void) => {
             // console.log(_value());
           }}
-          // getLinkComponent={(node: Node) => {
-          //   const href = node.data.get("href");
-          //   console.log(node);
-          // return () => <div {...node.attributes}>node</div>;
+          // getEmbedAttributes={a => {
+          //   console.log("embed attrs", a);
+          //   return () => <div>hello</div>;
           // }}
+          getLinkComponent={(_node, attrs) => {
+            return props => (
+              <div {...props.attributes} contentEditable={false}>
+                <iframe {...attrs}></iframe>
+              </div>
+            );
+          }}
         />
       </Container>
     );
