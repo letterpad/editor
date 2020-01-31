@@ -49,7 +49,6 @@ class Demo extends Component {
           onChange={(_value: () => void) => {
             // console.log(_value());
           }}
-          style="body { font-size: 16px; }"
           // getLinkComponent={(node: Node) => {
           //   const href = node.data.get("href");
           //   console.log(node);
