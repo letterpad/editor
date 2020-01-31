@@ -45,7 +45,7 @@ export default function CodeBlock({
 
   return (
     <Container {...attributes} spellCheck={false}>
-      <Code className="abc">{children}</Code>
+      <Code className="code-block">{children}</Code>
       {!readOnly && (
         <Language
           onChange={onSelectLanguage}
@@ -68,127 +68,102 @@ export default function CodeBlock({
   Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
 */
 const Code = styled.code`
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em 1em;
-  line-height: 1.4em;
-  color: #c5c8c6;
-  pre {
-    -webkit-font-smoothing: initial;
-    /* font-family: ${props => props.theme.fontFamilyMono} */
-    font-size: 13px;
-    direction: ltr;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-    color: ${props => props.theme.code};
-    margin: 0;
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: #7c7c7c;
   }
 
-  .token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-	color: #7C7C7C;
-}
+  .token.punctuation {
+    color: #c5c8c6;
+  }
 
-.token.punctuation {
-	color: #c5c8c6;
-}
+  .namespace {
+    opacity: 0.7;
+  }
 
-.namespace {
-	opacity: .7;
-}
+  .token.property,
+  .token.keyword,
+  .token.tag {
+    color: #96cbfe;
+  }
 
-.token.property,
-.token.keyword,
-.token.tag {
-	color: #96CBFE;
-}
+  .token.class-name {
+    color: #ffffb6;
+    text-decoration: underline;
+  }
 
-.token.class-name {
-	color: #FFFFB6;
-	text-decoration: underline;
-}
+  .token.boolean,
+  .token.constant {
+    color: #99cc99;
+  }
 
-.token.boolean,
-.token.constant {
-	color: #99CC99;
-}
+  .token.symbol,
+  .token.deleted {
+    color: #f92672;
+  }
 
-.token.symbol,
-.token.deleted {
-	color: #f92672;
-}
+  .token.number {
+    color: #ff73fd;
+  }
 
-.token.number {
-	color: #FF73FD;
-}
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin,
+  .token.inserted {
+    color: #a8ff60;
+  }
 
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-	color: #A8FF60;
-}
+  .token.variable {
+    color: #c6c5fe;
+  }
 
-.token.variable {
-	color: #C6C5FE;
-}
+  .token.operator {
+    color: #ededed;
+  }
 
-.token.operator {
-	color: #EDEDED;
-}
+  .token.entity {
+    color: #ffffb6;
+    cursor: help;
+  }
 
-.token.entity {
-	color: #FFFFB6;
-	cursor: help;
-}
+  .token.url {
+    color: #96cbfe;
+  }
 
-.token.url {
-	color: #96CBFE;
-}
+  .language-css .token.string,
+  .style .token.string {
+    color: #87c38a;
+  }
 
-.language-css .token.string,
-.style .token.string {
-	color: #87C38A;
-}
+  .token.atrule,
+  .token.attr-value {
+    color: #f9ee98;
+  }
 
-.token.atrule,
-.token.attr-value {
-	color: #F9EE98;
-}
+  .token.function {
+    color: #dad085;
+  }
 
-.token.function {
-	color: #DAD085;
-}
+  .token.regex {
+    color: #e9c062;
+  }
 
-.token.regex {
-	color: #E9C062;
-}
+  .token.important {
+    color: #fd971f;
+  }
 
-.token.important {
-	color: #fd971f;
-}
+  .token.important,
+  .token.bold {
+    font-weight: bold;
+  }
 
-.token.important,
-.token.bold {
-	font-weight: bold;
-}
-
-.token.italic {
-	font-style: italic;
-}
+  .token.italic {
+    font-style: italic;
+  }
 `;
 
 const Language = styled.select`
@@ -200,9 +175,6 @@ const Language = styled.select`
 
 const Container = styled.div`
   position: relative;
-  background: var(--bg-sections);
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
 
   &:hover {
     > span {
