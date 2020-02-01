@@ -35,7 +35,6 @@ const ListItem = styled.li<any>`
   position: relative;
 
   > p > span {
-    color: ${props => (props.checked ? props.theme.textSecondary : "inherit")};
     text-decoration: ${props => (props.checked ? "line-through" : "none")};
   }
 `;

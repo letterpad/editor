@@ -21,12 +21,12 @@
 div[data-slate-editor="true"] {
   padding-bottom: 400px;
 }
-.lp-h1,
-.lp-h2,
-.lp-h3,
-.lp-h4,
-.lp-h5,
-.lp-h6 {
+.lp-editor h1,
+.lp-editor h2,
+.lp-editor h3,
+.lp-editor h4,
+.lp-editor h5,
+.lp-editor h6 {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   text-rendering: optimizeLegibility;
@@ -35,32 +35,32 @@ div[data-slate-editor="true"] {
   padding-bottom: var(--spacingBottom);
 }
 
-.lp-h1 {
+.lp-editor h1 {
   font-size: 2rem;
   border-bottom: solid 1px var(--color-border);
 }
 
-.lp-h2 {
+.lp-editor h2 {
   font-size: 1.6rem;
 }
 
-.lp-h3 {
+.lp-editor h3 {
   font-size: 1.4rem;
 }
 
-.lp-h4 {
+.lp-editor h4 {
   font-size: 1.2rem;
 }
 
-.lp-h5 {
+.lp-editor h5 {
   font-size: 1.1rem;
 }
 
-.lp-h6 {
+.lp-editor h6 {
   font-size: 1rem;
 }
 
-.lp-a {
+.lp-editor a {
   text-decoration: underline;
 }
 
@@ -72,66 +72,76 @@ section {
   line-height: 25px;
 }
 
-.lp-h1 + section {
+.lp-editor h1 + section {
   padding-top: var(--spacingTop);
 }
 
-.lp-h2 + section,
-.lp-h3 + section,
-.lp-h4 + section {
+.lp-editor h2 + section,
+.lp-editor h3 + section,
+.lp-editor h4 + section {
   padding-top: var(--spacingTopSmall);
 }
 
-.lp-h1 + .lp-h2,
-.lp-h2 + .lp-h3,
-.lp-h3 + .lp-h4 {
+.lp-editor h1 + .lp-editor h2,
+.lp-editor h2 + .lp-editor h3,
+.lp-editor h3 + .lp-editor h4 {
   padding-top: var(--spacingTop);
 }
-.lp-ol,
-.lp-ul {
+.lp-editor ol,
+.lp-editor ul {
   padding-left: 2em;
 }
-.lp-ol .lp-ol,
-.lp-ol .lp-ul,
-.lp-ul .lp-ol,
-.lp-ul .lp-ul {
+.lp-editor ol .lp-editor ol,
+.lp-editor ol .lp-editor ul,
+.lp-editor ul .lp-editor ol,
+.lp-editor ul .lp-editor ul {
   margin-bottom: 0;
   margin-top: 0;
 }
-.lp-li {
+.lp-editor li {
   word-wrap: break-all;
 }
-.lp-li > .lp-p {
+.lp-editor li > .lp-editor p {
   margin-top: 8px;
 }
-.lp-li + .lp-li {
+.lp-editor li + .lp-editor li {
   margin-top: 0.25em;
 }
 
-.lp-blockquote,
-.lp-dl,
-.lp-ol,
-.lp-pre,
-.lp-table,
-.lp-ul {
+.lp-editor blockquote,
+.lp-editor dl,
+.lp-editor ol,
+.lp-editor pre,
+.lp-editor table,
+.lp-editor ul {
   margin-bottom: 16px;
   margin-top: 0;
 }
-.lp-blockquote {
+.code-block {
+  background: black;
+  display: block;
+  padding: 10px;
+  font-size: medium;
+}
+.code-block .lp-editor pre {
+  padding: 0px;
+  margin-bottom: 0px;
+}
+.lp-editor blockquote {
   border-left: 0.25em solid var(--color-border);
   padding: 0 1em;
 }
-.lp-blockquote > :first-child {
+.lp-editor blockquote > :first-child {
   margin-top: 0;
 }
-.lp-blockquote > :last-child {
+.lp-editor blockquote > :last-child {
   margin-bottom: 0;
 }
-.lp-code {
+.lp-editor code {
   padding: 0.5em 1em;
   white-space: nowrap;
 }
-.lp-code.code-block {
+.lp-editor code.code-block {
   display: block;
   overflow-x: auto;
   padding: 0.5em 1em;
@@ -142,7 +152,7 @@ section {
   border: 1px solid #283237;
 }
 
-.lp-code .lp-pre {
+.lp-editor code .lp-editor pre {
   -webkit-font-smoothing: initial;
   font-size: 13px;
   direction: ltr;

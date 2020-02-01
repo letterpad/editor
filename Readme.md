@@ -78,5 +78,6 @@ Most part is covered with integration tests using Cypress.
 ```sh
 # Run all tests locally
 yarn bundle # build the bundle
-yarn e2e # validate the bundle
+yarn testServer
+yarn cy:run # validate the bundle
 ```

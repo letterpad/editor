@@ -1,8 +1,7 @@
 import Gist from "./Gist";
-import React from "react";
 import Spotify from "./Spotify";
 import Vimeo from "./Vimeo";
-import YouTube from "./YouTube";
+import YouTube from "./Youtube";
 
 const embeds = { Gist, Vimeo, Spotify, YouTube };
 export default embeds;

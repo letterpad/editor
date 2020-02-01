@@ -234,7 +234,6 @@ class LinkToolbar extends React.Component<Props, State> {
 }
 
 const SearchResults = styled.div`
-  background: ${props => props.theme.toolbarBackground};
   position: absolute;
   top: 100%;
   width: 100%;
@@ -255,8 +254,6 @@ const LinkEditor = styled.div`
 
 const Input = styled.input`
   font-size: 15px;
-  background: ${props => props.theme.toolbarInput};
-  color: ${props => props.theme.toolbarItem};
   border-radius: 2px;
   padding: 4px 8px;
   border: 0;

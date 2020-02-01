@@ -96,8 +96,6 @@ const ErrorMessage = styled.div`
   top: 50%;
   left: 50%;
 
-  color: ${props => props.theme.text};
-  background: ${props => props.theme.imageErrorBackground};
   display: block;
   margin: 0 auto;
   padding: 4px 8px;
@@ -150,7 +148,6 @@ const Caption = styled.textarea<any>`
   resize: none;
 
   &::placeholder {
-    color: ${props => props.theme.placeholder};
   }
 `;
 

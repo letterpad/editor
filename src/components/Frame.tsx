@@ -73,6 +73,6 @@ const Iframe = props => <iframe {...props} />;
 
 const StyledIframe = styled(Iframe)`
   border: 1px solid;
-  border-color: ${props => props.theme.embedBorder};
+  border-color: var(--color-border);
   border-radius: 3px;
 `;
