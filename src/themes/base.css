@@ -21,6 +21,12 @@
 .lp-editor div[data-slate-editor="true"] {
   padding-bottom: 400px;
 }
+.lp-editor {
+  line-height: 2;
+}
+.lp-editor p {
+  margin: 1.2rem 0px;
+}
 .lp-editor h1,
 .lp-editor h2,
 .lp-editor h3,
@@ -62,6 +68,13 @@
 
 .lp-editor a {
   text-decoration: underline;
+}
+
+.lp-editor hr {
+  padding-top: 0.75em;
+  margin: 0;
+  border: none;
+  border-top: 1px solid var(--color-border);
 }
 
 .lp-editor section {

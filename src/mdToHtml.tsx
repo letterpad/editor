@@ -1,17 +1,20 @@
-import embeds, { getEmbedProvider } from "./components/EmbedProviders";
+import "prismjs/components/prism-markup-templating";
+
 import { letterpadClassName, letterpadId } from "./editor";
 
 import MarkownIt from "markdown-it";
+import embeds from "./components/EmbedProviders";
 import { getRenderer } from "./plugins/Embeds";
+import p from "markdown-it-prism";
 
-const mdToHtml = MarkownIt();
+const mdToHtml = MarkownIt().use(p);
 
 const regex = /<p><a[^>]+href=\"(.*?)\"[^>]*>(.*?)<\/a><\/p>/gi;
 
 export function getHtmlFromMarkdown(markdown: string, editor) {
   const html = mdToHtml.render(markdown);
   const htmlWithEmbedContent = convertLinksToEmbed(html, editor);
-  return `<div className='${letterpadClassName}' id='{letterpadId}'>${htmlWithEmbedContent}</div>`;
+  return `<div class='${letterpadClassName}' id='${letterpadId}'>${htmlWithEmbedContent}</div>`;
 }
 
 export default function convertLinksToEmbed(html: string, editor) {

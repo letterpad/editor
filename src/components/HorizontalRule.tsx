@@ -8,11 +8,8 @@ function HorizontalRule(props: SlateNodeProps) {
 }
 
 const StyledHr = styled.hr<any>`
-  padding-top: 0.75em;
-  margin: 0;
-  border: 0;
   border-top: 1px solid
-    ${props => (props.isSelected ? "var(--bg-success)" : "var(--color-border)")};
+    ${props => (props.isSelected ? "var(--bg-success)" : "inherit")};
 `;
 
 export default HorizontalRule;
