@@ -18,5 +18,9 @@ export default function ListItem({
       </CheckListItem>
     );
   }
-  return <li {...attributes}>{children}</li>;
+  return (
+    <li {...attributes} className="lp-li">
+      {children}
+    </li>
+  );
 }

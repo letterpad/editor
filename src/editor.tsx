@@ -140,32 +140,30 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
 
     const theme = dark ? "dark" : "light";
     return (
-      <Style>
-        <div id="letterpad-editor-container">
-          <GlobalStyle theme={theme} style={style} />
+      <div id="letterpad-editor-container">
+        <GlobalStyle theme={theme} style={style} />
 
-          <SlateReactEditor
-            value={this.state.editorValue}
-            plugins={this.plugins}
-            onChange={this.handleChange}
-            queries={queries}
-            commands={commands}
-            placeholder={placeholder}
-            schema={this.getSchema()}
-            onSave={onSave}
-            onSearchLink={onSearchLink}
-            onClickLink={onClickLink}
-            onShowToast={onShowToast}
-            readOnly={readOnly}
-            spellCheck={!readOnly}
-            uploadImage={uploadImage}
-            onImageBrowse={onImageBrowse}
-            title={title}
-            options={defaultOptions}
-            {...rest}
-          />
-        </div>
-      </Style>
+        <SlateReactEditor
+          value={this.state.editorValue}
+          plugins={this.plugins}
+          onChange={this.handleChange}
+          queries={queries}
+          commands={commands}
+          placeholder={placeholder}
+          schema={this.getSchema()}
+          onSave={onSave}
+          onSearchLink={onSearchLink}
+          onClickLink={onClickLink}
+          onShowToast={onShowToast}
+          readOnly={readOnly}
+          spellCheck={!readOnly}
+          uploadImage={uploadImage}
+          onImageBrowse={onImageBrowse}
+          title={title}
+          options={defaultOptions}
+          {...rest}
+        />
+      </div>
     );
   }
 }

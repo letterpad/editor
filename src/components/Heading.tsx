@@ -40,20 +40,20 @@ export const StyledHeading = styled(Heading)<any>`
   position: relative;
 `;
 export const Heading1 = (props: SlateNodeProps) => (
-  <StyledHeading level={1} {...props} />
+  <StyledHeading level={1} {...props} className="lp-h1" />
 );
 export const Heading2 = (props: SlateNodeProps) => (
-  <StyledHeading level={2} {...props} />
+  <StyledHeading level={2} {...props} className="lp-h2" />
 );
 export const Heading3 = (props: SlateNodeProps) => (
-  <StyledHeading level={3} {...props} />
+  <StyledHeading level={3} {...props} className="lp-h3" />
 );
 export const Heading4 = (props: SlateNodeProps) => (
-  <StyledHeading level={4} {...props} />
+  <StyledHeading level={4} {...props} className="lp-h4" />
 );
 export const Heading5 = (props: SlateNodeProps) => (
-  <StyledHeading level={5} {...props} />
+  <StyledHeading level={5} {...props} className="lp-h5" />
 );
 export const Heading6 = (props: SlateNodeProps) => (
-  <StyledHeading level={6} {...props} />
+  <StyledHeading level={6} {...props} className="lp-h6" />
 );

@@ -34,27 +34,51 @@ function renderNode(props: any, _editor: Editor, next: Function) {
     case "block-toolbar":
       return <BlockToolbar {...props} />;
     case "block-quote":
-      return <blockquote {...attributes}>{props.children}</blockquote>;
+      return (
+        <blockquote {...attributes} className="lp-blockquote">
+          {props.children}
+        </blockquote>
+      );
     case "bulleted-list":
-      return <ul {...attributes}>{props.children}</ul>;
+      return (
+        <ul {...attributes} className="lp-ul">
+          {props.children}
+        </ul>
+      );
     case "ordered-list":
-      return <ol {...attributes}>{props.children}</ol>;
+      return (
+        <ol {...attributes} className="lp-ol">
+          {props.children}
+        </ol>
+      );
     case "check-list":
-      return <CheckList {...attributes}>{props.children}</CheckList>;
+      return (
+        <CheckList {...attributes} className="lp-ul lp-cl">
+          {props.children}
+        </CheckList>
+      );
     case "table":
-      return <Table {...props}>{props.children}</Table>;
+      return (
+        <Table {...props} className="lp-table">
+          {props.children}
+        </Table>
+      );
     case "table-row":
-      return <Row {...props} />;
+      return <Row {...props} className="lp-tr" />;
     case "table-cell":
-      return <Cell {...props} />;
+      return <Cell {...props} className="lp-td" />;
     case "list-item":
       return <ListItem {...props} />;
     case "horizontal-rule":
       return <HorizontalRule {...props} />;
     case "code":
-      return <Code {...props} />;
+      return <Code {...props} className="lp-code" />;
     case "code-line":
-      return <pre {...attributes}>{props.children}</pre>;
+      return (
+        <pre {...attributes} className="lp-pre">
+          {props.children}
+        </pre>
+      );
     case "image":
       return <Image {...props} />;
     case "link":

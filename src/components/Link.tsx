@@ -23,6 +23,7 @@ export default function Link(props: SlateNodeProps) {
     <a
       {...attributes}
       href={readOnly ? href : undefined}
+      className="lp-a"
       onClick={
         readOnly
           ? ev => {

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 function HorizontalRule(props: SlateNodeProps) {
   const { isSelected, attributes } = props;
-  return <StyledHr isSelected={isSelected} {...attributes} />;
+  return <StyledHr isSelected={isSelected} {...attributes} className="lp-hr" />;
 }
 
 const StyledHr = styled.hr<any>`

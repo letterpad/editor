@@ -17,3 +17,162 @@
   text-rendering: optimizeLegibility;
   line-height: 2;
 }
+
+div[data-slate-editor="true"] {
+  padding-bottom: 400px;
+}
+.lp-h1,
+.lp-h2,
+.lp-h3,
+.lp-h4,
+.lp-h5,
+.lp-h6 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  line-height: 1;
+  padding-top: var(--spacingTop);
+  padding-bottom: var(--spacingBottom);
+}
+
+.lp-h1 {
+  font-size: 2rem;
+  border-bottom: solid 1px var(--color-border);
+}
+
+.lp-h2 {
+  font-size: 1.6rem;
+}
+
+.lp-h3 {
+  font-size: 1.4rem;
+}
+
+.lp-h4 {
+  font-size: 1.2rem;
+}
+
+.lp-h5 {
+  font-size: 1.1rem;
+}
+
+.lp-h6 {
+  font-size: 1rem;
+}
+
+.lp-a {
+  text-decoration: underline;
+}
+
+section {
+  padding: 0;
+  padding-top: var(--spacingTop);
+  padding-bottom: var(--spacingBottom);
+  text-align: justify;
+  line-height: 25px;
+}
+
+.lp-h1 + section {
+  padding-top: var(--spacingTop);
+}
+
+.lp-h2 + section,
+.lp-h3 + section,
+.lp-h4 + section {
+  padding-top: var(--spacingTopSmall);
+}
+
+.lp-h1 + .lp-h2,
+.lp-h2 + .lp-h3,
+.lp-h3 + .lp-h4 {
+  padding-top: var(--spacingTop);
+}
+.lp-ol,
+.lp-ul {
+  padding-left: 2em;
+}
+.lp-ol .lp-ol,
+.lp-ol .lp-ul,
+.lp-ul .lp-ol,
+.lp-ul .lp-ul {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.lp-li {
+  word-wrap: break-all;
+}
+.lp-li > .lp-p {
+  margin-top: 8px;
+}
+.lp-li + .lp-li {
+  margin-top: 0.25em;
+}
+
+.lp-blockquote,
+.lp-dl,
+.lp-ol,
+.lp-pre,
+.lp-table,
+.lp-ul {
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+.lp-blockquote {
+  border-left: 0.25em solid var(--color-border);
+  padding: 0 1em;
+}
+.lp-blockquote > :first-child {
+  margin-top: 0;
+}
+.lp-blockquote > :last-child {
+  margin-bottom: 0;
+}
+.lp-code {
+  padding: 0.5em 1em;
+  white-space: nowrap;
+}
+.lp-code.code-block {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em 1em;
+  line-height: 1.4em;
+  color: #c5c8c6;
+  background: #131b1f;
+  border-radius: 4px;
+  border: 1px solid #283237;
+}
+
+.lp-code .lp-pre {
+  -webkit-font-smoothing: initial;
+  font-size: 13px;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  tab-size: 4;
+  hyphens: none;
+  padding: 0px;
+  margin: 0;
+}
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Material Icons"), local("MaterialIcons-Regular"), format("woff2");
+}
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -moz-font-feature-settings: "liga";
+  -moz-osx-font-smoothing: grayscale;
+}
