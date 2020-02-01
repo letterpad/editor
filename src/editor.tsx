@@ -140,7 +140,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
 
     const theme = dark ? "dark" : "light";
     return (
-      <div id="letterpad-editor-container">
+      <div id="letterpad-editor-container" className="lp-editor">
         <GlobalStyle theme={theme} style={style} />
 
         <SlateReactEditor

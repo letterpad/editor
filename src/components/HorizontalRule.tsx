@@ -11,7 +11,7 @@ const StyledHr = styled.hr<any>`
   padding-top: 0.75em;
   margin: 0;
   border: 0;
-  border-bottom: 1px solid
+  border-top: 1px solid
     ${props => (props.isSelected ? "var(--bg-success)" : "var(--color-border)")};
 `;
 
