@@ -10,7 +10,6 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-bash";
 
 import { Editor, Node } from "slate";
-import { TypeIframeProps, TypeLinkComponent } from "../types";
 
 import ChromePlugin from "./Chrome";
 import CollapseOnEscape from "slate-collapse-on-escape";
@@ -21,6 +20,7 @@ import EditTable from "@domoinc/slate-edit-table";
 import Ellipsis from "./Ellipsis";
 import Embeds from "./Embeds";
 import InsertImages from "slate-drop-or-paste-images";
+import InstantReplace from "./InstanceReplace";
 import KeyboardBehavior from "./KeyboardBehavior";
 import { KeyboardEvent } from "react";
 import KeyboardShortcuts from "./KeyboardShortcuts";
@@ -34,6 +34,7 @@ import Placeholder from "./Placeholder";
 import Prism from "golery-slate-prism";
 import Table from "./Table";
 import TrailingBlock from "@wikifactory/slate-trailing-block";
+import { TypeLinkComponent } from "../types";
 
 const createPlugins = ({
   placeholder,
@@ -45,6 +46,7 @@ const createPlugins = ({
   return [
     Nodes,
     Marks,
+    InstantReplace,
     PasteLinkify({
       type: "link",
       collapseTo: "end"
