@@ -18,6 +18,9 @@ import schema from "./helper/schema";
 
 const defaultOptions = {};
 
+export const letterpadId = "letterpad-editor-container";
+export const letterpadClassName = "lp-editor";
+
 type State = {
   editorValue: Value;
 };
@@ -33,9 +36,7 @@ export type EditorProps = {
   schema?: SchemaProperties;
   uploadImage?: (file: File) => Promise<string>;
   onSave?: ({ done }: { done?: boolean }) => void;
-  onChange: (
-    value: () => { markdown: string; html: string; title: string }
-  ) => void;
+  onChange: (value: () => { markdown: string; html: string }) => void;
   onSearchLink?: (term: string) => Promise<ISearchResult[]>;
   onClickLink?: (href: string) => void;
   onShowToast?: (message: string) => void;
@@ -89,15 +90,8 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
   value = () => {
     const markdown = this.serializer.serialize(this.state.editorValue);
     const html = getHtmlFromMarkdown(markdown, this.editor);
-    let title = "";
-    if (
-      typeof this.editor.props.title !== "undefined" &&
-      markdown.startsWith("# ")
-    ) {
-      title = markdown.split("\n")[0].replace("# ", "");
-    }
 
-    return { markdown, html, title };
+    return { markdown, html };
   };
 
   handleChange = ({ value }: { value: Value }) => {
@@ -140,7 +134,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
 
     const theme = dark ? "dark" : "light";
     return (
-      <div id="letterpad-editor-container" className="lp-editor">
+      <div id={letterpadId} className={letterpadClassName}>
         <GlobalStyle theme={theme} style={style} />
 
         <SlateReactEditor
