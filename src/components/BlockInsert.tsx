@@ -1,10 +1,7 @@
-import * as React from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 import { Editor, findDOMNode } from "slate-react";
-
-import { Node } from "slate";
+import { Value, Node } from "slate";
 import { Portal } from "react-portal";
-import { isEqual } from "lodash";
 import styled from "styled-components";
 
 export const ToggleButton = styled.span`
@@ -21,7 +18,103 @@ type Props = {
   // theme: Object;
 };
 
-function findClosestRootNode(value, ev) {
+export default function BlockInsert(props: Props) {
+  const [top, setTop] = useState(-1000);
+  const [left, setLeft] = useState(-1000);
+  const [active, setActive] = useState(false);
+  const [closestRootNode, setClosestRootNode] = useState(null);
+  const blockEl = useRef(null);
+  let mouseMoveTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    return function cleanup() {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  });
+
+  useEffect(() => {
+    if (mouseMoveTimeout) {
+      clearTimeout(mouseMoveTimeout);
+      mouseMoveTimeout = undefined;
+    }
+    mouseMoveTimeout = setTimeout(() => setActive(false), 2000);
+  }, [active]);
+
+  function handleMouseMove(event: MouseEvent) {
+    const triggerPoint = blockEl.current.getBoundingClientRect().left + 300;
+    const result = findClosestRootNode(props.editor.value, event);
+    setActive(event.clientX < triggerPoint);
+    if (result) {
+      setClosestRootNode(result.node);
+
+      // do not show block menu when it's open, the paragraph isn't empty
+      // or the current node is an embed.
+      const shouldHideToolbar =
+        result.node.type !== "paragraph" ||
+        !!result.node.text.trim() ||
+        result.node.isVoid;
+
+      if (shouldHideToolbar) {
+        setLeft(-1000);
+        setActive(false);
+      } else {
+        setLeft(Math.round(result.bounds.left - 20));
+        setTop(Math.round(result.bounds.top + window.scrollY));
+      }
+    }
+  }
+
+  function handleToggleButtonClick(e: React.SyntheticEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setActive(false);
+    props.editor.value.document.nodes.forEach(node => {
+      if (node && node.type === "block-toolbar") {
+        props.editor.setNodeByKey(node.key, {
+          type: "paragraph",
+          isVoid: false
+        });
+      }
+    });
+
+    if (
+      closestRootNode &&
+      !closestRootNode.text.trim() &&
+      closestRootNode.type === "paragraph"
+    ) {
+      props.editor.setNodeByKey(closestRootNode.key, {
+        type: "block-toolbar",
+        isVoid: true
+      });
+    }
+  }
+
+  const style = {
+    top: `${top}px`,
+    left: `${left}px`
+  };
+
+  return (
+    <>
+      <span ref={blockEl} />
+      <Portal>
+        <Trigger active={active} style={style}>
+          <ToggleButton
+            id="letterpad-editor-toolbar-toggle-button"
+            className="material-icons toggle-button"
+            onClick={handleToggleButtonClick}
+          >
+            add
+          </ToggleButton>
+        </Trigger>
+      </Portal>
+    </>
+  );
+}
+
+function findClosestRootNode(value: Value, ev: MouseEvent) {
   let previous;
 
   for (const node of value.document.nodes) {
@@ -32,137 +125,6 @@ function findClosestRootNode(value, ev) {
   }
 
   return previous;
-}
-
-type State = {
-  closestRootNode?: Node;
-  active: boolean;
-  top: number;
-  left: number;
-};
-
-class BlockInsert extends React.Component<Props, State> {
-  mouseMoveTimeout?: ReturnType<typeof setTimeout>;
-  ref?: HTMLSpanElement;
-
-  state = {
-    top: -1000,
-    left: -1000,
-    active: false,
-    closestRootNode: undefined
-  };
-
-  componentDidMount = () => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("mousemove", this.handleMouseMove);
-    }
-  };
-
-  componentWillUnmount = () => {
-    if (this.mouseMoveTimeout) clearTimeout(this.mouseMoveTimeout);
-    if (typeof window !== "undefined") {
-      window.removeEventListener("mousemove", this.handleMouseMove);
-    }
-  };
-
-  setInactive = () => {
-    this.setState({ active: false });
-  };
-
-  handleMouseMove = (ev: MouseEvent) => {
-    const triggerPoint = this.ref
-      ? this.ref.getBoundingClientRect().left + 300
-      : window.innerWidth;
-    const result = findClosestRootNode(this.props.editor.value, ev);
-    const newState = { ...this.state };
-
-    newState.active = ev.clientX < triggerPoint;
-
-    if (result) {
-      newState.closestRootNode = result.node;
-
-      // do not show block menu when it's open, the paragraph isn't empty
-      // or the current node is an embed.
-      const hideToolbar =
-        result.node.type !== "paragraph" ||
-        !!result.node.text.trim() ||
-        result.node.isVoid;
-
-      if (hideToolbar) {
-        newState.left = -1000;
-        newState.active = false;
-      } else {
-        newState.left = Math.round(result.bounds.left - 20);
-        newState.top = Math.round(result.bounds.top + window.scrollY);
-      }
-    }
-
-    if (this.state.active) {
-      if (this.mouseMoveTimeout) clearTimeout(this.mouseMoveTimeout);
-      this.mouseMoveTimeout = setTimeout(this.setInactive, 2000);
-    }
-
-    if (!isEqual(newState, this.state)) {
-      this.setState(newState);
-    }
-  };
-
-  handleClick = (ev: React.SyntheticEvent) => {
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    this.setState({ active: false });
-
-    const { editor } = this.props;
-
-    // remove any existing toolbars in the document as a fail safe
-    editor.value.document.nodes.forEach(node => {
-      if (!node) return;
-      if (node["type"] === "block-toolbar") {
-        editor.setNodeByKey(node.key, {
-          type: "paragraph",
-          isVoid: false
-        });
-      }
-    });
-
-    const node = this.state.closestRootNode;
-    if (!node) return;
-
-    // we're on an empty paragraph. just replace it with the block toolbar
-    if (!node.text.trim() && node.type === "paragraph") {
-      editor.setNodeByKey(node.key, {
-        type: "block-toolbar",
-        isVoid: true
-      });
-    }
-  };
-
-  setRef = ref => {
-    this.ref = ref;
-  };
-
-  render() {
-    // const { theme } = this.props;
-    const style = { top: `${this.state.top}px`, left: `${this.state.left}px` };
-
-    return (
-      <React.Fragment>
-        <span ref={this.setRef} />
-        <Portal>
-          <Trigger active={this.state.active} style={style}>
-            <ToggleButton
-              id="letterpad-editor-toolbar-toggle-button"
-              className="material-icons toggle-button"
-              onClick={this.handleClick}
-            >
-              add
-            </ToggleButton>
-          </Trigger>
-        </Portal>
-      </React.Fragment>
-    );
-  }
 }
 
 const Trigger = styled.div<any>`
@@ -196,5 +158,3 @@ const Trigger = styled.div<any>`
     opacity: .9;
   `};
 `;
-
-export default BlockInsert;
