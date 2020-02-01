@@ -39,27 +39,14 @@ export default function Embeds({ getComponent }: Options) {
 
       const href = node.data.get("href");
       // check if the editor can embed this link
-      const provider = getEmbedProvider(href);
-      if (!provider) return next();
-      const { component, matches } = provider;
+      const renderHandle = getRenderer({
+        node,
+        href,
+        getComponent
+      });
+      if (!renderHandle) return next();
 
-      const EmbedComponent: React.ComponentType<IEmbedProvider> & {
-        getEmbedAttributes?: (
-          href: string,
-          matches: string[]
-        ) => TypeIframeProps;
-      } = component;
-
-      const iframeAttributes = EmbedComponent.getEmbedAttributes(
-        node.data.get("href"),
-        matches
-      );
-
-      // check if the consumer want to tackle this link
-      const ConsumerEmbedComponent = getComponent(node, iframeAttributes);
-
-      const renderer = ConsumerEmbedComponent || EmbedComponent;
-      if (!renderer) return next();
+      const { renderer, matches } = renderHandle;
 
       const parent = findTopParent(editor.value.document, node);
       if (!parent) return next();
@@ -88,4 +75,32 @@ export default function Embeds({ getComponent }: Options) {
       };
     }
   };
+}
+
+interface IProps {
+  href: string;
+  node: Node;
+  getComponent: any;
+  next?: () => void;
+}
+export function getRenderer({ href, node, getComponent }: IProps) {
+  const provider = getEmbedProvider(href);
+  if (!provider) return null;
+  const { component, matches } = provider;
+
+  const EmbedComponent: React.ComponentType<IEmbedProvider> & {
+    getEmbedAttributes?: (href: string, matches: string[]) => TypeIframeProps;
+  } = component;
+
+  const iframeAttributes = EmbedComponent.getEmbedAttributes(
+    node.data.get("href"),
+    matches
+  );
+
+  // check if the consumer want to tackle this link
+  const ConsumerEmbedComponent = getComponent(node, iframeAttributes);
+
+  const renderer = ConsumerEmbedComponent || EmbedComponent;
+
+  return { renderer, matches, iframeAttributes };
 }

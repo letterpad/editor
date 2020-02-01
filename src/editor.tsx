@@ -4,7 +4,6 @@ import {
   IPlugin,
   ISearchResult,
   ISerializer,
-  TypeIframeProps,
   TypeLinkComponent
 } from "./types";
 import React, { PureComponent } from "react";
@@ -14,6 +13,7 @@ import Markdown from "./serializer";
 import { Editor as SlateReactEditor } from "slate-react";
 import commands from "./commands";
 import createPlugins from "./plugins/plugins";
+import { getHtmlFromMarkdown } from "./mdToHtml";
 import queries from "./queries";
 import schema from "./helper/schema";
 
@@ -34,7 +34,7 @@ export type EditorProps = {
   schema?: SchemaProperties;
   uploadImage?: (file: File) => Promise<string>;
   onSave?: ({ done }: { done?: boolean }) => void;
-  onChange: (value: () => string) => void;
+  onChange: (value: () => any) => void;
   onSearchLink?: (term: string) => Promise<ISearchResult[]>;
   onClickLink?: (href: string) => void;
   onShowToast?: (message: string) => void;
@@ -73,6 +73,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       renderEditor: (_, editor: Editor, next: Function) => {
         if (editor && props.getEditorInstance && !this.editor) {
           props.getEditorInstance(editor);
+          this.editor = editor;
         }
         return next();
       }
@@ -84,8 +85,10 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
     };
   }
 
-  value = (): string => {
-    return this.serializer.serialize(this.state.editorValue);
+  value = async () => {
+    const markdown = this.serializer.serialize(this.state.editorValue);
+    const html = await getHtmlFromMarkdown(markdown, this.editor);
+    return Promise.resolve({ markdown, html });
   };
 
   handleChange = ({ value }: { value: Value }) => {

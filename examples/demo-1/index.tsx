@@ -47,10 +47,10 @@ class Demo extends Component {
             return Promise.resolve(URL.createObjectURL(file));
           }}
           onChange={(_value: () => void) => {
-            // console.log(_value());
+            console.log(_value());
           }}
           getLinkComponent={(_node, attrs) => {
-            if (_node.text.indexOf("youtube") < 0) {
+            if (_node.data.get("href").indexOf("youtube") < 0) {
               return props => (
                 <div
                   data-id="yoyoyo "

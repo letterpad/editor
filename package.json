@@ -42,6 +42,7 @@
     "immutable": "^3.8.2",
     "is-url": "^1.2.4",
     "lodash": "^4.17.15",
+    "markdown-it": "^10.0.0",
     "prismjs": "^1.16.0",
     "react-embed": "^2.7.1",
     "react-hot-keys": "^2.4.5",
