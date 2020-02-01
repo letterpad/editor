@@ -85,10 +85,10 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
     };
   }
 
-  value = async () => {
+  value = () => {
     const markdown = this.serializer.serialize(this.state.editorValue);
-    const html = await getHtmlFromMarkdown(markdown, this.editor);
-    return Promise.resolve({ markdown, html });
+    const html = getHtmlFromMarkdown(markdown, this.editor);
+    return { markdown, html };
   };
 
   handleChange = ({ value }: { value: Value }) => {
