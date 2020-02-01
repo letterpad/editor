@@ -10,17 +10,17 @@ type Props = {
 function renderMark(props: Props, _editor: Editor, next: Function) {
   switch (props.mark.type) {
     case "bold":
-      return <strong>{props.children}</strong>;
+      return <strong className="lp-strong">{props.children}</strong>;
     case "code":
-      return <code>{props.children}</code>;
+      return <code className="lp-code">{props.children}</code>;
     case "italic":
-      return <em>{props.children}</em>;
+      return <em className="lp-em">{props.children}</em>;
     case "underlined":
-      return <u>{props.children}</u>;
+      return <u className="lp-u">{props.children}</u>;
     case "deleted":
-      return <del>{props.children}</del>;
+      return <del className="lp-del">{props.children}</del>;
     case "inserted":
-      return <mark>{props.children}</mark>;
+      return <mark className="lp-mark">{props.children}</mark>;
     default:
       return next();
   }

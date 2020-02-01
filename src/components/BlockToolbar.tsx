@@ -227,7 +227,7 @@ export default class BlockToolbar extends React.Component<
     const { insertingImage } = this.state;
 
     return (
-      <Container ref={this.bar}>
+      <Container ref={this.bar} className="block-toolbar">
         <ToolbarButton
           active={this.checkActiveBlock("heading1")}
           onMouseDown={e => this.handleClickBlock(e, "heading1")}

@@ -12,13 +12,18 @@ export default function Link(props: SlateNodeProps) {
   const href = node.data.get("href");
 
   if (embed && Component) {
-    return <Component {...props} />;
+    return (
+      <div contentEditable={false} {...props.attributes}>
+        <Component {...props} matches={node.data.get("matches")} />
+      </div>
+    );
   }
 
   return (
     <a
       {...attributes}
       href={readOnly ? href : undefined}
+      className="lp-a"
       onClick={
         readOnly
           ? ev => {

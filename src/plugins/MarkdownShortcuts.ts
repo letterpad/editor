@@ -51,7 +51,6 @@ export default function MarkdownShortcuts() {
     const chars = startBlock.text.slice(0, selection.start.offset).trim();
     const type = getType(chars);
 
-    // @ts-ignore
     if (type) {
       // only shortcuts to change heading size should work in headings
       if (startBlock.type.match(/heading/) && !type.match(/heading/)) {
@@ -64,22 +63,16 @@ export default function MarkdownShortcuts() {
       }
       ev.preventDefault();
 
-      let checked;
-      if (chars === "[x]") checked = true;
-      if (chars === "[ ]") checked = false;
       // @ts-ignore
       editor.withoutNormalizing(c => {
         c.moveFocusToStartOfNode(startBlock)
           .delete()
           .setBlocks({
-            type,
-            data: { checked }
+            type
           });
 
         if (type === "list-item") {
-          if (checked !== undefined) {
-            return c.wrapBlock("check-list");
-          } else if (chars === "1.") {
+          if (chars === "1.") {
             return c.wrapBlock("ordered-list");
           } else {
             return c.wrapBlock("bulleted-list");
@@ -202,8 +195,6 @@ export default function MarkdownShortcuts() {
       case "-":
       case "+":
       case "1.":
-      case "[ ]":
-      case "[x]":
         return "list-item";
       case ">":
         return "block-quote";

@@ -42,7 +42,6 @@ export const EditorWrapper = styled.div<any>`
 
   h1 {
     font-size: 4rem;
-    border-bottom: solid 1px var(--color-border);
   }
 
   h2 {

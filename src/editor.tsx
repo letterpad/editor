@@ -1,12 +1,18 @@
 import { Editor, SchemaProperties, Value } from "slate";
-import { IPlugin, ISearchResult, ISerializer } from "./types";
+import { GlobalStyle, Style } from "./themes/Global.css";
+import {
+  IPlugin,
+  ISearchResult,
+  ISerializer,
+  TypeLinkComponent
+} from "./types";
 import React, { PureComponent } from "react";
 
-import { GlobalStyle } from "./themes/Global.css";
 import Markdown from "./serializer";
 import { Editor as SlateReactEditor } from "slate-react";
 import commands from "./commands";
 import createPlugins from "./plugins/plugins";
+import { getHtmlFromMarkdown } from "./mdToHtml";
 import queries from "./queries";
 import schema from "./helper/schema";
 
@@ -20,19 +26,21 @@ export type EditorProps = {
   id?: string;
   defaultValue: string;
   placeholder: string;
-  pretitle?: string;
+  title?: string;
   plugins: IPlugin[];
   readOnly?: boolean;
   dark?: boolean;
   schema?: SchemaProperties;
   uploadImage?: (file: File) => Promise<string>;
   onSave?: ({ done }: { done?: boolean }) => void;
-  onChange: (value: () => string) => void;
+  onChange: (
+    value: () => { markdown: string; html: string; title: string }
+  ) => void;
   onSearchLink?: (term: string) => Promise<ISearchResult[]>;
   onClickLink?: (href: string) => void;
   onShowToast?: (message: string) => void;
   onImageBrowse?: () => void;
-  getLinkComponent?: (node: Node) => React.ComponentType<any>;
+  getLinkComponent?: TypeLinkComponent;
   getEditorInstance?: (editor: Editor) => void;
   style?: string;
 };
@@ -66,6 +74,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       renderEditor: (_, editor: Editor, next: Function) => {
         if (editor && props.getEditorInstance && !this.editor) {
           props.getEditorInstance(editor);
+          this.editor = editor;
         }
         return next();
       }
@@ -77,8 +86,18 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
     };
   }
 
-  value = (): string => {
-    return this.serializer.serialize(this.state.editorValue);
+  value = () => {
+    const markdown = this.serializer.serialize(this.state.editorValue);
+    const html = getHtmlFromMarkdown(markdown, this.editor);
+    let title = "";
+    if (
+      typeof this.editor.props.title !== "undefined" &&
+      markdown.startsWith("# ")
+    ) {
+      title = markdown.split("\n")[0].replace("# ", "");
+    }
+
+    return { markdown, html, title };
   };
 
   handleChange = ({ value }: { value: Value }) => {
@@ -103,7 +122,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
   render() {
     const {
       readOnly,
-      pretitle,
+      title,
       placeholder,
       onSave,
       onChange,
@@ -123,6 +142,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
     return (
       <div id="letterpad-editor-container">
         <GlobalStyle theme={theme} style={style} />
+
         <SlateReactEditor
           value={this.state.editorValue}
           plugins={this.plugins}
@@ -139,7 +159,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
           spellCheck={!readOnly}
           uploadImage={uploadImage}
           onImageBrowse={onImageBrowse}
-          pretitle={pretitle}
+          title={title}
           options={defaultOptions}
           {...rest}
         />

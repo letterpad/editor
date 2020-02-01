@@ -65,6 +65,7 @@ class Image extends React.Component<SlateNodeProps, State> {
               isSelected={isSelected}
               isLoading={isLoading}
               loading="lazy"
+              className="lp-img"
             />
 
             {showCaption && (

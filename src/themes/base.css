@@ -9,7 +9,7 @@
   --spacingBottom: 1rem;
 }
 
-html {
+#letterpad-editor-container {
   font-style: normal;
   font-family: "Lora", sans-serif;
   font-size: larger;
@@ -18,12 +18,15 @@ html {
   line-height: 2;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+div[data-slate-editor="true"] {
+  padding-bottom: 400px;
+}
+.lp-h1,
+.lp-h2,
+.lp-h3,
+.lp-h4,
+.lp-h5,
+.lp-h6 {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   text-rendering: optimizeLegibility;
@@ -32,29 +35,33 @@ h6 {
   padding-bottom: var(--spacingBottom);
 }
 
-h1 {
+.lp-h1 {
   font-size: 2rem;
   border-bottom: solid 1px var(--color-border);
 }
 
-h2 {
+.lp-h2 {
   font-size: 1.6rem;
 }
 
-h3 {
+.lp-h3 {
   font-size: 1.4rem;
 }
 
-h4 {
+.lp-h4 {
   font-size: 1.2rem;
 }
 
-h5 {
+.lp-h5 {
   font-size: 1.1rem;
 }
 
-h6 {
+.lp-h6 {
   font-size: 1rem;
+}
+
+.lp-a {
+  text-decoration: underline;
 }
 
 section {
@@ -65,66 +72,66 @@ section {
   line-height: 25px;
 }
 
-h1 + section {
+.lp-h1 + section {
   padding-top: var(--spacingTop);
 }
 
-h2 + section,
-h3 + section,
-h4 + section {
+.lp-h2 + section,
+.lp-h3 + section,
+.lp-h4 + section {
   padding-top: var(--spacingTopSmall);
 }
 
-h1 + h2,
-h2 + h3,
-h3 + h4 {
+.lp-h1 + .lp-h2,
+.lp-h2 + .lp-h3,
+.lp-h3 + .lp-h4 {
   padding-top: var(--spacingTop);
 }
-ol,
-ul {
+.lp-ol,
+.lp-ul {
   padding-left: 2em;
 }
-ol ol,
-ol ul,
-ul ol,
-ul ul {
+.lp-ol .lp-ol,
+.lp-ol .lp-ul,
+.lp-ul .lp-ol,
+.lp-ul .lp-ul {
   margin-bottom: 0;
   margin-top: 0;
 }
-li {
+.lp-li {
   word-wrap: break-all;
 }
-li > p {
+.lp-li > .lp-p {
   margin-top: 8px;
 }
-li + li {
+.lp-li + .lp-li {
   margin-top: 0.25em;
 }
 
-blockquote,
-dl,
-ol,
-pre,
-table,
-ul {
+.lp-blockquote,
+.lp-dl,
+.lp-ol,
+.lp-pre,
+.lp-table,
+.lp-ul {
   margin-bottom: 16px;
   margin-top: 0;
 }
-blockquote {
+.lp-blockquote {
   border-left: 0.25em solid var(--color-border);
   padding: 0 1em;
 }
-blockquote > :first-child {
+.lp-blockquote > :first-child {
   margin-top: 0;
 }
-blockquote > :last-child {
+.lp-blockquote > :last-child {
   margin-bottom: 0;
 }
-code {
+.lp-code {
   padding: 0.5em 1em;
   white-space: nowrap;
 }
-code.code-block {
+.lp-code.code-block {
   display: block;
   overflow-x: auto;
   padding: 0.5em 1em;
@@ -135,7 +142,7 @@ code.code-block {
   border: 1px solid #283237;
 }
 
-code pre {
+.lp-code .lp-pre {
   -webkit-font-smoothing: initial;
   font-size: 13px;
   direction: ltr;
