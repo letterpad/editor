@@ -1,9 +1,10 @@
 import Gist from "./Gist";
+import React from "react";
 import Spotify from "./Spotify";
 import Vimeo from "./Vimeo";
-// import YouTube from "./YouTube";
+import YouTube from "./YouTube";
 
-const embeds = { Gist, Vimeo, Spotify };
+const embeds = { Gist, Vimeo, Spotify, YouTube };
 export default embeds;
 
 export function getEmbedProvider(
@@ -16,6 +17,7 @@ export function getEmbedProvider(
 
     for (const host of component.ENABLED) {
       const matches = href.match(host);
+
       if (matches) return { component, matches };
     }
   }

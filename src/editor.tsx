@@ -4,7 +4,8 @@ import {
   IPlugin,
   ISearchResult,
   ISerializer,
-  TypeIframeProps
+  TypeIframeProps,
+  TypeLinkComponent
 } from "./types";
 import React, { PureComponent } from "react";
 
@@ -38,10 +39,7 @@ export type EditorProps = {
   onClickLink?: (href: string) => void;
   onShowToast?: (message: string) => void;
   onImageBrowse?: () => void;
-  getLinkComponent?: (
-    node: Node,
-    attrs: TypeIframeProps
-  ) => React.ComponentType<any> | void;
+  getLinkComponent?: TypeLinkComponent;
   getEditorInstance?: (editor: Editor) => void;
   style?: string;
 };

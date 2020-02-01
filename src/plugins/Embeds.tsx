@@ -44,11 +44,15 @@ export default function Embeds({ getComponent }: Options) {
       const { component, matches } = provider;
 
       const EmbedComponent: React.ComponentType<IEmbedProvider> & {
-        getEmbedAttributes?: any;
+        getEmbedAttributes?: (
+          href: string,
+          matches: string[]
+        ) => TypeIframeProps;
       } = component;
 
       const iframeAttributes = EmbedComponent.getEmbedAttributes(
-        node.data.get("href")
+        node.data.get("href"),
+        matches
       );
 
       // check if the consumer want to tackle this link
@@ -76,6 +80,7 @@ export default function Embeds({ getComponent }: Options) {
           ],
           data: {
             ...node.data.toJS(),
+            matches,
             embed: true,
             component: renderer
           }

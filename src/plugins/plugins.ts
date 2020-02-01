@@ -10,6 +10,7 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-bash";
 
 import { Editor, Node } from "slate";
+import { TypeIframeProps, TypeLinkComponent } from "../types";
 
 import ChromePlugin from "./Chrome";
 import CollapseOnEscape from "slate-collapse-on-escape";
@@ -33,17 +34,13 @@ import Placeholder from "./Placeholder";
 import Prism from "golery-slate-prism";
 import Table from "./Table";
 import TrailingBlock from "@wikifactory/slate-trailing-block";
-import { TypeIframeProps } from "../types";
 
 const createPlugins = ({
   placeholder,
   getLinkComponent
 }: {
   placeholder: string;
-  getLinkComponent: (
-    node: Node,
-    attrs: TypeIframeProps
-  ) => React.ComponentType<any> | void;
+  getLinkComponent: TypeLinkComponent;
 }) => {
   return [
     Nodes,

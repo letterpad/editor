@@ -39,3 +39,8 @@ export interface IEmbedProvider {
     [name: string]: string | boolean;
   }) => React.ComponentType<any> | void;
 }
+
+export type TypeLinkComponent = (
+  node: Node,
+  attrs: TypeIframeProps
+) => React.ComponentType<any> | undefined;

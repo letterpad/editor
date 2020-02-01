@@ -27,6 +27,7 @@ function renderNode(props: any, _editor: Editor, next: Function) {
 
   const hidden = props.node.data.get("hidden");
   if (hidden) attributes.style = { display: "none" };
+
   switch (props.node.type) {
     case "paragraph":
       return <Paragraph {...props} />;

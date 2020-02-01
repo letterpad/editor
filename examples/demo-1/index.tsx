@@ -49,16 +49,18 @@ class Demo extends Component {
           onChange={(_value: () => void) => {
             // console.log(_value());
           }}
-          // getEmbedAttributes={a => {
-          //   console.log("embed attrs", a);
-          //   return () => <div>hello</div>;
-          // }}
           getLinkComponent={(_node, attrs) => {
-            return props => (
-              <div {...props.attributes} contentEditable={false}>
-                <iframe {...attrs}></iframe>
-              </div>
-            );
+            if (_node.text.indexOf("youtube") < 0) {
+              return props => (
+                <div
+                  data-id="yoyoyo "
+                  {...props.attributes}
+                  contentEditable={false}
+                >
+                  <iframe {...attrs}></iframe>
+                </div>
+              );
+            }
           }}
         />
       </Container>

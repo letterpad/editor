@@ -16,25 +16,14 @@ export default class DefaultEmbed extends React.Component<any> {
     const { component, matches } = result;
     const EmbedComponent: React.FC<IEmbedProvider> = component;
 
-    if (!children)
-      return (
-        <EmbedComponent
-          matches={matches}
-          url={this.url}
-          getEmbedAttributes={editor.props.getEmbedAttributes}
-        />
-      );
+    if (!children) return <EmbedComponent matches={matches} url={this.url} />;
     return (
       <Container
         contentEditable={false}
         isSelected={isSelected}
         {...attributes}
       >
-        <EmbedComponent
-          matches={matches}
-          url={this.url}
-          getEmbedAttributes={editor.props.getEmbedAttributes}
-        />
+        <EmbedComponent matches={matches} url={this.url} />
         {children}
       </Container>
     );
