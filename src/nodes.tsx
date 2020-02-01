@@ -51,12 +51,12 @@ function renderNode(props: any, _editor: Editor, next: Function) {
           {props.children}
         </ol>
       );
-    case "check-list":
-      return (
-        <CheckList {...attributes} className="lp-ul lp-cl">
-          {props.children}
-        </CheckList>
-      );
+    // case "check-list":
+    //   return (
+    //     <CheckList {...attributes} className="lp-ul lp-cl">
+    //       {props.children}
+    //     </CheckList>
+    //   );
     case "table":
       return (
         <Table {...props} className="lp-table">
