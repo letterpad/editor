@@ -21,8 +21,8 @@ export default class YouTube extends React.Component<IEmbedProvider> {
 
   render() {
     // @ts-ignore
-    const { matches, attributes } = this.props;
-    if (!matches) return <a {...attributes}></a>;
+    const { matches } = this.props;
+    if (!matches) return <a href={this.props.url}></a>;
     const videoId = matches[1];
 
     return (

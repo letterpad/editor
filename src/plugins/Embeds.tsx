@@ -88,19 +88,20 @@ export function getRenderer({ href, node, getComponent }: IProps) {
   if (!provider) return null;
   const { component, matches } = provider;
 
-  const EmbedComponent: React.ComponentType<IEmbedProvider> & {
+  const InbuiltEmbedComponent: React.ComponentType<IEmbedProvider> & {
     getEmbedAttributes?: (href: string, matches: string[]) => TypeIframeProps;
   } = component;
 
-  const iframeAttributes = EmbedComponent.getEmbedAttributes(
+  const iframeAttributes = InbuiltEmbedComponent.getEmbedAttributes(
     node.data.get("href"),
     matches
   );
 
   // check if the consumer want to tackle this link
-  const ConsumerEmbedComponent = getComponent(node, iframeAttributes);
+  const ConsumerEmbedComponent =
+    getComponent && getComponent(node, iframeAttributes);
 
-  const renderer = ConsumerEmbedComponent || EmbedComponent;
+  const renderer = ConsumerEmbedComponent || InbuiltEmbedComponent;
 
   return { renderer, matches, iframeAttributes };
 }

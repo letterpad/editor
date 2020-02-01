@@ -1,6 +1,6 @@
 import { Editor, SchemaProperties, Value } from "slate";
+import { GlobalStyle, Style } from "./themes/Global.css";
 import {
-  IEmbedProvider,
   IPlugin,
   ISearchResult,
   ISerializer,
@@ -8,7 +8,6 @@ import {
 } from "./types";
 import React, { PureComponent } from "react";
 
-import { GlobalStyle } from "./themes/Global.css";
 import Markdown from "./serializer";
 import { Editor as SlateReactEditor } from "slate-react";
 import commands from "./commands";
@@ -27,14 +26,16 @@ export type EditorProps = {
   id?: string;
   defaultValue: string;
   placeholder: string;
-  pretitle?: string;
+  title?: string;
   plugins: IPlugin[];
   readOnly?: boolean;
   dark?: boolean;
   schema?: SchemaProperties;
   uploadImage?: (file: File) => Promise<string>;
   onSave?: ({ done }: { done?: boolean }) => void;
-  onChange: (value: () => any) => void;
+  onChange: (
+    value: () => { markdown: string; html: string; title: string }
+  ) => void;
   onSearchLink?: (term: string) => Promise<ISearchResult[]>;
   onClickLink?: (href: string) => void;
   onShowToast?: (message: string) => void;
@@ -88,7 +89,15 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
   value = () => {
     const markdown = this.serializer.serialize(this.state.editorValue);
     const html = getHtmlFromMarkdown(markdown, this.editor);
-    return { markdown, html };
+    let title = "";
+    if (
+      typeof this.editor.props.title !== "undefined" &&
+      markdown.startsWith("# ")
+    ) {
+      title = markdown.split("\n")[0].replace("# ", "");
+    }
+
+    return { markdown, html, title };
   };
 
   handleChange = ({ value }: { value: Value }) => {
@@ -113,7 +122,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
   render() {
     const {
       readOnly,
-      pretitle,
+      title,
       placeholder,
       onSave,
       onChange,
@@ -131,29 +140,32 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
 
     const theme = dark ? "dark" : "light";
     return (
-      <div id="letterpad-editor-container">
-        <GlobalStyle theme={theme} style={style} />
-        <SlateReactEditor
-          value={this.state.editorValue}
-          plugins={this.plugins}
-          onChange={this.handleChange}
-          queries={queries}
-          commands={commands}
-          placeholder={placeholder}
-          schema={this.getSchema()}
-          onSave={onSave}
-          onSearchLink={onSearchLink}
-          onClickLink={onClickLink}
-          onShowToast={onShowToast}
-          readOnly={readOnly}
-          spellCheck={!readOnly}
-          uploadImage={uploadImage}
-          onImageBrowse={onImageBrowse}
-          pretitle={pretitle}
-          options={defaultOptions}
-          {...rest}
-        />
-      </div>
+      <Style>
+        <div id="letterpad-editor-container">
+          <GlobalStyle theme={theme} style={style} />
+
+          <SlateReactEditor
+            value={this.state.editorValue}
+            plugins={this.plugins}
+            onChange={this.handleChange}
+            queries={queries}
+            commands={commands}
+            placeholder={placeholder}
+            schema={this.getSchema()}
+            onSave={onSave}
+            onSearchLink={onSearchLink}
+            onClickLink={onClickLink}
+            onShowToast={onShowToast}
+            readOnly={readOnly}
+            spellCheck={!readOnly}
+            uploadImage={uploadImage}
+            onImageBrowse={onImageBrowse}
+            title={title}
+            options={defaultOptions}
+            {...rest}
+          />
+        </div>
+      </Style>
     );
   }
 }

@@ -5,7 +5,7 @@ import { getRenderer } from "./plugins/Embeds";
 
 const mdToHtml = MarkownIt();
 
-const regex = /<a[^>]+href=\"(.*?)\"[^>]*>(.*?)<\/a>/gi;
+const regex = /<p><a[^>]+href=\"(.*?)\"[^>]*>(.*?)<\/a><\/p>/gi;
 
 export function getHtmlFromMarkdown(markdown: string, editor) {
   const html = mdToHtml.render(markdown);

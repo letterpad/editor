@@ -30,12 +30,18 @@ class Demo extends Component {
   render() {
     return (
       <Container>
+        <br />
+        <br />
+        <br />
         <button type="button" onClick={this.handleToggleReadOnly}>
           {this.state.readOnly ? "Editable" : "Read Only"}
         </button>
         <button onClick={() => this.onThemeChange("dark")}>Dark</button>
         &nbsp;&nbsp;
         <button onClick={() => this.onThemeChange("light")}>Light</button>
+        <br />
+        <br />
+        <br />
         <LetterpadEditor
           defaultValue={sampleMd}
           dark={this.state.theme === "dark"}
@@ -46,17 +52,15 @@ class Demo extends Component {
             // you may save this in cloud and return a url
             return Promise.resolve(URL.createObjectURL(file));
           }}
-          onChange={(_value: () => void) => {
-            console.log(_value());
+          onChange={_value => {
+            const result = _value();
+            console.log("HTML", result.html);
+            console.log("MD", result.markdown);
           }}
           getLinkComponent={(_node, attrs) => {
             if (_node.data.get("href").indexOf("youtube") < 0) {
               return props => (
-                <div
-                  data-id="yoyoyo "
-                  {...props.attributes}
-                  contentEditable={false}
-                >
+                <div {...props.attributes} contentEditable={false}>
                   <iframe {...attrs}></iframe>
                 </div>
               );

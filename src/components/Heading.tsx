@@ -5,24 +5,16 @@ import styled from "styled-components";
 
 type Props = SlateNodeProps & {
   level: number;
-  hasPretitle: boolean;
+  hasTitle: boolean;
   className: string;
 };
 
 function Heading(props: Props) {
-  const {
-    node,
-    editor,
-    readOnly,
-    children,
-    attributes,
-    className,
-    level = 2
-  } = props;
+  const { node, editor, children, attributes, className, level = 2 } = props;
 
   const firstNode = editor.value.document.nodes.first() === node;
   const Component = `h${level}`;
-  const pretitle = "hi"; //editor.props.pretitle || "";
+  const pretitle = editor.props.title || "";
   const title = node.text.trim();
   const startsWithPretitleAndSpace =
     pretitle && title.match(new RegExp(`^${pretitle}\\s`));
@@ -37,9 +29,9 @@ function Heading(props: Props) {
   );
 }
 
-const Wrapper = styled.div<any>`
+const Wrapper = styled.div<{ hasPretitle: boolean }>`
   display: inline;
-  margin-left: ${(props: Props) => (props.hasPretitle ? "-1.2em" : 0)};
+  margin-left: ${props => (props.hasPretitle ? "-1.2em" : 0)};
 `;
 
 export const StyledHeading = styled(Heading)<any>`

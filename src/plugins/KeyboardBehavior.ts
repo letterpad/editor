@@ -107,6 +107,9 @@ export default function KeyboardBehavior() {
         return next();
       ev.preventDefault();
 
+      // force the first line to be heading1 always
+      // if (value.startBlock.type === "heading1") return next();
+
       editor.setBlocks("paragraph");
 
       if (startBlock.type === "list-item") {

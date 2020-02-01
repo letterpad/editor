@@ -12,7 +12,11 @@ export default function Link(props: SlateNodeProps) {
   const href = node.data.get("href");
 
   if (embed && Component) {
-    return <Component {...props} matches={node.data.get("matches")} />;
+    return (
+      <div contentEditable={false} {...props.attributes}>
+        <Component {...props} matches={node.data.get("matches")} />
+      </div>
+    );
   }
 
   return (
