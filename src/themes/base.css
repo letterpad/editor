@@ -18,7 +18,7 @@
   line-height: 2;
 }
 
-div[data-slate-editor="true"] {
+.lp-editor div[data-slate-editor="true"] {
   padding-bottom: 400px;
 }
 .lp-editor h1,
@@ -64,7 +64,7 @@ div[data-slate-editor="true"] {
   text-decoration: underline;
 }
 
-section {
+.lp-editor section {
   padding: 0;
   padding-top: var(--spacingTop);
   padding-bottom: var(--spacingBottom);
@@ -117,13 +117,13 @@ section {
   margin-bottom: 16px;
   margin-top: 0;
 }
-.code-block {
+.lp-editor .code-block {
   background: black;
   display: block;
   padding: 10px;
   font-size: medium;
 }
-.code-block .lp-editor pre {
+.lp-editor .code-block pre {
   padding: 0px;
   margin-bottom: 0px;
 }
@@ -152,7 +152,7 @@ section {
   border: 1px solid #283237;
 }
 
-.lp-editor code .lp-editor pre {
+.lp-editor code pre {
   -webkit-font-smoothing: initial;
   font-size: 13px;
   direction: ltr;
