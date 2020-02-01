@@ -11,7 +11,6 @@ import {
 
 import BlockToolbar from "./components/BlockToolbar";
 import Cell from "./components/Table/Cell";
-import CheckList from "./components/CheckList";
 import Code from "./components/Code";
 import { Editor } from "slate";
 import HorizontalRule from "./components/HorizontalRule";
@@ -51,12 +50,6 @@ function renderNode(props: any, _editor: Editor, next: Function) {
           {props.children}
         </ol>
       );
-    // case "check-list":
-    //   return (
-    //     <CheckList {...attributes} className="lp-ul lp-cl">
-    //       {props.children}
-    //     </CheckList>
-    //   );
     case "table":
       return (
         <Table {...props} className="lp-table">
