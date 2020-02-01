@@ -212,7 +212,6 @@ export const Menu = styled.div<any>`
     width: 24px;
     height: 24px;
     transform: translateX(-50%) rotate(45deg);
-    background: ${props => props.theme.toolbarBackground};
     border-radius: 3px;
     z-index: -1;
 
