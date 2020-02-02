@@ -161,5 +161,4 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
     );
   }
 }
-
 export default LetterpadEditor;
