@@ -1,13 +1,14 @@
 import * as React from "react";
 
 import { Node, Value } from "slate";
-import { debounce, isEqual } from "lodash";
 
 import { Editor } from "slate-react";
 import FormattingToolbar from "./FormattingToolbar";
 import LinkToolbar from "./LinkToolbar";
 import { Portal } from "react-portal";
+import debounce from "lodash.debounce";
 import { findDOMNode } from "slate-react";
+import isEqual from "lodash.isequal";
 import styled from "styled-components";
 
 type Props = {

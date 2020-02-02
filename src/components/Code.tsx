@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { SlateNodeProps } from "../types";
-import { map } from "lodash";
+import map from "lodash.map";
 import styled from "styled-components";
 
 function getCopyText(node) {
