@@ -151,7 +151,11 @@
   margin-bottom: 0;
 }
 .lp-editor code {
-  padding: 0.5em 1em;
+  padding: 0.2em 0.2em;
+  white-space: nowrap;
+  background: var(--bg-success);
+  color: var(--bg-base);
+  border-radius: 0.2em;
   white-space: nowrap;
 }
 .lp-editor code.code-block {
