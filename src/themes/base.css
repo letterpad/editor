@@ -150,10 +150,7 @@
 .lp-editor blockquote > :last-child {
   margin-bottom: 0;
 }
-.lp-editor code {
-  padding: 0.5em 1em;
-  white-space: nowrap;
-}
+
 .lp-editor code.code-block {
   display: block;
   overflow-x: auto;
