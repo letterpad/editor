@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
 import { Editor, findDOMNode } from "slate-react";
-import { Value, Node } from "slate";
+import React, { useEffect, useRef, useState } from "react";
+
 import { Portal } from "react-portal";
+import { Value } from "slate";
 import styled from "styled-components";
 
 export const ToggleButton = styled.span`
@@ -42,7 +43,9 @@ export default function BlockInsert(props: Props) {
   }, [active]);
 
   function handleMouseMove(event: MouseEvent) {
-    const triggerPoint = blockEl.current.getBoundingClientRect().left + 300;
+    const triggerPoint =
+      ((blockEl.current as unknown) as HTMLSpanElement).getBoundingClientRect()
+        .left + 300;
     const result = findClosestRootNode(props.editor.value, event);
     setActive(event.clientX < triggerPoint);
     if (result) {
@@ -78,12 +81,15 @@ export default function BlockInsert(props: Props) {
         });
       }
     });
-
+    if (closestRootNode === null) return;
     if (
       closestRootNode &&
-      !closestRootNode.text.trim() &&
-      closestRootNode.type === "paragraph"
+      //@ts-ignore
+      closestRootNode.type === "paragraph" &&
+      //@ts-ignore
+      !closestRootNode.text.trim()
     ) {
+      //@ts-ignore
       props.editor.setNodeByKey(closestRootNode.key, {
         type: "block-toolbar",
         isVoid: true

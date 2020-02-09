@@ -88,7 +88,7 @@ export default function MarkdownShortcuts() {
     for (const key of inlineShortcuts) {
       // find all inline characters
       let { mark, shortcut } = key;
-      let inlineTags = [];
+      let inlineTags: number[] = [];
 
       // only add tags if they have spaces around them or the tag is beginning
       // or the end of the block
