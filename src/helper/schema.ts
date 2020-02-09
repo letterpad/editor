@@ -1,4 +1,4 @@
-import { Block, Editor, Node, SchemaProperties } from "slate";
+import { Editor, Node, SchemaProperties } from "slate";
 
 function removeInlines(
   editor: Editor,

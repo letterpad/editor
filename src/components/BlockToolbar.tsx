@@ -223,7 +223,6 @@ export default class BlockToolbar extends React.Component<
   }
 
   render(): React.ReactNode {
-    const { editor } = this.props;
     const { insertingImage } = this.state;
 
     return (

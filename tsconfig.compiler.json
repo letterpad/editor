@@ -9,13 +9,13 @@
     "esModuleInterop": true,
     "pretty": true,
     "outDir": "dist",
-    "noUnusedLocals": false,
+    "noUnusedLocals": true,
     "noUnusedParameters": true,
     "jsx": "react",
     "resolveJsonModule": true,
     "declaration": true,
     "sourceMap": true,
     "noImplicitAny": false,
-    "strictNullChecks": false
+    "strictNullChecks": true
   }
 }

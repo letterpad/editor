@@ -17,6 +17,7 @@ import EditBlockquote from "@wikifactory/slate-edit-blockquote";
 import EditCode from "@wikifactory/slate-edit-code";
 import EditList from "./EditList";
 import EditTable from "@domoinc/slate-edit-table";
+import { EditorProps } from "../editor";
 import Ellipsis from "./Ellipsis";
 import Embeds from "./Embeds";
 import InsertImages from "slate-drop-or-paste-images";
@@ -34,14 +35,13 @@ import Placeholder from "./Placeholder";
 import Prism from "golery-slate-prism";
 import Table from "./Table";
 import TrailingBlock from "@wikifactory/slate-trailing-block";
-import { TypeLinkComponent } from "../types";
 
 const createPlugins = ({
   placeholder,
   getLinkComponent
 }: {
   placeholder: string;
-  getLinkComponent: TypeLinkComponent;
+  getLinkComponent: EditorProps["getLinkComponent"];
 }) => {
   return [
     Nodes,

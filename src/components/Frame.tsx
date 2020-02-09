@@ -24,7 +24,7 @@ export default class Frame extends React.Component<Props, any> {
   state = {
     isLoaded: true
   };
-  mounted: boolean;
+  mounted: boolean = false;
 
   componentDidMount() {
     this.mounted = true;

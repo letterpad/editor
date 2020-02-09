@@ -92,10 +92,9 @@ export function getRenderer({ href, node, getComponent }: IProps) {
     getEmbedAttributes?: (href: string, matches: string[]) => TypeIframeProps;
   } = component;
 
-  const iframeAttributes = InbuiltEmbedComponent.getEmbedAttributes(
-    node.data.get("href"),
-    matches
-  );
+  const iframeAttributes = InbuiltEmbedComponent.getEmbedAttributes
+    ? InbuiltEmbedComponent.getEmbedAttributes(node.data.get("href"), matches)
+    : {};
 
   // check if the consumer want to tackle this link
   const ConsumerEmbedComponent =

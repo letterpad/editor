@@ -3,7 +3,6 @@ import "prismjs/components/prism-markup-templating";
 import { letterpadClassName, letterpadId } from "./editor";
 
 import MarkownIt from "markdown-it";
-import embeds from "./components/EmbedProviders";
 import { getRenderer } from "./plugins/Embeds";
 import p from "markdown-it-prism";
 
@@ -29,13 +28,13 @@ export default function convertLinksToEmbed(html: string, editor) {
 function replace(str, regex, replacer) {
   const matches = [];
   str.replace(regex, (match, ...args) => {
+    //@ts-ignore
     matches.push(replacer(match, ...args));
   });
   return str.replace(regex, () => matches.shift());
 }
 
 function getEmbedHtml(anchorTag: string, url: string, editor) {
-  const keys = Object.keys(embeds);
   const node = {
     data: {
       get: attr => {
