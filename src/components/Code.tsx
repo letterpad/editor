@@ -4,10 +4,6 @@ import { SlateNodeProps } from "../types";
 import map from "lodash.map";
 import styled from "styled-components";
 
-function getCopyText(node) {
-  return node.nodes.reduce((memo, line) => `${memo}${line.text}\n`, "");
-}
-
 const languages = {
   none: "None",
   bash: "Bash",

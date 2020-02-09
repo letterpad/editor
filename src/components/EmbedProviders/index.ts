@@ -20,4 +20,5 @@ export function getEmbedProvider(
       if (matches) return { component, matches };
     }
   }
+  return { component: null, matches: [] };
 }

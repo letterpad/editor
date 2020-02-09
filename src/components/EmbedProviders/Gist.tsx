@@ -1,6 +1,5 @@
-import React, { IframeHTMLAttributes } from "react";
-
 import { IEmbedProvider } from "../../types";
+import React from "react";
 
 const URL_REGEX = new RegExp(
   "^https://gist.github.com/([a-zd](?:[a-zd]|-(?=[a-zd])){0,38})/(.*)$"
@@ -18,7 +17,7 @@ function getId(url: string) {
 }
 
 class Gist extends React.Component<IEmbedProvider> {
-  iframeNode: HTMLIFrameElement;
+  iframeNode: HTMLIFrameElement | null = null;
 
   static ENABLED = [URL_REGEX];
 
@@ -55,7 +54,9 @@ class Gist extends React.Component<IEmbedProvider> {
     return (
       <iframe
         ref={ref => {
-          this.iframeNode = ref;
+          if (ref) {
+            this.iframeNode = ref;
+          }
         }}
         {...iframeAttrs}
         id={`gist-${id}`}

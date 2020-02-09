@@ -1,5 +1,4 @@
 import { Editor, SchemaProperties, Value } from "slate";
-import { GlobalStyle, Style } from "./themes/Global.css";
 import {
   IPlugin,
   ISearchResult,
@@ -8,6 +7,7 @@ import {
 } from "./types";
 import React, { PureComponent } from "react";
 
+import { GlobalStyle } from "./themes/Global.css";
 import Markdown from "./serializer";
 import { Editor as SlateReactEditor } from "slate-react";
 import commands from "./commands";

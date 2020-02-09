@@ -12,7 +12,7 @@ export default class DefaultEmbed extends React.Component<any> {
   render() {
     const result = getEmbedProvider(this.url);
     if (!result) return null;
-    const { attributes, isSelected, children, editor } = this.props;
+    const { attributes, isSelected, children } = this.props;
     const { component, matches } = result;
     const EmbedComponent: React.FC<IEmbedProvider> = component;
 

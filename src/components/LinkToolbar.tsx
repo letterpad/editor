@@ -206,7 +206,6 @@ class LinkToolbar extends React.Component<Props, State> {
 
   render() {
     const href = this.props.link.data.get("href");
-    const hasResults = this.state.results.length > 0;
 
     return (
       <span ref={this.setWrapperRef}>
@@ -232,18 +231,6 @@ class LinkToolbar extends React.Component<Props, State> {
     );
   }
 }
-
-const SearchResults = styled.div`
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  height: auto;
-  left: 0;
-  padding: 8px;
-  margin-top: -3px;
-  margin-bottom: 0;
-  border-radius: 0 0 4px 4px;
-`;
 
 const LinkEditor = styled.div`
   margin-left: -8px;
