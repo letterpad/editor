@@ -1,3 +1,108 @@
+### Release: v0.0.18 (2020-02-09)
+
+  - Merge branch 'master' of github.com:letterpad/editor
+ (<a href="https://github.com/letterpad/editor/commit/aefbb5c0958400be038f78bad9ec77952f6a765c">aefbb5c</a>)
+ - Fix types (#106)
+
+ (<a href="https://github.com/letterpad/editor/commit/2632856b487cca78c850aacaac033d08697996cf">2632856</a>)
+ - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/575a02e33f8c9df11137e6c574b124333ebfa6b3">575a02e</a>)
+ - 0.0.17
+ (<a href="https://github.com/letterpad/editor/commit/56c07ffb4794d656de67a678730e4bf8e626a828">56c07ff</a>)
+ - fix: hard conflict
+ (<a href="https://github.com/letterpad/editor/commit/d9ad8473cb6339f7497d5eb55a3a77dae4f18691">d9ad847</a>)
+ - fix: cleanup
+ (<a href="https://github.com/letterpad/editor/commit/12654c682b8f1eb35f95f836ad15ebdbb9206e97">12654c6</a>)
+ - Remove unused imports (#102)
+
+ (<a href="https://github.com/letterpad/editor/commit/909e7cf76afdc3201e4797692bcc4d9241b39443">909e7cf</a>)
+ - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/9af0a31cf61d43408dd3f93997acf32049f9effa">9af0a31</a>)
+ - 0.0.16
+ (<a href="https://github.com/letterpad/editor/commit/83e751c81fee7c78c47c9f498b576e3522e4fa5d">83e751c</a>)
+ - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/49df7cb0c04611232f77eba1f591ae9369be7207">49df7cb</a>)
+ - 0.0.15
+ (<a href="https://github.com/letterpad/editor/commit/2e10255e95ed791914612975a4ab1a0bdca5150a">2e10255</a>)
+ - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/6528b6acaae1e3493bbeafc9413c48de41c08f74">6528b6a</a>)
+ - 0.0.14
+ (<a href="https://github.com/letterpad/editor/commit/d494adaf3f592c8039270f11bd37cf6491bc2c7e">d494ada</a>)
+ - fix: initial text
+ (<a href="https://github.com/letterpad/editor/commit/550c63b84b4bd93d7c93f51ab7c9c2e911fb89e2">550c63b</a>)
+ - added prism plugin for md -> html
+ (<a href="https://github.com/letterpad/editor/commit/22ca7d2baed5ea43ef05998b2ba66dfb5a955d96">22ca7d2</a>)
+ - added yarn lock
+ (<a href="https://github.com/letterpad/editor/commit/1ac22c4244b89745f860546a99608b3a53b0eb91">1ac22c4</a>)
+ - removed react embed (#100)
+
+ (<a href="https://github.com/letterpad/editor/commit/b752a14fda66d1725f9cbf70e5c0fcc8b5395dd0">b752a14</a>)
+ - refactor: remove checklist (#99)
+
+ (<a href="https://github.com/letterpad/editor/commit/3c4b9a6dc2f1b8a40347dc9201914d2d226720de">3c4b9a6</a>)
+ - Fix css class (#98)
+
+ (<a href="https://github.com/letterpad/editor/commit/1a2be20bd62d9c4ea1b93c98d350cff898d5bbad">1a2be20</a>)
+ - minor refactoring (#97)
+
+ (<a href="https://github.com/letterpad/editor/commit/975528f9bade1a9fad8873de57067cc5b961721c">975528f</a>)
+ - fix the deploy bug and replace classnames in css (#96)
+
+ (<a href="https://github.com/letterpad/editor/commit/baa263d78046d11c52cc996dd40da7125bd1cd16">baa263d</a>)
+ - refactor: block insert to functional component (#95)
+
+ (<a href="https://github.com/letterpad/editor/commit/f8fd8efc1241a7f2e17c2c4824e527300f745c28">f8fd8ef</a>)
+ - Embed Rework (#94)
+
+ (<a href="https://github.com/letterpad/editor/commit/5d90cb8f68d0af1e34994ccbb3bb789c4e8dd16b">5d90cb8</a>)
+ - added external code css (#93)
+
+ (<a href="https://github.com/letterpad/editor/commit/b312633a1289c1017c782e7adf7f41829fe5c8c2">b312633</a>)
+ - feat: change default font of editor to Lora nad Montserrat (#92)
+
+ (<a href="https://github.com/letterpad/editor/commit/f3fc1df8895d28e5fed615dde513aac4099166c9">f3fc1df</a>)
+ - update yarn.lock (#91)
+
+ (<a href="https://github.com/letterpad/editor/commit/27a0cbb6a59fbf046ce539ea4f70c9363af5ed71">27a0cbb</a>)
+ - Editor structural change (#90)
+
+ (<a href="https://github.com/letterpad/editor/commit/2a2f821966fd6aabba51755cbd7945b5bfc2ecfd">2a2f821</a>)
+ - [ci skip] Generated Build
+ (<a href="https://github.com/letterpad/editor/commit/1f213562cd3b2a67ba710b2d0f30336e11ec5cd7">1f21356</a>)
+ - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/2486e3c0fbb1df4319cd1d99ecbef758aae1e0ff">2486e3c</a>)
+ - fixed conflict
+ (<a href="https://github.com/letterpad/editor/commit/4609d7a954a4b4df28a80d81c43c5c295e5e32df">4609d7a</a>)
+ - Fix externals (#89)
+
+ (<a href="https://github.com/letterpad/editor/commit/955c4c67707344157aa7d5a80bfb6a925a8b1c66">955c4c6</a>)
+ - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/b5a36239f4a8e30593c2ebdfd0d5c76bafcd701e">b5a3623</a>)
+ - 0.0.11
+ (<a href="https://github.com/letterpad/editor/commit/6e1bce2412f1936e69bcacd8a3def9b8f92e3b6d">6e1bce2</a>)
+ - moved styped components to peer
+ (<a href="https://github.com/letterpad/editor/commit/1fe84f0d5fdc284239ac889f56288d62a3ffc4bb">1fe84f0</a>)
+ - 0.0.10
+ (<a href="https://github.com/letterpad/editor/commit/3dd45657031e16b70aa185e6cd2759bb12bdb287">3dd4565</a>)
+ - fix safari scroll issues
+ (<a href="https://github.com/letterpad/editor/commit/74f477a6db7d852d0da3ac7f140faa4f34321080">74f477a</a>)
+ - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/1966195b35126773e9fe3c99f50aa8c5d5de15e5">1966195</a>)
+ - 0.0.9
+ (<a href="https://github.com/letterpad/editor/commit/7d2fd1d7c40c03db82aad1470e6f108b98ebe0a0">7d2fd1d</a>)
+ - Upgrade slate (#88)
+
+ (<a href="https://github.com/letterpad/editor/commit/64aa6730be39808ab2897b6725ce95fcd23ded86">64aa673</a>)
+ - Bump lodash.template from 4.4.0 to 4.5.0 (#85)
+
+Bumps [lodash.template](https://github.com/lodash/lodash) from 4.4.0 to 4.5.0.
+- [Release notes](https://github.com/lodash/lodash/releases)
+- [Commits](https://github.com/lodash/lodash/compare/4.4.0...4.5.0)
+
+Signed-off-by: dependabot[bot] <support@github.com> (<a href="https://github.com/letterpad/editor/commit/b99496f0a7c919c578ce67d79ecfb4cd281abf4d">b99496f</a>)
+ - [ci skip] Generated Build
+ (<a href="https://github.com/letterpad/editor/commit/4ff70afa4c617401844503b87e124fd02c9d73d1">4ff70af</a>) 
+
 ### Release: v0.0.17 (2020-02-07)
 
   - fix: hard conflict
