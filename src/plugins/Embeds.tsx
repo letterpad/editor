@@ -87,6 +87,7 @@ export function getRenderer({ href, node, getComponent }: IProps) {
   const provider = getEmbedProvider(href);
   if (!provider) return null;
   const { component, matches } = provider;
+  if (!component) return null;
 
   const InbuiltEmbedComponent: React.ComponentType<IEmbedProvider> & {
     getEmbedAttributes?: (href: string, matches: string[]) => TypeIframeProps;
