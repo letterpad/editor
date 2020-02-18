@@ -167,6 +167,8 @@ const Language = styled.select`
   bottom: 2px;
   right: 2px;
   opacity: 0;
+  font-size: 12px;
+  border: none;
 `;
 
 const Container = styled.div`
