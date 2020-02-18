@@ -13,7 +13,8 @@ const regex = /<p><a[^>]+href=\"(.*?)\"[^>]*>(.*?)<\/a><\/p>/gi;
 export function getHtmlFromMarkdown(markdown: string, editor) {
   const html = mdToHtml.render(markdown);
   const htmlWithEmbedContent = convertLinksToEmbed(html, editor);
-  return `<div class='${letterpadClassName}' id='${letterpadId}'>${htmlWithEmbedContent}</div>`;
+  const htmlWithImageCaptions = addImageCaptionsFromAlt(htmlWithEmbedContent);
+  return `<div class='${letterpadClassName}' id='${letterpadId}'>${htmlWithImageCaptions}</div>`;
 }
 
 export default function convertLinksToEmbed(html: string, editor) {
@@ -23,6 +24,18 @@ export default function convertLinksToEmbed(html: string, editor) {
   });
 
   return htmlWithEmbedContent;
+}
+
+function addImageCaptionsFromAlt(html: string) {
+  const htmlWithCaptions = html.replace(
+    /<img[^>]* alt=\"([^\"]*)\"[^>]*>/g,
+    (image, alt) => {
+      const caption = alt ? `<figcaption>${alt}</figcaption>` : "";
+      return `<figure>${image}${caption}</figure>`;
+    }
+  );
+
+  return htmlWithCaptions;
 }
 
 function replace(str, regex, replacer) {
