@@ -66,20 +66,6 @@ class Demo extends Component {
               );
             }
           }}
-          addToToolbar={[
-            {
-              name: "test",
-              icon: (
-                <div>
-                  <img src="https://cdn.iconscout.com/icon/free/png-256/unsplash-1884620-1596840.png" />
-                </div>
-              ),
-              onClick: (name, editor) => {
-                console.log(name, editor);
-                //
-              }
-            }
-          ]}
         />
       </Container>
     );

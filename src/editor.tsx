@@ -106,10 +106,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
   };
 
   getSchema = () => {
-    if (
-      this.props.schema !== undefined &&
-      this.props.schema !== this.prevSchema
-    ) {
+    if (this.prevSchema !== this.props.schema) {
       this.schema = {
         ...schema,
         ...(this.props.schema || {})
