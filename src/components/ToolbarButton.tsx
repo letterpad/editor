@@ -16,6 +16,9 @@ const Wrapper = styled.span<any>`
   cursor: pointer;
   display: flex;
   align-items: center;
+  img {
+    width: 18px;
+  }
 `;
 const TextIcon = styled.span`
   font-size: 12px;

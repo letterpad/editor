@@ -44,3 +44,9 @@ export type TypeLinkComponent = (
   node: Node,
   attrs: TypeIframeProps
 ) => React.ComponentType<any> | undefined;
+
+export interface ICustomToolbar {
+  icon: React.ReactChild;
+  name: string;
+  onClick: (name: string, editor: ReactEditor) => void;
+}
