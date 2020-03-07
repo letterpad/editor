@@ -13,6 +13,7 @@ import {
 import { Container } from "./BlockToolbar.css";
 // import ImageUpload from "./ImageUpload";
 import EditList from "../plugins/EditList";
+import { ICustomToolbar } from "../types";
 import React from "react";
 import ToolbarButton from "./ToolbarButton";
 import { findDOMNode } from "react-dom";
@@ -23,6 +24,7 @@ const { changes } = EditList;
 interface ToolbarProps {
   editor: Editor;
   node: Node;
+  attributes: object;
 }
 
 interface ToolbarState {
@@ -127,8 +129,6 @@ export default class BlockToolbar extends React.Component<
     // simulate a click on the file upload input element
     if (this.file.current) this.file.current.click();
 
-    // browser does not have a cancel event listener for the file explorer.
-    // this is a hack to close the toolbar if the cancel is clicked.
     document.body.onfocus = () => {
       setTimeout(() => {
         this.insertingImage = false;
@@ -136,6 +136,9 @@ export default class BlockToolbar extends React.Component<
       }, 100);
       document.body.onfocus = null;
     };
+    // setTimeout(() => {
+    //   this.removeSelf(ev);
+    // }, 200);
   };
 
   onImagePicked = async (ev: any) => {
@@ -224,7 +227,7 @@ export default class BlockToolbar extends React.Component<
 
   render(): React.ReactNode {
     const { insertingImage } = this.state;
-
+    const { editor } = this.props;
     return (
       <Container ref={this.bar} className="block-toolbar">
         <ToolbarButton
@@ -270,13 +273,27 @@ export default class BlockToolbar extends React.Component<
           <TableIcon />
         </ToolbarButton>
         <ToolbarButton
-          onMouseDown={_e => {
-            this.onPickImage(_e);
+          onMouseDown={e => {
+            // e.preventDefault();
+            this.onPickImage(e);
           }}
           active={insertingImage}
         >
           <ImageIcon />
         </ToolbarButton>
+        {editor.props.addToToolbar.map((item: ICustomToolbar, idx: number) => {
+          return (
+            <ToolbarButton
+              onMouseDown={e => {
+                e.preventDefault();
+                item.onClick(item.name, editor);
+              }}
+              key={idx}
+            >
+              {item.icon}
+            </ToolbarButton>
+          );
+        })}
         <HiddenInput
           type="file"
           ref={this.file}

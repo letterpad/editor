@@ -1,5 +1,6 @@
 import { Editor, SchemaProperties, Value } from "slate";
 import {
+  ICustomToolbar,
   IPlugin,
   ISearchResult,
   ISerializer,
@@ -44,6 +45,7 @@ export type EditorProps = {
   getLinkComponent?: TypeLinkComponent;
   getEditorInstance?: (editor: Editor) => void;
   style?: string;
+  addToToolbar?: ICustomToolbar[];
 };
 
 export class LetterpadEditor extends PureComponent<EditorProps, State> {
@@ -53,7 +55,8 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
     plugins: [],
     tooltip: "span",
     dark: false,
-    readOnly: false
+    readOnly: false,
+    addToToolbar: []
   };
 
   prevSchema: SchemaProperties = null;
@@ -103,7 +106,10 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
   };
 
   getSchema = () => {
-    if (this.prevSchema !== this.props.schema) {
+    if (
+      this.props.schema !== undefined &&
+      this.props.schema !== this.prevSchema
+    ) {
       this.schema = {
         ...schema,
         ...(this.props.schema || {})
@@ -129,6 +135,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
       defaultValue,
       plugins,
       onImageBrowse,
+      addToToolbar,
       ...rest
     } = this.props;
 
@@ -155,6 +162,7 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
           onImageBrowse={onImageBrowse}
           title={title}
           options={defaultOptions}
+          addToToolbar={addToToolbar}
           {...rest}
         />
       </div>
