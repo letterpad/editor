@@ -6,7 +6,7 @@ import {
   ISerializer,
   TypeLinkComponent
 } from "./types";
-import React, { PureComponent } from "react";
+import React, { ComponentType, PureComponent } from "react";
 
 import { GlobalStyle } from "./themes/Global.css";
 import Markdown from "./serializer";
@@ -46,6 +46,7 @@ export type EditorProps = {
   getEditorInstance?: (editor: Editor) => void;
   style?: string;
   addToToolbar?: ICustomToolbar[];
+  tooltip: ComponentType<any>;
 };
 
 export class LetterpadEditor extends PureComponent<EditorProps, State> {

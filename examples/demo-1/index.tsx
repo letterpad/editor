@@ -5,6 +5,7 @@ import React, { Component } from "react";
 
 import { Editor } from "slate";
 import { LetterpadEditor } from "../../src/editor";
+import ReactTooltip from "react-tooltip";
 import styled from "styled-components";
 
 const sampleMd = require("../../src/initialText.md").default;
@@ -57,6 +58,7 @@ class Demo extends Component {
             console.log("HTML", result.html);
             console.log("MD", result.markdown);
           }}
+          tooltip={Tooltip}
           getLinkComponent={(_node, attrs) => {
             if (_node.data.get("href").indexOf("youtube") < 0) {
               return props => (
@@ -77,4 +79,19 @@ export default Demo;
 const Container = styled.div`
   width: 700px;
   margin: auto;
+
+  .flex {
+    display: flex;
+  }
 `;
+
+const Tooltip: React.FC<any> = ({ children, tooltip }) => {
+  return (
+    <>
+      <div data-tip={tooltip} className="flex">
+        {children}
+      </div>
+      <ReactTooltip />
+    </>
+  );
+};

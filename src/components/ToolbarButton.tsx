@@ -1,5 +1,6 @@
 import React, { MouseEventHandler, SFC } from "react";
 
+import { Editor } from "slate";
 import classnames from "classnames";
 import styled from "styled-components";
 
@@ -31,15 +32,26 @@ const TextIcon = styled.span`
 interface ButtonProps {
   onMouseDown: MouseEventHandler;
   active?: boolean;
+  editor: Editor;
+  tooltip: string;
 }
 
-const ToolbarButton: SFC<ButtonProps> = ({ onMouseDown, active, children }) => {
+const ToolbarButton: SFC<ButtonProps> = ({
+  onMouseDown,
+  active,
+  children,
+  tooltip,
+  editor
+}) => {
   const classes = classnames("button", {
     active
   });
+  const Tooltip = editor.props.tooltip;
   return (
     <Wrapper className={classes} onMouseDown={onMouseDown}>
-      {children}
+      <Tooltip tooltip={tooltip} placement="top">
+        {children}
+      </Tooltip>
     </Wrapper>
   );
 };
