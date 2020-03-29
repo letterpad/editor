@@ -100,25 +100,42 @@ class FormattingToolbar extends React.Component<Props> {
     }
   };
 
-  renderMarkButton = (type: string, IconClass: React.ComponentType<any>) => {
+  renderMarkButton = (
+    type: string,
+    IconClass: React.ComponentType<any>,
+    tootip: string
+  ) => {
     const isActive = this.hasMark(type);
     const onMouseDown = ev => this.onClickMark(ev, type);
-
     return (
-      <ToolbarButton onMouseDown={onMouseDown} active={isActive}>
+      <ToolbarButton
+        editor={this.props.editor}
+        tooltip={tootip}
+        onMouseDown={onMouseDown}
+        active={isActive}
+      >
         <IconClass />
       </ToolbarButton>
     );
   };
 
-  renderBlockButton = (type: string, IconClass: React.ComponentType) => {
+  renderBlockButton = (
+    type: string,
+    IconClass: React.ComponentType,
+    tooltip: string
+  ) => {
     const isActive = this.isBlock(type);
 
     const onMouseDown = ev =>
       this.onClickBlock(ev, isActive ? "paragraph" : type);
 
     return (
-      <ToolbarButton onMouseDown={onMouseDown} active={isActive || false}>
+      <ToolbarButton
+        editor={this.props.editor}
+        tooltip={tooltip}
+        onMouseDown={onMouseDown}
+        active={isActive || false}
+      >
         <IconClass />
       </ToolbarButton>
     );
@@ -140,26 +157,38 @@ class FormattingToolbar extends React.Component<Props> {
       <React.Fragment>
         {!isSelectionInHeading && (
           <React.Fragment>
-            {this.renderMarkButton("bold", BoldIcon)}
-            {this.renderMarkButton("italic", ItalicIcon)}
-            {this.renderMarkButton("deleted", StrikeThroughIcon)}
-            {this.renderMarkButton("code", HighlightIcon)}
-            {this.renderMarkButton("underlined", UnderlineIcon)}
+            {this.renderMarkButton("bold", BoldIcon, "Bold")}
+            {this.renderMarkButton("italic", ItalicIcon, "Italic")}
+            {this.renderMarkButton(
+              "deleted",
+              StrikeThroughIcon,
+              "Strike through"
+            )}
+            {this.renderMarkButton("code", HighlightIcon, "Highlight")}
+            {this.renderMarkButton("underlined", UnderlineIcon, "Underline")}
           </React.Fragment>
         )}
         {!isSelectionInTable && (
           <React.Fragment>
             {!isSelectionInHeading && <Separator />}
             {!isSelectionInHeading &&
-              this.renderBlockButton("block-quote", BlockQuoteIcon)}
+              this.renderBlockButton(
+                "block-quote",
+                BlockQuoteIcon,
+                "Blockquote"
+              )}
 
             <ToolbarButton
+              editor={this.props.editor}
+              tooltip="Heading"
               active={this.isBlock("heading1") || false}
               onMouseDown={e => this.onMouseDown(e, "heading1")}
             >
               <Heading1Icon />
             </ToolbarButton>
             <ToolbarButton
+              editor={this.props.editor}
+              tooltip="Sub Heading"
               active={this.isBlock("heading2") || false}
               onMouseDown={e => this.onMouseDown(e, "heading2")}
             >
@@ -171,7 +200,11 @@ class FormattingToolbar extends React.Component<Props> {
         {!isSelectionInHeading && (
           <React.Fragment>
             <Separator />
-            <ToolbarButton onMouseDown={this.handleCreateLink}>
+            <ToolbarButton
+              editor={this.props.editor}
+              tooltip="Create link"
+              onMouseDown={this.handleCreateLink}
+            >
               <LinkIcon />
             </ToolbarButton>
           </React.Fragment>
