@@ -219,11 +219,19 @@ class LinkToolbar extends React.Component<Props, State> {
             autoFocus={href === ""}
           />
           {this.state.isEditing && (
-            <ToolbarButton onMouseDown={this.openLink}>
+            <ToolbarButton
+              editor={this.props.editor}
+              tooltip="open link"
+              onMouseDown={this.openLink}
+            >
               <OpenIcon />
             </ToolbarButton>
           )}
-          <ToolbarButton onMouseDown={this.removeLink}>
+          <ToolbarButton
+            editor={this.props.editor}
+            tooltip="remove"
+            onMouseDown={this.removeLink}
+          >
             {this.state.isEditing ? <TrashIcon /> : <CloseIcon />}
           </ToolbarButton>
         </LinkEditor>

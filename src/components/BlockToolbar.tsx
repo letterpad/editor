@@ -231,48 +231,64 @@ export default class BlockToolbar extends React.Component<
     return (
       <Container ref={this.bar} className="block-toolbar">
         <ToolbarButton
+          editor={editor}
+          tooltip="Large Heading"
           active={this.checkActiveBlock("heading1")}
           onMouseDown={e => this.handleClickBlock(e, "heading1")}
         >
           <Heading1Icon />
         </ToolbarButton>
         <ToolbarButton
+          editor={editor}
+          tooltip="Sub Heading"
           active={this.checkActiveBlock("heading2")}
           onMouseDown={e => this.handleClickBlock(e, "heading2")}
         >
           <Heading2Icon />
         </ToolbarButton>
         <ToolbarButton
+          editor={editor}
+          tooltip="Codeblock"
           active={this.checkActiveBlock("code")}
           onMouseDown={e => this.handleClickBlock(e, "code")}
         >
           <CodeblockIcon />
         </ToolbarButton>
         <ToolbarButton
+          editor={editor}
+          tooltip="Bullet List"
           active={this.checkActiveBlock("bulleted-list")}
           onMouseDown={e => this.handleClickBlock(e, "bulleted-list")}
         >
           <BulletListIcon />
         </ToolbarButton>
         <ToolbarButton
+          editor={editor}
+          tooltip="Ordered List"
           active={this.checkActiveBlock("ordered-list")}
           onMouseDown={e => this.handleClickBlock(e, "ordered-list")}
         >
           <OrderedListIcon />
         </ToolbarButton>
         <ToolbarButton
+          editor={editor}
+          tooltip={"list"}
           active={this.checkActiveBlock("check-list")}
           onMouseDown={e => this.handleClickBlock(e, "check-list")}
         >
           <TodoListIcon />
         </ToolbarButton>
         <ToolbarButton
+          editor={editor}
+          tooltip="Insert Table"
           onMouseDown={e => this.handleClickBlock(e, "table")}
           active={this.checkActiveBlock("table")}
         >
           <TableIcon />
         </ToolbarButton>
         <ToolbarButton
+          editor={editor}
+          tooltip="Insert Image"
           onMouseDown={e => {
             // e.preventDefault();
             this.onPickImage(e);
@@ -284,6 +300,8 @@ export default class BlockToolbar extends React.Component<
         {editor.props.addToToolbar.map((item: ICustomToolbar, idx: number) => {
           return (
             <ToolbarButton
+              editor={editor}
+              tooltip={item.name}
               onMouseDown={e => {
                 e.preventDefault();
                 item.onClick(item.name, editor);
