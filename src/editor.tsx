@@ -47,7 +47,7 @@ export type EditorProps = {
   style?: string;
   addToToolbar?: ICustomToolbar[];
   tooltip: ComponentType<any>;
-  onLoad: (value: () => { markdown: string; html: string }) => void;
+  onLoad?: (value: () => { markdown: string; html: string }) => void;
 };
 
 export class LetterpadEditor extends PureComponent<EditorProps, State> {
