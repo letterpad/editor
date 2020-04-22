@@ -44,10 +44,10 @@ log "INFO" "Review Changes between ${secondTag} and HEAD"
 # Add temp tag 
 git tag $NEW_VERSION  &>/dev/null 
 
-CHANGELOG=`git log --pretty=format:' - %B (<a href="https://github.com/letterpad/editor/commit/%H">%h</a>)' ${secondTag}...${firstTag} 2>&1`
+CHANGELOG=`git log --pretty=format:' - %B (<a href="https://github.com/letterpad/editor/commit/%H">%h</a>)' ${secondTag}...HEAD 2>&1`
 
 # preview the log
-git log --pretty=format:' * %s %b %B' ${secondTag}..HEAD
+git log --pretty=format:' * %s %b %B' ${secondTag}...HEAD
 
 # delete temp tag
 git tag -d $NEW_VERSION  &>/dev/null 
