@@ -1,7 +1,8 @@
 import "prismjs/components/prism-markup-templating";
 
-import { letterpadClassName, letterpadId } from "./editor";
+import { letterpadClassName, letterpadId } from "./helper/constants";
 
+import { Editor } from "slate";
 import MarkownIt from "markdown-it";
 import { getRenderer } from "./plugins/Embeds";
 import p from "markdown-it-prism";
@@ -10,14 +11,14 @@ const mdToHtml = MarkownIt().use(p);
 
 const regex = /<p><a[^>]+href=\"(.*?)\"[^>]*>(.*?)<\/a><\/p>/gi;
 
-export function getHtmlFromMarkdown(markdown: string, editor) {
+export function getHtmlFromMarkdown(markdown: string, editor?: Editor) {
   const html = mdToHtml.render(markdown);
   const htmlWithEmbedContent = convertLinksToEmbed(html, editor);
   const htmlWithImageCaptions = addImageCaptionsFromAlt(htmlWithEmbedContent);
   return `<div class='${letterpadClassName}' id='${letterpadId}'>${htmlWithImageCaptions}</div>`;
 }
 
-export default function convertLinksToEmbed(html: string, editor) {
+export default function convertLinksToEmbed(html: string, editor?: Editor) {
   const htmlWithEmbedContent = replace(html, regex, (match, url: string) => {
     const embedContent = getEmbedHtml(match, url, editor);
     return embedContent;
@@ -47,7 +48,7 @@ function replace(str, regex, replacer) {
   return str.replace(regex, () => matches.shift());
 }
 
-function getEmbedHtml(anchorTag: string, url: string, editor) {
+function getEmbedHtml(anchorTag: string, url: string, editor?: Editor) {
   const node = {
     data: {
       get: attr => {
@@ -60,7 +61,7 @@ function getEmbedHtml(anchorTag: string, url: string, editor) {
   const renderHandle = getRenderer({
     node,
     href: url,
-    getComponent: editor.props.getLinkComponent
+    getComponent: editor ? editor.props.getLinkComponent : null
   });
   if (!renderHandle) return anchorTag;
   const iframeAttributes = renderHandle.iframeAttributes;

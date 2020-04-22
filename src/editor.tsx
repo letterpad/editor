@@ -7,6 +7,7 @@ import {
   TypeLinkComponent
 } from "./types";
 import React, { ComponentType, PureComponent } from "react";
+import { letterpadClassName, letterpadId } from "./helper/constants";
 
 import { GlobalStyle } from "./themes/Global.css";
 import Markdown from "./serializer";
@@ -18,9 +19,6 @@ import queries from "./queries";
 import schema from "./helper/schema";
 
 const defaultOptions = {};
-
-export const letterpadId = "letterpad-editor-container";
-export const letterpadClassName = "lp-editor";
 
 type State = {
   editorValue: Value;
@@ -172,4 +170,5 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
     );
   }
 }
+export const mdToHtml = getHtmlFromMarkdown;
 export default LetterpadEditor;
