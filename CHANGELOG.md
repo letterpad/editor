@@ -1,3 +1,13 @@
+### Release: v0.0.26 (2020-04-22)
+
+  - Convert build to commonjs instead f module (#113)
+
+ (<a href="https://github.com/letterpad/editor/commit/f4083e4ff4006e69ce690018197f07f5b52dc152">f4083e4</a>)
+ - fix: release script
+ (<a href="https://github.com/letterpad/editor/commit/c139d61eae89e8f027c2830f48716da1f00dc9f6">c139d61</a>)
+ - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/8aa8f97d388c31a63a5f39d25c3d99bd934dbdd1">8aa8f97</a>) 
+
 ### Release: v0.0.25 (2020-04-22)
 
   - fix: release script
