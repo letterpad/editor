@@ -32,14 +32,14 @@ fi
 
 # get last two tags
 firstTag=$NEW_VERSION 
-secondTag=$(git tag | sort -r | head -2 | awk '{split($0, tags, "\n")} END {print tags[1]}')
+secondTag=$(git describe --abbrev=0) 
 
 if [ $firstTag == $secondTag ]; then
     log "ERROR" "The tag ${firstTag} already exist"
     exit 1;
 fi
 
-log "INFO" "Review Changes between ${secondTag} and ${firstTag}"
+log "INFO" "Review Changes between ${secondTag} and HEAD"
 
 # Add temp tag 
 git tag $NEW_VERSION  &>/dev/null 
@@ -47,7 +47,7 @@ git tag $NEW_VERSION  &>/dev/null
 CHANGELOG=`git log --pretty=format:' - %B (<a href="https://github.com/letterpad/editor/commit/%H">%h</a>)' ${secondTag}...${firstTag} 2>&1`
 
 # preview the log
-git log --pretty=format:' * %s %b %B' ${secondTag}...${firstTag}
+git log --pretty=format:' * %s %b %B' ${secondTag}..HEAD
 
 # delete temp tag
 git tag -d $NEW_VERSION  &>/dev/null 
@@ -63,7 +63,7 @@ if [ "$CONT" == "y" ] || [ -z "$CONT"]; then
     log "INFO" "Updated version in package.json to $NEW_VERSION"
     ## Publishing npm
     log "INFO" "Publishing to npm..."
-    npm publish  &>/dev/null 
+    npm publish
     git checkout -b release-branch &>/dev/null
 
     ## commit this in a new release-branch and merge back to master
