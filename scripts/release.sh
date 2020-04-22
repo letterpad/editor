@@ -47,7 +47,7 @@ git tag $NEW_VERSION  &>/dev/null
 CHANGELOG=`git log --pretty=format:' - %B (<a href="https://github.com/letterpad/editor/commit/%H">%h</a>)' ${secondTag}...HEAD 2>&1`
 
 # preview the log
-git log --pretty=format:' * %s %b %B' ${secondTag}...HEAD
+git log --pretty=format:' * %s %b' ${secondTag}..HEAD
 
 # delete temp tag
 git tag -d $NEW_VERSION  &>/dev/null 

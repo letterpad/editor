@@ -12,7 +12,9 @@ require("@cypress/snapshot").register();
 context("Menu", () => {
   beforeEach(() => {
     cy.visit(params.testServer);
-    cy.get('div[contenteditable="true"]');
+    cy.get('div[data-slate-editor="true"]')
+      .focus()
+      .type("{enter}");
   });
 
   it("clearing editor", () => {
