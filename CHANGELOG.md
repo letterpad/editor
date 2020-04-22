@@ -1,3 +1,8 @@
+### Release: v0.0.24 (2020-04-22)
+
+  - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/e6842839f3b32a0045aea7a8b4ec4523d9b48e8f">e684283</a>) 
+
 ### Release: v0.0.23 (2020-04-19)
 
 - Add onload callback (#111)(<a href="https://github.com/letterpad/editor/commit/b52fbbb334ec99d8b95945726b250227e6e76bb2">b52fbbb</a>)
