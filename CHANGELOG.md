@@ -1,7 +1,14 @@
+### Release: v0.0.25 (2020-04-22)
+
+  - fix: release script
+ (<a href="https://github.com/letterpad/editor/commit/c139d61eae89e8f027c2830f48716da1f00dc9f6">c139d61</a>)
+ - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/8aa8f97d388c31a63a5f39d25c3d99bd934dbdd1">8aa8f97</a>) 
+
 ### Release: v0.0.24 (2020-04-22)
 
-  - Update CHANGELOG.md
- (<a href="https://github.com/letterpad/editor/commit/e6842839f3b32a0045aea7a8b4ec4523d9b48e8f">e684283</a>) 
+- Expose md to html function
+  (<a href="https://github.com/letterpad/editor/commit/af92fbcb47aa908794b1e53babd9366819d8461d">af92fbc</a>)
 
 ### Release: v0.0.23 (2020-04-19)
 
