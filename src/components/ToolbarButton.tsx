@@ -43,6 +43,7 @@ const ToolbarButton: SFC<ButtonProps> = ({
   tooltip,
   editor
 }) => {
+  if (!editor) return null;
   const classes = classnames("button", {
     active
   });
