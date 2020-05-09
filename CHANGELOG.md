@@ -1,3 +1,7 @@
+### Release: v0.0.28 (2020-05-09)
+
+- Fixed table error (#116)(<a href="https://github.com/letterpad/editor/commit/92fa1d54b800e3afbb5c07d1318589fd92166b79">92fa1d5</a>)
+
 ### Release: v0.0.27 (2020-04-22)
 
 - clean: remove base.css(<a href="https://github.com/letterpad/editor/commit/ec28b69beb6d73f69d50ca2668d0ff12ab11981c">ec28b69</a>)
