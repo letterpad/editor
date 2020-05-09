@@ -21,9 +21,7 @@ export const GlobalStyle = createGlobalStyle<{ style: string; theme: Themes }>`
       color: var(--color-base);
   }
   ${p => p.style}
-  .block-toolbar {
-    border-radius: 20px;
-  }
+ 
   #letterpad-editor-container {
     font-style: normal;
     font-family: "Lora", sans-serif;
