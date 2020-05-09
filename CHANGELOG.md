@@ -1,3 +1,7 @@
+### Release: v0.0.29 (2020-05-09)
+
+- Remove style .css file (#117)(<a href="https://github.com/letterpad/editor/commit/3d57982476c8119560d9457c8b350c9c0650206c">3d57982</a>)
+
 ### Release: v0.0.28 (2020-05-09)
 
 - Fixed table error (#116)(<a href="https://github.com/letterpad/editor/commit/92fa1d54b800e3afbb5c07d1318589fd92166b79">92fa1d5</a>)
