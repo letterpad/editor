@@ -1,5 +1,3 @@
-import "./themes/style.css";
-
 import { Editor, SchemaProperties, Value } from "slate";
 import {
   ICustomToolbar,
@@ -94,7 +92,22 @@ export class LetterpadEditor extends PureComponent<EditorProps, State> {
     if (typeof this.props.onLoad === "function") {
       this.props.onLoad(this.value);
     }
+    this.injectGoogleFonts(
+      "https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i|Montserrat:400,400i,700,700i&display=swap"
+    );
+
+    this.injectGoogleFonts(
+      "https://fonts.googleapis.com/icon?family=Material+Icons"
+    );
   }
+
+  injectGoogleFonts = (href: string) => {
+    const link = document.createElement("link");
+    link.setAttribute("rel", "stylesheet");
+    link.setAttribute("type", "text/css");
+    link.setAttribute("href", href);
+    document.head.appendChild(link);
+  };
 
   value = () => {
     const markdown = this.serializer.serialize(this.state.editorValue);
