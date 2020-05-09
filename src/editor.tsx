@@ -1,3 +1,5 @@
+import "./themes/style.css";
+
 import { Editor, SchemaProperties, Value } from "slate";
 import {
   ICustomToolbar,
