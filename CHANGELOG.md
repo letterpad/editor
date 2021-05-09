@@ -1,3 +1,8 @@
+### Release: v0.0.30 (2021-05-09)
+
+  - Update CHANGELOG.md
+ (<a href="https://github.com/letterpad/editor/commit/b58514cb8b2ed4933a34fa78520f184ef45e9288">b58514c</a>) 
+
 ### Release: v0.0.29 (2020-05-09)
 
 - Remove style .css file (#117)(<a href="https://github.com/letterpad/editor/commit/3d57982476c8119560d9457c8b350c9c0650206c">3d57982</a>)
