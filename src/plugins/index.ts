@@ -32,6 +32,7 @@ interface Callbacks {
 export const plugins = (callbacks: Callbacks) => {
   return [
     linkPlugin,
+    // createLinkifyPlugin(),
     prismPlugin,
     sideToolbarPlugin,
     focusPlugin,

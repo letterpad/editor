@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import Editor from "../editor";
+import Editor from "../src/editor";
 
 const Demo = () => {
   const handleImage = () => {
