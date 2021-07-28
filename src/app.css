@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+:root {
+  --bg-codeblock: #000;
+}
+.editor {
+  box-sizing: border-box;
+  cursor: text;
+  margin-left: 100px;
+  width: 700px;
+  margin: auto;
+  padding: 20px;
+  font-family: "PT Sans", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.editor :global(.public-DraftEditor-content) {
+  min-height: 140px;
+}
+
+.wrapper {
+  position: absolute;
+}
+
+img {
+  width: 100%;
+}
+
+pre code {
+  background: var(--bg-codeblock);
+  display: block;
+  font-size: 1rem;
+  color: #c7c7c7;
+  padding: 1rem;
+}
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  background: transparent;
+}
+
+blockquote {
+  margin: 20px 0px;
+  font-family: Open Sans;
+  font-style: italic;
+  color: #555555;
+  padding: 1.4rem 1rem;
+  border-left: 6px solid #78c0a8;
+  line-height: 1.6;
+  position: relative;
+  background: #ededed;
+}
+
+blockquote span {
+  display: block;
+  color: #333333;
+  font-style: normal;
+}
