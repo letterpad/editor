@@ -10,8 +10,6 @@ import {
   HeadlineTwoButton,
   UnorderedListButton,
   OrderedListButton,
-  BlockquoteButton,
-  CodeBlockButton,
 } from "@draft-js-plugins/buttons";
 
 import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
@@ -20,36 +18,46 @@ import { LinkPluginButton } from "./anchor";
 
 const InlineToolbar = () => {
   return (
-    <InlineToolarHoc>
-      {externalProps => {
-        const block = getCurrentBlock(externalProps.getEditorState());
-
-        if (block.getType() === IMAGE_BLOCK) {
+    <span className="inline-toolbar">
+      <InlineToolarHoc>
+        {externalProps => {
+          const block = getCurrentBlock(externalProps.getEditorState());
+          console.log("block.getType() :>> ", block.getType());
+          if (block.getType() === IMAGE_BLOCK) {
+            return (
+              <>
+                <BoldButton {...externalProps} />
+                <ItalicButton {...externalProps} />
+                <UnderlineButton {...externalProps} />
+                <LinkPluginButton {...externalProps} />
+              </>
+            );
+          }
+          if (block.getType() === "code-block") {
+            return (
+              <>
+                <BoldButton {...externalProps} />
+                <ItalicButton {...externalProps} />
+              </>
+            );
+          }
           return (
             <>
+              <HeadlineOneButton {...externalProps} />
+              <HeadlineTwoButton {...externalProps} />
               <BoldButton {...externalProps} />
               <ItalicButton {...externalProps} />
               <UnderlineButton {...externalProps} />
+              <CodeButton {...externalProps} />
+
               <LinkPluginButton {...externalProps} />
+              <UnorderedListButton {...externalProps} />
+              <OrderedListButton {...externalProps} />
             </>
           );
-        }
-        return (
-          <>
-            <HeadlineOneButton {...externalProps} />
-            <HeadlineTwoButton {...externalProps} />
-            <BoldButton {...externalProps} />
-            <ItalicButton {...externalProps} />
-            <UnderlineButton {...externalProps} />
-            <CodeButton {...externalProps} />
-
-            <LinkPluginButton {...externalProps} />
-            <UnorderedListButton {...externalProps} />
-            <OrderedListButton {...externalProps} />
-          </>
-        );
-      }}
-    </InlineToolarHoc>
+        }}
+      </InlineToolarHoc>
+    </span>
   );
 };
 
