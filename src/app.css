@@ -45,7 +45,6 @@ pre code {
 blockquote {
   margin: 20px 0px;
   font-family: Open Sans;
-  font-style: italic;
   color: #555555;
   padding: 1.4rem 1rem;
   border-left: 6px solid #78c0a8;
@@ -55,7 +54,5 @@ blockquote {
 }
 
 blockquote span {
-  display: block;
   color: #333333;
-  font-style: normal;
 }
