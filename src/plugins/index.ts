@@ -1,3 +1,4 @@
+import { videoPlugin } from "./video/index";
 import createFocusPlugin from "@draft-js-plugins/focus";
 import "@draft-js-plugins/focus/lib/plugin.css";
 
@@ -32,7 +33,7 @@ interface Callbacks {
 export const plugins = (callbacks: Callbacks) => {
   return [
     linkPlugin,
-    // createLinkifyPlugin(),
+    videoPlugin,
     prismPlugin,
     sideToolbarPlugin,
     focusPlugin,

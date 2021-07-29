@@ -2,3 +2,5 @@ node_modules
 umd
 dist
 build
+.bin
+.DS_Store

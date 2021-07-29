@@ -2,20 +2,19 @@ import createInlineToolbarPlugin from "@draft-js-plugins/inline-toolbar";
 import { ContentBlock, DraftBlockType } from "draft-js";
 export const inlineToolbarPlugin = createInlineToolbarPlugin();
 const InlineToolarHoc = inlineToolbarPlugin.InlineToolbar;
+
 import {
-  ItalicButton,
-  BoldButton,
-  UnderlineButton,
-  CodeButton,
-  HeadlineOneButton,
-  HeadlineTwoButton,
-  UnorderedListButton,
-  OrderedListButton,
-} from "@draft-js-plugins/buttons";
+  ButtonBold,
+  ButtonItalic,
+  ButtonUnderline,
+  ButtonHeadingOne,
+  ButtonHeadingTwo,
+  ButtonLink,
+  ButtonHighlight,
+} from "./buttons/Buttons";
 
 import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
 import { IMAGE_BLOCK } from "./image";
-import { LinkPluginButton } from "./anchor";
 
 const InlineToolbar = () => {
   return (
@@ -30,33 +29,33 @@ const InlineToolbar = () => {
           if (blockType === IMAGE_BLOCK) {
             return (
               <>
-                <BoldButton {...externalProps} />
-                <ItalicButton {...externalProps} />
-                <UnderlineButton {...externalProps} />
-                <LinkPluginButton {...externalProps} />
+                <ButtonBold {...externalProps} />
+                <ButtonItalic {...externalProps} />
+                <ButtonUnderline {...externalProps} />
+                <ButtonLink {...externalProps} />
               </>
             );
           }
           if (blockType === "code-block") {
             return (
               <>
-                <BoldButton {...externalProps} />
-                <ItalicButton {...externalProps} />
+                <ButtonBold {...externalProps} />
+                <ButtonItalic {...externalProps} />
               </>
             );
           }
           return (
             <>
-              <HeadlineOneButton {...externalProps} />
-              <HeadlineTwoButton {...externalProps} />
-              <BoldButton {...externalProps} />
-              <ItalicButton {...externalProps} />
-              <UnderlineButton {...externalProps} />
-              <CodeButton {...externalProps} />
+              {/* <HeadlineOneButton {...externalProps} />
+              <HeadlineTwoButton {...externalProps} /> */}
 
-              <LinkPluginButton {...externalProps} />
-              <UnorderedListButton {...externalProps} />
-              <OrderedListButton {...externalProps} />
+              <ButtonHeadingOne {...externalProps} />
+              <ButtonHeadingTwo {...externalProps} />
+              <ButtonBold {...externalProps} />
+              <ButtonItalic {...externalProps} />
+              <ButtonUnderline {...externalProps} />
+              <ButtonHighlight {...externalProps} />
+              <ButtonLink {...externalProps} />
             </>
           );
         }}

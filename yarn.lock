@@ -265,6 +265,13 @@
   resolved "https://registry.yarnpkg.com/@draft-js-plugins/utils/-/utils-4.2.0.tgz#ee3c643c94d548fd9460541881a7554c5b077988"
   integrity sha512-tQhf7a0S9ZDtOb0Mje5a+xTOT6LVDRv2LueEqqVdX4aI+oh0jjkAuP0oTiZBv6h7K9XSPgsQ08q9+kwHc3EyUg==
 
+"@draft-js-plugins/video@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/video/-/video-4.1.1.tgz#c4cd8180acffe4553f392ca9f64c7bdcb28323ff"
+  integrity sha512-CLP8s+LjxetM0jDkqeZz1Tn+5i5UeqNbRTg3x18hoU2S5YL42K8EuZGxErYpghSBkOjXAH6YVCN3EnkZtU+gXQ==
+  dependencies:
+    prop-types "^15.5.8"
+
 "@popperjs/core@^2.9.2":
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
