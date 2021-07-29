@@ -1,5 +1,5 @@
-/* @media (max-width: 900px) {
-  .inline-toolbar > div {
+@media (max-width: 900px) {
+  .mobile-toolbar > div {
     bottom: 0px;
     top: auto !important;
     position: fixed;
@@ -8,5 +8,10 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+    visibility: visible !important;
   }
-} */
+
+  .inline-toolbar {
+    display: none !important;
+  }
+}

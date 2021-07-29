@@ -15,6 +15,7 @@ import createListPlugin from "draft-js-list-plugin";
 // toolbars (side and inline)
 import { sideToolbarPlugin } from "./sideToolbar";
 import { inlineToolbarPlugin } from "./inline-toolbar/inlineToolbar";
+import { mobileToolbarPlugin } from "./mobile-toolbar/mobileToolbar";
 import { createImagePlugin } from "./image";
 import { linkPlugin } from "./anchor";
 
@@ -41,5 +42,6 @@ export const plugins = (callbacks: Callbacks) => {
     createMarkdownShortcutsPlugin(),
     listPlugin,
     inlineToolbarPlugin,
+    mobileToolbarPlugin,
   ];
 };

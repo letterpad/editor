@@ -5,6 +5,7 @@ import { markdownToDraft } from "markdown-draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import { plugins } from "./plugins";
 import InlineToolbar from "./plugins/inline-toolbar/inlineToolbar";
+import MobileToolbar from "./plugins/mobile-toolbar/mobileToolbar";
 import SideToolbar from "./plugins/sideToolbar";
 import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
 
@@ -55,6 +56,8 @@ const LetterpadEditor = (props: Props) => {
         plugins={plugins(pluginCallbacks)}
         ref={editorRef}
       />
+
+      <MobileToolbar getImageUrl={props.onImageClick} />
       <InlineToolbar />
       {/* <AlignmentTool /> */}
       <SideToolbar getImageUrl={props.onImageClick} />
