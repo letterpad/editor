@@ -14,7 +14,7 @@ import createListPlugin from "draft-js-list-plugin";
 
 // toolbars (side and inline)
 import { sideToolbarPlugin } from "./sideToolbar";
-import { inlineToolbarPlugin } from "./inlineToolbar";
+import { inlineToolbarPlugin } from "./inline-toolbar/inlineToolbar";
 import { createImagePlugin } from "./image";
 import { linkPlugin } from "./anchor";
 

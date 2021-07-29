@@ -1,5 +1,5 @@
 import createInlineToolbarPlugin from "@draft-js-plugins/inline-toolbar";
-import { ContentBlock, DraftBlockType } from "draft-js";
+import { ContentBlock, DraftBlockType, EditorState } from "draft-js";
 export const inlineToolbarPlugin = createInlineToolbarPlugin();
 const InlineToolarHoc = inlineToolbarPlugin.InlineToolbar;
 
@@ -11,19 +11,22 @@ import {
   ButtonHeadingTwo,
   ButtonLink,
   ButtonHighlight,
-} from "./buttons/Buttons";
+} from "../buttons/Buttons";
 
 import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
-import { IMAGE_BLOCK } from "./image";
+import "./inlineToolbar.css";
+
+import { IMAGE_BLOCK } from "../image";
 
 const InlineToolbar = () => {
   return (
     <span className="inline-toolbar">
       <InlineToolarHoc>
         {externalProps => {
-          const block: ContentBlock = getCurrentBlock(
+          const block = getCurrentBlock(
             externalProps.getEditorState(),
-          );
+          ) as ContentBlock;
+
           const blockType: DraftBlockType = block.getType();
 
           if (blockType === IMAGE_BLOCK) {
@@ -46,9 +49,6 @@ const InlineToolbar = () => {
           }
           return (
             <>
-              {/* <HeadlineOneButton {...externalProps} />
-              <HeadlineTwoButton {...externalProps} /> */}
-
               <ButtonHeadingOne {...externalProps} />
               <ButtonHeadingTwo {...externalProps} />
               <ButtonBold {...externalProps} />
@@ -66,11 +66,10 @@ const InlineToolbar = () => {
 
 export default InlineToolbar;
 
-const getCurrentBlock = editorState => {
+const getCurrentBlock = (editorState: EditorState) => {
   if (editorState.getSelection) {
     const selectionState = editorState.getSelection();
     const contentState = editorState.getCurrentContent();
-    const block = contentState.getBlockForKey(selectionState.getStartKey());
-    return block;
+    return contentState.getBlockForKey(selectionState.getStartKey());
   }
 };

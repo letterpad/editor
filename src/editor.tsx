@@ -4,7 +4,7 @@ import { markdownToDraft } from "markdown-draft-js";
 
 import { stateToHTML } from "draft-js-export-html";
 import { plugins } from "./plugins";
-import InlineToolbar from "./plugins/inlineToolbar";
+import InlineToolbar from "./plugins/inline-toolbar/inlineToolbar";
 import SideToolbar from "./plugins/sideToolbar";
 import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
 
