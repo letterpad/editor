@@ -1,4 +1,5 @@
 import createInlineToolbarPlugin from "@draft-js-plugins/inline-toolbar";
+import { ContentBlock, DraftBlockType } from "draft-js";
 export const inlineToolbarPlugin = createInlineToolbarPlugin();
 const InlineToolarHoc = inlineToolbarPlugin.InlineToolbar;
 import {
@@ -21,9 +22,12 @@ const InlineToolbar = () => {
     <span className="inline-toolbar">
       <InlineToolarHoc>
         {externalProps => {
-          const block = getCurrentBlock(externalProps.getEditorState());
-          console.log("block.getType() :>> ", block.getType());
-          if (block.getType() === IMAGE_BLOCK) {
+          const block: ContentBlock = getCurrentBlock(
+            externalProps.getEditorState(),
+          );
+          const blockType: DraftBlockType = block.getType();
+
+          if (blockType === IMAGE_BLOCK) {
             return (
               <>
                 <BoldButton {...externalProps} />
@@ -33,7 +37,7 @@ const InlineToolbar = () => {
               </>
             );
           }
-          if (block.getType() === "code-block") {
+          if (blockType === "code-block") {
             return (
               <>
                 <BoldButton {...externalProps} />
