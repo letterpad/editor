@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: ["./demo/index.tsx", "./src/editor.tsx"],
+  entry: ["./demo/index.tsx"],
   output: { path: path.join(__dirname, "build"), filename: "editor.js" },
   mode: process.env.NODE_ENV || "development",
   resolve: {
