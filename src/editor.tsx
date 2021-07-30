@@ -10,8 +10,14 @@ import { plugins } from "./plugins";
 import InlineToolbar from "./plugins/inline-toolbar/inlineToolbar";
 import MobileToolbar from "./plugins/mobile-toolbar/mobileToolbar";
 import SideToolbar from "./plugins/side-toolbar/sideToolbar";
-import { convertFromRaw, convertToRaw, EditorState, RichUtils } from "draft-js";
-
+import {
+  convertFromRaw,
+  convertToRaw,
+  DefaultDraftBlockRenderMap,
+  EditorState,
+  RichUtils,
+} from "draft-js";
+import Immutable from "immutable";
 const text = "Hello there";
 
 import "draft-js/dist/Draft.css";
@@ -76,6 +82,17 @@ const LetterpadEditor = (props: Props) => {
     onVideoClick: props.onVideoClick || noOp,
   };
 
+  const blockRenderMap = Immutable.Map({
+    unstyled: {
+      element: "p",
+    },
+  });
+
+  // Include 'paragraph' as a valid block and updated the unstyled element but
+  // keep support for other draft default block types
+  const extendedBlockRenderMap =
+    DefaultDraftBlockRenderMap.merge(blockRenderMap);
+
   return (
     <div className="editor" onClick={focus}>
       <Editor
@@ -84,6 +101,7 @@ const LetterpadEditor = (props: Props) => {
         plugins={plugins(pluginCallbacks)}
         handleKeyCommand={handleKeyCommand}
         ref={editorRef}
+        blockRenderMap={extendedBlockRenderMap}
       />
 
       <MobileToolbar

@@ -19,17 +19,9 @@ ___
 ***
 
 
-## Typographic replacements
+This article discusses how to customize Draft default block rendering. The block rendering is used to define supported block types and their respective renderers, as well as converting pasted content to known Draft block types.
 
-Enable typographer option to see result.
-
-(c) (C) (r) (R) (tm) (TM) (p) (P) +-
-
-test.. test... test..... test?..... test!....
-
-!!!!!! ???? ,,  -- ---
-
-"Smartypants, double quotes" and 'single quotes'
+When pasting content, or when calling convertFromHTML, Draft will convert pasted content to the respective block rendering type by matching the Draft block render map with the matched tag.
 
 
 ## Emphasis

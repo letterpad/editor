@@ -4,9 +4,13 @@
   position: absolute;
   background: var(--bg-toolbar);
   border-radius: 4px;
+
+  padding: 0.2rem;
   /* box-shadow: 0px 1px 3px 0px rgba(220, 220, 220, 1); */
   z-index: 2;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 .toolbar:after,

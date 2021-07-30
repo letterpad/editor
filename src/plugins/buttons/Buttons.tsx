@@ -194,6 +194,7 @@ export const ButtonHeadingOne = createBlockStyleButton({
         display: "block",
         marginBottom: "3px",
         fontSize: "95%",
+        padding: "0.2rem 0",
       }}
     >
       H1
@@ -210,6 +211,7 @@ export const ButtonHeadingTwo = createBlockStyleButton({
         display: "block",
         marginBottom: "3px",
         fontSize: "95%",
+        padding: "0.2rem 0",
       }}
     >
       H2
