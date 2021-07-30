@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import Editor, { createEditorStateWithText } from "@draft-js-plugins/editor";
+import Editor, {
+  createEditorStateWithText,
+  EditorCommand,
+} from "@draft-js-plugins/editor";
 import { markdownToDraft } from "markdown-draft-js";
 
 import { stateToHTML } from "draft-js-export-html";
 import { plugins } from "./plugins";
 import InlineToolbar from "./plugins/inline-toolbar/inlineToolbar";
 import MobileToolbar from "./plugins/mobile-toolbar/mobileToolbar";
-import SideToolbar from "./plugins/sideToolbar";
-import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
+import SideToolbar from "./plugins/side-toolbar/sideToolbar";
+import { convertFromRaw, convertToRaw, EditorState, RichUtils } from "draft-js";
 
 const text = "Hello there";
 
@@ -22,8 +25,12 @@ const editorStateDefault = EditorState.createWithContent(
 );
 
 interface Props {
-  onImageClick: () => Promise<string>;
+  onImageClick?: () => Promise<string>;
+  onVideoClick?: () => Promise<string>;
+  dark?: boolean;
 }
+
+const noOp = () => Promise.resolve("");
 
 const LetterpadEditor = (props: Props) => {
   const editorRef = useRef<Editor>(null);
@@ -37,6 +44,14 @@ const LetterpadEditor = (props: Props) => {
     }
   }, [editorState]);
 
+  useEffect(() => {
+    if (!props.dark) {
+      document.body.classList.remove("dark");
+    } else {
+      document.body.classList.add("dark");
+    }
+  }, [props.dark]);
+
   const focus = () => {
     editorRef.current?.focus();
   };
@@ -45,22 +60,41 @@ const LetterpadEditor = (props: Props) => {
     setEditorState(newState);
   };
 
-  const pluginCallbacks = {
-    onImageClick: props.onImageClick,
+  const handleKeyCommand = (command: EditorCommand, state: EditorState) => {
+    const newState = RichUtils.handleKeyCommand(state, command);
+
+    if (newState) {
+      onChange(newState);
+      return "handled";
+    }
+
+    return "not-handled";
   };
+
+  const pluginCallbacks = {
+    onImageClick: props.onImageClick || noOp,
+    onVideoClick: props.onVideoClick || noOp,
+  };
+
   return (
     <div className="editor" onClick={focus}>
       <Editor
         editorState={editorState}
         onChange={onChange}
         plugins={plugins(pluginCallbacks)}
+        handleKeyCommand={handleKeyCommand}
         ref={editorRef}
       />
 
-      <MobileToolbar getImageUrl={props.onImageClick} />
+      <MobileToolbar
+        getImageUrl={pluginCallbacks.onImageClick}
+        getVideoUrl={pluginCallbacks.onVideoClick}
+      />
       <InlineToolbar />
-      {/* <AlignmentTool /> */}
-      <SideToolbar getImageUrl={props.onImageClick} />
+      <SideToolbar
+        getImageUrl={pluginCallbacks.onImageClick}
+        getVideoUrl={pluginCallbacks.onVideoClick}
+      />
 
       <br />
       <br />

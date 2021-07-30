@@ -1,7 +1,39 @@
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
-:root {
+:root body {
   --bg-codeblock: #000;
+  --bg-secondary: #eee;
+  --bg-primary: #fff;
+  --border: #eee;
+  --bg-accent: #181e36;
+  --color-accent: #fff;
+  --color-primary: #333;
+  --color-secondary: #000;
+
+  --bg-toolbar: #333;
+  --color-toolbar: #ddd;
+  --border-toolbar: #111;
 }
+
+:root body.dark {
+  --bg-codeblock: #000;
+  --bg-secondary: #272727;
+  --bg-primary: #121212;
+  --border: #2e2e31;
+  --bg-accent: #777;
+  --color-accent: #333;
+  --color-primary: #bababa;
+  --color-secondary: #bababa;
+
+  --bg-toolbar: #333;
+  --color-toolbar: #ddd;
+  --border-toolbar: #111;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--color-primary);
+}
+
 .editor {
   box-sizing: border-box;
   cursor: text;
@@ -34,6 +66,7 @@ pre code {
   color: #c7c7c7;
   padding: 1rem;
 }
+
 .token.operator,
 .token.entity,
 .token.url,
@@ -45,14 +78,15 @@ pre code {
 blockquote {
   margin: 20px 0px;
   font-family: Open Sans;
-  color: #555555;
   padding: 1.4rem 1rem;
-  border-left: 6px solid #78c0a8;
+  border-left: 6px solid var(--bg-accent);
   line-height: 1.6;
   position: relative;
-  background: #ededed;
+  background: var(--bg-secondary);
+  color: var(--color-secondary);
 }
 
-blockquote span {
-  color: #333333;
+figure {
+  margin: 0px;
+  padding: 0px;
 }

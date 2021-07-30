@@ -13,7 +13,7 @@ import "prismjs/themes/prism.css";
 import createListPlugin from "draft-js-list-plugin";
 
 // toolbars (side and inline)
-import { sideToolbarPlugin } from "./sideToolbar";
+import { sideToolbarPlugin } from "./side-toolbar/sideToolbar";
 import { inlineToolbarPlugin } from "./inline-toolbar/inlineToolbar";
 import { mobileToolbarPlugin } from "./mobile-toolbar/mobileToolbar";
 import { createImagePlugin } from "./image";

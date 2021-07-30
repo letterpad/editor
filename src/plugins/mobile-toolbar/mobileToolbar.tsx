@@ -1,6 +1,11 @@
 import createInlineToolbarPlugin from "@draft-js-plugins/inline-toolbar";
 import { ContentBlock, DraftBlockType, EditorState } from "draft-js";
-export const mobileToolbarPlugin = createInlineToolbarPlugin();
+import buttonStyles from "../inline-toolbar/buttonStyles.module.css";
+import toolbarStyles from "../inline-toolbar/toolbarStyles.module.css";
+import { LinkPluginButton } from "../anchor";
+export const mobileToolbarPlugin = createInlineToolbarPlugin({
+  theme: { buttonStyles, toolbarStyles },
+});
 const MobileToolarHoc = mobileToolbarPlugin.InlineToolbar;
 
 import {
@@ -23,9 +28,10 @@ import { videoPlugin } from "../video";
 
 interface Props {
   getImageUrl: () => Promise<string>;
+  getVideoUrl: () => Promise<string>;
 }
 
-const MobileToolbar = ({ getImageUrl }: Props) => {
+const MobileToolbar = ({ getImageUrl, getVideoUrl }: Props) => {
   return (
     <span className="mobile-toolbar">
       <MobileToolarHoc>
@@ -63,21 +69,17 @@ const MobileToolbar = ({ getImageUrl }: Props) => {
               <ButtonItalic {...externalProps} />
               <ButtonUnderline {...externalProps} />
               <ButtonHighlight {...externalProps} />
-              <ButtonLink {...externalProps} />
+              <LinkPluginButton {...externalProps} />
               <span
                 onClick={() => imageClicked(externalProps, { getImageUrl })}
               >
                 <ButtonImage {...externalProps} />
               </span>
               <span
-                onClick={() => {
-                  const newState = videoPlugin.addVideo(
-                    externalProps.getEditorState(),
-                    {
-                      src: "https://www.youtube.com/watch?v=linlz7-Pnvw",
-                    },
-                  );
-
+                onClick={async () => {
+                  const state = externalProps.getEditorState();
+                  const src = await getVideoUrl();
+                  const newState = videoPlugin.addVideo(state, { src });
                   externalProps.setEditorState(newState);
                 }}
               >

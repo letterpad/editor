@@ -1,4 +1,10 @@
+.mobile-toolbar {
+  display: none;
+}
 @media (max-width: 900px) {
+  .mobile-toolbar {
+    display: block;
+  }
   .mobile-toolbar > div {
     bottom: 0px;
     top: auto !important;
@@ -9,9 +15,11 @@
     display: flex;
     justify-content: space-around;
     visibility: visible !important;
+    border-radius: 0px;
   }
 
-  .inline-toolbar {
+  .inline-toolbar,
+  .side-toolbar {
     display: none !important;
   }
 }

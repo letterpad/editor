@@ -1,0 +1,36 @@
+.buttonWrapper {
+  display: inline-block;
+}
+
+.button {
+  background: var(--bg-toolbar);
+  color: var(--color-toolbar);
+  font-size: 18px;
+  border: 0;
+  padding-top: 5px;
+  vertical-align: bottom;
+  height: 34px;
+  width: 36px;
+  cursor: pointer;
+  /* border-radius: 4px; */
+}
+
+.button svg {
+  fill: var(--color-toolbar);
+}
+
+.button:hover,
+.button:focus {
+  background: var(--bg-accent);
+  outline: 0; /* reset for :focus */
+}
+
+.active {
+  color: var(--color-accent);
+  background: var(--bg-accent);
+}
+
+.active svg {
+  fill: var(--color-accent);
+  background: var(--bg-accent);
+}
