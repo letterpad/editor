@@ -48,7 +48,7 @@ body {
 }
 @media (max-width: 900px) {
   .editor {
-    font-size: 0.9rem;
+    font-size: 1rem;
     padding: 10px;
   }
 }

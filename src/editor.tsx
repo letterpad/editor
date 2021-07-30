@@ -118,9 +118,9 @@ const LetterpadEditor = (props: Props) => {
       <br />
       <br />
 
-      <textarea rows={50} cols={80} style={{ maxWidth: "80vw" }}>
+      {/* <textarea rows={50} cols={80} style={{ maxWidth: "80vw" }}>
         {stateToHTML(editorState.getCurrentContent())}
-      </textarea>
+      </textarea> */}
     </div>
   );
 };
