@@ -15,7 +15,7 @@
 }
 
 :root body.dark {
-  --bg-codeblock: #000;
+  --bg-codeblock: #29292e;
   --bg-secondary: #272727;
   --bg-primary: #121212;
   --border: #2e2e31;
@@ -68,9 +68,9 @@ img {
 pre {
   background: var(--bg-codeblock);
   display: block;
-  /* font-size: 1rem; */
+  font-size: 0.9rem;
   color: #c7c7c7;
-  padding: 0.2rem 0.5rem;
+  padding: 0.1rem 0.5rem;
 }
 
 .token.operator,
@@ -83,12 +83,12 @@ pre {
 
 blockquote {
   margin: 20px 0px;
-  padding: 1.4rem 1rem;
-  border-left: 6px solid var(--bg-accent);
+  padding: 0.4rem 1rem;
+  border-left: 3px solid var(--bg-accent);
   line-height: 1.6;
   position: relative;
-  background: var(--bg-secondary);
-  color: var(--color-secondary);
+  /* background: var(--bg-secondary); */
+  /* color: var(--color-secondary); */
 }
 
 figure {
