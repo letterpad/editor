@@ -1,7 +1,8 @@
 import {useState} from "react";
 import ReactDOM from "react-dom";
-import Editor from "../src/editor";
+// import Editor from "../src/editor";
 import { data } from "./data";
+import Editor from "letterpad-editor";
 
 const Demo = () => {
   const [html, setHtml] = useState("");
