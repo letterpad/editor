@@ -1,6 +1,7 @@
 import {useState} from "react";
 import ReactDOM from "react-dom";
 import Editor from "../src/editor";
+import { data } from "./data";
 
 const Demo = () => {
   const [html, setHtml] = useState("");
@@ -20,12 +21,12 @@ const Demo = () => {
   return (
     <div>
       <Editor
+        html={data}
         onImageClick={handleImage}
         onVideoClick={handleVideo}
         dark={params.get("dark") === ""}
         onChange={(change) => {
           setHtml(change);
-
         }}
       />
       <hr />

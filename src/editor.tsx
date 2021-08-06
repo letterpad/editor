@@ -18,7 +18,6 @@ import "draft-js/dist/Draft.css";
 import "./app.css";
 
 import {highlightCodeOnChange} from "./utils/helper";
-import {data} from "./data";
 import {importData} from "./utils/import";
 import {exportData} from "./utils/export";
 
@@ -29,6 +28,7 @@ interface Props {
   onVideoClick?: () => Promise<string>;
   dark?: boolean;
   onChange: (html: string) => void;
+  html: string
 }
 
 const noOp = () => Promise.resolve("");
@@ -36,7 +36,7 @@ const noOp = () => Promise.resolve("");
 const LetterpadEditor = (props: Props) => {
   const editorRef = useRef<Editor>(null);
   const [editorState, setEditorState] =
-    useState<EditorState>(EditorState.createWithContent(importData(data)));
+    useState<EditorState>(EditorState.createWithContent(importData(props.html)));
 
   useEffect(() => {
     const newStateWithCodeHighlight = highlightCodeOnChange(editorState);

@@ -1,8 +1,8 @@
 {
   "name": "letterpad-editor",
   "version": "1.0.0",
-  "description": "",
-  "main": "./src/index.ts",
+  "description": "The letterpad editor - A high level abstraction of draftjs with plugin architecture",
+  "main": "./dist/editor.js",
   "scripts": {
     "start": "webpack serve --config webpack.config.demo.js",
     "bundle": "webpack --config webpack.config.prod.js",
@@ -11,7 +11,7 @@
     "prepublishOnly": "yarn bundle && yarn build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Abhishek Saha",
   "license": "ISC",
   "dependencies": {
     "@draft-js-plugins/anchor": "^4.1.3",
