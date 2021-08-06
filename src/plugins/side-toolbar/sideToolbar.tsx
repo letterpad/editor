@@ -29,8 +29,8 @@ export const sideToolbarPlugin = createSideToolbarPlugin({
 const { SideToolbar } = sideToolbarPlugin;
 
 interface Props {
-  getImageUrl: () => Promise<string>;
-  getVideoUrl: () => Promise<string>;
+  getImageUrl: ((insert: (url:string) => void) => void); 
+  getVideoUrl: ((insert: (url:string) => void) => void); 
 }
 
 const Sidebar = ({ getImageUrl, getVideoUrl }: Props) => {
@@ -49,10 +49,13 @@ const Sidebar = ({ getImageUrl, getVideoUrl }: Props) => {
             </span>
             <span
               onClick={async () => {
-                const state = externalProps.getEditorState();
-                const src = await getVideoUrl();
-                const newState = videoPlugin.addVideo(state, { src });
-                externalProps.setEditorState(newState);
+                const hook = (src:string) => {
+                    const state = externalProps.getEditorState();
+                    if (!src) return;
+                    const newEditorState = videoPlugin.addVideo(state, { src });
+                    externalProps.setEditorState(newEditorState);
+                  }
+                  getVideoUrl(hook);
               }}
             >
               <ButtonVideo {...externalProps} />

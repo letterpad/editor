@@ -27,11 +27,7 @@ const prismPlugin = createPrismPlugin({
 const focusPlugin = createFocusPlugin();
 const imagePlugin = createImagePlugin();
 
-interface Callbacks {
-  onImageClick: () => Promise<string>;
-}
-
-export const plugins = (callbacks: Callbacks) => {
+export const plugins = () => {
   return [
     linkPlugin,
     videoPlugin,

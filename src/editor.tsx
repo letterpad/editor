@@ -24,14 +24,14 @@ import {exportData} from "./utils/export";
 
 
 interface Props {
-  onImageClick?: () => Promise<string>;
-  onVideoClick?: () => Promise<string>;
+  onImageClick?: ((insert: (url:string) => void) => void) 
+  onVideoClick?: ((insert: (url:string) => void) => void) 
   dark?: boolean;
   onChange: (html: string) => void;
   html: string
 }
 
-const noOp = () => Promise.resolve("");
+const noOp = () => {};
 
 const LetterpadEditor = (props: Props) => {
   const editorRef = useRef<Editor>(null);
@@ -96,7 +96,7 @@ const LetterpadEditor = (props: Props) => {
       <Editor
         editorState={editorState}
         onChange={onChange}
-        plugins={plugins(pluginCallbacks)}
+        plugins={plugins()}
         handleKeyCommand={handleKeyCommand}
         ref={editorRef}
         blockRenderMap={extendedBlockRenderMap}

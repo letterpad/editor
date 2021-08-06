@@ -46,9 +46,9 @@ export default MyEditor;
 
     Set the theme. Options - light | dark
 
--   `onImageClick`: `() => Promise<string>`
+-   `onImageClick`: `((insert: (url:string) => void) => void)`
 
--   `onVideoClick`: `() => Promise<string>`
+-   `onVideoClick`: `((insert: (url:string) => void) => void)`
 
 -   `onChange(html: string)`: `(html:string) => void`
 

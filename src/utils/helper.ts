@@ -74,7 +74,7 @@ export const addNewBlockAt = (
     depth: 0,
     data: initialData,
   });
-debugger;
+  
   const newBlockMap = blocksBefore
     .concat(
       [

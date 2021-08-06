@@ -48,7 +48,7 @@ if(type === "atomic") {
 }
 
 
-const insertImage = (editorState: EditorState, src: string) => {
+const insertImage = (src: string, editorState: EditorState) => {
   const selection = editorState.getSelection();
 
   const {newEditorState} = addNewBlockAt(
@@ -72,10 +72,10 @@ export const createImagePlugin = () => {
 
 export const imageClicked = async (props: any, {getImageUrl}) => {
   const {getEditorState, setEditorState} = props;
-
-  const url = await getImageUrl();
-  if (!url) return;
-
-  const newEditorState = insertImage(getEditorState(), url);
-  setEditorState(newEditorState);
+  const hook = (url:string) => {
+    if (!url) return;
+    const newEditorState = insertImage(url,getEditorState());
+    setEditorState(newEditorState);
+  }
+  getImageUrl(hook);
 };
