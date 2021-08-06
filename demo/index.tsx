@@ -1,7 +1,10 @@
+import {useState} from "react";
 import ReactDOM from "react-dom";
 import Editor from "../src/editor";
 
 const Demo = () => {
+  const [html, setHtml] = useState("");
+
   const handleImage = () => {
     return Promise.resolve(
       "https://reactrocket.com/img/blog/draft-js-basic-editor.gif",
@@ -15,11 +18,19 @@ const Demo = () => {
   const params = new URL(document.location.href).searchParams;
 
   return (
-    <Editor
-      onImageClick={handleImage}
-      onVideoClick={handleVideo}
-      dark={params.get("dark") === ""}
-    />
+    <div>
+      <Editor
+        onImageClick={handleImage}
+        onVideoClick={handleVideo}
+        dark={params.get("dark") === ""}
+        onChange={(change) => {
+          setHtml(change);
+
+        }}
+      />
+      <hr />
+      <div dangerouslySetInnerHTML={{__html: html}} />
+    </div>
   );
 };
 

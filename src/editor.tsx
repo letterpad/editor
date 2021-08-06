@@ -19,8 +19,8 @@ import "./app.css";
 
 import {highlightCodeOnChange} from "./utils/helper";
 import {data} from "./data";
-import {convertFromHTML} from "draft-convert";
 import {importData} from "./utils/import";
+import {exportData} from "./utils/export";
 
 
 
@@ -28,6 +28,7 @@ interface Props {
   onImageClick?: () => Promise<string>;
   onVideoClick?: () => Promise<string>;
   dark?: boolean;
+  onChange: (html: string) => void;
 }
 
 const noOp = () => Promise.resolve("");
@@ -58,6 +59,9 @@ const LetterpadEditor = (props: Props) => {
 
   const onChange = (newState: EditorState) => {
     setEditorState(newState);
+    if (typeof props.onChange === "function") {
+      props.onChange(exportData(editorState.getCurrentContent()));
+    }
   };
 
   const handleKeyCommand = (command: EditorCommand, state: EditorState) => {
@@ -111,10 +115,6 @@ const LetterpadEditor = (props: Props) => {
       <br />
       <br />
       <br />
-
-      {/* <textarea rows={50} cols={80} style={{ maxWidth: "80vw" }}>
-        {stateToHTML(editorState.getCurrentContent())}
-      </textarea> */}
     </div>
   );
 };

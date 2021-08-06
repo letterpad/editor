@@ -39,6 +39,7 @@
     "@draft-js-plugins/focus": "^4.1.2",
     "@types/draft-convert": "^2.1.4",
     "@types/draft-js": "^0.11.4",
+    "@types/prismjs": "^1.16.6",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "css-loader": "^5.2.6",

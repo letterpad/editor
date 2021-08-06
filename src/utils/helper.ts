@@ -69,12 +69,12 @@ export const addNewBlockAt = (
   const newBlock = new ContentBlock({
     key: newBlockKey,
     type: "atomic",
-    text: "",
+    text: block.getText(),
     characterList: List(),
     depth: 0,
     data: initialData,
   });
-
+debugger;
   const newBlockMap = blocksBefore
     .concat(
       [

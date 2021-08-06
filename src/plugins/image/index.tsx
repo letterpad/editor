@@ -6,7 +6,7 @@ import {
 import {Map, List} from "immutable";
 import {addNewBlockAt} from "../../utils/helper";
 
-export const IMAGE_BLOCK = "IMAGE_BLOCK";
+export const IMAGE_BLOCK = "IMAGE";
 
 const Caption = props => {
   return (
@@ -57,6 +57,7 @@ const insertImage = (editorState: EditorState, src: string) => {
     IMAGE_BLOCK,
     Map({
       src,
+      type: IMAGE_BLOCK
     }),
   );
 
