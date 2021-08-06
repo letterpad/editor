@@ -1,34 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Editor, {
-  createEditorStateWithText,
   EditorCommand,
 } from "@draft-js-plugins/editor";
-import { markdownToDraft } from "markdown-draft-js";
 
-import { stateToHTML } from "draft-js-export-html";
-import { plugins } from "./plugins";
+import {plugins} from "./plugins";
 import InlineToolbar from "./plugins/inline-toolbar/inlineToolbar";
 import MobileToolbar from "./plugins/mobile-toolbar/mobileToolbar";
 import SideToolbar from "./plugins/side-toolbar/sideToolbar";
 import {
-  convertFromRaw,
-  convertToRaw,
   DefaultDraftBlockRenderMap,
   EditorState,
   RichUtils,
 } from "draft-js";
 import Immutable from "immutable";
-const text = "Hello there";
 
 import "draft-js/dist/Draft.css";
 import "./app.css";
 
-import { highlightCodeOnChange } from "./utils/helper";
-import { data } from "./data";
+import {highlightCodeOnChange} from "./utils/helper";
+import {data} from "./data";
+import {convertFromHTML} from "draft-convert";
+import {importData} from "./utils/import";
 
-const editorStateDefault = EditorState.createWithContent(
-  convertFromRaw(markdownToDraft(data)),
-);
+
 
 interface Props {
   onImageClick?: () => Promise<string>;
@@ -41,7 +35,7 @@ const noOp = () => Promise.resolve("");
 const LetterpadEditor = (props: Props) => {
   const editorRef = useRef<Editor>(null);
   const [editorState, setEditorState] =
-    useState<EditorState>(editorStateDefault);
+    useState<EditorState>(EditorState.createWithContent(importData(data)));
 
   useEffect(() => {
     const newStateWithCodeHighlight = highlightCodeOnChange(editorState);
@@ -84,7 +78,7 @@ const LetterpadEditor = (props: Props) => {
 
   const blockRenderMap = Immutable.Map({
     unstyled: {
-      element: "p",
+      element: "section",
     },
   });
 

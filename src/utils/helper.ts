@@ -68,7 +68,7 @@ export const addNewBlockAt = (
 
   const newBlock = new ContentBlock({
     key: newBlockKey,
-    type: newBlockType,
+    type: "atomic",
     text: "",
     characterList: List(),
     depth: 0,
