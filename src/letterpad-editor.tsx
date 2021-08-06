@@ -21,11 +21,10 @@ import {highlightCodeOnChange} from "./utils/helper";
 import {importData} from "./utils/import";
 import {exportData} from "./utils/export";
 
-
-
 interface Props {
-  onImageClick?: ((insert: (url:string) => void) => void) 
-  onVideoClick?: ((insert: (url:string) => void) => void) 
+  placeholder?: string;
+  onImageClick?: ((insert: (url:string|string[]) => void) => void) 
+  onVideoClick?: ((insert: (url:string|string[]) => void) => void) 
   dark?: boolean;
   onChange: (html: string) => void;
   html: string
@@ -100,6 +99,7 @@ const LetterpadEditor = (props: Props) => {
         handleKeyCommand={handleKeyCommand}
         ref={editorRef}
         blockRenderMap={extendedBlockRenderMap}
+        placeholder={props.placeholder ||"Write a story"}
       />
 
       <MobileToolbar

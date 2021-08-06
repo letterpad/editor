@@ -21,7 +21,7 @@ const Caption = props => {
 
 const ImageBlock = props => {
   const imgSrc = props.block.get("data").get("src");
-
+  
   return (
     <div className="my-custom-block">
       <figure className="custom-block__image-wrap">
@@ -37,7 +37,6 @@ function blockRendererFn(block) {
 
 if(type === "atomic") {
   const blockType = block.get("data").get("type");
-
   if(blockType === "IMAGE") {
     return {
       component: ImageBlock,
@@ -48,13 +47,13 @@ if(type === "atomic") {
 }
 
 
-const insertImage = (src: string, editorState: EditorState) => {
+const insertImage = (src: string, caption:string|undefined, editorState: EditorState) => {
   const selection = editorState.getSelection();
 
   const {newEditorState} = addNewBlockAt(
     editorState,
     selection.getAnchorKey(),
-    IMAGE_BLOCK,
+    caption,
     Map({
       src,
       type: IMAGE_BLOCK
@@ -72,10 +71,12 @@ export const createImagePlugin = () => {
 
 export const imageClicked = async (props: any, {getImageUrl}) => {
   const {getEditorState, setEditorState} = props;
-  const hook = (url:string) => {
-    if (!url) return;
-    const newEditorState = insertImage(url,getEditorState());
-    setEditorState(newEditorState);
+  const hook = (urls:string|string[], caption?:string) => {
+    if (!urls) return;
+    if(typeof urls === "string") {
+      urls = [urls]
+    }
+    urls.forEach(url => setEditorState(insertImage(url, caption,getEditorState())))
   }
   getImageUrl(hook);
 };

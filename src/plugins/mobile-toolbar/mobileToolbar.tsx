@@ -24,11 +24,11 @@ import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
 import "./mobileToolbar.css";
 
 import { imageClicked, IMAGE_BLOCK } from "../image";
-import { videoPlugin } from "../video";
+import { videoClicked, videoPlugin } from "../video";
 
 interface Props {
-  getImageUrl: ((insert: (url:string) => void) => void) 
-  getVideoUrl: ((insert: (url:string) => void) => void) 
+  getImageUrl: ((insert: (url:string|string[]) => void) => void) 
+  getVideoUrl: ((insert: (url:string|string[]) => void) => void) 
 }
 
 const MobileToolbar = ({ getImageUrl, getVideoUrl }: Props) => {
@@ -76,15 +76,7 @@ const MobileToolbar = ({ getImageUrl, getVideoUrl }: Props) => {
                 <ButtonImage {...externalProps} />
               </span>
               <span
-                onClick={async () => {
-                  const hook = (src:string) => {
-                    const state = externalProps.getEditorState();
-                    if (!src) return;
-                    const newEditorState = videoPlugin.addVideo(state, { src });
-                    externalProps.setEditorState(newEditorState);
-                  }
-                  getVideoUrl(hook);
-                }}
+                onClick={() => videoClicked(externalProps, {getVideoUrl})}
               >
                 <ButtonVideo {...externalProps} />
               </span>

@@ -1,6 +1,7 @@
 import {useState} from "react";
 import ReactDOM from "react-dom";
-import Editor from "../src/editor";
+import LetterpadEditor from "../src/letterpad-editor";
+// import LetterpadEditor from "../dist/letterpad-editor";
 import { data } from "./data";
 
 const Demo = () => {
@@ -22,7 +23,7 @@ const Demo = () => {
 
   return (
     <div>
-      <Editor
+      <LetterpadEditor
         html={data}
         onImageClick={handleImage}
         onVideoClick={handleVideo}

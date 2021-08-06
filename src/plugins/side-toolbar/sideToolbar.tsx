@@ -16,7 +16,7 @@ import {
 } from "../buttons/Buttons";
 
 import { imageClicked } from "../image";
-import { videoPlugin } from "../video";
+import { videoClicked } from "../video";
 
 export const sideToolbarPlugin = createSideToolbarPlugin({
   theme: {
@@ -29,8 +29,8 @@ export const sideToolbarPlugin = createSideToolbarPlugin({
 const { SideToolbar } = sideToolbarPlugin;
 
 interface Props {
-  getImageUrl: ((insert: (url:string) => void) => void); 
-  getVideoUrl: ((insert: (url:string) => void) => void); 
+  getImageUrl: ((insert: (url:string|string[]) => void) => void); 
+  getVideoUrl: ((insert: (url:string|string[]) => void) => void); 
 }
 
 const Sidebar = ({ getImageUrl, getVideoUrl }: Props) => {
@@ -48,16 +48,8 @@ const Sidebar = ({ getImageUrl, getVideoUrl }: Props) => {
               <ButtonImage {...externalProps} />
             </span>
             <span
-              onClick={async () => {
-                const hook = (src:string) => {
-                    const state = externalProps.getEditorState();
-                    if (!src) return;
-                    const newEditorState = videoPlugin.addVideo(state, { src });
-                    externalProps.setEditorState(newEditorState);
-                  }
-                  getVideoUrl(hook);
-              }}
-            >
+                onClick={() => videoClicked(externalProps, {getVideoUrl})}
+              >
               <ButtonVideo {...externalProps} />
             </span>
           </div>

@@ -46,7 +46,7 @@ export const highlightCodeOnChange = (editorState: EditorState) => {
 export const addNewBlockAt = (
   editorState: EditorState,
   pivotBlockKey: string,
-  newBlockType = "unstyled",
+  text?:string,
   initialData = Map({}),
 ) => {
   const content = editorState.getCurrentContent();
@@ -69,7 +69,7 @@ export const addNewBlockAt = (
   const newBlock = new ContentBlock({
     key: newBlockKey,
     type: "atomic",
-    text: block.getText(),
+    text: text || block.getText(),
     characterList: List(),
     depth: 0,
     data: initialData,

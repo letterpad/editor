@@ -27,9 +27,10 @@ module.exports = {
         use: ["ts-loader"],
       },
       {
-        test: /\.(css|scss)$/,
+        test: /\.(css|pcss)$/,
         use: ["style-loader", "css-loader"],
       },
+      
       {
         test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
         use: ["file-loader"],
