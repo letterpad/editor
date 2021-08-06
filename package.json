@@ -1,6 +1,6 @@
 {
   "name": "letterpad-editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The letterpad editor - A high level abstraction of draftjs with plugin architecture",
   "main": "./dist/editor.js",
   "scripts": {
@@ -11,6 +11,13 @@
     "prepublishOnly": "yarn bundle && yarn build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json",
+    "yarn.lock"
+  ],
   "author": "Abhishek Saha",
   "license": "ISC",
   "dependencies": {
