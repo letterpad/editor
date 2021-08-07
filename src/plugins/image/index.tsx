@@ -2,9 +2,14 @@ import React from "react";
 import {
   EditorState,
   EditorBlock,
+  ContentBlock,
+  genKey,
+  ContentState,
+  CharacterMetadata,
 } from "draft-js";
-import {Map, List} from "immutable";
+import {Map, List,Repeat} from "immutable";
 import {addNewBlockAt} from "../../utils/helper";
+import { TypeMediaInsert } from "../../types";
 
 export const IMAGE_BLOCK = "IMAGE";
 
@@ -40,6 +45,7 @@ if(type === "atomic") {
   if(blockType === "IMAGE") {
     return {
       component: ImageBlock,
+      editable: true,
       props: {},
     };
   }
@@ -47,7 +53,7 @@ if(type === "atomic") {
 }
 
 
-const insertImage = (src: string, caption:string|undefined, editorState: EditorState) => {
+const insertImage = (src: string, caption:string, editorState: EditorState) => {
   const selection = editorState.getSelection();
 
   const {newEditorState} = addNewBlockAt(
@@ -56,7 +62,8 @@ const insertImage = (src: string, caption:string|undefined, editorState: EditorS
     caption,
     Map({
       src,
-      type: IMAGE_BLOCK
+      type: IMAGE_BLOCK,
+      caption
     }),
   );
 
@@ -71,12 +78,17 @@ export const createImagePlugin = () => {
 
 export const imageClicked = async (props: any, {getImageUrl}) => {
   const {getEditorState, setEditorState} = props;
-  const hook = (urls:string|string[], caption?:string) => {
-    if (!urls) return;
-    if(typeof urls === "string") {
-      urls = [urls]
+  const hook = (args: TypeMediaInsert | TypeMediaInsert[]) => {
+
+    if(!Array.isArray(args)) {
+      args = [args]
     }
-    urls.forEach(url => setEditorState(insertImage(url, caption,getEditorState())))
+    let state = getEditorState();
+    for (let i = 0; i < args.length; i++) {
+      const {url, caption} = args[i];
+      state = insertImage(url, caption || "",state);
+    }
+    setEditorState(state);
   }
   getImageUrl(hook);
 };

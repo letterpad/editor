@@ -1,10 +1,11 @@
 import {
   AtomicBlockUtils,
+  CharacterMetadata,
   ContentBlock,
   ContentState,
   EditorState,
 } from "draft-js";
-import { List, Map } from "immutable";
+import { List, Map,Repeat } from "immutable";
 
 import generateRandomKey from "draft-js/lib/generateRandomKey";
 
@@ -46,7 +47,7 @@ export const highlightCodeOnChange = (editorState: EditorState) => {
 export const addNewBlockAt = (
   editorState: EditorState,
   pivotBlockKey: string,
-  text?:string,
+  text:string = "",
   initialData = Map({}),
 ) => {
   const content = editorState.getCurrentContent();
@@ -70,7 +71,7 @@ export const addNewBlockAt = (
     key: newBlockKey,
     type: "atomic",
     text: text || block.getText(),
-    characterList: List(),
+      characterList: List(Repeat(CharacterMetadata.create(), text.length)),
     depth: 0,
     data: initialData,
   });

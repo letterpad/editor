@@ -1,4 +1,5 @@
 import createVideoPlugin from "@draft-js-plugins/video";
+import { TypeMediaInsert } from "../../types";
 import videoStyles from "./video.module.css";
 
 export const videoPlugin = createVideoPlugin({
@@ -8,12 +9,18 @@ export const videoPlugin = createVideoPlugin({
 
 export const videoClicked = async (props: any, {getVideoUrl}) => {
   const {getEditorState, setEditorState} = props;
-  const hook = (urls:string|string[]) => {
-    if (!urls) return;
-    if(typeof urls === "string") {
-      urls = [urls]
+  
+  const hook = (args: TypeMediaInsert | TypeMediaInsert[]) => {
+
+    if(!Array.isArray(args)) {
+      args = [args]
     }
-    urls.forEach(src => setEditorState(videoPlugin.addVideo(getEditorState(), { src })))
+    let state = getEditorState();
+    for (let i = 0; i < args.length; i++) {
+      const {url} = args[i];
+      state = videoPlugin.addVideo(state, { src:url })
+    }
+    setEditorState(state);
   }
   getVideoUrl(hook);
 };

@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: __dirname + "/dist",
     filename: "letterpad-editor.js",
-    libraryTarget: "commonjs2",
+    libraryTarget: "commonjs",
     globalObject: 'this'
   },
   resolve: {
@@ -23,19 +23,26 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(css|pcss)$/,
+        test: /\.css$/,
         use: [
+          'style-loader',
           {
-            loader: "css-loader",
-            options: { importLoaders: 1, sourceMap: true },
-          },
-          // {
-          //   loader: "postcss-loader",
-          //   options: {
-          //     sourceMap: "inline"
-          //   }
-          // }
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: true
+            }
+          }
         ],
+        include: /\.module\.css$/
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ],
+        exclude: /\.module\.css$/
       },
       {
         test: /\.(html)$/,

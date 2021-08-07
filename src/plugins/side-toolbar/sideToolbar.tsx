@@ -17,6 +17,7 @@ import {
 
 import { imageClicked } from "../image";
 import { videoClicked } from "../video";
+import { TypeMediaCallback } from "../../types";
 
 export const sideToolbarPlugin = createSideToolbarPlugin({
   theme: {
@@ -29,8 +30,8 @@ export const sideToolbarPlugin = createSideToolbarPlugin({
 const { SideToolbar } = sideToolbarPlugin;
 
 interface Props {
-  getImageUrl: ((insert: (url:string|string[]) => void) => void); 
-  getVideoUrl: ((insert: (url:string|string[]) => void) => void); 
+  getImageUrl: TypeMediaCallback;
+  getVideoUrl: TypeMediaCallback;
 }
 
 const Sidebar = ({ getImageUrl, getVideoUrl }: Props) => {

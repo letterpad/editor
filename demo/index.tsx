@@ -3,13 +3,14 @@ import ReactDOM from "react-dom";
 import LetterpadEditor from "../src/letterpad-editor";
 // import LetterpadEditor from "../dist/letterpad-editor";
 import { data } from "./data";
+import { TypeMediaCallback, TypeMediaInsert } from "./types";
 
 const Demo = () => {
   const [html, setHtml] = useState("");
 
   const handleImage = (insert) => {
     insert(
-      "https://reactrocket.com/img/blog/draft-js-basic-editor.gif",
+      {url: "https://reactrocket.com/img/blog/draft-js-basic-editor.gif",caption: "captionis"}
     );
   };
 

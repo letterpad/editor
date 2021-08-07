@@ -20,11 +20,12 @@ import "./app.css";
 import {highlightCodeOnChange} from "./utils/helper";
 import {importData} from "./utils/import";
 import {exportData} from "./utils/export";
+import { TypeMediaCallback } from "./types";
 
 interface Props {
   placeholder?: string;
-  onImageClick?: ((insert: (url:string|string[]) => void) => void) 
-  onVideoClick?: ((insert: (url:string|string[]) => void) => void) 
+  onImageClick?: TypeMediaCallback;
+  onVideoClick?: TypeMediaCallback;
   dark?: boolean;
   onChange: (html: string) => void;
   html: string
@@ -38,6 +39,7 @@ const LetterpadEditor = (props: Props) => {
     useState<EditorState>(EditorState.createWithContent(importData(props.html)));
 
   useEffect(() => {
+    console.log('editorState :>> ', editorState.toJS());
     const newStateWithCodeHighlight = highlightCodeOnChange(editorState);
     if (newStateWithCodeHighlight) {
       setEditorState(newStateWithCodeHighlight);
