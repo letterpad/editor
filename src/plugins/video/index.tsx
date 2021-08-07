@@ -6,21 +6,19 @@ export const videoPlugin = createVideoPlugin({
   theme: videoStyles,
 });
 
+export const videoClicked = async (props: any, { getVideoUrl }) => {
+  const { getEditorState, setEditorState } = props;
 
-export const videoClicked = async (props: any, {getVideoUrl}) => {
-  const {getEditorState, setEditorState} = props;
-  
   const hook = (args: TypeMediaInsert | TypeMediaInsert[]) => {
-
-    if(!Array.isArray(args)) {
-      args = [args]
+    if (!Array.isArray(args)) {
+      args = [args];
     }
     let state = getEditorState();
     for (let i = 0; i < args.length; i++) {
-      const {url} = args[i];
-      state = videoPlugin.addVideo(state, { src:url })
+      const { url } = args[i];
+      state = videoPlugin.addVideo(state, { src: url });
     }
     setEditorState(state);
-  }
+  };
   getVideoUrl(hook);
 };

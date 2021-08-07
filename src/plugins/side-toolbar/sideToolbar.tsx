@@ -38,7 +38,7 @@ const Sidebar = ({ getImageUrl, getVideoUrl }: Props) => {
   return (
     <div className="side-toolbar">
       <SideToolbar>
-        {externalProps => (
+        {(externalProps) => (
           <div>
             <ButtonBlockQuote {...externalProps} />
             <ButtonCode {...externalProps} />
@@ -48,9 +48,7 @@ const Sidebar = ({ getImageUrl, getVideoUrl }: Props) => {
             <span onClick={() => imageClicked(externalProps, { getImageUrl })}>
               <ButtonImage {...externalProps} />
             </span>
-            <span
-                onClick={() => videoClicked(externalProps, {getVideoUrl})}
-              >
+            <span onClick={() => videoClicked(externalProps, { getVideoUrl })}>
               <ButtonVideo {...externalProps} />
             </span>
           </div>

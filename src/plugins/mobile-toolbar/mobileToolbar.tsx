@@ -28,24 +28,24 @@ import { videoClicked, videoPlugin } from "../video";
 import { TypeMediaCallback } from "../../types";
 
 interface Props {
-  getImageUrl: TypeMediaCallback; 
-  getVideoUrl: TypeMediaCallback; 
+  getImageUrl: TypeMediaCallback;
+  getVideoUrl: TypeMediaCallback;
 }
 
 const MobileToolbar = ({ getImageUrl, getVideoUrl }: Props) => {
   return (
     <span className="mobile-toolbar">
       <MobileToolarHoc>
-        {externalProps => {
+        {(externalProps) => {
           const block = getCurrentBlock(
-            externalProps.getEditorState(),
+            externalProps.getEditorState()
           ) as ContentBlock;
 
           const blockType: DraftBlockType = block.getType();
 
           if (blockType === "atomic") {
             const type = block.get("data").get("type");
-            if(type === IMAGE_BLOCK){
+            if (type === IMAGE_BLOCK) {
               return (
                 <>
                   <ButtonBold {...externalProps} />
@@ -80,7 +80,7 @@ const MobileToolbar = ({ getImageUrl, getVideoUrl }: Props) => {
                 <ButtonImage {...externalProps} />
               </span>
               <span
-                onClick={() => videoClicked(externalProps, {getVideoUrl})}
+                onClick={() => videoClicked(externalProps, { getVideoUrl })}
               >
                 <ButtonVideo {...externalProps} />
               </span>

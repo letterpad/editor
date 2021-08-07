@@ -5,7 +5,7 @@ import {
   ContentState,
   EditorState,
 } from "draft-js";
-import { List, Map,Repeat } from "immutable";
+import { List, Map, Repeat } from "immutable";
 
 import generateRandomKey from "draft-js/lib/generateRandomKey";
 
@@ -14,7 +14,7 @@ export const _insertImage = (editorState: EditorState, src: string) => {
   const contentStateWithEntity = contentState.createEntity(
     "IMAGE",
     "IMMUTABLE",
-    { src: src },
+    { src: src }
   );
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
   const newEditorState = EditorState.set(editorState, {
@@ -47,8 +47,8 @@ export const highlightCodeOnChange = (editorState: EditorState) => {
 export const addNewBlockAt = (
   editorState: EditorState,
   pivotBlockKey: string,
-  text:string = "",
-  initialData = Map({}),
+  text: string = "",
+  initialData = Map({})
 ) => {
   const content = editorState.getCurrentContent();
   const blockMap = content.getBlockMap();
@@ -56,14 +56,14 @@ export const addNewBlockAt = (
 
   if (!block) {
     throw new Error(
-      `The pivot key - ${pivotBlockKey} is not present in blockMap.`,
+      `The pivot key - ${pivotBlockKey} is not present in blockMap.`
     );
   }
 
-  const blocksBefore = blockMap.toSeq().takeUntil(v => v === block);
+  const blocksBefore = blockMap.toSeq().takeUntil((v) => v === block);
   const blocksAfter = blockMap
     .toSeq()
-    .skipUntil(v => v === block)
+    .skipUntil((v) => v === block)
     .rest();
   const newBlockKey = generateRandomKey();
 
@@ -71,18 +71,18 @@ export const addNewBlockAt = (
     key: newBlockKey,
     type: "atomic",
     text: text || block.getText(),
-      characterList: List(Repeat(CharacterMetadata.create(), text.length)),
+    characterList: List(Repeat(CharacterMetadata.create(), text.length)),
     depth: 0,
     data: initialData,
   });
-  
+
   const newBlockMap = blocksBefore
     .concat(
       [
         [pivotBlockKey, block],
         [newBlockKey, newBlock],
       ],
-      blocksAfter,
+      blocksAfter
     )
     .toOrderedMap();
 

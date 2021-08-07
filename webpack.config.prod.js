@@ -4,13 +4,13 @@ module.exports = {
   entry: "./src/letterpad-editor.tsx",
   target: "web",
   optimization: {
-    minimize: false
+    minimize: false,
   },
   output: {
     path: __dirname + "/dist",
     filename: "letterpad-editor.js",
     libraryTarget: "commonjs",
-    globalObject: 'this'
+    globalObject: "this",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -25,24 +25,21 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               importLoaders: 1,
-              modules: true
-            }
-          }
+              modules: true,
+            },
+          },
         ],
-        include: /\.module\.css$/
+        include: /\.module\.css$/,
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ],
-        exclude: /\.module\.css$/
+        use: ["style-loader", "css-loader"],
+        exclude: /\.module\.css$/,
       },
       {
         test: /\.(html)$/,
@@ -69,6 +66,6 @@ module.exports = {
   },
   externals: {
     "react-dom": "react-dom",
-     react: "react",
+    react: "react",
   },
 };

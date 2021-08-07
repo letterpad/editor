@@ -24,15 +24,15 @@ import React from "react";
 import LetterpadEditor from "letterpad-editor";
 
 const MyEditor = () => {
-    return (
-        <LetterpadEditor
-            theme="dark"
-            onChange={(html: string) => {
-                console.log(html);
-            }}
-            html="Hello World"
-        />
-    );
+  return (
+    <LetterpadEditor
+      theme="dark"
+      onChange={(html: string) => {
+        console.log(html);
+      }}
+      html="Hello World"
+    />
+  );
 };
 
 export default MyEditor;
@@ -40,23 +40,23 @@ export default MyEditor;
 
 ### Parameters
 
--   `theme`: **string**
+- `theme`: **string**
 
-    `default`: **dark**
+  `default`: **dark**
 
-    Set the theme. Options - light | dark
+  Set the theme. Options - light | dark
 
--   `onImageClick`: `((insert: (url:string) => void) => void)`
+- `onImageClick`: `((insert: (url:string) => void) => void)`
 
--   `onVideoClick`: `((insert: (url:string) => void) => void)`
+- `onVideoClick`: `((insert: (url:string) => void) => void)`
 
--   `onChange(html: string)`: `(html:string) => void`
+- `onChange(html: string)`: `(html:string) => void`
 
-    Receive html whenever there is a change in the editor.
+  Receive html whenever there is a change in the editor.
 
--   `html` - string
+- `html` - string
 
-    Load the initial html. If you want empty page, the enter empty string. If its null, it will load sample data.
+  Load the initial html. If you want empty page, the enter empty string. If its null, it will load sample data.
 
 ## Development
 

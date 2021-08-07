@@ -1,26 +1,20 @@
-import React, {useEffect, useRef, useState} from "react";
-import Editor, {
-  EditorCommand,
-} from "@draft-js-plugins/editor";
+import React, { useEffect, useRef, useState } from "react";
+import Editor, { EditorCommand } from "@draft-js-plugins/editor";
 
-import {plugins} from "./plugins";
+import { plugins } from "./plugins";
 import InlineToolbar from "./plugins/inline-toolbar/inlineToolbar";
 import MobileToolbar from "./plugins/mobile-toolbar/mobileToolbar";
 import SideToolbar from "./plugins/side-toolbar/sideToolbar";
-import {
-  DefaultDraftBlockRenderMap,
-  EditorState,
-  RichUtils,
-} from "draft-js";
+import { DefaultDraftBlockRenderMap, EditorState, RichUtils } from "draft-js";
 import Immutable from "immutable";
 
 import "draft-js/dist/Draft.css";
 import "./app.css";
 
-import {highlightCodeOnChange} from "./utils/helper";
-import {importData} from "./utils/import";
-import {exportData} from "./utils/export";
-import { TypeMediaCallback } from "./types";
+import { highlightCodeOnChange } from "./utils/helper";
+import { importData } from "./utils/import";
+import { exportData } from "./utils/export";
+import { TypeMediaCallback, TypeMediaInsert } from "./types";
 
 interface Props {
   placeholder?: string;
@@ -28,18 +22,18 @@ interface Props {
   onVideoClick?: TypeMediaCallback;
   dark?: boolean;
   onChange: (html: string) => void;
-  html: string
+  html: string;
 }
 
 const noOp = () => {};
 
 const LetterpadEditor = (props: Props) => {
   const editorRef = useRef<Editor>(null);
-  const [editorState, setEditorState] =
-    useState<EditorState>(EditorState.createWithContent(importData(props.html)));
+  const [editorState, setEditorState] = useState<EditorState>(
+    EditorState.createWithContent(importData(props.html))
+  );
 
   useEffect(() => {
-    console.log('editorState :>> ', editorState.toJS());
     const newStateWithCodeHighlight = highlightCodeOnChange(editorState);
     if (newStateWithCodeHighlight) {
       setEditorState(newStateWithCodeHighlight);
@@ -61,7 +55,7 @@ const LetterpadEditor = (props: Props) => {
   const onChange = (newState: EditorState) => {
     setEditorState(newState);
     if (typeof props.onChange === "function") {
-      props.onChange(exportData(editorState.getCurrentContent()));
+      props.onChange(exportData(newState.getCurrentContent()));
     }
   };
 
@@ -101,7 +95,7 @@ const LetterpadEditor = (props: Props) => {
         handleKeyCommand={handleKeyCommand}
         ref={editorRef}
         blockRenderMap={extendedBlockRenderMap}
-        placeholder={props.placeholder ||"Write a story"}
+        placeholder={props.placeholder || "Write a story"}
       />
 
       <MobileToolbar
@@ -122,3 +116,5 @@ const LetterpadEditor = (props: Props) => {
 };
 
 export default LetterpadEditor;
+
+export type { TypeMediaCallback, TypeMediaInsert };

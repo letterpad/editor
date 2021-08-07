@@ -28,16 +28,16 @@ const InlineToolbar = () => {
   return (
     <span className="inline-toolbar">
       <InlineToolarHoc>
-        {externalProps => {
+        {(externalProps) => {
           const block = getCurrentBlock(
-            externalProps.getEditorState(),
+            externalProps.getEditorState()
           ) as ContentBlock;
 
           const blockType: DraftBlockType = block.getType();
 
           if (blockType === "atomic") {
             const type = block.get("data").get("type");
-            if(type === IMAGE_BLOCK){
+            if (type === IMAGE_BLOCK) {
               return (
                 <>
                   <ButtonBold {...externalProps} />

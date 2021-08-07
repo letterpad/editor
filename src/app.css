@@ -84,9 +84,10 @@ pre {
   background: transparent;
 }
 
-figcaption, figcaption * {
-text-align: center !important;
-font-style: italic;
+figcaption,
+figcaption * {
+  text-align: center !important;
+  font-style: italic;
 }
 blockquote {
   margin: 20px 0px;

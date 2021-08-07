@@ -3,17 +3,17 @@ const path = require("path");
 
 module.exports = {
   entry: ["./demo/index.tsx"],
-  output: {path: path.join(__dirname, "build"), filename: "editor.js"},
+  output: { path: path.join(__dirname, "build"), filename: "editor.js" },
   mode: process.env.NODE_ENV || "development",
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
     fallback: {
-      "path": false,
-      "process": false
-    }
+      path: false,
+      process: false,
+    },
   },
   devtool: "inline-source-map",
-  devServer: {contentBase: path.join(__dirname, "src")},
+  devServer: { contentBase: path.join(__dirname, "src") },
   module: {
     rules: [
       {
@@ -30,7 +30,7 @@ module.exports = {
         test: /\.(css|pcss)$/,
         use: ["style-loader", "css-loader"],
       },
-      
+
       {
         test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
         use: ["file-loader"],
