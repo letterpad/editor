@@ -9,7 +9,7 @@ const Demo = () => {
 
   const handleImage = (insert) => {
     insert({
-      url: "https://reactrocket.com/img/blog/draft-js-basic-editor.gif",
+      url: "https://www.carolmusyoka.com/wp-content/uploads/2020/04/Freedom.jpg",
       caption: "captionis",
     });
   };
