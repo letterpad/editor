@@ -3,9 +3,6 @@ module.exports = {
   devtool: "source-map",
   entry: "./src/letterpad-editor.tsx",
   target: "web",
-  optimization: {
-    minimize: false,
-  },
   output: {
     path: __dirname + "/dist",
     filename: "letterpad-editor.js",

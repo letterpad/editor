@@ -29,11 +29,6 @@
   --border-toolbar: #111;
 }
 
-body {
-  background: var(--bg-primary);
-  color: var(--color-primary);
-}
-
 .editor {
   box-sizing: border-box;
   cursor: text;
