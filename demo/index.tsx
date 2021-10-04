@@ -4,6 +4,8 @@ import LetterpadEditor from "../src/letterpad-editor";
 import { data } from "./data";
 import { TypeMediaCallback, TypeMediaInsert } from "./types";
 
+const isLocalhost = new URL(document.location.href).hostname === "localhost";
+
 const Demo = () => {
   const [html, setHtml] = useState("");
 
@@ -32,7 +34,7 @@ const Demo = () => {
         }}
       />
       <hr />
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      {isLocalhost && <div dangerouslySetInnerHTML={{ __html: html }} />}
     </div>
   );
 };

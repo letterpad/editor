@@ -28,9 +28,9 @@ const ImageBlock = (props) => {
   const imgSrc = props.block.get("data").get("src");
 
   return (
-    <div className="my-custom-block">
-      <figure className="custom-block__image-wrap">
-        <img src={imgSrc} className="custom-block__image" />
+    <div className="image-block">
+      <figure>
+        <img src={imgSrc} />
         <Caption {...props} />
       </figure>
     </div>
