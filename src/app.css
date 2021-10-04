@@ -29,11 +29,6 @@
   --border-toolbar: #111;
 }
 
-body {
-  background: var(--bg-primary);
-  color: var(--color-primary);
-}
-
 .editor {
   box-sizing: border-box;
   cursor: text;
@@ -65,16 +60,17 @@ img {
   width: 100%;
 }
 
-pre > pre {
-  padding: 0px;
-  margin-top: 2rem;
-}
 pre {
   background: var(--bg-codeblock);
   display: block;
   font-size: 0.9rem;
   color: #c7c7c7;
   padding: 0.1rem 0.5rem;
+}
+
+pre > pre {
+  padding: 0px;
+  margin: 1rem 1rem 0rem 1rem;
 }
 .token.operator,
 .token.entity,
@@ -84,9 +80,10 @@ pre {
   background: transparent;
 }
 
-figcaption, figcaption * {
-text-align: center !important;
-font-style: italic;
+figcaption,
+figcaption * {
+  text-align: center !important;
+  font-style: italic;
 }
 blockquote {
   margin: 20px 0px;

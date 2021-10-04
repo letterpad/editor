@@ -1,5 +1,4 @@
 export const data = `
-
 <h1 id="h1-heading-8-">h1 Heading 8-)</h1>
 <h2 id="h2-heading">h2 Heading</h2>
 <h3 id="h3-heading">h3 Heading</h3>
@@ -20,7 +19,6 @@ export const data = `
 <p><em>This is italic text</em></p>
 <p><del>Strikethrough</del></p>
 <h2 id="blockquotes">Blockquotes</h2>
-
 <blockquote>
 ...by using additional greater-than signs right next to each other...
 </blockquote>
@@ -46,7 +44,6 @@ export const data = `
 </ol>
 <ol>
 <li>You can use sequential numbers...</li>
-
 </ol>
 <p>Start numbering with offset:</p>
 <ol>
@@ -72,5 +69,4 @@ var foo = function (bar) {
 <p><a href="http://nodeca.github.io/pica/demo/" title="title text!">link with title</a></p>
 <p>Autoconverted link <a href="https://github.com/nodeca/pica">https://github.com/nodeca/pica</a> (enable linkify to see)</p>
 <h2 id="images">Images</h2>
-
 `;

@@ -24,33 +24,37 @@ import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
 import "./mobileToolbar.css";
 
 import { imageClicked, IMAGE_BLOCK } from "../image";
-import { videoPlugin } from "../video";
+import { videoClicked, videoPlugin } from "../video";
+import { TypeMediaCallback } from "../../types";
 
 interface Props {
-  getImageUrl: ((insert: (url:string) => void) => void) 
-  getVideoUrl: ((insert: (url:string) => void) => void) 
+  getImageUrl: TypeMediaCallback;
+  getVideoUrl: TypeMediaCallback;
 }
 
 const MobileToolbar = ({ getImageUrl, getVideoUrl }: Props) => {
   return (
     <span className="mobile-toolbar">
       <MobileToolarHoc>
-        {externalProps => {
+        {(externalProps) => {
           const block = getCurrentBlock(
-            externalProps.getEditorState(),
+            externalProps.getEditorState()
           ) as ContentBlock;
 
           const blockType: DraftBlockType = block.getType();
 
-          if (blockType === IMAGE_BLOCK) {
-            return (
-              <>
-                <ButtonBold {...externalProps} />
-                <ButtonItalic {...externalProps} />
-                <ButtonUnderline {...externalProps} />
-                <ButtonLink {...externalProps} />
-              </>
-            );
+          if (blockType === "atomic") {
+            const type = block.get("data").get("type");
+            if (type === IMAGE_BLOCK) {
+              return (
+                <>
+                  <ButtonBold {...externalProps} />
+                  <ButtonItalic {...externalProps} />
+                  <ButtonUnderline {...externalProps} />
+                  <ButtonLink {...externalProps} />
+                </>
+              );
+            }
           }
           if (blockType === "code-block") {
             return (
@@ -76,15 +80,7 @@ const MobileToolbar = ({ getImageUrl, getVideoUrl }: Props) => {
                 <ButtonImage {...externalProps} />
               </span>
               <span
-                onClick={async () => {
-                  const hook = (src:string) => {
-                    const state = externalProps.getEditorState();
-                    if (!src) return;
-                    const newEditorState = videoPlugin.addVideo(state, { src });
-                    externalProps.setEditorState(newEditorState);
-                  }
-                  getVideoUrl(hook);
-                }}
+                onClick={() => videoClicked(externalProps, { getVideoUrl })}
               >
                 <ButtonVideo {...externalProps} />
               </span>

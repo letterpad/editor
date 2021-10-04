@@ -1,12 +1,13 @@
 module.exports = {
   mode: "production",
   devtool: "source-map",
-  entry: "./src/editor.tsx",
+  entry: "./src/letterpad-editor.tsx",
   target: "web",
   output: {
-    path: __dirname + "/umd",
+    path: __dirname + "/dist",
     filename: "letterpad-editor.js",
-    libraryTarget: "umd",
+    libraryTarget: "commonjs",
+    globalObject: "this",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -19,20 +20,23 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(css|pcss)$/,
+        test: /\.css$/,
         use: [
           "style-loader",
           {
             loader: "css-loader",
-            options: { importLoaders: 1, sourceMap: true },
+            options: {
+              importLoaders: 1,
+              modules: true,
+            },
           },
-          // {
-          //   loader: "postcss-loader",
-          //   options: {
-          //     sourceMap: "inline"
-          //   }
-          // }
         ],
+        include: /\.module\.css$/,
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+        exclude: /\.module\.css$/,
       },
       {
         test: /\.(html)$/,
@@ -60,6 +64,5 @@ module.exports = {
   externals: {
     "react-dom": "react-dom",
     react: "react",
-    "styled-components": "styled-components",
   },
 };

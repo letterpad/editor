@@ -1,28 +1,28 @@
-import {useState} from "react";
+import { useState } from "react";
 import ReactDOM from "react-dom";
-import Editor from "../src/editor";
+import LetterpadEditor from "../src/letterpad-editor";
 import { data } from "./data";
+import { TypeMediaCallback, TypeMediaInsert } from "./types";
 
 const Demo = () => {
   const [html, setHtml] = useState("");
 
   const handleImage = (insert) => {
-    insert(
-      "https://reactrocket.com/img/blog/draft-js-basic-editor.gif",
-    );
+    insert({
+      url: "https://www.carolmusyoka.com/wp-content/uploads/2020/04/Freedom.jpg",
+      caption: "captionis",
+    });
   };
 
   const handleVideo = (insert) => {
-    insert(
-      "https://www.youtube.com/watch?v=M3BM9TB-8yA",
-    );
+    insert("https://www.youtube.com/watch?v=M3BM9TB-8yA");
   };
 
   const params = new URL(document.location.href).searchParams;
 
   return (
     <div>
-      <Editor
+      <LetterpadEditor
         html={data}
         onImageClick={handleImage}
         onVideoClick={handleVideo}
@@ -32,7 +32,7 @@ const Demo = () => {
         }}
       />
       <hr />
-      <div dangerouslySetInnerHTML={{__html: html}} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
     </div>
   );
 };
