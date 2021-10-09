@@ -41,7 +41,7 @@ export const highlightCodeOnChange = (editorState: EditorState) => {
 
     return EditorState.push(editorState, newContentState, "change-block-data");
   }
-  return null;
+  return editorState;
 };
 
 export const addNewBlockAt = (

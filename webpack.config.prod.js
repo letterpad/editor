@@ -1,11 +1,11 @@
 module.exports = {
   mode: "production",
   devtool: "source-map",
-  entry: "./src/letterpad-editor.tsx",
+  entry: "./src/index.tsx",
   target: "web",
   output: {
     path: __dirname + "/dist",
-    filename: "letterpad-editor.js",
+    filename: "index.js",
     libraryTarget: "commonjs",
     globalObject: "this",
   },

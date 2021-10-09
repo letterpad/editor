@@ -19,6 +19,7 @@ import { mobileToolbarPlugin } from "./mobile-toolbar/mobileToolbar";
 import { createImagePlugin } from "./image";
 import { linkPlugin } from "./anchor";
 import { createTitleHeadingPlugin } from "./title-heading";
+import { EditorPlugin } from "@draft-js-plugins/editor";
 
 const listPlugin = createListPlugin();
 const prismPlugin = createPrismPlugin({
@@ -44,7 +45,7 @@ export enum PluginNames {
   focusPlugin = "focusPlugin",
 }
 
-export const getPlugins = (ignoreList: PluginNames[] = []) => {
+export const getPlugins = (ignoreList: PluginNames[] = []): EditorPlugin[] => {
   const availablePlugins = {
     linkPlugin,
     videoPlugin,
@@ -62,7 +63,6 @@ export const getPlugins = (ignoreList: PluginNames[] = []) => {
   for (const plugin of ignoreList) {
     delete availablePlugins[plugin];
   }
-  console.log(availablePlugins);
 
   return Object.values(availablePlugins);
 };

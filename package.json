@@ -2,8 +2,8 @@
   "name": "letterpad-editor",
   "version": "1.0.19",
   "description": "The letterpad editor - A high level abstraction of draftjs with plugin architecture",
-  "main": "./dist/letterpad-editor.js",
-  "types": "./dist/letterpad-editor.d.ts",
+  "main": "./dist/index.tsx.js",
+  "types": "./dist/index.tsx.d.ts",
   "scripts": {
     "start": "webpack serve --config webpack.config.demo.js",
     "bundle": "webpack --config webpack.config.prod.js",
