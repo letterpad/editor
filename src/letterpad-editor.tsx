@@ -1,20 +1,20 @@
-import React, {useEffect, useRef, useState} from "react";
-import Editor, {EditorCommand} from "@draft-js-plugins/editor";
+import React, { useEffect, useRef, useState } from "react";
+import Editor, { EditorCommand } from "@draft-js-plugins/editor";
 
-import {plugins} from "./plugins";
+import { getPlugins, PluginNames } from "./plugins";
 import InlineToolbar from "./plugins/inline-toolbar/inlineToolbar";
 import MobileToolbar from "./plugins/mobile-toolbar/mobileToolbar";
 import SideToolbar from "./plugins/side-toolbar/sideToolbar";
-import {DefaultDraftBlockRenderMap, EditorState, RichUtils} from "draft-js";
+import { DefaultDraftBlockRenderMap, EditorState, RichUtils } from "draft-js";
 import Immutable from "immutable";
 
 import "draft-js/dist/Draft.css";
 import "./app.css";
 
-import {highlightCodeOnChange} from "./utils/helper";
-import {importData} from "./utils/import";
-import {exportData} from "./utils/export";
-import {TypeMediaCallback, TypeMediaInsert} from "./types";
+import { highlightCodeOnChange } from "./utils/helper";
+import { importData } from "./utils/import";
+import { exportData } from "./utils/export";
+import { TypeMediaCallback, TypeMediaInsert } from "./types";
 import useTheme from "./hooks/theme";
 
 interface Props {
@@ -22,7 +22,7 @@ interface Props {
   onImageClick?: TypeMediaCallback;
   onVideoClick?: TypeMediaCallback;
   dark?: boolean;
-  onChange: (html: string) => void;
+  onChange: (html: string, title?: string) => void;
   html: string;
 }
 
@@ -45,7 +45,6 @@ const LetterpadEditor = (props: Props) => {
   const focus = () => {
     editorRef.current?.focus();
   };
-
 
   const onChange = (newState: EditorState) => {
     setEditorState(newState);
@@ -70,7 +69,6 @@ const LetterpadEditor = (props: Props) => {
     onVideoClick: props.onVideoClick || noOp,
   };
 
-
   // Here we define the default block. It can be a paragraph but symentec html
   // does not allow div's to be placed inside p.
   const blockRenderMap = Immutable.Map({
@@ -82,12 +80,15 @@ const LetterpadEditor = (props: Props) => {
   const extendedBlockRenderMap =
     DefaultDraftBlockRenderMap.merge(blockRenderMap);
 
+  const ignoreList: PluginNames[] = [];
+  const plugins = getPlugins(ignoreList);
+
   return (
     <div className="editor" onClick={focus}>
       <Editor
         editorState={editorState}
         onChange={onChange}
-        plugins={plugins()}
+        plugins={Object.values(plugins)}
         handleKeyCommand={handleKeyCommand}
         ref={editorRef}
         blockRenderMap={extendedBlockRenderMap}
@@ -113,4 +114,4 @@ const LetterpadEditor = (props: Props) => {
 
 export default LetterpadEditor;
 
-export type {TypeMediaCallback, TypeMediaInsert};
+export type { TypeMediaCallback, TypeMediaInsert };
