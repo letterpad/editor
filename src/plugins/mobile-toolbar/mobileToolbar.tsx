@@ -24,15 +24,12 @@ import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
 import "./mobileToolbar.css";
 
 import { imageClicked, IMAGE_BLOCK } from "../image";
-import { videoClicked, videoPlugin } from "../video";
-import { TypeMediaCallback } from "../../types";
+import { videoClicked } from "../video";
+import { callbacks } from "../../callbacks";
 
-interface Props {
-  getImageUrl: TypeMediaCallback;
-  getVideoUrl: TypeMediaCallback;
-}
+const MobileToolbar = () => {
+  const { onImageClick, onVideoClick } = callbacks.getAll();
 
-const MobileToolbar = ({ getImageUrl, getVideoUrl }: Props) => {
   return (
     <span className="mobile-toolbar">
       <MobileToolarHoc>
@@ -75,12 +72,16 @@ const MobileToolbar = ({ getImageUrl, getVideoUrl }: Props) => {
               <ButtonHighlight {...externalProps} />
               <LinkPluginButton {...externalProps} />
               <span
-                onClick={() => imageClicked(externalProps, { getImageUrl })}
+                onClick={() =>
+                  imageClicked(externalProps, { getImageUrl: onImageClick })
+                }
               >
                 <ButtonImage {...externalProps} />
               </span>
               <span
-                onClick={() => videoClicked(externalProps, { getVideoUrl })}
+                onClick={() =>
+                  videoClicked(externalProps, { getVideoUrl: onVideoClick })
+                }
               >
                 <ButtonVideo {...externalProps} />
               </span>

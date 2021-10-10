@@ -1,8 +1,7 @@
 import { useState } from "react";
 import ReactDOM from "react-dom";
-import LetterpadEditor from "../src/letterpad-editor";
+import LetterpadEditor from "../src/index";
 import { data } from "./data";
-import { TypeMediaCallback, TypeMediaInsert } from "./types";
 
 const isLocalhost = new URL(document.location.href).hostname === "localhost";
 

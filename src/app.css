@@ -99,3 +99,6 @@ figure {
   margin: 0px;
   padding: 0px;
 }
+.editor h1:first-child {
+  margin-top: 0px;
+}

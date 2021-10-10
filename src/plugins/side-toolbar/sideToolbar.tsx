@@ -17,7 +17,7 @@ import {
 
 import { imageClicked } from "../image";
 import { videoClicked } from "../video";
-import { TypeMediaCallback } from "../../types";
+import { callbacks } from "../../callbacks";
 
 export const sideToolbarPlugin = createSideToolbarPlugin({
   theme: {
@@ -29,12 +29,8 @@ export const sideToolbarPlugin = createSideToolbarPlugin({
 
 const { SideToolbar } = sideToolbarPlugin;
 
-interface Props {
-  getImageUrl: TypeMediaCallback;
-  getVideoUrl: TypeMediaCallback;
-}
-
-const Sidebar = ({ getImageUrl, getVideoUrl }: Props) => {
+const Sidebar = () => {
+  const { onImageClick, onVideoClick } = callbacks.getAll();
   return (
     <div className="side-toolbar">
       <SideToolbar>
@@ -45,10 +41,18 @@ const Sidebar = ({ getImageUrl, getVideoUrl }: Props) => {
             <ButtonOrderedList {...externalProps} />
             <ButtonUnOrderedList {...externalProps} />
 
-            <span onClick={() => imageClicked(externalProps, { getImageUrl })}>
+            <span
+              onClick={() =>
+                imageClicked(externalProps, { getImageUrl: onImageClick })
+              }
+            >
               <ButtonImage {...externalProps} />
             </span>
-            <span onClick={() => videoClicked(externalProps, { getVideoUrl })}>
+            <span
+              onClick={() =>
+                videoClicked(externalProps, { getVideoUrl: onVideoClick })
+              }
+            >
               <ButtonVideo {...externalProps} />
             </span>
           </div>
