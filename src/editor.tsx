@@ -22,7 +22,11 @@ const LetterpadEditor = (props: Props) => {
   }, [state]);
 
   const focusEditor = () => {
-    editorRef.current?.focus();
+    getRef()?.current?.focus();
+  };
+
+  const getRef = () => {
+    return props.editorRef || editorRef;
   };
 
   const onChange = (newState: EditorState) => {
@@ -46,7 +50,7 @@ const LetterpadEditor = (props: Props) => {
         onChange={onChange}
         plugins={props.plugins}
         handleKeyCommand={handleKeyCommand}
-        ref={editorRef}
+        ref={getRef()}
         blockRenderMap={extendedBlockRenderMap}
         placeholder={props.placeholder}
       />
