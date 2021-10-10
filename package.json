@@ -1,9 +1,9 @@
 {
   "name": "letterpad-editor",
-  "version": "1.0.19",
+  "version": "1.0.21",
   "description": "The letterpad editor - A high level abstraction of draftjs with plugin architecture",
-  "main": "./dist/index.tsx.js",
-  "types": "./dist/index.tsx.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "start": "webpack serve --config webpack.config.demo.js",
     "bundle": "webpack --config webpack.config.prod.js",
@@ -12,7 +12,8 @@
     "prepublishOnly": "yarn clean && yarn bundle && yarn build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist/",
-    "prettify": "npx prettier --write ./src"
+    "prettify": "npx prettier --write ./src",
+    "type-check": "yarn tsc"
   },
   "files": [
     "dist",

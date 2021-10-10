@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { Editor } from "../src/types";
+import { useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import LetterpadEditor from "../src/index";
 import { data } from "./data";
@@ -7,6 +8,7 @@ const isLocalhost = new URL(document.location.href).hostname === "localhost";
 
 const Demo = () => {
   const [html, setHtml] = useState("");
+  const editorRef = useRef<Editor>(null);
 
   const handleImage = (insert) => {
     insert({
@@ -31,6 +33,7 @@ const Demo = () => {
         onChange={(change) => {
           setHtml(change);
         }}
+        editorRef={editorRef}
       />
       <hr />
       {isLocalhost && <div dangerouslySetInnerHTML={{ __html: html }} />}
