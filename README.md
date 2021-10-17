@@ -97,7 +97,7 @@ export default MyEditor;
 
 - `onImageClick`: `((insert: TypeInsertImageFn) => void)`
 
-  `insert` is a callback function. You may want to upload the image to the server first and then provide a url. eg.
+  `insert` is a callback function to insert the image in the editor.
 
   ```jsx
     ...
@@ -116,8 +116,7 @@ export default MyEditor;
   ```
 
   **Scenario**:
-  If a user is uploading an image, you might want to show some sort of a loading placeholder in the editor. And then when the image has uploaded, you
-  will have to replace the placeholder. You can do so in this way.
+  If a user is uploading an image, you might want to show some sort of a loading placeholder in the editor. And then when the image has uploaded, you will have to replace the placeholder. You can do so in this way.
 
   ```jsx
   import { Helpers } from "letterpad-editor/dist/types";

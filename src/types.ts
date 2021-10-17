@@ -32,8 +32,8 @@ export interface EditorProps extends EditorCallbacks {
   placeholder?: string;
   dark?: boolean;
   html: string;
-  editorRef: React.RefObject<Editor>;
-  setHelpers: HelpersCallback;
+  editorRef?: React.RefObject<Editor>;
+  setHelpers?: HelpersCallback;
 }
 
 export type PluginHelpers = {
