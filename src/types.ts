@@ -1,18 +1,20 @@
 import { PluginFunctions } from "@draft-js-plugins/editor";
 import PluginEditor from "@draft-js-plugins/editor/lib/Editor";
 import { getPlugins } from "./plugins";
-import { InsertImageAttrs } from "./plugins/image/types";
+import { ImageData } from "./plugins/image/types";
 
 type EditorHelpers = PluginFunctions;
 
 export type Editor = PluginEditor;
 
-export type TypeMediaInsert = InsertImageAttrs;
+export type TypeMediaInsert = ImageData;
 export { default as EditorRef } from "@draft-js-plugins/editor";
+
+export type BlockKey = string;
 
 export type TypeInsertImageFn = (
   props: TypeMediaInsert | TypeMediaInsert[]
-) => void;
+) => BlockKey;
 
 export type TypeMediaCallback = (insertImage: TypeInsertImageFn) => void;
 

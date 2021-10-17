@@ -1,32 +1,7 @@
-import { EditorBlock } from "draft-js";
-import { insertImage } from "./insertImage";
+import { updateImageBlock, insertImage } from "./insertImage";
 import { PluginFunctions } from "@draft-js-plugins/editor";
-import { InsertImageAttrs, StateTypes } from "./types";
-
-const Caption = (props) => {
-  return (
-    <figcaption
-      className="custom-block__caption"
-      style={{ fontSize: "0.8rem" }}
-    >
-      <EditorBlock {...props} />
-    </figcaption>
-  );
-};
-
-const ImageBlock = (props) => {
-  const imgSrc = props.block.get("data").get("src");
-  const width = props.block.get("data").get("width");
-
-  return (
-    <div className="image-block">
-      <figure>
-        <img src={imgSrc} style={{ maxWidth: "100%", width }} />
-        <Caption {...props} />
-      </figure>
-    </div>
-  );
-};
+import { ImageData, StateTypes } from "./types";
+import { ImageBlock } from "./component";
 
 function blockRendererFn(block) {
   const type = block.getType();
@@ -48,10 +23,20 @@ export const createImagePlugin = () => {
 
   return {
     blockRendererFn,
-    insertImage: (props: InsertImageAttrs) => {
+    insertImage: (props: ImageData) => {
       if (store.getEditorState && store.setEditorState) {
-        insertImage({
+        return insertImage({
           ...props,
+          getState: store.getEditorState,
+          setState: store.setEditorState,
+        });
+      }
+    },
+    updateImageBlock: (blockKey: string, data: Partial<ImageData>) => {
+      if (store.getEditorState && store.setEditorState) {
+        updateImageBlock({
+          blockKey,
+          data,
           getState: store.getEditorState,
           setState: store.setEditorState,
         });
@@ -69,9 +54,7 @@ export const imageClicked = async (
   { getImageUrl }
 ) => {
   const { getEditorState, setEditorState } = props;
-  const externalCallback = async (
-    args: InsertImageAttrs | InsertImageAttrs[]
-  ) => {
+  const externalCallback = async (args: ImageData | ImageData[]) => {
     if (!Array.isArray(args)) {
       args = [args];
     }

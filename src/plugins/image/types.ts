@@ -1,4 +1,5 @@
 import { EditorState } from "draft-js";
+import { BlockKey } from "../../types";
 
 export interface InsertImageType {
   src: string;
@@ -10,9 +11,16 @@ export interface InsertImageType {
   setState: (state: EditorState) => void;
 }
 
-export type InsertImageAttrs = Omit<InsertImageType, "setState" | "getState">;
+export type ImageData = Omit<InsertImageType, "setState" | "getState">;
 
 export type StateTypes = {
   setEditorState?: (state: EditorState) => void;
   getEditorState?: () => EditorState;
 };
+
+export interface UpdateImage {
+  blockKey: BlockKey;
+  data: Partial<ImageData>;
+  setState: (state: EditorState) => void;
+  getState: () => EditorState;
+}

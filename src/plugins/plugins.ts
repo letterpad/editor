@@ -1,5 +1,5 @@
 import { videoPlugin } from "./video";
-import createFocusPlugin from "@draft-js-plugins/focus";
+// import createFocusPlugin from "@draft-js-plugins/focus";
 import "@draft-js-plugins/focus/lib/plugin.css";
 
 // markdown
@@ -24,54 +24,32 @@ const prismPlugin = createPrismPlugin({
   prism: Prism,
 });
 
-const focusPlugin = createFocusPlugin();
+// const focusPlugin = createFocusPlugin();
 const imagePlugin = createImagePlugin();
 const markdownPlugin = createMarkdownShortcutsPlugin();
 
-export enum PluginNames {
-  linkPlugin = "linkPlugin",
-  videoPlugin = "videoPlugin",
-  prismPlugin = "prismPlugin",
-  sideToolbarPlugin = "sideToolbarPlugin",
-  imagePlugin = "imagePlugin",
-  markdownPlugin = "markdownPlugin",
-  listPlugin = "listPlugin",
-  inlineToolbarPlugin = "inlineToolbarPlugin",
-  mobileToolbarPlugin = "mobileToolbarPlugin",
-  titleHeadingPlugin = "titleHeadingPlugin",
-  focusPlugin = "focusPlugin",
-}
+const pluginsMap = {
+  linkPlugin,
+  videoPlugin,
+  prismPlugin,
+  sideToolbarPlugin,
+  imagePlugin,
+  markdownPlugin,
+  listPlugin,
+  inlineToolbarPlugin,
+  mobileToolbarPlugin,
+  // focusPlugin,
+};
 
 const preparePluginsSingleton = () => {
-  return (ignoreList: PluginNames[]) => {
-    const availablePlugins = {
-      linkPlugin,
-      videoPlugin,
-      prismPlugin,
-      sideToolbarPlugin,
-      imagePlugin,
-      markdownPlugin,
-      listPlugin,
-      inlineToolbarPlugin,
-      mobileToolbarPlugin,
-      focusPlugin,
-    };
-
-    for (const plugin of ignoreList) {
-      delete availablePlugins[plugin];
-    }
-
+  const closureFn = () => {
     return {
-      pluginsArray: Object.values(availablePlugins),
-      pluginsMap: availablePlugins,
+      pluginsArray: Object.values(pluginsMap),
+      pluginsMap,
     };
   };
+
+  return closureFn;
 };
 
-const plugins = preparePluginsSingleton() as ReturnType<
-  typeof preparePluginsSingleton
->;
-
-export const getPlugins = (ignoreList: PluginNames[] = []) => {
-  return plugins(ignoreList);
-};
+export const getPlugins = preparePluginsSingleton();

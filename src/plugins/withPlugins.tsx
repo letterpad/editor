@@ -1,6 +1,6 @@
 import { EditorPlugin } from "@draft-js-plugins/editor";
 import { EditorProps, TypeMediaCallback } from "../types";
-import { PluginNames, getPlugins } from "./plugins";
+import { getPlugins } from ".";
 
 export interface WithPluginProps {
   plugins: EditorPlugin[];
@@ -17,8 +17,7 @@ const withPlugins = <T extends EditorProps = EditorProps>(
       onVideoClick: props.onVideoClick,
     };
 
-    const ignoreList: PluginNames[] = [];
-    const plugins = getPlugins(ignoreList);
+    const plugins = getPlugins();
 
     return (
       <WrappedComponent

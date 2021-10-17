@@ -1,47 +1,93 @@
 import { EditorState, Modifier, SelectionState } from "draft-js";
 import { Map } from "immutable";
 import { addNewBlockAt } from "../../utils/helper";
-import { InsertImageType } from "./types";
+import { ImageData, InsertImageType, UpdateImage } from "./types";
 import { IMAGE_BLOCK } from "./constants";
+import { BlockKey } from "../../types";
 
 const loadAsyncImage = async ({
   src,
   getState,
   setState,
   blockKey,
-  dataMap,
+}: {
+  src: string;
+  blockKey: string;
+  getState: () => EditorState;
+  setState: (state: EditorState) => void;
 }) => {
   const img = new Image();
   img.src = src;
   img.onload = () => {
     const editorState = getState();
-
-    const content = editorState.getCurrentContent();
-    const imageBlock = content.getBlockForKey(blockKey);
-    const next = content.getBlockAfter(imageBlock.getKey());
-    if (!next) return;
-
-    const selectionState = new SelectionState({
-      anchorKey: imageBlock.getKey(),
-      anchorOffset: imageBlock.getText().length,
-      focusKey: next.getKey(),
-      focusOffset: 0,
+    const newEditorState = setImageBlockData({
+      data: { src },
+      blockKey,
+      state: editorState,
     });
-
-    const newContentState = Modifier.setBlockData(
-      content,
-      selectionState,
-      dataMap.set("src", src)
-    );
-
-    const newEditorState = EditorState.push(
-      editorState,
-      newContentState,
-      "change-block-data"
-    );
-
-    setState(newEditorState);
+    if (newEditorState) setState(newEditorState);
   };
+};
+
+const setImageBlockData = ({
+  data,
+  blockKey,
+  state,
+}: {
+  data: Partial<ImageData>;
+  blockKey: BlockKey;
+  state: EditorState;
+}) => {
+  const content = state.getCurrentContent();
+  const imageBlock = content.getBlockForKey(blockKey);
+  const next = content.getBlockAfter(imageBlock.getKey());
+  if (!next) return;
+
+  const selectionState = new SelectionState({
+    anchorKey: imageBlock.getKey(),
+    anchorOffset: imageBlock.getText().length,
+    focusKey: next.getKey(),
+    focusOffset: 0,
+  });
+
+  let dataMap = imageBlock.getData();
+
+  for (const key in data) {
+    if (dataMap.has(key)) {
+      dataMap = dataMap.set(key, data[key]);
+    }
+  }
+
+  const newContentState = Modifier.setBlockData(
+    content,
+    selectionState,
+    dataMap
+  );
+
+  const newEditorState = EditorState.push(
+    state,
+    newContentState,
+    "change-block-data"
+  );
+
+  return newEditorState;
+};
+
+export const updateImageBlock = ({
+  blockKey,
+  data,
+  setState,
+  getState,
+}: UpdateImage) => {
+  const state = getState();
+  const newEditorState = setImageBlockData({
+    data,
+    blockKey,
+    state,
+  });
+  if (newEditorState) {
+    setState(newEditorState);
+  }
 };
 
 export const insertImage = async ({
@@ -76,6 +122,7 @@ export const insertImage = async ({
     getState,
     setState,
     blockKey: addedBlockKey,
-    dataMap,
   });
+
+  return addedBlockKey as BlockKey;
 };

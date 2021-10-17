@@ -65,7 +65,7 @@ export const addNewBlockAt = (
     .toSeq()
     .skipUntil((v) => v === block)
     .rest();
-  const newBlockKey = generateRandomKey();
+  const newBlockKey: string = generateRandomKey();
 
   const newBlock = new ContentBlock({
     key: newBlockKey,
