@@ -1,1 +1,1 @@
-export { PluginNames, getPlugins } from "./init";
+export { getPlugins } from "./plugins";

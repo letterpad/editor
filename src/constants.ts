@@ -1,9 +1,10 @@
-const noop = () => {};
+const noop = () => null;
 
 export const callbacks = {
   onImageClick: noop,
   onVideoClick: noop,
-  onChange: (html: string, title?: string) => null,
+  onChange: () => null,
+  setHelpers: () => null,
 };
 
 export const defaultProps = {

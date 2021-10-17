@@ -14,7 +14,7 @@ export const _insertImage = (editorState: EditorState, src: string) => {
   const contentStateWithEntity = contentState.createEntity(
     "IMAGE",
     "IMMUTABLE",
-    { src: src }
+    { src }
   );
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
   const newEditorState = EditorState.set(editorState, {
@@ -47,7 +47,7 @@ export const highlightCodeOnChange = (editorState: EditorState) => {
 export const addNewBlockAt = (
   editorState: EditorState,
   pivotBlockKey: string,
-  text: string = "",
+  text = "",
   initialData = Map({})
 ) => {
   const content = editorState.getCurrentContent();
@@ -65,7 +65,7 @@ export const addNewBlockAt = (
     .toSeq()
     .skipUntil((v) => v === block)
     .rest();
-  const newBlockKey = generateRandomKey();
+  const newBlockKey: string = generateRandomKey();
 
   const newBlock = new ContentBlock({
     key: newBlockKey,

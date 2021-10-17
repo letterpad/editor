@@ -1,6 +1,6 @@
 import { StoreContextProvider } from "./store";
 import LetterpadEditor from "./editor";
-import { EditorProps, TypeMediaCallback, TypeMediaInsert } from "./types";
+import { EditorProps } from "./types";
 import { EditorState } from "draft-js";
 import { importData } from "./utils/import";
 import "draft-js/dist/Draft.css";
@@ -18,6 +18,7 @@ const Container = (props: EditorProps) => {
     onImageClick: mergedProps.onImageClick,
     onVideoClick: mergedProps.onVideoClick,
     onChange: mergedProps.onChange,
+    setHelpers: mergedProps.setHelpers,
   };
 
   useEffect(() => {
@@ -33,5 +34,3 @@ const Container = (props: EditorProps) => {
   );
 };
 export default Container;
-
-export type { TypeMediaCallback, TypeMediaInsert };

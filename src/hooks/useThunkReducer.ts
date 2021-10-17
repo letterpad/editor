@@ -1,3 +1,4 @@
+import { EditorState } from "draft-js";
 import {
   Reducer,
   useReducer,
@@ -5,16 +6,20 @@ import {
   ReducerAction,
   Dispatch,
 } from "react";
+import { Action } from "../store/types";
 
-export type Initializer<R extends Reducer<any, any>, I> = (
+export type Initializer<R extends Reducer<EditorState, Action>, I> = (
   arg: (I & ReducerState<R>) | I
 ) => ReducerState<R>;
 export type AsyncAction<S, A> = (dispatch: Dispatch<A>, state: S) => void;
 export type ThunkDispatch<S, A> = (action: A | AsyncAction<S, A>) => void;
 
-let globalState: any = {};
+let globalState: unknown;
 
-export default function useThunkReducer<R extends Reducer<any, any>, I>(
+export default function useThunkReducer<
+  R extends Reducer<EditorState, Action>,
+  I
+>(
   reducer: R,
   initializerArg: I & ReducerState<R>,
   initializer?: Initializer<R, I>
@@ -31,7 +36,7 @@ export default function useThunkReducer<R extends Reducer<any, any>, I>(
     if (typeof action === "function") {
       return (action as AsyncAction<ReducerState<R>, ReducerAction<R>>)(
         dispatch,
-        globalState
+        globalState as ReducerState<R>
       );
     }
     dispatch(action);
