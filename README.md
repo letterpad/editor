@@ -128,14 +128,15 @@ export default MyEditor;
 
   const insertImage = () => {
     const image = getImageFromUser(); // implement this method.
+    const {insertImage, updateImageBlock} = helpers.pluginHelpers.imagePlugin;
 
-    const key = helpers.pluginHelpers.imagePlugin.insertImage({
+    const key = insertImage({
       src: "https://example.com/placeholder.svg"
     });
 
     const uploadedSrc = await uploadImageToServer(image);
 
-    const key = helpers.pluginHelpers.imagePlugin.updateImageBlock(key, {
+    updateImageBlock(key, {
       src: uploadedSrc
     });
   };
@@ -170,7 +171,7 @@ export default MyEditor;
 
 If you would like to contribute then setup your dev environment this way.
 
-You will find some documentation over here - https://app.gitbook.com/@letterpad/s/editor/
+[comment]: <> (You will find some documentation over here - https://app.gitbook.com/@letterpad/s/editor/)
 
 ```sh
 git clone git@github.com:letterpad/editor.git
