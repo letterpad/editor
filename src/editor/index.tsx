@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import Editor, { EditorCommand } from "@draft-js-plugins/editor";
-import { InlineToolbar } from "./plugins/inline-toolbar";
-import { MobileToolbar } from "./plugins/mobile-toolbar";
-import { Sidebar } from "./plugins/side-toolbar";
+import { InlineToolbar } from "../plugins/inline-toolbar";
+import { MobileToolbar } from "../plugins/mobile-toolbar";
+import { Sidebar } from "../plugins/side-toolbar";
 import { EditorState, RichUtils } from "draft-js";
-import withPlugins, { WithPluginProps } from "./plugins/withPlugins";
-import { EditorProps, PluginHelpers } from "./types";
-import { useStoreContext } from "./hooks/useStore";
-import { highlightCodeAction, onChangeAction } from "./store/actions";
-import { extendedBlockRenderMap } from "./blockRenderMap";
+import withPlugins, { WithPluginProps } from "../plugins/withPlugins";
+import { EditorProps, PluginHelpers } from "../types";
+import { useStoreContext } from "../hooks/useStore";
+import { highlightCodeAction, onChangeAction } from "../store/actions";
+import { extendedBlockRenderMap } from "../blockRenderMap";
 
 type Props = EditorProps & WithPluginProps & PluginHelpers;
 
@@ -51,11 +51,12 @@ const LetterpadEditor = (props: Props) => {
           ...props.plugins,
           {
             initialize: (helpers) => {
-              props.setHelpers({
-                ...helpers,
-                pluginHelpers: props.pluginHelpers,
-                // pluginHelpers: props.pluginHelpers.pluginsMap,
-              });
+              if (props.setHelpers) {
+                props.setHelpers({
+                  ...helpers,
+                  pluginHelpers: props.pluginHelpers,
+                });
+              }
             },
           },
         ]}
