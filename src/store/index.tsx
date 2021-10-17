@@ -18,8 +18,8 @@ const StoreContext = React.createContext<{
 function StoreContextProvider(
   props: React.PropsWithChildren<{ value: EditorState }>
 ) {
-  let [state, dispatch] = useThunkReducer(reducer, props.value);
-  let value = {
+  const [state, dispatch] = useThunkReducer(reducer, props.value);
+  const value = {
     state,
     dispatch,
     setState: (state: EditorState) => {
@@ -34,6 +34,6 @@ function StoreContextProvider(
   );
 }
 
-let StoreContextConsumer = StoreContext.Consumer;
+const StoreContextConsumer = StoreContext.Consumer;
 
 export { StoreContext, StoreContextProvider, StoreContextConsumer };

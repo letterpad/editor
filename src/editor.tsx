@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import Editor, { EditorCommand } from "@draft-js-plugins/editor";
-import InlineToolbar from "./plugins/inline-toolbar/inlineToolbar";
-import MobileToolbar from "./plugins/mobile-toolbar/mobileToolbar";
-import SideToolbar from "./plugins/side-toolbar/sideToolbar";
+import { InlineToolbar } from "./plugins/inline-toolbar";
+import { MobileToolbar } from "./plugins/mobile-toolbar";
+import { Sidebar } from "./plugins/side-toolbar";
 import { EditorState, RichUtils } from "draft-js";
 import withPlugins, { WithPluginProps } from "./plugins/withPlugins";
 import { EditorProps, PluginHelpers } from "./types";
@@ -67,7 +67,7 @@ const LetterpadEditor = (props: Props) => {
 
       <MobileToolbar />
       <InlineToolbar />
-      <SideToolbar />
+      <Sidebar />
 
       <br />
       <br />

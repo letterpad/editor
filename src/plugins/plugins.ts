@@ -1,4 +1,4 @@
-import { videoPlugin } from "./video/index";
+import { videoPlugin } from "./video";
 import createFocusPlugin from "@draft-js-plugins/focus";
 import "@draft-js-plugins/focus/lib/plugin.css";
 
@@ -13,12 +13,11 @@ import "prismjs/themes/prism.css";
 import createListPlugin from "draft-js-list-plugin";
 
 // toolbars (side and inline)
-import { sideToolbarPlugin } from "./side-toolbar/sideToolbar";
-import { inlineToolbarPlugin } from "./inline-toolbar/inlineToolbar";
-import { mobileToolbarPlugin } from "./mobile-toolbar/mobileToolbar";
+import { sideToolbarPlugin } from "./side-toolbar";
+import { inlineToolbarPlugin } from "./inline-toolbar";
+import { mobileToolbarPlugin } from "./mobile-toolbar";
 import { createImagePlugin } from "./image";
 import { linkPlugin } from "./anchor";
-import { createTitleHeadingPlugin } from "./title-heading";
 
 const listPlugin = createListPlugin();
 const prismPlugin = createPrismPlugin({
@@ -28,7 +27,6 @@ const prismPlugin = createPrismPlugin({
 const focusPlugin = createFocusPlugin();
 const imagePlugin = createImagePlugin();
 const markdownPlugin = createMarkdownShortcutsPlugin();
-const titleHeadingPlugin = createTitleHeadingPlugin();
 
 export enum PluginNames {
   linkPlugin = "linkPlugin",
@@ -56,7 +54,6 @@ const preparePluginsSingleton = () => {
       listPlugin,
       inlineToolbarPlugin,
       mobileToolbarPlugin,
-      titleHeadingPlugin,
       focusPlugin,
     };
 

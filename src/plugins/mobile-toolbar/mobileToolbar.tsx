@@ -1,5 +1,5 @@
 import createInlineToolbarPlugin from "@draft-js-plugins/inline-toolbar";
-import { ContentBlock, DraftBlockType, EditorState } from "draft-js";
+import { ContentBlock, DraftBlockType } from "draft-js";
 import buttonStyles from "../inline-toolbar/buttonStyles.module.css";
 import toolbarStyles from "../inline-toolbar/toolbarStyles.module.css";
 import { LinkPluginButton } from "../anchor";

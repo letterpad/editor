@@ -1,8 +1,7 @@
-import React from "react";
 import { EditorBlock } from "draft-js";
 import { insertImage } from "./insertImage";
 import { PluginFunctions } from "@draft-js-plugins/editor";
-import { InsertImageAttrs } from "./types";
+import { InsertImageAttrs, StateTypes } from "./types";
 
 const Caption = (props) => {
   return (
@@ -45,15 +44,18 @@ function blockRendererFn(block) {
 }
 
 export const createImagePlugin = () => {
-  const store: { [key: string]: any } = {};
+  const store: StateTypes = {};
+
   return {
     blockRendererFn,
     insertImage: (props: InsertImageAttrs) => {
-      insertImage({
-        ...props,
-        getState: store.getEditorState,
-        setState: store.setEditorState,
-      });
+      if (store.getEditorState && store.setEditorState) {
+        insertImage({
+          ...props,
+          getState: store.getEditorState,
+          setState: store.setEditorState,
+        });
+      }
     },
     initialize: (helpers: PluginFunctions) => {
       store.setEditorState = helpers.setEditorState;
@@ -62,7 +64,10 @@ export const createImagePlugin = () => {
   };
 };
 
-export const imageClicked = async (props: any, { getImageUrl }) => {
+export const imageClicked = async (
+  props: Required<StateTypes>,
+  { getImageUrl }
+) => {
   const { getEditorState, setEditorState } = props;
   const externalCallback = async (
     args: InsertImageAttrs | InsertImageAttrs[]

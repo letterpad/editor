@@ -11,3 +11,8 @@ export interface InsertImageType {
 }
 
 export type InsertImageAttrs = Omit<InsertImageType, "setState" | "getState">;
+
+export type StateTypes = {
+  setEditorState?: (state: EditorState) => void;
+  getEditorState?: () => EditorState;
+};

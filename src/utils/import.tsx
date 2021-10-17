@@ -21,23 +21,23 @@ export const importData = convertFromHTML({
       let caption = "",
         src = "",
         blockType = "IMAGE";
-      let captionNode = node.children[1];
+      const captionNode = node.children[1];
       if (captionNode !== undefined) {
         caption = captionNode.innerHTML;
       }
-      let blockNode = node.children[0];
+      const blockNode = node.children[0];
       if (blockNode !== undefined) {
         src = blockNode["src"];
       }
 
-      let type = blockNode.tagName.toLowerCase();
+      const type = blockNode.tagName.toLowerCase();
       if (type === "iframe") {
         blockType = "video";
       }
 
       return {
         type: "atomic",
-        data: { src: src, type: blockType, caption: caption },
+        data: { src, type: blockType, caption },
       };
     }
   },

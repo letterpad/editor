@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-const useTheme = (isDark: boolean = false) => {
+const useTheme = (isDark = false) => {
   const [theme, setTheme] = useState(isDark ? "dark" : "");
 
   useEffect(() => {

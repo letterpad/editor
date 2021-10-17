@@ -7,7 +7,7 @@ import "draft-js/dist/Draft.css";
 import "./app.css";
 import useTheme from "./hooks/theme";
 import { callbacks } from "./callbacks";
-import { forwardRef, useEffect } from "react";
+import { useEffect } from "react";
 import { defaultProps } from "./constants";
 
 const Container = (props: EditorProps) => {

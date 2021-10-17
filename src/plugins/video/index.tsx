@@ -1,12 +1,16 @@
 import createVideoPlugin from "@draft-js-plugins/video";
 import { TypeMediaInsert } from "../../types";
+import { StateTypes } from "../image/types";
 import videoStyles from "./video.module.css";
 
 export const videoPlugin = createVideoPlugin({
   theme: videoStyles,
 });
 
-export const videoClicked = async (props: any, { getVideoUrl }) => {
+export const videoClicked = async (
+  props: Required<StateTypes>,
+  { getVideoUrl }
+) => {
   const { getEditorState, setEditorState } = props;
 
   const hook = (args: TypeMediaInsert | TypeMediaInsert[]) => {
