@@ -26,6 +26,7 @@ import "./mobileToolbar.css";
 import { imageClicked, IMAGE_BLOCK } from "../image";
 import { videoClicked } from "../video";
 import { callbacks } from "../../callbacks";
+import { getCurrentBlock } from "../utils";
 
 const MobileToolbar = () => {
   const { onImageClick, onVideoClick } = callbacks.getAll();
@@ -94,11 +95,3 @@ const MobileToolbar = () => {
 };
 
 export default MobileToolbar;
-
-const getCurrentBlock = (editorState: EditorState) => {
-  if (editorState.getSelection) {
-    const selectionState = editorState.getSelection();
-    const contentState = editorState.getCurrentContent();
-    return contentState.getBlockForKey(selectionState.getStartKey());
-  }
-};

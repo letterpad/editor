@@ -15,8 +15,8 @@ export const videoClicked = async (props: any, { getVideoUrl }) => {
     }
     let state = getEditorState();
     for (let i = 0; i < args.length; i++) {
-      const { url } = args[i];
-      state = videoPlugin.addVideo(state, { src: url });
+      const { src } = args[i];
+      state = videoPlugin.addVideo(state, { src });
     }
     setEditorState(state);
   };

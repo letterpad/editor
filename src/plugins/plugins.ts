@@ -19,7 +19,6 @@ import { mobileToolbarPlugin } from "./mobile-toolbar/mobileToolbar";
 import { createImagePlugin } from "./image";
 import { linkPlugin } from "./anchor";
 import { createTitleHeadingPlugin } from "./title-heading";
-import { EditorPlugin } from "@draft-js-plugins/editor";
 
 const listPlugin = createListPlugin();
 const prismPlugin = createPrismPlugin({
@@ -45,24 +44,37 @@ export enum PluginNames {
   focusPlugin = "focusPlugin",
 }
 
-export const getPlugins = (ignoreList: PluginNames[] = []): EditorPlugin[] => {
-  const availablePlugins = {
-    linkPlugin,
-    videoPlugin,
-    prismPlugin,
-    sideToolbarPlugin,
-    imagePlugin,
-    markdownPlugin,
-    listPlugin,
-    inlineToolbarPlugin,
-    mobileToolbarPlugin,
-    titleHeadingPlugin,
-    focusPlugin,
+const preparePluginsSingleton = () => {
+  return (ignoreList: PluginNames[]) => {
+    const availablePlugins = {
+      linkPlugin,
+      videoPlugin,
+      prismPlugin,
+      sideToolbarPlugin,
+      imagePlugin,
+      markdownPlugin,
+      listPlugin,
+      inlineToolbarPlugin,
+      mobileToolbarPlugin,
+      titleHeadingPlugin,
+      focusPlugin,
+    };
+
+    for (const plugin of ignoreList) {
+      delete availablePlugins[plugin];
+    }
+
+    return {
+      pluginsArray: Object.values(availablePlugins),
+      pluginsMap: availablePlugins,
+    };
   };
+};
 
-  for (const plugin of ignoreList) {
-    delete availablePlugins[plugin];
-  }
+const plugins = preparePluginsSingleton() as ReturnType<
+  typeof preparePluginsSingleton
+>;
 
-  return Object.values(availablePlugins);
+export const getPlugins = (ignoreList: PluginNames[] = []) => {
+  return plugins(ignoreList);
 };

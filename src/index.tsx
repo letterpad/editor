@@ -7,7 +7,7 @@ import "draft-js/dist/Draft.css";
 import "./app.css";
 import useTheme from "./hooks/theme";
 import { callbacks } from "./callbacks";
-import { useEffect } from "react";
+import { forwardRef, useEffect } from "react";
 import { defaultProps } from "./constants";
 
 const Container = (props: EditorProps) => {
@@ -18,6 +18,7 @@ const Container = (props: EditorProps) => {
     onImageClick: mergedProps.onImageClick,
     onVideoClick: mergedProps.onVideoClick,
     onChange: mergedProps.onChange,
+    setHelpers: mergedProps.setHelpers,
   };
 
   useEffect(() => {

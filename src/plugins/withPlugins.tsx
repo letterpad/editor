@@ -1,6 +1,6 @@
 import { EditorPlugin } from "@draft-js-plugins/editor";
 import { EditorProps, TypeMediaCallback } from "../types";
-import { PluginNames, getPlugins } from "./init";
+import { PluginNames, getPlugins } from "./plugins";
 
 export interface WithPluginProps {
   plugins: EditorPlugin[];
@@ -24,7 +24,8 @@ const withPlugins = <T extends EditorProps = EditorProps>(
       <WrappedComponent
         {...(props as T)}
         {...pluginCallbacks}
-        plugins={plugins}
+        plugins={plugins.pluginsArray}
+        pluginHelpers={plugins.pluginsMap}
       />
     );
   };

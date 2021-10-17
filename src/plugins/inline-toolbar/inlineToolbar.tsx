@@ -20,7 +20,6 @@ import {
 } from "../buttons/Buttons";
 
 import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
-import "./inlineToolbar.css";
 
 import { IMAGE_BLOCK } from "../image";
 

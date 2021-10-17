@@ -96,6 +96,7 @@ blockquote {
 figure {
   margin: 0px;
   padding: 0px;
+  text-align: center;
 }
 .editor h1:first-child {
   margin-top: 0px;
