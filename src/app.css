@@ -83,6 +83,13 @@ figcaption * {
   text-align: center !important;
   font-style: italic;
 }
+
+figure img {
+  max-height: 500px;
+  height: 100%;
+  background: var(--bg-secondary);
+}
+
 blockquote {
   margin: 20px 0px;
   padding: 0.4rem 1rem;
