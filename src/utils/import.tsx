@@ -5,12 +5,21 @@ export const importData = convertFromHTML({
     if (nodeName === "a") {
       return createEntity("LINK", "MUTABLE", { url: node.href });
     }
+    if (nodeName === "hr") {
+      return createEntity("divider", "MUTABLE", { type: "divider" });
+    }
   },
   htmlToBlock: (nodeName, node) => {
+    if (nodeName === "hr") {
+      return {
+        type: "atomic",
+        data: { type: "divider" },
+      };
+    }
     if (nodeName === "img") {
       return {
         type: "atomic",
-        data: { src: node.src, type: "IMAGE" },
+        data: { src: node.src, type: "IMAGE", caption: node.alt },
       };
     }
     if (nodeName === "figure") {

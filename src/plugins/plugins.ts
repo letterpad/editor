@@ -1,7 +1,6 @@
 import { videoPlugin } from "./video";
-// import createFocusPlugin from "@draft-js-plugins/focus";
-import "@draft-js-plugins/focus/lib/plugin.css";
-
+import { focusPlugin } from "./focus";
+import { dividerPlugin } from "./divider";
 // markdown
 import createMarkdownShortcutsPlugin from "draft-js-md-keyboard-plugin";
 // code highlight
@@ -24,8 +23,8 @@ const prismPlugin = createPrismPlugin({
   prism: Prism,
 });
 
-// const focusPlugin = createFocusPlugin();
-const imagePlugin = createImagePlugin();
+const imagePlugin = createImagePlugin({ decorator: null });
+
 const markdownPlugin = createMarkdownShortcutsPlugin();
 
 const pluginsMap = {
@@ -33,12 +32,13 @@ const pluginsMap = {
   videoPlugin,
   prismPlugin,
   sideToolbarPlugin,
+  focusPlugin,
+  dividerPlugin,
   imagePlugin,
   markdownPlugin,
   listPlugin,
   inlineToolbarPlugin,
   mobileToolbarPlugin,
-  // focusPlugin,
 };
 
 const preparePluginsSingleton = () => {

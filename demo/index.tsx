@@ -5,10 +5,10 @@ import LetterpadEditor from "../src/index";
 import { data } from "./data";
 
 const isLocalhost = new URL(document.location.href).hostname === "localhost";
-let pluginHelpers: Helpers;
 
 const Demo = () => {
   const [html, setHtml] = useState("");
+  const [helpers, setHelpers] = useState<Helpers>();
   const editorRef = useRef<Editor>(null);
 
   const handleImage = (insert: TypeInsertImageFn) => {
@@ -25,24 +25,6 @@ const Demo = () => {
   };
   const params = new URL(document.location.href).searchParams;
 
-  const setHelpers = (props: Helpers) => {
-    pluginHelpers = props;
-    setTimeout(async () => {
-      const key = await props.pluginHelpers.imagePlugin.insertImage({
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png",
-        caption: "A nice caption here",
-        width: 300,
-        height: 200,
-      });
-
-      setTimeout(() => {
-        if (key)
-          props.pluginHelpers.imagePlugin.updateImageBlock(key, {
-            src: "https://i.stack.imgur.com/y9DpT.jpg",
-          });
-      }, 3000);
-    }, 3000);
-  };
   return (
     <>
       <LetterpadEditor
