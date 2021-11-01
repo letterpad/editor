@@ -17,22 +17,6 @@ export const ImageBlock = (props) => {
   const width = props.block.get("data").get("width");
 
   const { className, theme = {}, ...otherProps } = props;
-  // leveraging destructuring to omit certain properties from props
-  const {
-    block, // eslint-disable-line @typescript-eslint/no-unused-vars
-    blockProps, // eslint-disable-line @typescript-eslint/no-unused-vars
-    customStyleMap, // eslint-disable-line @typescript-eslint/no-unused-vars
-    customStyleFn, // eslint-disable-line @typescript-eslint/no-unused-vars
-    decorator, // eslint-disable-line @typescript-eslint/no-unused-vars
-    forceSelection, // eslint-disable-line @typescript-eslint/no-unused-vars
-    offsetKey, // eslint-disable-line @typescript-eslint/no-unused-vars
-    selection, // eslint-disable-line @typescript-eslint/no-unused-vars
-    tree, // eslint-disable-line @typescript-eslint/no-unused-vars
-    blockStyleFn, // eslint-disable-line @typescript-eslint/no-unused-vars
-    preventScroll, // eslint-disable-line @typescript-eslint/no-unused-vars
-    contentState, // eslint-disable-line @typescript-eslint/no-unused-vars
-    ...elementProps
-  } = otherProps;
 
   return (
     <>

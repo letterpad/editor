@@ -1048,6 +1048,14 @@
     prop-types "^15.5.8"
     punycode "^2.0.1"
 
+"@draft-js-plugins/divider@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/divider/-/divider-4.1.1.tgz#9764e35366f17f0114d189276db45a9e81e08c05"
+  integrity sha512-dl3ZleveBEOQjP+QquMfv3QWcLeG27uEceEcCO6YahEVESrGyui6TbBrFayyIVSUkDkro3XYsRrLIxBO7dyqPw==
+  dependencies:
+    clsx "^1.0.4"
+    prop-types "^15.5.8"
+
 "@draft-js-plugins/editor@^4.1.0":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@draft-js-plugins/editor/-/editor-4.1.0.tgz#1861fb257ba51ecbd031b8a3d84ee0809de1504e"

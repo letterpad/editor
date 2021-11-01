@@ -1,0 +1,17 @@
+.divider:after {
+  display: block;
+  text-align: center;
+  content: "...";
+  color: var(--color-primary);
+  font-size: 2rem;
+  height: 2rem;
+  line-height: 1rem;
+  clear: both;
+  border: none;
+}
+
+.divider {
+  border: none;
+  margin: 2rem;
+  background: transparent;
+}

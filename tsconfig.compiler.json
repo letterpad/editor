@@ -20,6 +20,14 @@
     "noImplicitAny": false,
     "declaration": true,
     "noEmit": false,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "paths": {
+      "@editor/*": ["./src/editor/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@plugins/*": ["./src/plugins/*"],
+      "@store/*": ["./src/store/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@src/*": ["./src/*"]
+    }
   }
 }

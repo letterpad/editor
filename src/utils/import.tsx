@@ -6,7 +6,7 @@ export const importData = convertFromHTML({
       return createEntity("LINK", "MUTABLE", { url: node.href });
     }
     if (nodeName === "hr") {
-      return createEntity("divider", "MUTABLE", { type: "divider" });
+      return createEntity("divider", "IMMUTABLE", { type: "divider" });
     }
   },
   htmlToBlock: (nodeName, node) => {

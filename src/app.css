@@ -108,3 +108,21 @@ figure {
 .editor h1:first-child {
   margin-top: 0px;
 }
+
+hr:after {
+  display: block;
+  text-align: center;
+  content: "...";
+  color: var(--color-primary);
+  font-size: 2rem;
+  height: 2rem;
+  line-height: 1rem;
+  clear: both;
+  border: none;
+}
+
+hr {
+  border: none;
+  margin: 2rem;
+  background: transparent;
+}
