@@ -1,14 +1,14 @@
-import { StoreContextProvider } from "../store";
-import LetterpadEditor from "../editor";
-import { EditorProps } from "../types";
+import { StoreContextProvider } from "@store";
+import LetterpadEditor from "@editor/index";
+import { EditorProps } from "@src/types";
 import { EditorState } from "draft-js";
-import { importData } from "../utils/import";
+import { importData } from "@utils/import";
 import "draft-js/dist/Draft.css";
 import "../app.css";
-import useTheme from "../hooks/theme";
-import { callbacks } from "../callbacks";
+import useTheme from "@hooks/theme";
+import { callbacks } from "@src/callbacks";
 import { useEffect } from "react";
-import { defaultProps } from "../constants";
+import { defaultProps } from "@src/constants";
 
 const Container = (props: EditorProps) => {
   useTheme(props.dark);

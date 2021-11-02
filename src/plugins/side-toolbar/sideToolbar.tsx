@@ -1,9 +1,9 @@
-import createSideToolbarPlugin from "@draft-js-plugins/side-toolbar";
 // side toolbar (+)
+import createSideToolbarPlugin from "@draft-js-plugins/side-toolbar";
 import "@draft-js-plugins/side-toolbar/lib/plugin.css";
 
-import buttonStyles from "../inline-toolbar/buttonStyles.module.css";
-import toolbarStyles from "../inline-toolbar/toolbarStyles.module.css";
+import buttonStyles from "@plugins/inline-toolbar/buttonStyles.module.css";
+import toolbarStyles from "@plugins/inline-toolbar/toolbarStyles.module.css";
 import blockTypeSelectStyles from "./blockTypeSelectStyles.module.css";
 
 import {
@@ -13,11 +13,13 @@ import {
   ButtonVideo,
   ButtonOrderedList,
   ButtonUnOrderedList,
-} from "../buttons/Buttons";
+  ButtonHorizontalLine,
+} from "@plugins/buttons/Buttons";
 
-import { imageClicked } from "../image";
-import { videoClicked } from "../video";
-import { callbacks } from "../../callbacks";
+import { imageClicked } from "@plugins/image";
+import { videoClicked } from "@plugins/video";
+import { callbacks } from "@src/callbacks";
+import { addDivider } from "@plugins/divider";
 
 export const sideToolbarPlugin = createSideToolbarPlugin({
   theme: {
@@ -54,6 +56,16 @@ const Sidebar = () => {
               }
             >
               <ButtonVideo {...externalProps} />
+            </span>
+            <span
+              onClick={() => {
+                const newState = addDivider(externalProps.getEditorState(), {
+                  type: "divider",
+                });
+                externalProps.setEditorState(newState);
+              }}
+            >
+              <ButtonHorizontalLine {...externalProps} />
             </span>
           </div>
         )}

@@ -25,19 +25,19 @@ export const _insertImage = (editorState: EditorState, src: string) => {
 
 export const highlightCodeOnChange = (editorState: EditorState) => {
   const selection = editorState.getSelection();
-  const block = editorState
-    .getCurrentContent()
-    .getBlockForKey(selection.getStartKey());
+  const content = editorState.getCurrentContent();
+  const startKey = selection.getStartKey();
+  const block = content.getBlockForKey(startKey);
+
   if (block.getType() === "code-block") {
     const data = block.getData().merge({ language: "javascript" });
     const newBlock = block.merge({ data }) as ContentBlock;
-    const newContentState = editorState.getCurrentContent().merge({
-      blockMap: editorState
-        .getCurrentContent()
-        .getBlockMap()
-        .set(selection.getStartKey(), newBlock),
+
+    const newContent = {
+      blockMap: content.getBlockMap().set(startKey, newBlock),
       selectionAfter: selection,
-    }) as ContentState;
+    };
+    const newContentState = content.merge(newContent) as ContentState;
 
     return EditorState.push(editorState, newContentState, "change-block-data");
   }

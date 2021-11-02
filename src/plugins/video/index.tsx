@@ -1,6 +1,6 @@
 import createVideoPlugin from "@draft-js-plugins/video";
-import { TypeMediaInsert } from "../../types";
-import { StateTypes } from "../image/types";
+import { TypeMediaInsert } from "@src/types";
+import { StateTypes } from "@plugins/image/types";
 import videoStyles from "./video.module.css";
 
 export const videoPlugin = createVideoPlugin({

@@ -9,7 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "outDir": "dist",
-    "rootDirs": ["./src", "./demo"],
+    "rootDirs": ["src", "demo"],
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
@@ -20,6 +20,18 @@
     "noImplicitAny": false,
     "declaration": true,
     "noEmit": false,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "baseUrl": ".",
+    "paths": {
+      "@editor/*": ["src/editor/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@plugins/*": ["src/plugins/*"],
+      "@store": ["src/store"],
+      "@store/*": ["src/store/*"],
+      "@utils/*": ["src/utils/*"],
+      "@src": ["src"],
+      "@src/*": ["src/*"],
+      "@demo/*": ["demo/*"]
+    }
   }
 }

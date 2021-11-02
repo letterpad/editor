@@ -1,17 +1,9 @@
-import {
-  ContentBlock,
-  ContentState,
-  EditorState,
-  genKey,
-  Modifier,
-  RichUtils,
-  SelectionState,
-} from "draft-js";
+import { EditorState, Modifier, SelectionState } from "draft-js";
 import { Map } from "immutable";
-import { addNewBlockAt } from "../../utils/helper";
+import { addNewBlockAt } from "@utils/helper";
 import { ImageData, InsertImageType, UpdateImage } from "./types";
 import { IMAGE_BLOCK } from "./constants";
-import { BlockKey } from "../../types";
+import { BlockKey } from "@src/types";
 
 const setImageBlockData = ({
   data,

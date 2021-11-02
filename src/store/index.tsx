@@ -1,9 +1,9 @@
 import { EditorState } from "draft-js";
-import React from "react";
-import { Action } from "./types";
-import reducer from "./reducer";
-import useThunkReducer, { ThunkDispatch } from "../hooks/useThunkReducer";
-import { setState } from "./actions";
+import React, { useMemo } from "react";
+import { Action } from "@store/types";
+import reducer from "@store/reducer";
+import useThunkReducer, { ThunkDispatch } from "@hooks/useThunkReducer";
+import { setState } from "@store/actions";
 
 const initialState: EditorState = EditorState.createEmpty();
 
@@ -27,10 +27,13 @@ function StoreContextProvider(
     },
   };
 
-  return (
-    <StoreContext.Provider value={value}>
-      {props.children}
-    </StoreContext.Provider>
+  return useMemo(
+    () => (
+      <StoreContext.Provider value={value}>
+        {props.children}
+      </StoreContext.Provider>
+    ),
+    [value]
   );
 }
 

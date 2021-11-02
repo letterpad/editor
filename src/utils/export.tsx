@@ -7,24 +7,26 @@ export const exportData = convertToHTML({
     if (type === "IMAGE") {
       return <p />;
     }
-
-    if (type === "atomic" || type === "IMAGE") {
+    if (block.data?.type === "divider" || block.type === "divider") {
+      return <hr />;
+    }
+    if (type === "IMAGE" || block.data?.type === "IMAGE") {
       const src = block?.data?.src;
-      const caption = block?.data?.caption;
+      const caption = block?.text;
       return (
         <figure>
-          <img src={src} />
+          <img src={src} alt={caption} />
           <figcaption>{caption}</figcaption>
         </figure>
       );
     }
 
     if (type === "code-block") {
-      return `<pre><pre>${Prism.highlight(
+      return `<pre>${Prism.highlight(
         block.text,
         Prism.languages.javascript,
         "javascript"
-      )}</pre></pre>`;
+      )}</pre>`;
     }
 
     if (type === "unstyled") {
@@ -35,9 +37,11 @@ export const exportData = convertToHTML({
     if (entity.type === "LINK") {
       return <a href={entity.data?.url} title={entity.data?.url} />;
     }
-    if (entity.type === "IMAGE") {
-      console.log("image found");
+
+    if (entity.type === "divider") {
+      return <hr />;
     }
+
     return originalText;
   },
 });

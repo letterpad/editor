@@ -1,6 +1,6 @@
 import { EditorState } from "draft-js";
-import { highlightCodeOnChange } from "../utils/helper";
-import { Action, ActionType } from "./types";
+import { highlightCodeOnChange } from "@utils/helper";
+import { Action, ActionType } from "@store/types";
 
 const reducer = (state: EditorState, action: Action) => {
   switch (action.type) {

@@ -1,5 +1,5 @@
-import { EditorCallbacks } from "./types";
-import { callbacks as defaultCallbacks } from "./constants";
+import { EditorCallbacks } from "@src/types";
+import { callbacks as defaultCallbacks } from "@src/constants";
 
 /**
  * Its handy to call the user callbacks from anywhere.

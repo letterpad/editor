@@ -1,16 +1,14 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = {
   entry: ["./demo/index.tsx"],
   output: { path: path.join(__dirname, "build"), filename: "editor.js" },
   mode: process.env.NODE_ENV || "development",
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-    fallback: {
-      path: false,
-      process: false,
-    },
+    extensions: [".ts", ".tsx", ".js"],
+    plugins: [new TsconfigPathsPlugin({ extensions: [".ts", ".tsx"] })],
   },
   devtool: "inline-source-map",
   devServer: { contentBase: path.join(__dirname, "src") },
