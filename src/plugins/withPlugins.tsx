@@ -1,5 +1,5 @@
 import { EditorPlugin } from "@draft-js-plugins/editor";
-import { EditorProps, TypeMediaCallback } from "../types";
+import { EditorProps, TypeMediaCallback } from "@src/types";
 import { getPlugins } from ".";
 
 export interface WithPluginProps {

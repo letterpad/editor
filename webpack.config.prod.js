@@ -10,7 +10,8 @@ module.exports = {
     globalObject: "this",
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".ts", ".tsx", ".js"],
+    plugins: [new TsconfigPathsPlugin({ extensions: [".ts", ".tsx"] })],
   },
   module: {
     rules: [

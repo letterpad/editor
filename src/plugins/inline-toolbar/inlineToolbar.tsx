@@ -1,14 +1,14 @@
 import createInlineToolbarPlugin from "@draft-js-plugins/inline-toolbar";
 import { ContentBlock, DraftBlockType, EditorState } from "draft-js";
-import buttonStyles from "../inline-toolbar/buttonStyles.module.css";
-import toolbarStyles from "../inline-toolbar/toolbarStyles.module.css";
+import buttonStyles from "@plugins/inline-toolbar/buttonStyles.module.css";
+import toolbarStyles from "@plugins/inline-toolbar/toolbarStyles.module.css";
 
 export const inlineToolbarPlugin = createInlineToolbarPlugin({
   theme: { buttonStyles, toolbarStyles },
 });
 const InlineToolarHoc = inlineToolbarPlugin.InlineToolbar;
 
-import { LinkPluginButton } from "../anchor";
+import { LinkPluginButton } from "@plugins/anchor";
 import {
   ButtonBold,
   ButtonItalic,
@@ -17,11 +17,11 @@ import {
   ButtonHeadingTwo,
   ButtonLink,
   ButtonHighlight,
-} from "../buttons/Buttons";
+} from "@plugins/buttons/Buttons";
 
 import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
 
-import { IMAGE_BLOCK } from "../image";
+import { IMAGE_BLOCK } from "@plugins/image";
 
 const InlineToolbar = () => {
   return (

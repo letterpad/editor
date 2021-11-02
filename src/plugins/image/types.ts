@@ -1,5 +1,5 @@
 import { EditorState } from "draft-js";
-import { BlockKey } from "../../types";
+import { BlockKey } from "@src/types";
 
 export interface InsertImageType {
   src: string;

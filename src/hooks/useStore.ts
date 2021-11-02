@@ -1,4 +1,6 @@
 import { useContext } from "react";
-import { StoreContext } from "../store";
+import { StoreContext } from "@store";
 
-export const useStoreContext = () => useContext(StoreContext);
+const storeContext = () => useContext(StoreContext);
+
+export const useStoreContext = storeContext;

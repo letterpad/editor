@@ -6,7 +6,7 @@ import {
   ReducerAction,
   Dispatch,
 } from "react";
-import { Action } from "../store/types";
+import { Action } from "@store/types";
 
 export type Initializer<R extends Reducer<EditorState, Action>, I> = (
   arg: (I & ReducerState<R>) | I

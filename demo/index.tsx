@@ -1,7 +1,7 @@
-import { Editor, Helpers, TypeInsertImageFn } from "../src/types";
+import { Editor, Helpers, TypeInsertImageFn } from "@src/types";
 import { useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import LetterpadEditor from "../src/index";
+import LetterpadEditor from "@src";
 import { data } from "./data";
 
 const isLocalhost = new URL(document.location.href).hostname === "localhost";

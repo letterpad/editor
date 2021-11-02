@@ -1,9 +1,9 @@
 import { EditorState } from "draft-js";
 import React, { useMemo } from "react";
-import { Action } from "./types";
-import reducer from "./reducer";
-import useThunkReducer, { ThunkDispatch } from "../hooks/useThunkReducer";
-import { setState } from "./actions";
+import { Action } from "@store/types";
+import reducer from "@store/reducer";
+import useThunkReducer, { ThunkDispatch } from "@hooks/useThunkReducer";
+import { setState } from "@store/actions";
 
 const initialState: EditorState = EditorState.createEmpty();
 

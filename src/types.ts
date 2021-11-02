@@ -1,7 +1,7 @@
 import { PluginFunctions } from "@draft-js-plugins/editor";
 import PluginEditor from "@draft-js-plugins/editor/lib/Editor";
-import { getPlugins } from "./plugins";
-import { ImageData } from "./plugins/image/types";
+import { getPlugins } from "@plugins/index";
+import { ImageData } from "@plugins/image/types";
 
 type EditorHelpers = PluginFunctions;
 

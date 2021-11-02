@@ -16,7 +16,7 @@ export const ImageBlock = (props) => {
   const imgSrc = props.block.get("data").get("src");
   const width = props.block.get("data").get("width");
 
-  const { className, theme = {}, ...otherProps } = props;
+  const { className } = props;
 
   return (
     <>

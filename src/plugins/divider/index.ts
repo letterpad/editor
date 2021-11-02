@@ -1,5 +1,5 @@
 import createDividerPlugin from "@draft-js-plugins/divider";
-import { focusDecorator } from "../focus";
+import { focusDecorator } from "@plugins/focus";
 import dividerStyles from "./divider.module.css";
 
 export const dividerPlugin = createDividerPlugin({

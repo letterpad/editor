@@ -1,6 +1,6 @@
-import { videoPlugin } from "./video";
-import { focusPlugin } from "./focus";
-import { dividerPlugin } from "./divider";
+import { videoPlugin } from "@plugins/video";
+import { focusPlugin } from "@plugins/focus";
+import { dividerPlugin } from "@plugins/divider";
 // markdown
 import createMarkdownShortcutsPlugin from "draft-js-md-keyboard-plugin";
 // code highlight
@@ -12,11 +12,11 @@ import "prismjs/themes/prism.css";
 import createListPlugin from "draft-js-list-plugin";
 
 // toolbars (side and inline)
-import { sideToolbarPlugin } from "./side-toolbar";
-import { inlineToolbarPlugin } from "./inline-toolbar";
-import { mobileToolbarPlugin } from "./mobile-toolbar";
-import { createImagePlugin } from "./image";
-import { linkPlugin } from "./anchor";
+import { sideToolbarPlugin } from "@plugins/side-toolbar";
+import { inlineToolbarPlugin } from "@plugins/inline-toolbar";
+import { mobileToolbarPlugin } from "@plugins/mobile-toolbar";
+import { createImagePlugin } from "@plugins/image";
+import { linkPlugin } from "@plugins/anchor";
 
 const listPlugin = createListPlugin();
 const prismPlugin = createPrismPlugin({

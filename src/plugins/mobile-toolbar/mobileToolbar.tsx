@@ -1,8 +1,8 @@
 import createInlineToolbarPlugin from "@draft-js-plugins/inline-toolbar";
 import { ContentBlock, DraftBlockType } from "draft-js";
-import buttonStyles from "../inline-toolbar/buttonStyles.module.css";
-import toolbarStyles from "../inline-toolbar/toolbarStyles.module.css";
-import { LinkPluginButton } from "../anchor";
+import buttonStyles from "@plugins/inline-toolbar/buttonStyles.module.css";
+import toolbarStyles from "@plugins/inline-toolbar/toolbarStyles.module.css";
+import { LinkPluginButton } from "@plugins/anchor";
 export const mobileToolbarPlugin = createInlineToolbarPlugin({
   theme: { buttonStyles, toolbarStyles },
 });
@@ -18,15 +18,15 @@ import {
   ButtonVideo,
   ButtonImage,
   ButtonHighlight,
-} from "../buttons/Buttons";
+} from "@plugins/buttons/Buttons";
 
 import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
 import "./mobileToolbar.css";
 
-import { imageClicked, IMAGE_BLOCK } from "../image";
-import { videoClicked } from "../video";
-import { callbacks } from "../../callbacks";
-import { getCurrentBlock } from "../utils";
+import { imageClicked, IMAGE_BLOCK } from "@plugins/image";
+import { videoClicked } from "@plugins/video";
+import { callbacks } from "@src/callbacks";
+import { getCurrentBlock } from "@plugins/utils";
 
 const MobileToolbar = () => {
   const { onImageClick, onVideoClick } = callbacks.getAll();

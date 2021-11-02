@@ -9,7 +9,7 @@ module.exports = {
     // "plugin:import/typescript",
     // "plugin:react-hooks/recommended",
   ],
-  plugins: [],
+  plugins: ["import"],
   //   plugins: ["prettier", "babel", "deprecate", "react-hooks"],
   parserOptions: {
     ecmaVersion: 2018,
@@ -20,5 +20,19 @@ module.exports = {
   },
   rules: {
     "import/no-duplicates": "off",
+    "import/no-unresolved": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+  },
+  settings: {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
+    "import/resolver": {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+    },
   },
 };
