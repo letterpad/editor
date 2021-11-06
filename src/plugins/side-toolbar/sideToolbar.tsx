@@ -10,16 +10,15 @@ import {
   ButtonCode,
   ButtonImage,
   ButtonBlockQuote,
-  ButtonVideo,
   ButtonOrderedList,
   ButtonUnOrderedList,
   ButtonHorizontalLine,
 } from "@plugins/buttons/Buttons";
 
 import { imageClicked } from "@plugins/image";
-import { videoClicked } from "@plugins/video";
 import { callbacks } from "@src/callbacks";
 import { addDivider } from "@plugins/divider";
+import { EditorBlockTypes } from "@src/types";
 
 export const sideToolbarPlugin = createSideToolbarPlugin({
   theme: {
@@ -32,7 +31,7 @@ export const sideToolbarPlugin = createSideToolbarPlugin({
 const { SideToolbar } = sideToolbarPlugin;
 
 const Sidebar = () => {
-  const { onImageClick, onVideoClick } = callbacks.getAll();
+  const { onImageClick } = callbacks.getAll();
   return (
     <div className="side-toolbar">
       <SideToolbar>
@@ -51,16 +50,9 @@ const Sidebar = () => {
               <ButtonImage {...externalProps} />
             </span>
             <span
-              onClick={() =>
-                videoClicked(externalProps, { getVideoUrl: onVideoClick })
-              }
-            >
-              <ButtonVideo {...externalProps} />
-            </span>
-            <span
               onClick={() => {
                 const newState = addDivider(externalProps.getEditorState(), {
-                  type: "divider",
+                  type: EditorBlockTypes.Divider,
                 });
                 externalProps.setEditorState(newState);
               }}

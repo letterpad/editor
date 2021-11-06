@@ -1,3 +1,4 @@
+import { EditorBlockTypes } from "@src/types";
 import { convertFromHTML } from "draft-convert";
 
 export const importData = convertFromHTML({
@@ -6,20 +7,26 @@ export const importData = convertFromHTML({
       return createEntity("LINK", "MUTABLE", { url: node.href });
     }
     if (nodeName === "hr") {
-      return createEntity("divider", "IMMUTABLE", { type: "divider" });
+      return createEntity(EditorBlockTypes.Divider, "IMMUTABLE", {
+        type: EditorBlockTypes.Divider,
+      });
     }
   },
   htmlToBlock: (nodeName, node) => {
     if (nodeName === "hr") {
       return {
-        type: "atomic",
-        data: { type: "divider" },
+        type: EditorBlockTypes.Atomic,
+        data: { type: EditorBlockTypes.Divider },
       };
     }
     if (nodeName === "img") {
       return {
-        type: "atomic",
-        data: { src: node.src, type: "IMAGE", caption: node.alt },
+        type: EditorBlockTypes.Atomic,
+        data: {
+          src: node.src,
+          type: EditorBlockTypes.Image,
+          caption: node.alt,
+        },
       };
     }
     if (nodeName === "figure") {
@@ -28,8 +35,8 @@ export const importData = convertFromHTML({
       }
 
       let caption = "",
-        src = "",
-        blockType = "IMAGE";
+        src = "";
+      const blockType = EditorBlockTypes.Image;
       const captionNode = node.children[1];
       if (captionNode !== undefined) {
         caption = captionNode.innerHTML;
@@ -39,13 +46,8 @@ export const importData = convertFromHTML({
         src = blockNode["src"];
       }
 
-      const type = blockNode.tagName.toLowerCase();
-      if (type === "iframe") {
-        blockType = "video";
-      }
-
       return {
-        type: "atomic",
+        type: EditorBlockTypes.Atomic,
         data: { src, type: blockType, caption },
       };
     }

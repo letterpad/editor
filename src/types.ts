@@ -2,6 +2,8 @@ import { PluginFunctions } from "@draft-js-plugins/editor";
 import PluginEditor from "@draft-js-plugins/editor/lib/Editor";
 import { getPlugins } from "@plugins/index";
 import { ImageData } from "@plugins/image/types";
+import { BlockTypes } from "draft-js-list-plugin/dist/types";
+import { DraftBlockType } from "draft-js";
 
 type EditorHelpers = PluginFunctions;
 
@@ -39,3 +41,21 @@ export interface EditorProps extends EditorCallbacks {
 export type PluginHelpers = {
   pluginHelpers: ReturnType<typeof getPlugins>["pluginsMap"];
 };
+
+export enum EditorBlockTypes {
+  Unstyled = "unstyled",
+  Paragraphq = "paragraph",
+  HeaderOne = "header-one",
+  HeaderTwo = "header-two",
+  HeaderThree = "header-three",
+  HeaderFour = "header-four",
+  HeaderFive = "header-five",
+  HeaderSix = "header-six",
+  Unordered = "unordered-list-item",
+  Ordered = "ordered-list-item",
+  Blockquote = "blockquote",
+  CodeBlock = "code-block",
+  Atomic = "atomic",
+  Image = "image",
+  Divider = "divider",
+}

@@ -15,7 +15,6 @@ import {
   ButtonHeadingOne,
   ButtonHeadingTwo,
   ButtonLink,
-  ButtonVideo,
   ButtonImage,
   ButtonHighlight,
 } from "@plugins/buttons/Buttons";
@@ -23,13 +22,13 @@ import {
 import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
 import "./mobileToolbar.css";
 
-import { imageClicked, IMAGE_BLOCK } from "@plugins/image";
-import { videoClicked } from "@plugins/video";
+import { imageClicked } from "@plugins/image";
 import { callbacks } from "@src/callbacks";
+import { EditorBlockTypes } from "@src/types";
 import { getCurrentBlock } from "@plugins/utils";
 
 const MobileToolbar = () => {
-  const { onImageClick, onVideoClick } = callbacks.getAll();
+  const { onImageClick } = callbacks.getAll();
 
   return (
     <span className="mobile-toolbar">
@@ -43,7 +42,7 @@ const MobileToolbar = () => {
 
           if (blockType === "atomic") {
             const type = block.get("data").get("type");
-            if (type === IMAGE_BLOCK) {
+            if (type === EditorBlockTypes.Image) {
               return (
                 <>
                   <ButtonBold {...externalProps} />
@@ -78,13 +77,6 @@ const MobileToolbar = () => {
                 }
               >
                 <ButtonImage {...externalProps} />
-              </span>
-              <span
-                onClick={() =>
-                  videoClicked(externalProps, { getVideoUrl: onVideoClick })
-                }
-              >
-                <ButtonVideo {...externalProps} />
               </span>
             </>
           );

@@ -8,11 +8,12 @@ import {
 import { List, Map, Repeat } from "immutable";
 
 import generateRandomKey from "draft-js/lib/generateRandomKey";
+import { EditorBlockTypes } from "@src/types";
 
 export const _insertImage = (editorState: EditorState, src: string) => {
   const contentState = editorState.getCurrentContent();
   const contentStateWithEntity = contentState.createEntity(
-    "IMAGE",
+    EditorBlockTypes.Image,
     "IMMUTABLE",
     { src }
   );
@@ -69,7 +70,7 @@ export const addNewBlockAt = (
 
   const newBlock = new ContentBlock({
     key: newBlockKey,
-    type: "atomic",
+    type: EditorBlockTypes.Atomic,
     text: text || block.getText(),
     characterList: List(Repeat(CharacterMetadata.create(), text.length)),
     depth: 0,

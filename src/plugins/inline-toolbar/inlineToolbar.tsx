@@ -20,8 +20,7 @@ import {
 } from "@plugins/buttons/Buttons";
 
 import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
-
-import { IMAGE_BLOCK } from "@plugins/image";
+import { EditorBlockTypes } from "@src/types";
 
 const InlineToolbar = () => {
   return (
@@ -36,7 +35,7 @@ const InlineToolbar = () => {
 
           if (blockType === "atomic") {
             const type = block.get("data").get("type");
-            if (type === IMAGE_BLOCK) {
+            if (type === EditorBlockTypes.Image) {
               return (
                 <>
                   <ButtonBold {...externalProps} />
