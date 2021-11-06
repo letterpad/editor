@@ -3,13 +3,14 @@ import { PluginFunctions } from "@draft-js-plugins/editor";
 import { ImageData, StateTypes } from "./types";
 import { ImageBlock } from "./component";
 import { ContentBlock, EditorState, SelectionState } from "draft-js";
+import { EditorBlockTypes } from "@src/types";
 
 function blockRendererFn(block: ContentBlock, decorator) {
   const type = block.getType();
 
   if (type === "atomic") {
     const blockType = block.get("data").get("type");
-    if (blockType === "IMAGE") {
+    if (blockType === EditorBlockTypes.Image) {
       return {
         component: decorator ? decorator(ImageBlock) : ImageBlock,
         editable: true,

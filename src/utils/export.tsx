@@ -1,16 +1,23 @@
+import { EditorBlockTypes } from "@src/types";
 import { convertToHTML } from "draft-convert";
 import Prism from "prismjs";
 
 export const exportData = convertToHTML({
   blockToHTML: (block) => {
     const type = block.type;
-    if (type === "IMAGE") {
+    if (type === EditorBlockTypes.Image) {
       return <p />;
     }
-    if (block.data?.type === "divider" || block.type === "divider") {
+    if (
+      block.data?.type === EditorBlockTypes.Divider ||
+      block.type === EditorBlockTypes.Divider
+    ) {
       return <hr />;
     }
-    if (type === "IMAGE" || block.data?.type === "IMAGE") {
+    if (
+      type === EditorBlockTypes.Image ||
+      block.data?.type === EditorBlockTypes.Image
+    ) {
       const src = block?.data?.src;
       const caption = block?.text;
       return (
@@ -21,7 +28,7 @@ export const exportData = convertToHTML({
       );
     }
 
-    if (type === "code-block") {
+    if (type === EditorBlockTypes.CodeBlock) {
       return `<pre>${Prism.highlight(
         block.text,
         Prism.languages.javascript,
@@ -38,7 +45,7 @@ export const exportData = convertToHTML({
       return <a href={entity.data?.url} title={entity.data?.url} />;
     }
 
-    if (entity.type === "divider") {
+    if (entity.type === EditorBlockTypes.Divider) {
       return <hr />;
     }
 

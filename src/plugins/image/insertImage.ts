@@ -2,8 +2,7 @@ import { EditorState, Modifier, SelectionState } from "draft-js";
 import { Map } from "immutable";
 import { addNewBlockAt } from "@utils/helper";
 import { ImageData, InsertImageType, UpdateImage } from "./types";
-import { IMAGE_BLOCK } from "./constants";
-import { BlockKey } from "@src/types";
+import { BlockKey, EditorBlockTypes } from "@src/types";
 
 const setImageBlockData = ({
   data,
@@ -94,7 +93,7 @@ export const insertImage = async ({
       ? placeholderSrc ||
         `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=`
       : src,
-    type: IMAGE_BLOCK,
+    type: EditorBlockTypes.Image,
     caption,
     width,
     height,
