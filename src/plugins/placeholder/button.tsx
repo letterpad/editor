@@ -18,9 +18,7 @@ const EmbedButton = ({ setEditorState, getEditorState, children }) => {
 
   return (
     <span onMouseDown={onMouseDown}>
-      <span onClick={onClick} type="button">
-        {children}
-      </span>
+      <span onClick={onClick}>{children}</span>
     </span>
   );
 };

@@ -19,6 +19,10 @@ const createEmbedPlugin = ({ options = {} }) => {
     return addEmbed(state, embedData);
   };
 
+  const Component = decorateComponentWithProps(Embed, {
+    theme: pluginOptions.theme,
+  });
+
   return {
     initialize: () => {
       if ("placeholderPlugin" in pluginOptions) {
@@ -30,12 +34,12 @@ const createEmbedPlugin = ({ options = {} }) => {
       if (
         isBlockWithEntityType(getEditorState(), block, EditorBlockTypes.Embed)
       ) {
-        console.log(pluginOptions.theme);
         return {
-          component: decorateComponentWithProps(Embed, {
-            theme: pluginOptions.theme,
-          }),
+          component: Component,
           editable: false,
+          props: {
+            ...getEmbedType(block.getData().get("src")),
+          },
         };
       }
     },

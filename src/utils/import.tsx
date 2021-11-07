@@ -11,8 +11,23 @@ export const importData = convertFromHTML({
         type: EditorBlockTypes.Divider,
       });
     }
+    if (nodeName === "iframe") {
+      return createEntity(EditorBlockTypes.Embed, "IMMUTABLE", {
+        type: EditorBlockTypes.Embed,
+        src: node.src,
+      });
+    }
   },
   htmlToBlock: (nodeName, node) => {
+    if (nodeName === "iframe") {
+      return {
+        type: EditorBlockTypes.Atomic,
+        data: {
+          type: EditorBlockTypes.Embed,
+          src: node.src,
+        },
+      };
+    }
     if (nodeName === "hr") {
       return {
         type: EditorBlockTypes.Atomic,

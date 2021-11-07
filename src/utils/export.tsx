@@ -40,8 +40,10 @@ export const exportData = convertToHTML({
       return <br />;
     }
 
-    if (type === EditorBlockTypes.Embed) {
-      return <iframe src="" />;
+    if (type === EditorBlockTypes.Embed && block?.data?.src) {
+      console.log("================1111");
+      debugger;
+      return <iframe src={block.data.src} />;
     }
 
     if (type === "unstyled") {
@@ -56,7 +58,10 @@ export const exportData = convertToHTML({
     if (entity.type === EditorBlockTypes.Divider) {
       return <hr />;
     }
-
+    if (entity.type === EditorBlockTypes.Embed) {
+      debugger;
+      return <iframe src={entity.data.src} />;
+    }
     return originalText;
   },
 });

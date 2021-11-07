@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { EmbedType } from "./types";
 
 const Embed = (props) => {
   const {
-    theme,
+    theme, // eslint-disable-next-line @typescript-eslint/no-unused-vars
     block, // eslint-disable-next-line @typescript-eslint/no-unused-vars
     blockProps, // eslint-disable-next-line @typescript-eslint/no-unused-vars
     customStyleMap, // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -19,9 +19,15 @@ const Embed = (props) => {
     className, // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ...elementProps
   } = props;
-  console.log("c", theme);
-  const { type, src } = contentState.getEntity(block.getEntityAt(0)).getData();
 
+  // const { type, src } = contentState.getEntity(block.getEntityAt(0)).getData();
+
+  return useMemo(() => {
+    return <Iframe type={blockProps.type} src={blockProps.src} theme={theme} />;
+  }, [blockProps.src, blockProps.type]);
+};
+
+function Iframe({ type, src, theme }) {
   if (type === EmbedType.Github) {
     return (
       <div className={theme.wrapper}>
@@ -48,7 +54,20 @@ const Embed = (props) => {
     );
   }
 
-  return null;
-};
+  if (type === EmbedType.CodeSandbox) {
+    return (
+      <div className={theme.wrapper}>
+        <iframe
+          className={theme.iframe}
+          src={src}
+          frameBorder={0}
+          allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+          sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+        ></iframe>
+      </div>
+    );
+  }
 
+  return null;
+}
 export default Embed;
