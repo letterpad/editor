@@ -40,6 +40,10 @@ export const exportData = convertToHTML({
       return <br />;
     }
 
+    if (type === EditorBlockTypes.Embed) {
+      return <iframe src="" />;
+    }
+
     if (type === "unstyled") {
       return <p />;
     }

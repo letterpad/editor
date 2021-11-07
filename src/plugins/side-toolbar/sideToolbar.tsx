@@ -13,6 +13,7 @@ import {
   ButtonOrderedList,
   ButtonUnOrderedList,
   ButtonHorizontalLine,
+  ButtonEmbedStyled,
 } from "@plugins/buttons/Buttons";
 
 import { imageClicked } from "@plugins/image";
@@ -47,7 +48,9 @@ const Sidebar = ({
             <ButtonCode {...externalProps} />
             <ButtonOrderedList {...externalProps} />
             <ButtonUnOrderedList {...externalProps} />
-            <PlaceholderButton {...externalProps} />
+            <PlaceholderButton {...externalProps}>
+              <ButtonEmbedStyled {...externalProps} />
+            </PlaceholderButton>
             <span
               onClick={() =>
                 imageClicked(externalProps, { getImageUrl: onImageClick })

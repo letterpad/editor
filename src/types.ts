@@ -57,4 +57,5 @@ export enum EditorBlockTypes {
   Image = "image",
   Divider = "divider",
   Placeholder = "placeholder",
+  Embed = "embed",
 }
