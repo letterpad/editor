@@ -36,6 +36,10 @@ export const exportData = convertToHTML({
       )}</pre>`;
     }
 
+    if (type === EditorBlockTypes.Placeholder) {
+      return <br />;
+    }
+
     if (type === "unstyled") {
       return <p />;
     }

@@ -5,7 +5,6 @@ import { getPlugins } from ".";
 export interface WithPluginProps {
   plugins: EditorPlugin[];
   onImageClick: TypeMediaCallback;
-  onVideoClick: TypeMediaCallback;
 }
 
 const withPlugins = <T extends EditorProps = EditorProps>(
@@ -14,7 +13,6 @@ const withPlugins = <T extends EditorProps = EditorProps>(
   const Component = (props: EditorProps) => {
     const pluginCallbacks = {
       onImageClick: props.onImageClick,
-      onVideoClick: props.onVideoClick,
     };
 
     const plugins = getPlugins();

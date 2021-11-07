@@ -1,6 +1,8 @@
 import { videoPlugin } from "@plugins/video";
 import { focusPlugin } from "@plugins/focus";
 import { dividerPlugin } from "@plugins/divider";
+import { createPlaceholderPlugin } from "@plugins/placeholder";
+
 // markdown
 import createMarkdownShortcutsPlugin from "draft-js-md-keyboard-plugin";
 // code highlight
@@ -23,6 +25,7 @@ const prismPlugin = createPrismPlugin({
   prism: Prism,
 });
 
+const placeholderPlugin = createPlaceholderPlugin({});
 const imagePlugin = createImagePlugin({ decorator: null });
 
 const markdownPlugin = createMarkdownShortcutsPlugin();
@@ -39,6 +42,7 @@ const pluginsMap = {
   listPlugin,
   inlineToolbarPlugin,
   mobileToolbarPlugin,
+  placeholderPlugin,
 };
 
 const preparePluginsSingleton = () => {
