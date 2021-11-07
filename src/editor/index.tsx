@@ -68,7 +68,7 @@ const LetterpadEditor = (props: Props) => {
 
       <MobileToolbar />
       <InlineToolbar />
-      <Sidebar />
+      <Sidebar pluginHelpers={props.pluginHelpers} />
 
       <br />
       <br />

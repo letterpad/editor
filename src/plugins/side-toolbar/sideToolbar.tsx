@@ -19,6 +19,7 @@ import { imageClicked } from "@plugins/image";
 import { callbacks } from "@src/callbacks";
 import { addDivider } from "@plugins/divider";
 import { EditorBlockTypes } from "@src/types";
+import { PluginHelpers } from "@src";
 
 export const sideToolbarPlugin = createSideToolbarPlugin({
   theme: {
@@ -30,8 +31,13 @@ export const sideToolbarPlugin = createSideToolbarPlugin({
 
 const { SideToolbar } = sideToolbarPlugin;
 
-const Sidebar = () => {
+const Sidebar = ({
+  pluginHelpers,
+}: {
+  pluginHelpers: PluginHelpers["pluginHelpers"];
+}) => {
   const { onImageClick } = callbacks.getAll();
+  const { PlaceholderButton } = pluginHelpers.placeholderPlugin;
   return (
     <div className="side-toolbar">
       <SideToolbar>
@@ -41,7 +47,7 @@ const Sidebar = () => {
             <ButtonCode {...externalProps} />
             <ButtonOrderedList {...externalProps} />
             <ButtonUnOrderedList {...externalProps} />
-
+            <PlaceholderButton {...externalProps} />
             <span
               onClick={() =>
                 imageClicked(externalProps, { getImageUrl: onImageClick })

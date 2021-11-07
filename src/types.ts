@@ -2,8 +2,6 @@ import { PluginFunctions } from "@draft-js-plugins/editor";
 import PluginEditor from "@draft-js-plugins/editor/lib/Editor";
 import { getPlugins } from "@plugins/index";
 import { ImageData } from "@plugins/image/types";
-import { BlockTypes } from "draft-js-list-plugin/dist/types";
-import { DraftBlockType } from "draft-js";
 
 type EditorHelpers = PluginFunctions;
 
@@ -58,4 +56,5 @@ export enum EditorBlockTypes {
   Atomic = "atomic",
   Image = "image",
   Divider = "divider",
+  Placeholder = "placeholder",
 }

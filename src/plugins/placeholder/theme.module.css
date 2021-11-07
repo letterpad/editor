@@ -1,0 +1,22 @@
+.wrapper {
+  width: 100%;
+  outline: none;
+}
+
+.input {
+  width: 100%;
+  outline: none;
+  font-size: inherit;
+  font-family: inherit;
+  border: 1px solid var(--border);
+  padding: 4px;
+}
+
+.inputError {
+  width: 100%;
+  outline: none;
+  font-size: inherit;
+  font-family: inherit;
+  border: 1px solid crimson;
+  padding: 4px;
+}
