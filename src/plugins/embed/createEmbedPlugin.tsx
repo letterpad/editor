@@ -5,8 +5,10 @@ import Embed from "./component";
 import { addEmbed } from "./modifiers";
 import { EmbedType } from "./types";
 import { getEmbedType } from "./validate";
+import theme from "./theme.module.css";
+import decorateComponentWithProps from "@utils/decorateComponentWithProps";
 
-const defaultOptions = {};
+const defaultOptions = { theme };
 
 const createEmbedPlugin = ({ options = {} }) => {
   const pluginOptions = { ...defaultOptions, ...options };
@@ -28,8 +30,11 @@ const createEmbedPlugin = ({ options = {} }) => {
       if (
         isBlockWithEntityType(getEditorState(), block, EditorBlockTypes.Embed)
       ) {
+        console.log(pluginOptions.theme);
         return {
-          component: Embed,
+          component: decorateComponentWithProps(Embed, {
+            theme: pluginOptions.theme,
+          }),
           editable: false,
         };
       }

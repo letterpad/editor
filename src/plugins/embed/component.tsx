@@ -15,26 +15,37 @@ const Embed = (props) => {
     tree, // eslint-disable-next-line @typescript-eslint/no-unused-vars
     contentState, // eslint-disable-next-line @typescript-eslint/no-unused-vars
     blockStyleFn, // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    style,
+    style, // eslint-disable-next-line @typescript-eslint/no-unused-vars
     className, // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ...elementProps
   } = props;
-
-  const classname = [className].join(" ");
+  console.log("c", theme);
   const { type, src } = contentState.getEntity(block.getEntityAt(0)).getData();
 
   if (type === EmbedType.Github) {
     return (
-      <iframe
-        frameBorder={0}
-        scrolling="no"
-        srcDoc={`<html><body><script src="${src}"></script></body></html>`}
-      ></iframe>
+      <div className={theme.wrapper}>
+        <iframe
+          className={theme.iframe}
+          frameBorder={0}
+          scrolling="no"
+          srcDoc={`<html><body><script src="${src}"></script></body></html>`}
+        ></iframe>
+      </div>
     );
   }
 
   if (type === EmbedType.Youtube) {
-    return <iframe frameBorder={0} scrolling="no" src={src}></iframe>;
+    return (
+      <div className={theme.wrapper}>
+        <iframe
+          frameBorder={0}
+          scrolling="no"
+          src={src}
+          className={theme.iframe}
+        ></iframe>
+      </div>
+    );
   }
 
   return null;
