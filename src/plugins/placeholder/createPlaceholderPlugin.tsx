@@ -10,20 +10,16 @@ import {
 import PlaceholderButton from "./button";
 import React from "react";
 
+type Callback = (
+  block: ContentBlock,
+  data: { [key: string]: any }
+) => Promise<EditorState | null>;
+
 const defaultOptions = {
   placeholder: "Paste a link to embed content and press Enter",
   handleOnReturn: true,
   handleOnPaste: false,
   Component: React.Component,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onEnter: async (
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    block: ContentBlock,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    text: string
-  ): Promise<EditorState | null> => {
-    return null;
-  },
 };
 
 export const createPlaceholderPlugin = ({
@@ -33,6 +29,20 @@ export const createPlaceholderPlugin = ({
   //   editable = false,
 }) => {
   const pluginOptions = { ...defaultOptions, ...options };
+  const callbacks = {
+    enterCallback: async (
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      block: ContentBlock,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      data: { [key: string]: any }
+    ): Promise<EditorState | null> => {
+      return null;
+    },
+  };
+
+  const registerInputEnter = (callback: Callback) => {
+    callbacks.enterCallback = callback;
+  };
 
   return {
     blockRendererFn: (
@@ -54,13 +64,12 @@ export const createPlaceholderPlugin = ({
             },
 
             onEnter: async (block: ContentBlock, text: string) => {
-              let editorState = await pluginOptions.onEnter(block, text);
-
+              let editorState = await callbacks.enterCallback(
+                getEditorState(),
+                { text }
+              );
               if (editorState) {
-                editorState = removePlaceholder(
-                  getEditorState(),
-                  block.getKey()
-                );
+                editorState = removePlaceholder(editorState, block.getKey());
               } else if (text) {
                 editorState = setPlaceHolderWithError(getEditorState(), block);
               }
@@ -76,5 +85,6 @@ export const createPlaceholderPlugin = ({
       entityType: EditorBlockTypes.Placeholder,
       addPlaceholder,
     }),
+    registerInputEnter,
   };
 };

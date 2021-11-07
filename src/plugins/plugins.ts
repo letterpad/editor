@@ -19,6 +19,7 @@ import { inlineToolbarPlugin } from "@plugins/inline-toolbar";
 import { mobileToolbarPlugin } from "@plugins/mobile-toolbar";
 import { createImagePlugin } from "@plugins/image";
 import { linkPlugin } from "@plugins/anchor";
+import createEmbedPlugin from "./embed/createEmbedPlugin";
 
 const listPlugin = createListPlugin();
 const prismPlugin = createPrismPlugin({
@@ -26,6 +27,11 @@ const prismPlugin = createPrismPlugin({
 });
 
 const placeholderPlugin = createPlaceholderPlugin({});
+const embedPlugin = createEmbedPlugin({
+  options: {
+    placeholderPlugin,
+  },
+});
 const imagePlugin = createImagePlugin({ decorator: null });
 
 const markdownPlugin = createMarkdownShortcutsPlugin();
@@ -43,6 +49,7 @@ const pluginsMap = {
   inlineToolbarPlugin,
   mobileToolbarPlugin,
   placeholderPlugin,
+  embedPlugin,
 };
 
 const preparePluginsSingleton = () => {

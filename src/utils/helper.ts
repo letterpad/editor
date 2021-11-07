@@ -106,3 +106,24 @@ export const addNewBlockAt = (
     addedBlockKey: newBlockKey,
   };
 };
+
+export const isBlockWithEntityType = (
+  editorState: EditorState,
+  block: ContentBlock,
+  entityType: EditorBlockTypes
+) => {
+  if (block.getType() !== EditorBlockTypes.Atomic) {
+    return false;
+  }
+
+  const contentState = editorState.getCurrentContent();
+  const entityKey = block.getEntityAt(0);
+
+  if (!entityKey) {
+    return false;
+  }
+
+  const entity = contentState.getEntity(entityKey);
+
+  return entity.getType() === entityType;
+};
