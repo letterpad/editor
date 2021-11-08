@@ -1,3 +1,4 @@
+import { getEmbedType, Iframe } from "@plugins/embed";
 import { EditorBlockTypes } from "@src/types";
 import { convertToHTML } from "draft-convert";
 import Prism from "prismjs";
@@ -8,12 +9,12 @@ export const exportData = convertToHTML({
     if (type === EditorBlockTypes.Image) {
       return <p />;
     }
-    if (
-      block.data?.type === EditorBlockTypes.Divider ||
-      block.type === EditorBlockTypes.Divider
-    ) {
-      return <hr />;
-    }
+    // if (
+    //   block.data?.type === EditorBlockTypes.Divider ||
+    //   block.type === EditorBlockTypes.Divider
+    // ) {
+    //   return <hr />;
+    // }
     if (
       type === EditorBlockTypes.Image ||
       block.data?.type === EditorBlockTypes.Image
@@ -40,10 +41,6 @@ export const exportData = convertToHTML({
       return <br />;
     }
 
-    if (type === EditorBlockTypes.Embed) {
-      return <iframe src="" />;
-    }
-
     if (type === "unstyled") {
       return <p />;
     }
@@ -52,11 +49,14 @@ export const exportData = convertToHTML({
     if (entity.type === "LINK") {
       return <a href={entity.data?.url} title={entity.data?.url} />;
     }
-
     if (entity.type === EditorBlockTypes.Divider) {
       return <hr />;
     }
+    if (entity.type === EditorBlockTypes.Embed) {
+      const { src, type } = getEmbedType(entity.data.src);
 
+      return src ? <iframe src={src} /> : <br />;
+    }
     return originalText;
   },
 });

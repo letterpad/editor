@@ -34,7 +34,7 @@ export const createImagePlugin = ({ decorator }) => {
       const blockMap = currentContent.getBlockMap();
       const block = blockMap.get(anchorKey);
 
-      if (block.getType() !== "atomic") return "not-handled";
+      if (block.getData().get("type") !== "image") return "not-handled";
 
       const nextBlock = currentContent.getBlockAfter(block.getKey());
 

@@ -126,3 +126,7 @@ hr {
   margin: 2rem;
   background: transparent;
 }
+
+iframe {
+  margin-bottom: 2rem;
+}

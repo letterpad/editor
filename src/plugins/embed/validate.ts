@@ -22,6 +22,12 @@ export const getEmbedType = (text: string) => {
     };
   }
 
+  if (text.startsWith("https://codesandbox.io/embed")) {
+    return {
+      type: EmbedType.CodeSandbox,
+      src: text,
+    };
+  }
   return {
     type: EmbedType.Unknown,
     src: null,
