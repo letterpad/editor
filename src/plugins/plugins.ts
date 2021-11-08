@@ -28,6 +28,7 @@ const prismPlugin = createPrismPlugin({
 
 const placeholderPlugin = createPlaceholderPlugin({});
 const embedPlugin = createEmbedPlugin({
+  decorator: focusPlugin.decorator,
   options: {
     placeholderPlugin,
   },
@@ -37,7 +38,6 @@ const imagePlugin = createImagePlugin({ decorator: null });
 const markdownPlugin = createMarkdownShortcutsPlugin();
 
 const pluginsMap = {
-  linkPlugin,
   videoPlugin,
   prismPlugin,
   sideToolbarPlugin,
@@ -50,6 +50,7 @@ const pluginsMap = {
   mobileToolbarPlugin,
   placeholderPlugin,
   embedPlugin,
+  linkPlugin,
 };
 
 const preparePluginsSingleton = () => {
