@@ -35,7 +35,6 @@ const setImageBlockData = ({
       dataMap = dataMap.set(key, data[key]);
     }
   }
-  console.log("setting new data");
 
   const newContentState = Modifier.setBlockData(
     content,

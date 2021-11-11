@@ -22,7 +22,6 @@ const Embed = (props) => {
   } = props;
 
   // const { type, src } = contentState.getEntity(block.getEntityAt(0)).getData();
-  console.log(className);
   return useMemo(() => {
     return (
       <Iframe
