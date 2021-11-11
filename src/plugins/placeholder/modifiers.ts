@@ -15,19 +15,6 @@ export const setPlaceHolderWithError = (
   state: EditorState,
   block: ContentBlock
 ) => {
-  // const contentState = state.getCurrentContent();
-  // const selection = state.getSelection();
-  // const entity = contentState.getEntity(key);
-  // const exisitingData = entity.getData();
-  // const newContentState = Modifier.setBlockData(
-  //   contentState,
-  //   selection,
-  //   Map({
-  //     ...exisitingData,
-  //     error: true,
-  //   })
-  // );
-
   // save the actual selection to use later
   const userSelection = state.getSelection();
 

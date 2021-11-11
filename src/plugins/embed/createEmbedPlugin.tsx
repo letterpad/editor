@@ -1,19 +1,12 @@
 import { EditorBlockTypes } from "@src";
 import { isBlockWithEntityType } from "@utils/helper";
-import {
-  ContentBlock,
-  ContentState,
-  EditorState,
-  genKey,
-  Modifier,
-} from "draft-js";
+import { ContentBlock, EditorState } from "draft-js";
 import Embed from "./component";
 import { addEmbed } from "./modifiers";
 import { EmbedType } from "./types";
 import { getEmbedType } from "./validate";
 import theme from "./theme.module.css";
 import decorateComponentWithProps from "@utils/decorateComponentWithProps";
-import { List } from "immutable";
 
 const defaultOptions = { theme };
 
@@ -39,23 +32,6 @@ const createEmbedPlugin = ({ options = {}, decorator }) => {
         pluginOptions.placeholderPlugin.registerInputEnter(onPlaceholderEnter);
       }
     },
-    // handleReturn: (e, state) => {
-    //   e.preventDefault();
-
-    //   // const currentContent = state.getCurrentContent();
-    //   // const selection = state.getSelection();
-    //   // const anchorKey = selection.getAnchorKey();
-    //   // const blockMap = currentContent.getBlockMap();
-    //   // const block = blockMap.get(anchorKey);
-
-    //   const currentContent = state.getCurrentContent();
-    //   const selection = state.getSelection();
-    //   const textWithEntity = Modifier.splitBlock(currentContent, selection);
-
-    //   store.setEditorState(
-    //     EditorState.push(state, textWithEntity, "split-block")
-    //   );
-    // },
     blockRendererFn: (block: ContentBlock, { getEditorState }) => {
       if (
         isBlockWithEntityType(getEditorState(), block, EditorBlockTypes.Embed)
