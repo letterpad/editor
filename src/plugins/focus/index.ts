@@ -14,4 +14,6 @@ export const focusPlugin = createFocusPlugin({
 }) as FocusEditorPlugin;
 
 // @ts-ignore
-export const focusDecorator = composeDecorators(focusPlugin.decorator) as any;
+export const focusDecorator = composeDecorators(
+  focusPlugin.decorator
+) as unknown;

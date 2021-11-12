@@ -1,4 +1,4 @@
-import { getEmbedType, Iframe } from "@plugins/embed";
+import { getEmbedType } from "@plugins/embed";
 import { EditorBlockTypes } from "@src/types";
 import { convertToHTML } from "draft-convert";
 import Prism from "prismjs";
@@ -53,7 +53,7 @@ export const exportData = convertToHTML({
       return <hr />;
     }
     if (entity.type === EditorBlockTypes.Embed) {
-      const { src, type } = getEmbedType(entity.data.src);
+      const { src } = getEmbedType(entity.data.src);
 
       return src ? <iframe src={src} /> : <br />;
     }

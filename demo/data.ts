@@ -10,7 +10,7 @@ export const data = `
 <hr>
 <h2>Embeds</h2>
 <iframe src="https://www.youtube.com/watch?v=LkRhBOZSw38&ab_channel=WesSpencer"></iframe>
-<iframe src="https://codesandbox.io/embed/wp5olnmn?fontsize=14&hidenavigation=1&theme=dark"></iframe>
+<!--<iframe src="https://codesandbox.io/embed/wp5olnmn?fontsize=14&hidenavigation=1&theme=dark"></iframe>-->
 
 <h2 id="emphasis">Text</h2>
 <p>This is <strong>bold text</strong> and this is <em>italic text</em></p>
@@ -52,21 +52,13 @@ export const data = `
 </ol>
 <h2 id="code">Code</h2>
 <p>Indented code</p>
-<pre><code><span class="hljs-comment">// Some comments</span>
-line <span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">code</span>
-line <span class="hljs-number">2</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">code</span>
-line <span class="hljs-number">3</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">code</span>
-</code></pre><p>Block code &quot;fences&quot;</p>
-<p>Syntax highlighting</p>
 <pre>
-var foo = function (bar) {
-  return bar++;
-};</p>
-<p>console.log(foo(5));
+const add = (num1, num2) => {
+  return num1 + num2;
+}
 </pre>
 <h2 id="links">Links</h2>
 <p><a href="http://dev.nodeca.com">link text</a> is</p>
 <p><a href="http://nodeca.github.io/pica/demo/" title="title text!">link with title</a></p>
-<h2 id="images">Images</h2>
 
 `;

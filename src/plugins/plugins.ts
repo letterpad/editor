@@ -36,32 +36,44 @@ const embedPlugin = createEmbedPlugin({
 const imagePlugin = createImagePlugin({ decorator: null });
 
 const markdownPlugin = createMarkdownShortcutsPlugin();
+// we need the right order
+const pluginsArr = [
+  { videoPlugin },
+  { sideToolbarPlugin },
+  { focusPlugin },
+  { dividerPlugin },
+  { imagePlugin },
+  { markdownPlugin },
+  { listPlugin },
+  { inlineToolbarPlugin },
+  { mobileToolbarPlugin },
+  { placeholderPlugin },
+  { embedPlugin },
+  { linkPlugin },
+  { prismPlugin },
+];
 
-const pluginsMap = {
-  videoPlugin,
-  prismPlugin,
-  sideToolbarPlugin,
-  focusPlugin,
-  dividerPlugin,
-  imagePlugin,
-  markdownPlugin,
-  listPlugin,
-  inlineToolbarPlugin,
-  mobileToolbarPlugin,
-  placeholderPlugin,
-  embedPlugin,
-  linkPlugin,
-};
-
-const preparePluginsSingleton = () => {
-  const closureFn = () => {
-    return {
-      pluginsArray: Object.values(pluginsMap),
-      pluginsMap,
-    };
+export const getPlugins = () => {
+  return {
+    pluginsMap: getPluginsMap(pluginsArr),
+    pluginsArr: getPluginsArr(pluginsArr),
   };
-
-  return closureFn;
 };
 
-export const getPlugins = preparePluginsSingleton();
+function getPluginsArr<T extends typeof pluginsArr>(plugins: T) {
+  return plugins.map((plugin) => {
+    return Object.values(plugin).pop() as T[keyof T];
+  });
+}
+
+function getPluginsMap<T extends typeof pluginsArr>(plugins: T) {
+  const pluginsMap = plugins.reduce<Record<keyof (keyof T), T>>((a, item) => {
+    const name = Object.keys(item).pop() as keyof typeof item;
+    a[name] = Object.values(item).pop();
+
+    return a;
+    //@ts-ignore
+  }, {});
+
+  return pluginsMap as Required<typeof pluginsMap>;
+}

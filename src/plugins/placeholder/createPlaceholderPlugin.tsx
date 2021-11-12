@@ -12,7 +12,7 @@ import React from "react";
 
 type Callback = (
   block: ContentBlock,
-  data: { [key: string]: any }
+  data: { [key: string]: unknown }
 ) => Promise<EditorState | null>;
 
 const defaultOptions = {
@@ -34,7 +34,7 @@ export const createPlaceholderPlugin = ({
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       block: ContentBlock,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      data: { [key: string]: any }
+      data: { [key: string]: unknown }
     ): Promise<EditorState | null> => {
       return null;
     },

@@ -1,7 +1,6 @@
 import { EditorBlockTypes } from "@src/types";
 import { addBlock, removeBlock } from "@utils/modifiers";
 import { ContentBlock, EditorState, Modifier, SelectionState } from "draft-js";
-import { Map } from "immutable";
 
 export const addPlaceholder = (state: EditorState, data) => {
   return addBlock(state, EditorBlockTypes.Placeholder, data);

@@ -4,8 +4,12 @@ import { convertFromHTML } from "draft-convert";
 export const importData = convertFromHTML({
   htmlToEntity: (nodeName, node, createEntity) => {
     if (nodeName === "a") {
-      return createEntity("LINK", "MUTABLE", { url: node.href });
+      return createEntity("LINK", "MUTABLE", {
+        url: node.href,
+        title: node.title,
+      });
     }
+
     if (nodeName === "hr") {
       return createEntity(EditorBlockTypes.Divider, "IMMUTABLE", {
         type: EditorBlockTypes.Divider,

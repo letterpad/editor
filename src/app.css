@@ -8,6 +8,7 @@
   --color-accent: #fff;
   --color-primary: #333;
   --color-secondary: #000;
+  --color-link: #3f82b7;
 
   --bg-toolbar: #333;
   --color-toolbar: #ddd;
@@ -19,11 +20,11 @@
   --bg-secondary: #272727;
   --bg-primary: #121212;
   --border: #2e2e31;
-  --bg-accent: #777;
+  --bg-accent: #2db76d;
   --color-accent: #333;
   --color-primary: #bababa;
   --color-secondary: #bababa;
-
+  --color-link: #3f82b7;
   --bg-toolbar: #333;
   --color-toolbar: #ddd;
   --border-toolbar: #111;
@@ -129,4 +130,10 @@ hr {
 
 iframe {
   margin-bottom: 2rem;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  cursor: pointer;
 }
