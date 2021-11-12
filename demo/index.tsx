@@ -1,4 +1,4 @@
-import { Editor, Helpers, TypeInsertImageFn } from "@src/types";
+import { Editor, EditorHelpers, TypeInsertImageFn } from "@src/types";
 import { useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import LetterpadEditor from "@src";
@@ -8,10 +8,12 @@ const isLocalhost = new URL(document.location.href).hostname === "localhost";
 
 const Demo = () => {
   const [html, setHtml] = useState("");
-  const [helpers, setHelpers] = useState<Helpers>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [helpers, setHelpers] = useState<EditorHelpers>();
   const editorRef = useRef<Editor>(null);
 
   const handleImage = (insert: TypeInsertImageFn) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const blockKey = insert({
       src: "https://www.carolmusyoka.com/wp-content/uploads/2020/04/Freedom.jpg",
       caption: "captionis",
@@ -20,9 +22,6 @@ const Demo = () => {
     });
   };
 
-  const handleVideo = (insert) => {
-    insert("https://www.youtube.com/watch?v=M3BM9TB-8yA");
-  };
   const params = new URL(document.location.href).searchParams;
 
   return (
@@ -30,7 +29,6 @@ const Demo = () => {
       <LetterpadEditor
         html={data}
         onImageClick={handleImage}
-        onVideoClick={handleVideo}
         dark={params.get("dark") === ""}
         onChange={(change) => {
           setHtml(change);

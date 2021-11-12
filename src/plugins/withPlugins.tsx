@@ -1,9 +1,11 @@
 import { EditorPlugin } from "@draft-js-plugins/editor";
+import { PluginsMap } from "@src/types";
 import { EditorProps, TypeMediaCallback } from "@src/types";
 import { getPlugins } from ".";
 
 export interface WithPluginProps {
   plugins: EditorPlugin[];
+  pluginsMap: PluginsMap;
   onImageClick: TypeMediaCallback;
 }
 
@@ -14,15 +16,14 @@ const withPlugins = <T extends EditorProps = EditorProps>(
     const pluginCallbacks = {
       onImageClick: props.onImageClick,
     };
-
     const plugins = getPlugins();
 
     return (
       <WrappedComponent
         {...(props as T)}
         {...pluginCallbacks}
-        plugins={plugins.pluginsArray}
-        pluginHelpers={plugins.pluginsMap}
+        plugins={plugins.pluginsArr}
+        pluginsMap={plugins.pluginsMap}
       />
     );
   };

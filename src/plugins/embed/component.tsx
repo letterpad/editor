@@ -37,7 +37,7 @@ const Embed = (props) => {
 interface IFrameProps {
   type: string;
   src: string;
-  theme?: any;
+  theme?: typeof defaultTheme;
   className?: string;
 }
 export const Iframe = ({
@@ -79,8 +79,7 @@ export const Iframe = ({
           className={theme.iframe}
           src={src}
           frameBorder={0}
-          allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-          sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+          // sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
         />
       </div>
     );

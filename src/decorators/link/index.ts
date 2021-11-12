@@ -1,0 +1,1 @@
+export { linkDecorator } from "./link";

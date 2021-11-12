@@ -8,10 +8,10 @@ This editor gives a high level api of the [draft editor](https://draftjs.org/) a
 ### How to use
 
 ```sh
-// using yarn
+# using yarn
 yarn add letterpad-editor
 
-//using npm
+# using npm
 npm install letterpad-editor
 ```
 
@@ -25,10 +25,10 @@ const MyEditor = () => {
   return (
     <LetterpadEditor
       theme="dark"
+      html="Hello World"
       onChange={(html: string) => {
         console.log(html);
       }}
-      html="Hello World"
     />
   );
 };
@@ -69,11 +69,11 @@ export default MyEditor;
       <div>
         <LetterpadEditor
           theme="dark"
+          html="Hello World"
+          setHelpers={setHelpers}
           onChange={(html: string) => {
             console.log(html);
           }}
-          html="Hello World"
-          setHelpers={setHelpers}
         />
         <button onClick={insertImage}>Insert Image</button>
       </div>

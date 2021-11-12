@@ -3,13 +3,13 @@ import LetterpadEditor from "@editor/index";
 import { EditorProps } from "@src/types";
 import { CompositeDecorator, EditorState } from "draft-js";
 import { importData } from "@utils/import";
-import "draft-js/dist/Draft.css";
-import "../app.css";
 import useTheme from "@hooks/theme";
 import { callbacks } from "@src/callbacks";
 import { useEffect } from "react";
 import { defaultProps } from "@src/constants";
-import { linkDecorator } from "@src/decorators/link";
+import { linkDecorator } from "@src/decorators/link/index";
+import "draft-js/dist/Draft.css";
+import "../app.css";
 
 const decorators = new CompositeDecorator([linkDecorator]);
 
@@ -19,7 +19,6 @@ const Container = (props: EditorProps) => {
 
   const userCallbacks = {
     onImageClick: mergedProps.onImageClick,
-    onVideoClick: mergedProps.onVideoClick,
     onChange: mergedProps.onChange,
     setHelpers: mergedProps.setHelpers,
   };

@@ -5,12 +5,12 @@ import { MobileToolbar } from "@plugins/mobile-toolbar";
 import { Sidebar } from "@plugins/side-toolbar";
 import { EditorState, RichUtils } from "draft-js";
 import withPlugins, { WithPluginProps } from "@plugins/withPlugins";
-import { EditorProps, PluginHelpers } from "@src/types";
+import { EditorProps } from "@src/types";
 import { useStoreContext } from "@hooks/useStore";
 import { highlightCodeAction, onChangeAction } from "@store/actions";
 import { extendedBlockRenderMap } from "@src/blockRenderMap";
 
-type Props = EditorProps & WithPluginProps & PluginHelpers;
+type Props = EditorProps & WithPluginProps;
 
 const LetterpadEditor = (props: Props) => {
   const editorRef = useRef<Editor>(null);
@@ -54,7 +54,7 @@ const LetterpadEditor = (props: Props) => {
               if (props.setHelpers) {
                 props.setHelpers({
                   ...helpers,
-                  pluginHelpers: props.pluginHelpers,
+                  getPlugins: () => props.pluginsMap,
                 });
               }
             },
@@ -68,7 +68,7 @@ const LetterpadEditor = (props: Props) => {
 
       <MobileToolbar />
       <InlineToolbar />
-      <Sidebar pluginHelpers={props.pluginHelpers} />
+      <Sidebar plugins={props.pluginsMap} />
 
       <br />
       <br />

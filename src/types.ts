@@ -3,7 +3,10 @@ import PluginEditor from "@draft-js-plugins/editor/lib/Editor";
 import { getPlugins } from "@plugins/index";
 import { ImageData } from "@plugins/image/types";
 
-type EditorHelpers = PluginFunctions;
+export type PluginsMap = ReturnType<typeof getPlugins>["pluginsMap"];
+export interface EditorHelpers extends Omit<PluginFunctions, "getPlugins"> {
+  getPlugins: () => PluginsMap;
+}
 
 export type Editor = PluginEditor;
 
@@ -20,13 +23,10 @@ export type TypeMediaCallback = (insertImage: TypeInsertImageFn) => void;
 
 export interface EditorCallbacks {
   onImageClick?: TypeMediaCallback;
-  onVideoClick?: TypeMediaCallback;
-  onChange: (html: string, title?: string) => void;
+  onChange: (html: string) => void;
 }
 
-export type Helpers = PluginHelpers & EditorHelpers;
-
-export type HelpersCallback = (helpers: PluginHelpers & EditorHelpers) => void;
+export type HelpersCallback = (helpers: EditorHelpers) => void;
 
 export interface EditorProps extends EditorCallbacks {
   placeholder?: string;
@@ -35,10 +35,6 @@ export interface EditorProps extends EditorCallbacks {
   editorRef?: React.RefObject<Editor>;
   setHelpers?: HelpersCallback;
 }
-
-export type PluginHelpers = {
-  pluginHelpers: ReturnType<typeof getPlugins>["pluginsMap"];
-};
 
 export enum EditorBlockTypes {
   Unstyled = "unstyled",
