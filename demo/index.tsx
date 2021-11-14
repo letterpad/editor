@@ -7,7 +7,7 @@ import { data } from "./data";
 const isLocalhost = new URL(document.location.href).hostname === "localhost";
 
 const Demo = () => {
-  const [html, setHtml] = useState("");
+  const [html, setHtml] = useState(data);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [helpers, setHelpers] = useState<EditorHelpers>();
   const editorRef = useRef<Editor>(null);
@@ -27,7 +27,7 @@ const Demo = () => {
   return (
     <>
       <LetterpadEditor
-        html={data}
+        html={html}
         onImageClick={handleImage}
         dark={params.get("dark") === ""}
         onChange={(change) => {
