@@ -1,14 +1,9 @@
-import { videoPlugin } from "@plugins/video";
 import { focusPlugin } from "@plugins/focus";
 import { dividerPlugin } from "@plugins/divider";
 import { createPlaceholderPlugin } from "@plugins/placeholder";
 
 // markdown
 import createMarkdownShortcutsPlugin from "draft-js-md-keyboard-plugin";
-// code highlight
-import Prism from "prismjs";
-import createPrismPlugin from "draft-js-prism-plugin";
-import "prismjs/themes/prism.css";
 
 // li ul ol
 import createListPlugin from "draft-js-list-plugin";
@@ -22,9 +17,6 @@ import { linkPlugin } from "@plugins/anchor";
 import createEmbedPlugin from "./embed/createEmbedPlugin";
 
 const listPlugin = createListPlugin();
-const prismPlugin = createPrismPlugin({
-  prism: Prism,
-});
 
 const placeholderPlugin = createPlaceholderPlugin({});
 const embedPlugin = createEmbedPlugin({
@@ -38,7 +30,6 @@ const imagePlugin = createImagePlugin({ decorator: null });
 const markdownPlugin = createMarkdownShortcutsPlugin();
 // we need the right order
 const pluginsArr = [
-  { videoPlugin },
   { sideToolbarPlugin },
   { focusPlugin },
   { dividerPlugin },
@@ -50,7 +41,6 @@ const pluginsArr = [
   { placeholderPlugin },
   { embedPlugin },
   { linkPlugin },
-  { prismPlugin },
 ];
 
 export const getPlugins = () => {

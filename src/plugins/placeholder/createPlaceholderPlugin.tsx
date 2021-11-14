@@ -46,7 +46,7 @@ export const createPlaceholderPlugin = ({
 
   return {
     blockRendererFn: (
-      block,
+      block: ContentBlock,
       { getEditorState, setEditorState, setReadOnly }
     ) => {
       if (block.getType() === EditorBlockTypes.Placeholder) {

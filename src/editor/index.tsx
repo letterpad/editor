@@ -1,14 +1,22 @@
-import React, { useEffect, useRef } from "react";
+import React, { memo, useCallback, useRef } from "react";
 import Editor, { EditorCommand } from "@draft-js-plugins/editor";
 import { InlineToolbar } from "@plugins/inline-toolbar";
 import { MobileToolbar } from "@plugins/mobile-toolbar";
 import { Sidebar } from "@plugins/side-toolbar";
-import { EditorState, RichUtils } from "draft-js";
+import { CompositeDecorator, EditorState, RichUtils } from "draft-js";
 import withPlugins, { WithPluginProps } from "@plugins/withPlugins";
 import { EditorProps } from "@src/types";
 import { useStoreContext } from "@hooks/useStore";
-import { highlightCodeAction, onChangeAction } from "@store/actions";
+import { onChangeAction } from "@store/actions";
 import { extendedBlockRenderMap } from "@src/blockRenderMap";
+
+import createPrismDecorator from "draft-js-prism-decorator";
+import { linkDecorator } from "@src/decorators/link";
+
+const prismDecorator = createPrismDecorator({
+  getLanguage: () => "javascript",
+});
+const decorators = new CompositeDecorator([linkDecorator, prismDecorator]);
 
 type Props = EditorProps & WithPluginProps;
 
@@ -16,11 +24,6 @@ const LetterpadEditor = (props: Props) => {
   const editorRef = useRef<Editor>(null);
 
   const { state, dispatch } = useStoreContext();
-
-  useEffect(() => {
-    dispatch(highlightCodeAction(state));
-  }, [state]);
-
   const focusEditor = () => {
     getRef()?.current?.focus();
   };
@@ -28,19 +31,33 @@ const LetterpadEditor = (props: Props) => {
   const getRef = () => {
     return props.editorRef || editorRef;
   };
-
-  const onChange = (newState: EditorState) => {
-    dispatch(onChangeAction(newState, props.onChange));
-  };
-
-  const handleKeyCommand = (command: EditorCommand, state: EditorState) => {
-    const newState = RichUtils.handleKeyCommand(state, command);
-    if (newState) {
+  const onChange = useCallback(
+    (newState: EditorState) => {
       dispatch(onChangeAction(newState, props.onChange));
-      return "handled";
+    },
+    [state]
+  );
+
+  const handleKeyCommand = useCallback(
+    (command: EditorCommand, state: EditorState) => {
+      const newState = RichUtils.handleKeyCommand(state, command);
+      if (newState) {
+        dispatch(onChangeAction(newState, props.onChange));
+        return "handled";
+      }
+      return "not-handled";
+    },
+    []
+  );
+
+  const initPlugin = useCallback((helpers) => {
+    if (props.setHelpers) {
+      props.setHelpers({
+        ...helpers,
+        getPlugins: () => props.pluginsMap,
+      });
     }
-    return "not-handled";
-  };
+  }, []);
 
   return (
     <div className="editor" onClick={focusEditor}>
@@ -50,20 +67,20 @@ const LetterpadEditor = (props: Props) => {
         plugins={[
           ...props.plugins,
           {
-            initialize: (helpers) => {
-              if (props.setHelpers) {
-                props.setHelpers({
-                  ...helpers,
-                  getPlugins: () => props.pluginsMap,
-                });
-              }
-            },
+            initialize: initPlugin,
           },
         ]}
         handleKeyCommand={handleKeyCommand}
         ref={getRef()}
         blockRenderMap={extendedBlockRenderMap}
         placeholder={props.placeholder}
+        decorators={[decorators]}
+        customStyleMap={{
+          CODE: {
+            background: "var(--bg-highlight)",
+            padding: "0 2px",
+          },
+        }}
       />
 
       <MobileToolbar />
@@ -77,4 +94,4 @@ const LetterpadEditor = (props: Props) => {
   );
 };
 
-export default withPlugins(LetterpadEditor);
+export default memo(withPlugins(LetterpadEditor));

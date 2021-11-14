@@ -4,14 +4,15 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = {
   entry: ["./demo/index.tsx"],
+  target: "web",
   output: { path: path.join(__dirname, "build"), filename: "editor.js" },
   mode: process.env.NODE_ENV || "development",
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
     plugins: [new TsconfigPathsPlugin({ extensions: [".ts", ".tsx"] })],
   },
-  devtool: "inline-source-map",
-  devServer: { contentBase: path.join(__dirname, "src") },
+  devtool: "source-map",
+  devServer: { contentBase: path.join(__dirname, "src"), hot: true },
   module: {
     rules: [
       {

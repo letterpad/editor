@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@300&display=swap");
 :root body {
-  --bg-codeblock: #000;
+  --bg-codeblock: #f3f3f3;
   --bg-secondary: #eee;
   --bg-primary: #fff;
   --border: #eee;
@@ -9,6 +9,7 @@
   --color-primary: #333;
   --color-secondary: #000;
   --color-link: #3f82b7;
+  --bg-highlight: #9de6ed;
 
   --bg-toolbar: #333;
   --color-toolbar: #ddd;
@@ -16,10 +17,11 @@
 }
 
 :root body.dark {
-  --bg-codeblock: #29292e;
+  --bg-codeblock: #2a2a38;
   --bg-secondary: #272727;
-  --bg-primary: #121212;
+  --bg-primary: #1d1d28;
   --border: #2e2e31;
+  --bg-highlight: #9de6ed;
   --bg-accent: #2db76d;
   --color-accent: #333;
   --color-primary: #bababa;
@@ -63,7 +65,6 @@ pre {
   background: var(--bg-codeblock);
   display: block;
   font-size: 0.9rem;
-  color: #c7c7c7;
   padding: 0.1rem 0.5rem;
 }
 

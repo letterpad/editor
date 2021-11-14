@@ -1,35 +1,35 @@
 import { StoreContextProvider } from "@store";
 import LetterpadEditor from "@editor/index";
 import { EditorProps } from "@src/types";
-import { CompositeDecorator, EditorState } from "draft-js";
+import { EditorState } from "draft-js";
 import { importData } from "@utils/import";
 import useTheme from "@hooks/theme";
 import { callbacks } from "@src/callbacks";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { defaultProps } from "@src/constants";
-import { linkDecorator } from "@src/decorators/link/index";
 import "draft-js/dist/Draft.css";
 import "../app.css";
-
-const decorators = new CompositeDecorator([linkDecorator]);
+import "prismjs/themes/prism.css";
+import { removeTagsFromPre } from "@utils/helper";
 
 const Container = (props: EditorProps) => {
   useTheme(props.dark);
   const mergedProps = { ...defaultProps, ...props };
 
   const userCallbacks = {
-    onImageClick: mergedProps.onImageClick,
-    onChange: mergedProps.onChange,
-    setHelpers: mergedProps.setHelpers,
+    onImageClick: useCallback(mergedProps.onImageClick, []),
+    onChange: useCallback(mergedProps.onChange, []),
+    setHelpers: useCallback(mergedProps.setHelpers, []),
   };
 
   useEffect(() => {
     callbacks.set(userCallbacks);
   }, []);
+  const html = removeTagsFromPre(props.html);
 
   return (
     <StoreContextProvider
-      value={EditorState.createWithContent(importData(props.html), decorators)}
+      value={EditorState.createWithContent(importData(html))}
     >
       <LetterpadEditor {...mergedProps} />
     </StoreContextProvider>

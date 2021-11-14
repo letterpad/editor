@@ -27,8 +27,12 @@ export const setPlaceHolderWithError = (
     newData
   );
 
-  const newEditor = EditorState.push(state, newContent, "change-block-data");
+  const newEditorState = EditorState.push(
+    state,
+    newContent,
+    "change-block-data"
+  );
 
   // return a new editor state, applying the selection we stored before
-  return EditorState.forceSelection(newEditor, userSelection);
+  return EditorState.forceSelection(newEditorState, userSelection);
 };

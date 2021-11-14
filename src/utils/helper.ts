@@ -29,8 +29,12 @@ export const highlightCodeOnChange = (editorState: EditorState) => {
   const content = editorState.getCurrentContent();
   const startKey = selection.getStartKey();
   const block = content.getBlockForKey(startKey);
-
-  if (block.getType() === "code-block") {
+  if (block.getType() === "code-block" && !block.getData().get("language")) {
+    // const nextContentState = Modifier.setBlockData(
+    //   content,
+    //   selection,
+    //   Map({ language: "javascript" })
+    // );
     const data = block.getData().merge({ language: "javascript" });
     const newBlock = block.merge({ data }) as ContentBlock;
 
@@ -38,9 +42,9 @@ export const highlightCodeOnChange = (editorState: EditorState) => {
       blockMap: content.getBlockMap().set(startKey, newBlock),
       selectionAfter: selection,
     };
-    const newContentState = content.merge(newContent) as ContentState;
+    const nextContentState = content.merge(newContent) as ContentState;
 
-    return EditorState.push(editorState, newContentState, "change-block-data");
+    return EditorState.push(editorState, nextContentState, "change-block-data");
   }
   return editorState;
 };
@@ -126,4 +130,32 @@ export const isBlockWithEntityType = (
   const entity = contentState.getEntity(entityKey);
 
   return entity.getType() === entityType;
+};
+
+export const removeTagsFromPre = (data: string) => {
+  const matchPre = /<pre\s*(.*)\>(.|\n)*?<\/pre>/gm;
+
+  const newHtml = data
+    .replace(matchPre, (match) => {
+      const a =
+        "<codeblock>" + match.replace(/<[^>]*>?/gm, "") + "</codeblock>";
+      return a;
+    })
+    .replace(/<\/pre>/g, "")
+    .replace(/<pre\s*(.*)\>/, "")
+    .replace(/codeblock/g, "pre")
+    .replace(/(<div)/gim, "<p")
+    .replace(/<\/div>/gim, "</p>");
+
+  return newHtml;
+};
+
+export const objectEqual = (obj1: object, obj2: object) => {
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  return (
+    keys1.length === keys2.length &&
+    keys1.every((key) => obj1[key] === obj2[key])
+  );
 };
