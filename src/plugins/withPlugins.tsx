@@ -8,7 +8,7 @@ export interface WithPluginProps {
   pluginsMap: PluginsMap;
   onImageClick: TypeMediaCallback;
 }
-
+const plugins = getPlugins();
 const withPlugins = <T extends EditorProps = EditorProps>(
   WrappedComponent: React.ComponentType<T>
 ) => {
@@ -16,7 +16,6 @@ const withPlugins = <T extends EditorProps = EditorProps>(
     const pluginCallbacks = {
       onImageClick: props.onImageClick,
     };
-    const plugins = getPlugins();
 
     return (
       <WrappedComponent

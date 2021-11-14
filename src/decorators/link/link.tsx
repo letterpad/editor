@@ -19,10 +19,12 @@ const Link = (props) => {
   const { url, title } = props.contentState
     .getEntity(props.entityKey)
     .getData();
-  const urlHost = new URL(url).origin;
-  const srcHost = new URL(document.location.href).origin;
-  const isInternal = urlHost.indexOf(srcHost) === 0;
-
+  let isInternal = false;
+  if (typeof document !== "undefined") {
+    const urlHost = new URL(url).origin;
+    const srcHost = new URL(document.location.href).origin;
+    isInternal = urlHost.indexOf(srcHost) === 0;
+  }
   const attrs = {
     href: url,
     target: isInternal ? "" : "_blank",

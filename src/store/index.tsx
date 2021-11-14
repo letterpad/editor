@@ -1,5 +1,5 @@
 import { EditorState } from "draft-js";
-import React, { useMemo } from "react";
+import React from "react";
 import { Action } from "@store/types";
 import reducer from "@store/reducer";
 import useThunkReducer, { ThunkDispatch } from "@hooks/useThunkReducer";
@@ -27,13 +27,10 @@ function StoreContextProvider(
     },
   };
 
-  return useMemo(
-    () => (
-      <StoreContext.Provider value={value}>
-        {props.children}
-      </StoreContext.Provider>
-    ),
-    [value]
+  return (
+    <StoreContext.Provider value={value}>
+      {props.children}
+    </StoreContext.Provider>
   );
 }
 
