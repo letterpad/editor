@@ -9,12 +9,12 @@ export const exportData = convertToHTML({
     if (type === EditorBlockTypes.Image) {
       return <p />;
     }
-    // if (
-    //   block.data?.type === EditorBlockTypes.Divider ||
-    //   block.type === EditorBlockTypes.Divider
-    // ) {
-    //   return <hr />;
-    // }
+    if (
+      block.data?.type === EditorBlockTypes.Divider ||
+      block.type === EditorBlockTypes.Divider
+    ) {
+      return <hr />;
+    }
     if (
       type === EditorBlockTypes.Image ||
       block.data?.type === EditorBlockTypes.Image
