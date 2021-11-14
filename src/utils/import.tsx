@@ -52,7 +52,14 @@ export const importData = convertFromHTML({
       if (!node.children.length) {
         return undefined;
       }
-
+      if (node.firstChild?.nodeName === "HR") {
+        return {
+          type: EditorBlockTypes.Atomic,
+          data: {
+            type: EditorBlockTypes.Divider,
+          },
+        };
+      }
       let caption = "",
         src = "";
       const blockType = EditorBlockTypes.Image;
