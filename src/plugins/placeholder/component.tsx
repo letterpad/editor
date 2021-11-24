@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import defaultTheme from "./theme.module.css";
 
 const Embedder = ({ blockProps, block }) => {
