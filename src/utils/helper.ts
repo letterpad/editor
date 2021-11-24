@@ -8,7 +8,7 @@ import {
 import { List, Map, Repeat } from "immutable";
 
 import generateRandomKey from "draft-js/lib/generateRandomKey";
-import { EditorBlockTypes } from "@src/types";
+import { EditorBlockTypes } from "@src/_types";
 
 export const _insertImage = (editorState: EditorState, src: string) => {
   const contentState = editorState.getCurrentContent();

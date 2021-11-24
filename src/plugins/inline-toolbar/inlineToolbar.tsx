@@ -1,3 +1,4 @@
+import React from "react";
 import createInlineToolbarPlugin from "@draft-js-plugins/inline-toolbar";
 import { ContentBlock, DraftBlockType, EditorState } from "draft-js";
 import buttonStyles from "@plugins/inline-toolbar/buttonStyles.module.css";
@@ -20,7 +21,7 @@ import {
 } from "@plugins/buttons/Buttons";
 
 import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
-import { EditorBlockTypes } from "@src/types";
+import { EditorBlockTypes } from "@src/_types";
 
 const InlineToolbar = () => {
   return (

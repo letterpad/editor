@@ -15,15 +15,38 @@ module.exports = {
   devServer: { contentBase: path.join(__dirname, "src"), hot: true },
   module: {
     rules: [
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   exclude: /node_modules/,
+      //   use: ["babel-loader"],
+      // },
+      // {
+      //   test: /\.(ts|tsx)$/,
+      //   exclude: /node_modules/,
+      //   use: ["ts-loader"],
+      // },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.ts(x?)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
-      },
-      {
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        use: ["ts-loader"],
+        use: {
+          loader: "swc-loader",
+          options: {
+            sync: true,
+            jsc: {
+              paths: {
+                "@editor/*": ["src/editor/*"],
+                "@hooks/*": ["src/hooks/*"],
+                "@plugins/*": ["src/plugins/*"],
+                "@store": ["src/store"],
+                "@store/*": ["src/store/*"],
+                "@utils/*": ["src/utils/*"],
+                "@src": ["src"],
+                "@src/*": ["src/*"],
+                "@demo/*": ["demo/*"],
+              },
+            },
+          },
+        },
       },
       {
         test: /\.(css|pcss)$/,

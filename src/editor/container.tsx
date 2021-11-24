@@ -1,5 +1,6 @@
 import { StoreContextProvider } from "@store";
 import LetterpadEditor from "@editor/index";
+import React from "react";
 import { EditorProps } from "@src/types";
 import { EditorState } from "draft-js";
 import { importData } from "@utils/import";

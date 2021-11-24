@@ -1,5 +1,5 @@
 import { Editor, EditorHelpers, TypeInsertImageFn } from "@src/types";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import LetterpadEditor from "@src";
 import { data } from "./data";

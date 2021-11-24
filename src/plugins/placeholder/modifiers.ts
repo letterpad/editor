@@ -1,4 +1,4 @@
-import { EditorBlockTypes } from "@src/types";
+import { EditorBlockTypes } from "@src/_types";
 import { addBlock, removeBlock } from "@utils/modifiers";
 import { ContentBlock, EditorState, Modifier, SelectionState } from "draft-js";
 

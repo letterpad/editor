@@ -2,7 +2,8 @@ import {
   createBlockStyleButton,
   createInlineStyleButton,
 } from "@draft-js-plugins/buttons";
-import { EditorBlockTypes } from "@src/types";
+import { EditorBlockTypes } from "@src/_types";
+import React from "react";
 
 export const ButtonBold = createInlineStyleButton({
   style: "BOLD",

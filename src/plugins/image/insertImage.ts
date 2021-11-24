@@ -2,7 +2,8 @@ import { EditorState, Modifier, SelectionState } from "draft-js";
 import { Map } from "immutable";
 import { addNewBlockAt } from "@utils/helper";
 import { ImageData, InsertImageType, UpdateImage } from "./types";
-import { BlockKey, EditorBlockTypes } from "@src/types";
+import { EditorBlockTypes } from "@src/_types";
+import { BlockKey } from "@src/types";
 
 const setImageBlockData = ({
   data,

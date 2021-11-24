@@ -18,9 +18,27 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(j|t)sx?$/,
-        use: "ts-loader",
+        test: /\.ts(x?)$/,
         exclude: /node_modules/,
+        use: {
+          loader: "swc-loader",
+          options: {
+            sync: true,
+            jsc: {
+              paths: {
+                "@editor/*": ["src/editor/*"],
+                "@hooks/*": ["src/hooks/*"],
+                "@plugins/*": ["src/plugins/*"],
+                "@store": ["src/store"],
+                "@store/*": ["src/store/*"],
+                "@utils/*": ["src/utils/*"],
+                "@src": ["src"],
+                "@src/*": ["src/*"],
+                "@demo/*": ["demo/*"],
+              },
+            },
+          },
+        },
       },
       {
         test: /\.css$/,

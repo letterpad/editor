@@ -1,4 +1,4 @@
-import { EditorBlockTypes } from "@src";
+import { EditorBlockTypes } from "@src/_types";
 import { isBlockWithEntityType } from "@utils/helper";
 import { ContentBlock, EditorState } from "draft-js";
 import Embed from "./component";

@@ -1,7 +1,8 @@
-import { getEmbedType } from "@plugins/embed";
-import { EditorBlockTypes } from "@src/types";
+import { getEmbedType, Iframe } from "@plugins/embed";
+import { EditorBlockTypes } from "@src/_types";
 import { convertToHTML } from "draft-convert";
 import Prism from "prismjs";
+import React from "react";
 
 export const exportData = convertToHTML({
   blockToHTML: (block) => {
@@ -39,6 +40,17 @@ export const exportData = convertToHTML({
 
     if (type === EditorBlockTypes.Placeholder) {
       return <br />;
+    }
+
+    if (type === EditorBlockTypes.Embed) {
+      if (!block.data?.src) return <p />;
+      return (
+        <Iframe
+          type={getEmbedType(block.data.src).type}
+          src={block.data.src}
+          className=""
+        />
+      );
     }
 
     if (type === "unstyled") {
