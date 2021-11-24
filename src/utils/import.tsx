@@ -1,4 +1,4 @@
-import { EditorBlockTypes } from "@src/types";
+import { EditorBlockTypes } from "@src/_types";
 import { convertFromHTML } from "draft-convert";
 
 export const importData = convertFromHTML({

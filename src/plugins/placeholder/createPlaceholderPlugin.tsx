@@ -1,4 +1,4 @@
-import { EditorBlockTypes } from "@src/types";
+import { EditorBlockTypes } from "@src/_types";
 import decorateComponentWithProps from "@utils/decorateComponentWithProps";
 import { ContentBlock, EditorState } from "draft-js";
 import Embedder from "./component";

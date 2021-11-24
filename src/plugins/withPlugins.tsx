@@ -1,5 +1,6 @@
 import { EditorPlugin } from "@draft-js-plugins/editor";
 import { PluginsMap } from "@src/types";
+import React from "react";
 import { EditorProps, TypeMediaCallback } from "@src/types";
 import { getPlugins } from ".";
 

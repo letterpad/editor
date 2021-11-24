@@ -1,3 +1,4 @@
+import React from "react";
 import createInlineToolbarPlugin from "@draft-js-plugins/inline-toolbar";
 import { ContentBlock, DraftBlockType } from "draft-js";
 import buttonStyles from "@plugins/inline-toolbar/buttonStyles.module.css";
@@ -24,7 +25,7 @@ import "./mobileToolbar.css";
 
 import { imageClicked } from "@plugins/image";
 import { callbacks } from "@src/callbacks";
-import { EditorBlockTypes } from "@src/types";
+import { EditorBlockTypes } from "@src/_types";
 import { getCurrentBlock } from "@plugins/utils";
 
 const MobileToolbar = () => {

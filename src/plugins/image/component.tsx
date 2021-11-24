@@ -1,5 +1,5 @@
 import { EditorBlock } from "draft-js";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 
 export const Caption = (props) => {
   return (

@@ -1,4 +1,5 @@
 // side toolbar (+)
+import React from "react";
 import createSideToolbarPlugin from "@draft-js-plugins/side-toolbar";
 import "@draft-js-plugins/side-toolbar/lib/plugin.css";
 
@@ -19,7 +20,8 @@ import {
 import { imageClicked } from "@plugins/image";
 import { callbacks } from "@src/callbacks";
 import { addDivider } from "@plugins/divider";
-import { EditorBlockTypes, PluginsMap } from "@src/types";
+import { EditorBlockTypes } from "@src/_types";
+import { PluginsMap } from "@src/types";
 
 export const sideToolbarPlugin = createSideToolbarPlugin({
   theme: {

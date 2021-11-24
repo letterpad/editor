@@ -6,7 +6,7 @@ import {
   Modifier,
   SelectionState,
 } from "draft-js";
-import { EditorBlockTypes } from "@src/types";
+import { EditorBlockTypes } from "@src/_types";
 import { getCurrentBlock } from "@plugins/utils";
 import { Map } from "immutable";
 
