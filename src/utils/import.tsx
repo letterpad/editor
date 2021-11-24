@@ -1,3 +1,4 @@
+import { getEmbedType } from "@plugins/embed";
 import { EditorBlockTypes } from "@src/_types";
 import { convertFromHTML } from "draft-convert";
 
@@ -17,8 +18,7 @@ export const importData = convertFromHTML({
     }
     if (nodeName === "iframe") {
       return createEntity(EditorBlockTypes.Embed, "IMMUTABLE", {
-        type: EditorBlockTypes.Embed,
-        src: node.src,
+        ...getEmbedType(node?.src || ""),
       });
     }
   },
@@ -27,8 +27,7 @@ export const importData = convertFromHTML({
       return {
         type: EditorBlockTypes.Atomic,
         data: {
-          type: EditorBlockTypes.Embed,
-          src: node.src,
+          ...getEmbedType(node?.src || ""),
         },
       };
     }
@@ -51,6 +50,15 @@ export const importData = convertFromHTML({
     if (nodeName === "figure") {
       if (!node.children.length) {
         return undefined;
+      }
+      const iframeSrc = node?.firstElementChild?.getAttribute("src");
+      if (node.firstChild?.nodeName === "IFRAME" && iframeSrc) {
+        return {
+          type: EditorBlockTypes.Atomic,
+          data: {
+            ...getEmbedType(iframeSrc),
+          },
+        };
       }
       if (node.firstChild?.nodeName === "HR") {
         return {

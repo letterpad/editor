@@ -36,11 +36,15 @@ const createEmbedPlugin = ({ options = {}, decorator }) => {
       if (
         isBlockWithEntityType(getEditorState(), block, EditorBlockTypes.Embed)
       ) {
+        const contentState = getEditorState().getCurrentContent();
+        const entityKey = block.getEntityAt(0);
+        const entity = contentState.getEntity(entityKey);
+
         return {
           component: Component,
           editable: false,
           props: {
-            ...getEmbedType(block.getData().get("src")),
+            ...entity.data,
           },
         };
       }
