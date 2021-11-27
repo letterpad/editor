@@ -1,2 +1,2 @@
-export { createImagePlugin, imageClicked } from "./lib";
-export { insertImage } from "./insertImage";
+export { createImagePlugin } from "./createImagePlugin";
+export { imageClicked, insertImage } from "./actions";

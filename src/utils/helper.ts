@@ -49,12 +49,20 @@ export const highlightCodeOnChange = (editorState: EditorState) => {
   return editorState;
 };
 
-export const addNewBlockAt = (
-  editorState: EditorState,
-  pivotBlockKey: string,
-  text = "",
-  initialData = Map({})
-) => {
+type NewBlockProps = {
+  editorState: EditorState;
+  pivotBlockKey: string;
+  text: string;
+  type?: string;
+  initialData?: Map<string, unknown>;
+};
+export const addNewBlockAt = ({
+  editorState,
+  pivotBlockKey,
+  text,
+  type = EditorBlockTypes.Atomic,
+  initialData = Map({}),
+}: NewBlockProps) => {
   const content = editorState.getCurrentContent();
   const blockMap = content.getBlockMap();
   const block = blockMap.get(pivotBlockKey);
@@ -74,7 +82,7 @@ export const addNewBlockAt = (
 
   const newBlock = new ContentBlock({
     key: newBlockKey,
-    type: EditorBlockTypes.Atomic,
+    type,
     text: text || block.getText(),
     characterList: List(Repeat(CharacterMetadata.create(), text.length)),
     depth: 0,

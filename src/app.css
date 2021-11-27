@@ -102,9 +102,9 @@ blockquote {
   /* color: var(--color-secondary); */
 }
 
-figure {
+figure:not(:first-child) {
   margin: 0px;
-  padding: 0px;
+  padding-top: 2rem;
   text-align: center;
 }
 .editor h1:first-child {

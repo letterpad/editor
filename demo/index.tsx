@@ -12,13 +12,12 @@ const Demo = () => {
   const [helpers, setHelpers] = useState<EditorHelpers>();
   const editorRef = useRef<Editor>(null);
 
-  const handleImage = (insert: TypeInsertImageFn) => {
+  const handleImage = async (insert: TypeInsertImageFn) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const blockKey = insert({
+    const blockKey = await insert({
       src: "https://www.carolmusyoka.com/wp-content/uploads/2020/04/Freedom.jpg",
-      caption: "captionis",
-      width: 200,
-      placeholderSrc: "https://via.placeholder.com/600",
+      caption: "Some caption...",
+      width: 600,
     });
   };
 
