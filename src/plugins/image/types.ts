@@ -4,20 +4,23 @@ import { BlockKey } from "@src/types";
 export interface InsertImageType {
   src: string;
   caption: string;
-  placeholderSrc?: string;
   width?: number | string;
   height?: number | string;
-  getState: () => EditorState;
-  setState: (state: EditorState) => void;
+  state: EditorState;
 }
 
-export type ImageData = Omit<InsertImageType, "setState" | "getState">;
+export type ImageData = Omit<InsertImageType, "state">;
 
 export type StateTypes = {
   setEditorState?: (state: EditorState) => void;
   getEditorState?: () => EditorState;
 };
 
+export interface ImageBlockData {
+  blockKey: BlockKey;
+  data: Partial<ImageData>;
+  state: EditorState;
+}
 export interface UpdateImage {
   blockKey: BlockKey;
   data: Partial<ImageData>;

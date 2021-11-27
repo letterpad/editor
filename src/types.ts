@@ -15,9 +15,9 @@ export { default as EditorRef } from "@draft-js-plugins/editor";
 
 export type BlockKey = string;
 
-export type TypeInsertImageFn = (
-  props: TypeMediaInsert | TypeMediaInsert[]
-) => BlockKey;
+export type TypeInsertImageFn = <T extends TypeMediaInsert | TypeMediaInsert[]>(
+  props: T
+) => Promise<T extends TypeMediaInsert ? string : string[]>;
 
 export type TypeMediaCallback = (insertImage: TypeInsertImageFn) => void;
 
