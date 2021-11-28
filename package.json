@@ -1,6 +1,6 @@
 {
   "name": "letterpad-editor",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "The letterpad editor - A high level abstraction of draftjs with plugin architecture",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
