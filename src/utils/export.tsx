@@ -23,7 +23,7 @@ export const exportData = convertToHTML({
       const src = block?.data?.src;
       const caption = block?.text;
       return (
-        <figure>
+        <figure className="lp-image">
           <img src={src} alt={caption} />
           <figcaption>{caption}</figcaption>
         </figure>
