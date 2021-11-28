@@ -67,7 +67,13 @@ export const exportData = convertToHTML({
     if (entity.type === EditorBlockTypes.Embed) {
       const { src } = getEmbedType(entity.data.src);
 
-      return src ? <iframe src={src} /> : <br />;
+      return src ? (
+        <div className="lp-iframe-wrapper">
+          <iframe src={src} className="iframe" />
+        </div>
+      ) : (
+        <br />
+      );
     }
     return originalText;
   },
