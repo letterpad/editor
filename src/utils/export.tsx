@@ -69,7 +69,7 @@ export const exportData = convertToHTML({
 
       return src ? (
         <div className="lp-iframe-wrapper">
-          <iframe src={src} className="iframe" />
+          <iframe src={src} className="iframe" loading="lazy" />
         </div>
       ) : (
         <br />

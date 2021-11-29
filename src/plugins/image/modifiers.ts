@@ -85,3 +85,31 @@ export const moveFocusToNextBlock = (state: EditorState, store: StateTypes) => {
   }
   return "not-handled";
 };
+
+export const moveFocusToPreviousBlock = (
+  state: EditorState,
+  store: StateTypes
+) => {
+  const currentContent = state.getCurrentContent();
+  const selection = state.getSelection();
+  const anchorKey = selection.getAnchorKey();
+  let blockMap = currentContent.getBlockMap();
+  const block = blockMap.get(anchorKey);
+  const prevBlock = currentContent.getBlockBefore(block.getKey());
+  blockMap = blockMap.remove(block.getKey());
+
+  const newSelection = new SelectionState({
+    anchorKey: prevBlock?.getKey(),
+    anchorOffset: 0,
+    focusKey: prevBlock?.getKey(),
+    focusOffset: 0,
+  });
+
+  const newEditorState = EditorState.forceSelection(state, newSelection);
+
+  if (store.setEditorState) {
+    store.setEditorState(newEditorState);
+    return "handled";
+  }
+  return "not-handled";
+};

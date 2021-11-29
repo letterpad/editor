@@ -50,6 +50,7 @@ export const Iframe = ({
     return (
       <div className={theme.wrapper + " " + className}>
         <iframe
+          loading="lazy"
           className={theme.iframe}
           frameBorder={0}
           scrolling="no"
@@ -64,6 +65,7 @@ export const Iframe = ({
       <div className={theme.wrapper + " " + className}>
         <iframe
           frameBorder={0}
+          loading="lazy"
           scrolling="no"
           src={src}
           className={theme.iframe}
@@ -76,6 +78,7 @@ export const Iframe = ({
     return (
       <div className={theme.wrapper + " " + className}>
         <iframe
+          loading="lazy"
           className={theme.iframe}
           src={src}
           frameBorder={0}

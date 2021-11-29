@@ -7,6 +7,7 @@ import {
   moveFocusToNextBlock,
   insertImageInEditor,
   updateImageBlock,
+  moveFocusToPreviousBlock,
 } from "./modifiers";
 
 export const createImagePlugin = ({ decorator }) => {
@@ -25,6 +26,26 @@ export const createImagePlugin = ({ decorator }) => {
           };
         }
       }
+    },
+    handleKeyCommand: (command, state: EditorState) => {
+      if (command === "backspace") {
+        const currentContent = state.getCurrentContent();
+        const selection = state.getSelection();
+        const anchorKey = selection.getAnchorKey();
+        const blockMap = currentContent.getBlockMap();
+        const block = blockMap.get(anchorKey);
+
+        const previousBlock = currentContent.getBlockBefore(block.getKey());
+        if (
+          block.getText() === "" &&
+          previousBlock?.getType() === "atomic" &&
+          previousBlock.getData().get("type") === "image"
+        ) {
+          return moveFocusToPreviousBlock(state, store);
+        }
+      }
+
+      return "not-handled";
     },
     handleReturn: (e, state: EditorState) => {
       e.preventDefault();
