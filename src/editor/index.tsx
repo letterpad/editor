@@ -38,18 +38,6 @@ const LetterpadEditor = (props: Props) => {
     [state]
   );
 
-  const handleKeyCommand = useCallback(
-    (command: EditorCommand, state: EditorState) => {
-      const newState = RichUtils.handleKeyCommand(state, command);
-      if (newState) {
-        dispatch(onChangeAction(newState, props.onChange));
-        return "handled";
-      }
-      return "not-handled";
-    },
-    []
-  );
-
   const initPlugin = useCallback((helpers) => {
     if (props.setHelpers) {
       props.setHelpers({
@@ -70,7 +58,7 @@ const LetterpadEditor = (props: Props) => {
             initialize: initPlugin,
           },
         ]}
-        handleKeyCommand={handleKeyCommand}
+        //handleKeyCommand={handleKeyCommand}
         ref={getRef()}
         blockRenderMap={extendedBlockRenderMap}
         placeholder={props.placeholder}

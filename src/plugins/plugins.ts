@@ -15,9 +15,10 @@ import { mobileToolbarPlugin } from "@plugins/mobile-toolbar";
 import { createImagePlugin } from "@plugins/image";
 import { linkPlugin } from "@plugins/anchor";
 import createEmbedPlugin from "./embed/createEmbedPlugin";
+import createKeyCommand from "./key-commands/createKeyCommand";
 
 const listPlugin = createListPlugin();
-
+const keyCommand = createKeyCommand();
 const placeholderPlugin = createPlaceholderPlugin({});
 const embedPlugin = createEmbedPlugin({
   decorator: focusPlugin.decorator,
@@ -41,6 +42,7 @@ const pluginsArr = [
   { placeholderPlugin },
   { embedPlugin },
   { linkPlugin },
+  { keyCommand },
 ];
 
 export const getPlugins = () => {
